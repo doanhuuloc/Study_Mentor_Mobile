@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:intl/intl.dart';
+import 'package:study_mentor_mobile/screen/home/widgets/settingBox.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,9 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: Container(
-        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-        padding: EdgeInsets.all(5),
-        child: Icon(
+        decoration:
+            const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+        padding: const EdgeInsets.all(5),
+        child: const Icon(
           Icons.add,
           color: Colors.white,
         ),
@@ -28,25 +32,28 @@ class _HomeScreenState extends State<HomeScreen> {
           toolbarHeight: 70,
           backgroundColor: Colors.transparent,
           elevation: 0,
+          leading: Builder(builder: (context) {
+            return InkWell(
+              onTap: () => Scaffold.of(context).openDrawer(),
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    shape: BoxShape.circle),
+              ),
+            );
+          }),
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.amber),
-                  ),
-                ),
                 Expanded(
                   child: Image.asset(
                     "assets/img/Logo.png",
                   ),
                 ),
-                Row(
+                const Row(
                   children: [
                     Icon(
                       Icons.search,
@@ -62,6 +69,72 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           )),
+      drawer: Drawer(
+        // width: MediaQuery.of(context).size.width*0.5,
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(top: 30, bottom: 10),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 80,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.orange),
+                  ),
+                  const SizedBox(height: 5),
+                  const Text(
+                    "Đoàn Hữu Lộc",
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 20),
+              child: Column(
+                children: [
+                  SettingBox(
+                    title: "Profile",
+                    svg: "user.svg",
+                    func: () {},
+                  ),
+                  SettingBox(
+                      title: "Change Password",
+                      svg: "lock-open.svg",
+                      func: () {}),
+                  SettingBox(
+                    title: "Setting",
+                    svg: "lock-open.svg",
+                    func: () {},
+                  ),
+                  SettingBox(
+                    title: "Language",
+                    svg: "world.svg",
+                    func: () {},
+                  ),
+                  SettingBox(
+                    title: "Notifications",
+                    svg: "bell-ringing.svg",
+                    func: () {},
+                  ),
+                  SettingBox(
+                    title: "Logout",
+                    svg: "logout.svg",
+                    func: () {},
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
@@ -75,14 +148,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   }).toList(),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Column(
                   children: [
                     Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(right: 5),
                           child: Icon(
                             Icons.star,
@@ -109,13 +182,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            Padding(
+              Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Column(
                   children: [
                     Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(right: 5),
                           child: Icon(
                             Icons.star,
@@ -142,13 +215,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            Padding(
+              Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Column(
                   children: [
                     Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(right: 5),
                           child: Icon(
                             Icons.star,
@@ -175,13 +248,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            Padding(
+              Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Column(
                   children: [
                     Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(right: 5),
                           child: Icon(
                             Icons.star,

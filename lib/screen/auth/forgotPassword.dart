@@ -3,21 +3,18 @@ import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/shared/widget/customDivider.dart';
 import 'package:study_mentor_mobile/shared/widget/customTextField.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController = TextEditingController();
   final FocusNode _focusNodeEmail = FocusNode();
   bool _isFocusEmail = false;
-  final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _focusNodePassword = FocusNode();
-  bool _isFocusPassword = false;
   bool _isLoading = false;
 
   @override
@@ -28,18 +25,13 @@ class _LoginScreenState extends State<LoginScreen> {
         _isFocusEmail = _focusNodeEmail.hasFocus;
       });
     });
-    _focusNodePassword.addListener(() {
-      setState(() {
-        _isFocusPassword = _focusNodePassword.hasFocus;
-      });
-    });
+
   }
 
   @override
   void dispose() {
     super.dispose();
     _focusNodeEmail.dispose();
-    _focusNodePassword.dispose();
   }
 
   String? validEmail(String value) {
@@ -48,9 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
-  String? validPassword(String value) {
-    return null;
-  }
+
 
   void _loginByATS() async {
     if (_formKey.currentState!.validate()) {
@@ -91,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 10),
               Text(
-                "Sign in your account",
+                "Reset your password",
                 style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -108,31 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                 textStyle: const TextStyle(color: Colors.white),
               ),
-              SizedBox(height: 15),
-              CustomTextField(
-                controller: _passwordController,
-                focusNode: _focusNodePassword,
-                isfocus: _isFocusPassword,
-                hintText: "Enter Password",
-                validator: validPassword,
-                isPasswordField: true,
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                textStyle: const TextStyle(color: Colors.white),
-              ),
-              SizedBox(height: 5),
-              TextButton(
-                onPressed: () {
-                  // Navigator.pushNamed(context, Routes.forgot);
-                },
-                child: Text(
-                  "Forgot password?",
-                  style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
+        
+       
               SizedBox(height: 20),
               _isLoading
                   ? Container(
@@ -148,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   : ElevatedButton(
                       onPressed: () {
                         // _loginByATS();
-                        context.go("/");
+                        
                       },
                       style: ButtonStyle(
                           backgroundColor:
@@ -160,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.center,
                         height: 50,
                         child: Text(
-                          "Sign in",
+                          "Send",
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -198,14 +165,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account?",
+                    "Do you have an account?",
                     style: const TextStyle(fontSize: 14, color: Colors.white),
                   ),
                   SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () => context.go("/signup"),
+                    onTap: () => context.go("/signin"),
                     child: Text(
-                      "Create Account",
+                      "Sign in Now",
                       style: TextStyle(color: theme.primaryColor, fontSize: 14),
                     ),
                   )
