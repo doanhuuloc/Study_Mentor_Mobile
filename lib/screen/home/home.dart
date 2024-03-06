@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:study_mentor_mobile/screen/home/widgets/settingBox.dart';
 
@@ -19,13 +20,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Container(
-        decoration:
-            const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-        padding: const EdgeInsets.all(5),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+      floatingActionButton: InkWell(
+        onTap: () => context.go('/chat'),
+        child: Container(
+          decoration:
+              const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+          padding: const EdgeInsets.all(5),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
       appBar: AppBar(
@@ -103,27 +107,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   SettingBox(
                     title: "Profile",
                     svg: "user.svg",
-                    func: () {},
+                    func: () {
+                      context.go("/editprofile");
+                    },
                   ),
-                  SettingBox(
-                      title: "Change Password",
-                      svg: "lock-open.svg",
-                      func: () {}),
+                  // SettingBox(
+                  //     title: "Change Password",
+                  //     svg: "lock-open.svg",
+                  //     func: () {}),
                   SettingBox(
                     title: "Setting",
                     svg: "lock-open.svg",
                     func: () {},
                   ),
-                  SettingBox(
-                    title: "Language",
-                    svg: "world.svg",
-                    func: () {},
-                  ),
-                  SettingBox(
-                    title: "Notifications",
-                    svg: "bell-ringing.svg",
-                    func: () {},
-                  ),
+                  // SettingBox(
+                  //   title: "Language",
+                  //   svg: "world.svg",
+                  //   func: () {},
+                  // ),
+                  // SettingBox(
+                  //   title: "Notifications",
+                  //   svg: "bell-ringing.svg",
+                  //   func: () {},
+                  // ),
                   SettingBox(
                     title: "Logout",
                     svg: "logout.svg",

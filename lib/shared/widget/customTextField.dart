@@ -103,7 +103,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       ? theme.primaryColor
                       : widget.iconColor ?? Colors.white,
                 ))
-            : null,
+            : Icon(widget.rightIcon,color: widget.iconColor,),
         prefixIcon: widget.leftIcon != null
             ? Padding(
                 padding: const EdgeInsets.all(10),
@@ -131,7 +131,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         filled: true,
         fillColor: widget.isfocus
             ? widget.focusFillColor ?? theme.primaryColor.withOpacity(0.1)
-            : widget.fillColor??Colors.grey.withOpacity(0.15),
+            : widget.fillColor ?? Colors.grey.withOpacity(0.15),
       ),
     );
   }
