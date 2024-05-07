@@ -1,11 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
-import 'package:study_mentor_mobile/screen/home/widgets/settingBox.dart';
+import 'package:provider/provider.dart';
+import 'package:study_mentor_mobile/screen/home/widgets/itemChatIntrustor.dart';
+import 'package:study_mentor_mobile/shared/widget/customDivider.dart';
+
+import '../../provider/user.dart';
+import 'widgets/itemChatAI.dart';
+import 'widgets/itemFilter.dart';
+import 'widgets/menuAppDrawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,33 +22,102 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final listType = ['All', 'Intrustor', 'AI'];
   String selectType = 'All';
+
+  List<Map<String, dynamic>> listChat = [
+    {
+      "id": "1",
+      "description":
+          "Data Storytelling là gì? 5+ Cách để trực quan nội dung câu chuyện thú vị hơn",
+      "datetime": DateTime.now(),
+      "type": "ai",
+      "intrustor": "",
+    },
+    {
+      "id": "2",
+      "description":
+          "Data Storytelling là gì? 5+ Cách để trực quan nội dung câu chuyện thú vị hơn",
+      "datetime": DateTime.now(),
+      "type": "ai",
+      "intrustor": "",
+    },
+    {
+      "id": "3",
+      "description":
+          "Data Storytelling là gì? 5+ Cách để trực quan nội dung câu chuyện thú vị hơn",
+      "datetime": DateTime.now(),
+      "type": "ai",
+      "intrustor": "",
+    },
+    {
+      "id": "4",
+      "description":
+          "Data Storytelling là gì? 5+ Cách để trực quan nội dung câu chuyện thú vị hơn",
+      "datetime": DateTime.now(),
+      "type": "intrustor",
+      "intrustor": "locno63",
+    },
+    {
+      "id": "5",
+      "description":
+          "Data Storytelling là gì? 5+ Cách để trực quan nội dung câu chuyện thú vị hơn",
+      "datetime": DateTime.now(),
+      "type": "intrustor",
+      "intrustor": "doan huu loc",
+    },
+    {
+      "id": "6",
+      "description":
+          "Data Storytelling là gì? 5+ Cách để trực quan nội dung câu chuyện thú vị hơn",
+      "datetime": DateTime.now(),
+      "type": "intrustor",
+      "intrustor": "loc huu doan",
+    },
+  ];
+
+  changeType(String type) {
+    setState(() {
+      if (type != selectType) {
+        selectType = type;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: InkWell(
-        onTap: () => context.go('/chat'),
-        child: Container(
-          decoration:
-              const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-          padding: const EdgeInsets.all(5),
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      // floatingActionButton: InkWell(
+      //   onTap: () => context.go('/chat'),
+      //   child: Container(
+      //     decoration:
+      //         const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+      //     padding: const EdgeInsets.all(5),
+      //     child: const Icon(
+      //       Icons.add,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      // ),
       appBar: AppBar(
           toolbarHeight: 70,
           backgroundColor: Colors.transparent,
           elevation: 0,
+          
           leading: Builder(builder: (context) {
-            return InkWell(
+            return GestureDetector(
               onTap: () => Scaffold.of(context).openDrawer(),
               child: Container(
-                margin: const EdgeInsets.all(10),
+                margin: const EdgeInsets.only(left: 10),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    shape: BoxShape.circle),
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: context.read<UserViewModel>().user.avatar != null
+                          ? FileImage(File(
+                                  context.read<UserViewModel>().user.avatar!))
+                              as ImageProvider
+                          : AssetImage("assets/imgs/user.png"),
+                      fit: BoxFit.fill,
+                    )),
               ),
             );
           }),
@@ -54,15 +128,15 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Expanded(
                   child: Image.asset(
-                    "assets/img/Logo.png",
+                    "assets/imgs/Logo.png",
                   ),
                 ),
                 const Row(
                   children: [
-                    Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
+                    // Icon(
+                    //   Icons.search,
+                    //   color: Colors.black,
+                    // ),
                     SizedBox(width: 10),
                     Icon(
                       Icons.notifications_none_rounded,
@@ -73,264 +147,207 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           )),
-      drawer: Drawer(
-        // width: MediaQuery.of(context).size.width*0.5,
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 30, bottom: 10),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 80,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.orange),
-                  ),
-                  const SizedBox(height: 5),
-                  const Text(
-                    "Đoàn Hữu Lộc",
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20),
-              child: Column(
-                children: [
-                  SettingBox(
-                    title: "Profile",
-                    svg: "user.svg",
-                    func: () {
-                      context.go("/editprofile");
-                    },
-                  ),
-                  // SettingBox(
-                  //     title: "Change Password",
-                  //     svg: "lock-open.svg",
-                  //     func: () {}),
-                  SettingBox(
-                    title: "Setting",
-                    svg: "lock-open.svg",
-                    func: () {},
-                  ),
-                  // SettingBox(
-                  //   title: "Language",
-                  //   svg: "world.svg",
-                  //   func: () {},
-                  // ),
-                  // SettingBox(
-                  //   title: "Notifications",
-                  //   svg: "bell-ringing.svg",
-                  //   func: () {},
-                  // ),
-                  SettingBox(
-                    title: "Logout",
-                    svg: "logout.svg",
-                    func: () {},
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+      drawer: const MenuAppDrawer(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+          padding: const EdgeInsets.only(right: 20, left: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  children: listType.map((e) {
-                    return ItemFitler(type: e, isSelected: e == selectType);
-                  }).toList(),
+              const Text(
+                "Các câu hỏi gần nhất",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const CustomDivider(),
+              Container(
+                height: 200,
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: listChat.map((e) {
+                      return e["type"] == "ai"
+                          ? ItemChatAI(
+                              description: e['description'],
+                              dateTime: e['datetime'],
+                              route: '/chat',
+                            )
+                          : ItemChatIntrustor(
+                              description: e['description'],
+                              dateTime: e['datetime'],
+                              route: '/chat',
+                              intrustorName: e["intrustor"],
+                            );
+                    }).toList(),
+                  ),
                 ),
               ),
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 5),
-                          child: Icon(
-                            Icons.star,
-                            size: 40,
+              const Text(
+                "Đặt câu hỏi",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const CustomDivider(),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                child: InkWell(
+                  onTap: () => context.go("/chat"),
+                  child: Row(children: [
+                    Container(
+                      height: 80,
+                      width: 80,
+                      margin: const EdgeInsets.only(right: 10),
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/imgs/AI.jpg"),
+                              fit: BoxFit.fill)),
+                    ),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Trả lời bằng AI",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.normal),
                           ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "asiduh fas9dung as9un gia iuasd bnipg sad aa a aaa a a ag",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.blue.shade300),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(DateFormat("hh:mm dd/mm/yyyy")
-                                  .format(DateTime.now())),
-                            ],
+                          Text(
+                            "1. chat để giải đáp bài tập",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.normal),
                           ),
-                        )
-                      ],
+                        ],
+                      ),
                     )
-                  ],
+                  ]),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Column(
-                  children: [
-                    Row(
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                child: InkWell(
+                  onTap: () => context.go("/makequestion"),
+                  child: Row(children: [
+                    Container(
+                      height: 80,
+                      width: 80,
+                      margin: const EdgeInsets.only(right: 10),
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/imgs/AIPRE.jpg"),
+                              fit: BoxFit.fill)),
+                    ),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 5),
-                          child: Icon(
-                            Icons.star,
-                            size: 40,
-                          ),
+                        Text(
+                          "Trả lời bằng AI Prenium",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.normal),
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "asiduh fas9dung as9un gia iuasd bnipg sad aa a aaa a a ag",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.blue.shade300),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(DateFormat("hh:mm dd/mm/yyyy")
-                                  .format(DateTime.now())),
-                            ],
-                          ),
-                        )
+                        // const Text(
+                        //   "1. chat để giải đáp bài tập",
+                        //   style: TextStyle(
+                        //       fontSize: 16, fontWeight: FontWeight.normal),
+                        // ),
+                        // const Text(
+                        //   "2. Có thể gữi file tài liệu hoặc hình ảnh để giải đáp bài tập",
+                        //   style: TextStyle(
+                        //       fontSize: 16, fontWeight: FontWeight.normal),
+                        // ),
                       ],
                     )
-                  ],
+                  ]),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Column(
-                  children: [
-                    Row(
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                child: InkWell(
+                  onTap: () => context.go("/makequestion"),
+                  child: Row(children: [
+                    Container(
+                      height: 80,
+                      width: 80,
+                      margin: const EdgeInsets.only(right: 10),
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/imgs/Intrustor.jpg"),
+                              fit: BoxFit.fill)),
+                    ),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 5),
-                          child: Icon(
-                            Icons.star,
-                            size: 40,
-                          ),
+                        Text(
+                          "Giải đáp với người hướng dẫn",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.normal),
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "asiduh fas9dung as9un gia iuasd bnipg sad aa a aaa a a ag",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.blue.shade300),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(DateFormat("hh:mm dd/mm/yyyy")
-                                  .format(DateTime.now())),
-                            ],
-                          ),
-                        )
+                        // const Text(
+                        //   "1. chat để giải đáp bài tập",
+                        //   style: TextStyle(
+                        //       fontSize: 16, fontWeight: FontWeight.normal),
+                        // ),
+                        // const Text(
+                        //   "2. Có thể gữi file tài liệu hoặc hình ảnh để giải đáp bài tập",
+                        //   style: TextStyle(
+                        //       fontSize: 16, fontWeight: FontWeight.normal),
+                        // ),
+                        // const Text(
+                        //   "2. Có thể trực tiếp giải đáp bài tập thông qua ggmeet",
+                        //   style: TextStyle(
+                        //       fontSize: 16, fontWeight: FontWeight.normal),
+                        // ),
                       ],
                     )
-                  ],
+                  ]),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Column(
-                  children: [
-                    Row(
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                child: InkWell(
+                  onTap: () => context.go("/createmeet"),
+                  child: Row(children: [
+                    Container(
+                      height: 80,
+                      width: 80,
+                      margin: const EdgeInsets.only(right: 10),
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/imgs/ggmeet.jpg"),
+                              fit: BoxFit.fill)),
+                    ),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 5),
-                          child: Icon(
-                            Icons.star,
-                            size: 40,
-                          ),
+                        Text(
+                          "Giải đáp thông qua gg meet",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.normal),
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "asiduh fas9dung as9un gia iuasd bnipg sad aa a aaa a a ag",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.blue.shade300),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(DateFormat("hh:mm dd/mm/yyyy")
-                                  .format(DateTime.now())),
-                            ],
-                          ),
-                        )
+                        // const Text(
+                        //   "1. chat để giải đáp bài tập",
+                        //   style: TextStyle(
+                        //       fontSize: 16, fontWeight: FontWeight.normal),
+                        // ),
+                        // const Text(
+                        //   "2. Có thể gữi file tài liệu hoặc hình ảnh để giải đáp bài tập",
+                        //   style: TextStyle(
+                        //       fontSize: 16, fontWeight: FontWeight.normal),
+                        // ),
+                        // const Text(
+                        //   "2. Có thể trực tiếp giải đáp bài tập thông qua ggmeet",
+                        //   style: TextStyle(
+                        //       fontSize: 16, fontWeight: FontWeight.normal),
+                        // ),
                       ],
                     )
-                  ],
+                  ]),
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ItemFitler extends StatelessWidget {
-  const ItemFitler({
-    super.key,
-    required this.type,
-    required this.isSelected,
-  });
-
-  final String type;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 30),
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: isSelected
-              ? const LinearGradient(
-                  colors: [Color(0xffA0DAFB), Color(0xff0A8ED9)],
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft)
-              : null,
-          color: !isSelected ? const Color(0xffF7F7F7) : null,
-          boxShadow: isSelected
-              ? [
-                  const BoxShadow(
-                      color: Color(0xff0A8ED9),
-                      blurRadius: 5,
-                      blurStyle: BlurStyle.normal,
-                      offset: Offset(2, 2))
-                ]
-              : null),
-      child: Text(
-        type,
-        style: TextStyle(color: isSelected ? Colors.white : Colors.grey),
       ),
     );
   }

@@ -13,6 +13,8 @@ class CustomTextField extends StatefulWidget {
     this.isPasswordField = false,
     this.autoFocus = false,
     this.textInputType = TextInputType.text,
+    this.minLines,
+    this.maxLines=1,
     this.readOnly = false,
     this.contentPadding,
     this.enabledBorder,
@@ -24,6 +26,7 @@ class CustomTextField extends StatefulWidget {
     this.radius = 12,
     this.onEditingComplete,
     this.onChanged,
+    this.suffixIcononTap,
   });
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -33,6 +36,8 @@ class CustomTextField extends StatefulWidget {
   IconData? leftIcon;
   IconData? rightIcon;
   TextInputType? textInputType;
+  int? minLines;
+  int? maxLines;
   bool isPasswordField = false;
   bool autoFocus;
   bool readOnly;
@@ -46,6 +51,7 @@ class CustomTextField extends StatefulWidget {
   double radius;
   VoidCallback? onEditingComplete;
   Function? onChanged;
+  Function? suffixIcononTap;
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
@@ -73,14 +79,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
     final theme = Theme.of(context);
 
     return TextFormField(
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
       readOnly: widget.readOnly,
       controller: widget.controller,
       focusNode: widget.focusNode,
       autofocus: widget.autoFocus,
       keyboardType: widget.textInputType ?? TextInputType.text,
       obscureText: isVisible,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.none,
       onEditingComplete: widget.onEditingComplete,
+      minLines: widget.minLines,
+      maxLines: widget.maxLines,
       validator: (value) {
         return widget.validator(value);
       },
@@ -89,6 +98,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ? (value) => widget.onChanged!(value)
           : (value) {},
       decoration: InputDecoration(
+        
         errorStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         contentPadding: widget.contentPadding,
         hintText: widget.hintText,
@@ -103,7 +113,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       ? theme.primaryColor
                       : widget.iconColor ?? Colors.white,
                 ))
-            : Icon(widget.rightIcon,color: widget.iconColor,),
+            : GestureDetector(
+                onTap: () {
+                  if (widget.suffixIcononTap != null) {
+                    widget.suffixIcononTap!();
+                  }
+                },
+                child: Icon(
+                  widget.rightIcon,
+                  color: widget.iconColor,
+                ),
+              ),
         prefixIcon: widget.leftIcon != null
             ? Padding(
                 padding: const EdgeInsets.all(10),

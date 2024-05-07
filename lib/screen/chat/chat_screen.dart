@@ -20,33 +20,31 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _isFocusMessage = false;
 
   List<dynamic> chats = [
-    
-      {
-        "content": "11111a111111",
-        "time": DateTime.now(),
-        "isUser": true,
-      },
-      {
-        "content": "22a2222222",
-        "time": DateTime.now(),
-        "isUser": false,
-      },
-      {
-        "content": "33333a33333",
-        "time": DateTime.now(),
-        "isUser": true,
-      },
-      {
-        "content": "4444a444444",
-        "time": DateTime.now(),
-        "isUser": true,
-      },
-      {
-        "content": "555555a5555555",
-        "time": DateTime.now(),
-        "isUser": false,
-      },
-    
+    {
+      "content": "11111a111111",
+      "time": DateTime.now(),
+      "isOpposite": true,
+    },
+    {
+      "content": "22a2222222",
+      "time": DateTime.now(),
+      "isOpposite": false,
+    },
+    {
+      "content": "33333a33333",
+      "time": DateTime.now(),
+      "isOpposite": true,
+    },
+    {
+      "content": "4444a444444",
+      "time": DateTime.now(),
+      "isOpposite": true,
+    },
+    {
+      "content": "555555a5555555",
+      "time": DateTime.now(),
+      "isOpposite": false,
+    },
   ];
 
   @override
@@ -57,6 +55,24 @@ class _ChatScreenState extends State<ChatScreen> {
         _isFocusMessage = _focusNodeMessage.hasFocus;
       });
     });
+  }
+
+  sendMessage() {
+    final message = _messageController.text;
+    if (message != "") {
+      if (mounted) {
+        setState(() {
+          final data = {
+            "content": message.toString(),
+            "time": DateTime.now(),
+            "isOpposite": true,
+          };
+          print(data);
+          chats.insert(0,data);
+        });
+        _messageController.clear();
+      }
+    }
   }
 
   @override
@@ -78,7 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
               return ChatItem(
                   content: e["content"],
                   dateTime: e["time"],
-                  isUser: e["isUser"]);
+                  isOpposite: e["isOpposite"]);
             }).toList(),
           )),
           Padding(
@@ -91,20 +107,23 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 Expanded(
                   child: CustomTextField(
-                      controller: _messageController,
-                      focusNode: _focusNodeMessage,
-                      isfocus: _isFocusMessage,
-                      rightIcon: Icons.send,
-                      hintText: "Nhập nội dung tin nhắn",
-                      hintStyle: TextStyle(color: Colors.black),
-                      iconColor: Theme.of(context).primaryColor,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.grey)),
-                      validator: (value) {
-                        return null;
-                      }),
+                    controller: _messageController,
+                    focusNode: _focusNodeMessage,
+                    isfocus: _isFocusMessage,
+                    rightIcon: Icons.send,
+                    textInputType: TextInputType.text,
+                    hintText: "Nhập nội dung tin nhắn",
+                    hintStyle: TextStyle(color: Colors.black),
+                    iconColor: Theme.of(context).primaryColor,
+                    fillColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.grey)),
+                    validator: (value) {
+                      return null;
+                    },
+                    suffixIcononTap: sendMessage,
+                  ),
                 ),
               ],
             ),

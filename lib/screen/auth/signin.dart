@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:study_mentor_mobile/provider/user.dart';
+import 'package:study_mentor_mobile/services/tutor/tutor_api.dart';
 import 'package:study_mentor_mobile/shared/widget/customDivider.dart';
 import 'package:study_mentor_mobile/shared/widget/customTextField.dart';
+
+import '../../services/user/user_api.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,10 +17,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController =
+      TextEditingController(text: "lapdoan.010102@gmail.com");
   final FocusNode _focusNodeEmail = FocusNode();
   bool _isFocusEmail = false;
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController =
+      TextEditingController(text: "123456789");
   final FocusNode _focusNodePassword = FocusNode();
   bool _isFocusPassword = false;
   bool _isLoading = false;
@@ -52,11 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
-  void _loginByATS() async {
+  _loginByATS() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
+      final response = await UserApi.login(
+          email: _emailController.text, password: _passwordController.text);
+      print("haha data $response");
+      context.read<UserViewModel>().initData(response["data"]);
 
       setState(() {
         _isLoading = false;
@@ -146,8 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     )
                   : ElevatedButton(
-                      onPressed: () {
-                        // _loginByATS();
+                      onPressed: () async {
+                        await _loginByATS();
+                        print("haha go");
                         context.go("/");
                       },
                       style: ButtonStyle(
