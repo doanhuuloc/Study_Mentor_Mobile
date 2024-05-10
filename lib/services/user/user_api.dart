@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:study_mentor_mobile/services/file/uploadFile.dart';
+import 'package:study_mentor_mobile/utilities/file_uploader.dart';
 
 import '../../config/config.dart';
 import '../DioInterceptorManager.dart';
@@ -57,18 +58,20 @@ class UserApi {
     }
   }
 
-  static Future<Map<String, dynamic>> updateUserAvatar(
+  static Future<Map<String, dynamic>?> updateUserAvatar(
       File file, String token) async {
     try {
-      String fileName = file.path.split('/').last;
+      final fileUploader = FileUploader(token: token);
+      final fileReq = await fileUploader.uploadImage(file);
+      if (fileReq == null) {
+        // baos loi
+        return null;
+      }
 
-      final resSignedUrl = await UploadFileApi.signedUrl(fileName, token);
       final data = {
-        "fileName": resSignedUrl["data"]["fileName"],
-        "fileKey": resSignedUrl["data"]["fileKey"],
+        'fileKey': fileReq.fileKey,
+        'fileName': fileReq.fileName,
       };
-      final resUploadFile =
-          await UploadFileApi.updateFile(file, resSignedUrl["data"]["url"]);
 
       Response response =
           await _dio.patch('${Config.api_url}users/profile/avatar',
@@ -76,6 +79,7 @@ class UserApi {
               options: Options(headers: {
                 'Authorization': 'Bearer $token',
               }));
+
       return response.data;
     } catch (e) {
       rethrow;

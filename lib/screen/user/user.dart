@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:study_mentor_mobile/provider/user.dart';
 import 'package:study_mentor_mobile/services/user/user_api.dart';
 import 'package:study_mentor_mobile/shared/widget/customTextField.dart';
+import 'package:study_mentor_mobile/utilities/image_picker_func.dart';
 
 import '../../shared/widget/selectOption.dart';
 import 'widgets/dateField.dart';
@@ -39,7 +40,7 @@ class _EditProfileState extends State<EditProfile> {
   late final FocusNode _dateFocusNode;
   bool _isDateFocus = false;
 
-  XFile? selectedFile;
+  File? selectedFile;
 
   bool _isLoading = false;
 
@@ -125,16 +126,15 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   updateAvatar() async {
-    final XFile? imgXFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final File? imgXFile = await pickSingleImage(source: ImageSource.gallery);
     if (imgXFile != null) {
-      setState(() {
-        selectedFile = imgXFile;
-      });
-      context.read<UserViewModel>().updateAvatar(imgXFile.path);
+      // setState(() {
+      //   selectedFile = imgXFile;
+      // });
+      // context.read<UserViewModel>().updateAvatar(imgXFile.path);
       // File selectIMG = File(imgXFile.path);
-      // final response = await UserApi.updateUserAvatar(
-      //     selectIMG, context.read<UserViewModel>().user.accessToken);
+      final response = await UserApi.updateUserAvatar(
+          imgXFile, context.read<UserViewModel>().user.accessToken);
     }
   }
 

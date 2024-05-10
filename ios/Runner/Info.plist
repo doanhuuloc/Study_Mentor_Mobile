@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Để chụp ảnh hoặc chọn hình đại diện để sử dụng trong bài đánh giá của bạn</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Để chọn một hình ảnh hoặc chọn một hình đại diện được sử dụng trong bài đánh giá của bạn</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Để ghi âm và chia sẻ bài đánh giá của bạn</string>
 </dict>
 </plist>
