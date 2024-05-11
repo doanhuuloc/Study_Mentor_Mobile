@@ -90,7 +90,6 @@ void initializeMappers() {
   p26.BaseResponseMapper.ensureInitialized();
   p27.SuccessResponseMapper.ensureInitialized();
   p28.CreateQuestionRequestMapper.ensureInitialized();
-  p28.FileRequestMapper.ensureInitialized();
   p29.CreateQuestionResponseMapper.ensureInitialized();
   p30.GetStructureEducationResponseMapper.ensureInitialized();
   p30.LevelResponseMapper.ensureInitialized();
