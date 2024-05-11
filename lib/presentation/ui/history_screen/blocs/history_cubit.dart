@@ -1,25 +1,26 @@
 import 'dart:async';
 
-import 'package:study_mentor_mobile/presentation/bases/user_cubit/user_cubit.dart';
-
 import '../../../../application/services/ai/ai.dart';
 import '../../../../application/services/app/app_config/app_config.dart';
-import '../../../../utilities/logging/logging.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
+import '../../../bases/user_cubit/user_cubit.dart';
+import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'history_state.dart';
 
 class HistoryCubit extends SafeCubit<HistoryState> {
-  HistoryCubit({
-    required this.aiController,
-    required this.appConfig,
-    required this.userCubit,
-  }) : super(const HistoryState()) {
+  HistoryCubit(
+      {required this.aiController,
+      required this.appConfig,
+      required this.userCubit,
+      required this.failureHandlerManager})
+      : super(const HistoryState()) {
     _fetchData();
   }
 
   final AIController aiController;
   final AppConfig appConfig;
   final UserCubit userCubit;
+  final FailureHandlerManager failureHandlerManager;
 
   Future<void> getListChatGpt() async {
     emit(state.copyWith(loading: true));
@@ -30,7 +31,7 @@ class HistoryCubit extends SafeCubit<HistoryState> {
     );
 
     listChatGpt.handleLeft((failure) {
-      logging.i(failure.toString());
+      failureHandlerManager.handle(failure);
     });
 
     emit(state.copyWith(
@@ -48,7 +49,7 @@ class HistoryCubit extends SafeCubit<HistoryState> {
     );
 
     listChatGemini.handleLeft((failure) {
-      logging.i(failure.toString());
+      failureHandlerManager.handle(failure);
     });
 
     emit(state.copyWith(

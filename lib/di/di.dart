@@ -138,7 +138,7 @@ class AppDIService implements DIService<AppDIData> {
 
     // dio for ai
     final dioAI = Dio(optionsAI);
-    dio.interceptors.addAll([
+    dioAI.interceptors.addAll([
       authInterceptor,
       loggerInterceptor,
     ]);

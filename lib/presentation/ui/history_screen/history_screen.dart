@@ -7,6 +7,7 @@ import 'package:study_mentor_mobile/presentation/ui/history_screen/blocs/history
 import '../../../application/services/ai/ai.dart';
 import '../../../application/services/app/app_config/app_config.dart';
 import '../../bases/user_cubit/user_cubit.dart';
+import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'widgets/tab_ai.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -62,10 +63,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
         body: BlocProvider<HistoryCubit>(
           create: (BuildContext context) {
             return HistoryCubit(
-              aiController: context.read<AIController>(),
-              appConfig: context.read<AppConfig>(),
-              userCubit: context.read<UserCubit>(),
-            );
+                aiController: context.read<AIController>(),
+                appConfig: context.read<AppConfig>(),
+                userCubit: context.read<UserCubit>(),
+                failureHandlerManager: context.read<FailureHandlerManager>());
           },
           child: const TabBarView(children: [
             TabAI(),
