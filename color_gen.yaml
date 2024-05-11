@@ -10,7 +10,7 @@ shaded_color:
       shade500: 0xFF004B8B
       shade200: 0xFFE9EBF8
       shade100: 0xFFF2F6F9
-      shade50: 0xFFE6EDF3
+      shade50: 0xFFF3F9FA
     gray:
       shade800: 0xFF444444
       shade700: 0xFF636363

@@ -11,7 +11,6 @@ import '../../../router/router_config/router_config.dart';
 import '../../../shared/base_infinite_loading/app_shimmer.dart';
 import '../../../shared/theme/theme.dart';
 import '../../../shared/widgets/profile_info_section.dart';
-import 'business_card_action.dart';
 
 class HeaderProfileSection extends StatelessWidget {
   const HeaderProfileSection(

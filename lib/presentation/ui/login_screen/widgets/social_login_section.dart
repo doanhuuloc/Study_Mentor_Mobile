@@ -1,9 +1,6 @@
 import 'dart:io' show Platform;
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../../../utilities/logging/logging.dart';
@@ -11,7 +8,6 @@ import '../../../gen/app_colors.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../gen/locale/app_localizations.dart';
 import '../../../shared/theme/src/app_style.dart';
-import '../bloc/login_cubit.dart';
 
 class SocialLoginSection extends StatelessWidget {
   const SocialLoginSection({super.key});

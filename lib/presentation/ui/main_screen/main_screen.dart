@@ -44,7 +44,6 @@ class MainScreen extends StatelessWidget {
   }
 
   void onChangeTab(BuildContext context, int index) {
-    print('object $index');
     switch (index) {
       case 0:
         const HomeRouteData().go(context);
@@ -64,7 +63,7 @@ class MainScreen extends StatelessWidget {
     if (location.startsWith(const HomeRouteData().location)) {
       return 0;
     }
-    if (location.startsWith(const HomeRouteData().location)) {
+    if (location.startsWith(const HistoryRouteData().location)) {
       return 1;
     }
     if (location.startsWith(const ProfileRouteData().location)) {
@@ -78,6 +77,10 @@ class MainScreen extends StatelessWidget {
     return MainPopScope(
       child: Scaffold(
         body: navigator,
+        // appBar: MainAppBar(
+        //   currentMainTabIndex: currentIndex,
+        //   backgroundColor: AppColors.blue.shade50,
+        // ),
         bottomNavigationBar: MainBottomNavigationBar(
           selected: getCurrentIndex(context),
           onSelected: (index) => onChangeTab(context, index),

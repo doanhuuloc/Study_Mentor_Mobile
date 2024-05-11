@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:study_mentor_mobile/presentation/shared/transitions/transitions.dart';
 
-import '../../shared/transitions/transitions.dart';
 import 'widgets/history_tab_view.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
 
-  // static Page<void> buildPage(BuildContext context, GoRouterState state) {
-  //   return CustomTransitionPage(
-  //     child: const HistoryScreen(),
-  //     transitionsBuilder: (BuildContext context, Animation<double> animation,
-  //         Animation<double> secondaryAnimation, Widget child) {
-  //       return CustomTransitionBuilder.noTransition(
-  //         context,
-  //         animation,
-  //         secondaryAnimation,
-  //         child,
-  //       );
-  //     },
-  //   );
-  // }
+  static Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      child: const HistoryScreen(),
+      transitionsBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation, Widget child) {
+        return CustomTransitionBuilder.noTransition(
+          context,
+          animation,
+          secondaryAnimation,
+          child,
+        );
+      },
+    );
+  }
 
   @override
   State<HistoryScreen> createState() => _HistoryScreenState();

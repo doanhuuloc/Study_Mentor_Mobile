@@ -13,12 +13,12 @@ class Section extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text("Chat AI"),
-          Text("gemini or gpt"),
+          const Text("Chat AI"),
+          const Text("gemini or gpt"),
           Container(
-            margin: EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 10),
             alignment: Alignment.centerRight,
-            child: Icon(
+            child: const Icon(
               Icons.abc,
               size: 50,
             ),

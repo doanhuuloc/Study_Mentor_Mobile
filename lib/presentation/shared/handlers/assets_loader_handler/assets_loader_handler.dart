@@ -15,6 +15,9 @@ class AssetsLoaderHandler extends SingleChildStatefulWidget {
 
   static List<String> getImagesList() {
     final List<String> imagePaths = [];
+    imagePaths.addAll(Assets.images.homeBanner.values.map((e) => e.path));
+    imagePaths.addAll(Assets.images.homeLogo.values.map((e) => e.path));
+    imagePaths.addAll(Assets.images.homeBanner1.values.map((e) => e.path));
     return imagePaths;
   }
 

@@ -1,8 +1,13 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:study_mentor_mobile/presentation/ui/home_screen/widgets/section.dart';
+import 'package:study_mentor_mobile/presentation/gen/app_colors.dart';
+import 'package:study_mentor_mobile/presentation/gen/assets.gen.dart';
+import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
+import 'package:study_mentor_mobile/presentation/ui/home_screen/widgets/home_main_content.dart';
 
 import '../../shared/transitions/transitions.dart';
+import '../../shared/widgets/app_bar/main_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,170 +34,121 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // return BlocProvider<HomeCubit>(
-    //   lazy: false,
-    //   create: (context) {
-    //     return HomeCubit(
-    //       mainPageController: context.read<MainPageController>(),
-    //     );
-    //   },
-    //   child: BlocBuilder<HomeCubit, HomeState>(
-    //     builder: (context, state) {
-    //       return Scaffold(
-    //         backgroundColor: AppColors.blue.shade600,
-    //         appBar: MainAppBar(
-    //           onLogoTap: () {
-    //             const HomeRouteData().go(context);
-    //           },
-    //         ),
-    //         body: RefreshIndicator(
-    //           onRefresh: () async {
-    //             context.read<HomeCubit>().reload();
-    //           },
-    //           child: SingleChildScrollView(
-    //             child: Column(
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 const CelebsSection(),
-    //                 Container(
-    //                   height: 40,
-    //                   width: double.infinity,
-    //                   decoration: BoxDecoration(
-    //                     color: AppColors.blue.shade600,
-    //                     border: Border.all(
-    //                       color: AppColors.blue.shade600,
-    //                       width: 0,
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 ColoredBox(
-    //                   color: AppColors.gray.shade70,
-    //                   child: const Column(
-    //                     children: [
-    //                       BestContentsSection(),
-    //                       SizedBox(height: 57),
-    //                       OnlineMagazineSection(),
-    //                       SizedBox(height: 57),
-    //                       BestReviewsSection(),
-    //                       SizedBox(height: 57),
-    //                       SungongMuseumSection(),
-    //                       SizedBox(height: 26),
-    //                     ],
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 40,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(8)),
+      appBar: MainAppBar(
+        currentMainTabIndex: 0,
+        backgroundColor: AppColors.blue.shade50,
+      ),
+      body: const Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: HomeMainContent(),
             ),
-            Container(
-              height: 80,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                  color: Colors.grey, borderRadius: BorderRadius.circular(8)),
-            ),
-            SizedBox(
-              height: 500,
-              child: GridView.count(
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                crossAxisCount: 2,
-                children: [
-                //  Section(),
-                //  Section(),
-                //  Section(),
-                //  Section(),
-                 
-                ],
-              ),
-            )
-          ],
+          ),
+          _HomeBottomBanner(),
+        ],
+      ),
+    );
+  }
+}
+
+class _HomeBottomBannerSingle extends StatelessWidget {
+  const _HomeBottomBannerSingle();
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        // AppAmplitudeService.instance
+        //     .bannerTap(userId: context.read<UserCubit>().state.idx);
+        // const url = Constants.homeBannerUrl;
+        // final uri = Uri.parse(url);
+        // launchUrl(uri, mode: LaunchMode.externalApplication);
+      },
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: AspectRatio(
+          aspectRatio: 375 / 80,
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Assets.images.homeBanner.homeBanner.image(),
+          ),
         ),
       ),
     );
   }
 }
 
+class _HomeBottomBanner extends StatefulWidget {
+  const _HomeBottomBanner();
 
-class _EventItem extends StatelessWidget {
-  const _EventItem({
-    required this.title,
-    required this.subTitle,
-    required this.icon,
-    this.onTap,
-  });
+  @override
+  State<_HomeBottomBanner> createState() => _HomeBottomBannerState();
+}
 
-  final String title;
-  final String subTitle;
-  final Widget icon;
-  final VoidCallback? onTap;
+class _HomeBottomBannerState extends State<_HomeBottomBanner> {
+  static const _autoPlayDuration = Duration(seconds: 5);
+  static const _nextSlideDuration = Duration(milliseconds: 900);
+  static const _nextSlideCurve = Curves.fastEaseInToSlowEaseOut;
+
+  static final _carouselItems = [
+    Assets.images.homeBanner.homeBanner.image(),
+    Assets.images.homeBanner1.homeBanner1.image(),
+    // Assets.images.homeBanner1.homeBanner1.image(),
+    // Assets.images.homeBanner.homeBanner.image(),
+    // Assets.images.homeBanner.homeBanner.image(),
+    // Assets.images.homeBanner.homeBanner.image(),
+  ];
+
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 164 / 144,
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: Colors.amber,
-            borderRadius: BorderRadius.circular(8)),
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(8),
-            onTap: onTap,
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(right: 8, bottom: 8, top: 14, left: 16),
-              child: Stack(
-                children: [
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: icon,
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // AutoSizeText(
-                      //   title,
-                      //   minFontSize: 10,
-                      //   style: Styles.s16()
-                      //       .withHeight(22 / 16)
-                      //       .withWeight(FontWeight.w600)
-                      //       .withLetterSpacing(-2.5 / 100)
-                      //       .withColor(AppColors.text.main),
-                      // ),
-                      // AutoSizeText(
-                      //   subTitle,
-                      //   minFontSize: 8,
-                      //   style: Styles.s12()
-                      //       .withHeight(16 / 12)
-                      //       .withLetterSpacing(-2.5 / 100)
-                      //       .withColor(AppColors.text.common),
-                      // ),
-                    ],
-                  ),
-                ],
+    return Stack(
+      children: [
+        CarouselSlider(
+          options: CarouselOptions(
+              autoPlayCurve: _nextSlideCurve,
+              autoPlayInterval: _autoPlayDuration,
+              autoPlayAnimationDuration: _nextSlideDuration,
+              aspectRatio: 375 / 80,
+              viewportFraction: 1,
+              autoPlay: true,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentPage = index;
+                });
+              }),
+          items: _carouselItems.map((item) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: item,
               ),
+            );
+          }).toList(),
+        ),
+        Positioned(
+          top: 10,
+          left: 18,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(
+              color: AppColors.white.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              '${_currentPage + 1}/${_carouselItems.length}',
+              style: Styles.s12()
+                  .withHeight(16 / 12)
+                  .withLetterSpacing(-2.5 / 100)
+                  .withColor(AppColors.black),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

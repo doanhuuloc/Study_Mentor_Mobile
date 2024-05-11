@@ -85,6 +85,10 @@ flutter:
     - assets/fonts/
     - assets/svgs/
     - assets/images/
+    - assets/images/home_logo/
+    - assets/images/home_banner/
+    - assets/images/home_banner_1/
+    - assets/images/logo/
     - assets/images/icons/
     - shorebird.yaml
 

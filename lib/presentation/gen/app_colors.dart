@@ -19,7 +19,7 @@ class AppColors {
   static const _blueShade500 = Color(0XFF004B8B);
   static const _blueShade200 = Color(0XFFE9EBF8);
   static const _blueShade100 = Color(0XFFF2F6F9);
-  static const _blueShade50 = Color(0XFFE6EDF3);
+  static const _blueShade50 = Color(0XFFF3F9FA);
   static const Map<String, Color> _blueColorMap = {
     'shade600': _blueShade600,
     'shade500': _blueShade500,

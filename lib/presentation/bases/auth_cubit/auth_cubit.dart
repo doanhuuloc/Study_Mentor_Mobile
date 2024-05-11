@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:study_mentor_mobile/application/services/user/response/response.dart';
 // import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../../application/services/app/token_service/refresh_token_manager.dart';

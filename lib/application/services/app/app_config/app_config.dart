@@ -19,7 +19,6 @@ class AppConfig {
   final String chatPay;
   final String chatGemini;
   final String chatGpt;
-  
 }
 
 mixin AppConfigLoader {

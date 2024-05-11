@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                   Container(
                     height: constraints.maxHeight * logoFraction,
                     alignment: Alignment.center,
-                    child: Assets.images.logo.image(),
+                    child: Assets.images.homeLogo.homeLogo.image(),
                   ),
                   const LoginFormSection(),
                   Container(

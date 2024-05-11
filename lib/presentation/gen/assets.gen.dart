@@ -68,23 +68,27 @@ class $AssetsImagesGen {
   AssetGenImage get intrustor =>
       const AssetGenImage('assets/images/Intrustor.jpg');
 
-  /// File path: assets/images/Logo.png
-  AssetGenImage get logo => const AssetGenImage('assets/images/Logo.png');
-
   /// File path: assets/images/ggmeet.jpg
   AssetGenImage get ggmeet => const AssetGenImage('assets/images/ggmeet.jpg');
 
+  $AssetsImagesHomeBannerGen get homeBanner =>
+      const $AssetsImagesHomeBannerGen();
+  $AssetsImagesHomeBanner1Gen get homeBanner1 =>
+      const $AssetsImagesHomeBanner1Gen();
+  $AssetsImagesHomeLogoGen get homeLogo => const $AssetsImagesHomeLogoGen();
   $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
 
   /// File path: assets/images/loader.png
   AssetGenImage get loader => const AssetGenImage('assets/images/loader.png');
+
+  $AssetsImagesLogoGen get logo => const $AssetsImagesLogoGen();
 
   /// File path: assets/images/user.png
   AssetGenImage get user => const AssetGenImage('assets/images/user.png');
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [ai, aipre, intrustor, logo, ggmeet, loader, user];
+      [ai, aipre, intrustor, ggmeet, loader, user];
 }
 
 class $AssetsSvgsGen {
@@ -226,6 +230,28 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/history.svg
   SvgGenImage get history => const SvgGenImage('assets/svgs/history.svg');
+
+  /// File path: assets/svgs/home-ai-fee.svg
+  SvgGenImage get homeAiFee => const SvgGenImage('assets/svgs/home-ai-fee.svg');
+
+  /// File path: assets/svgs/home-ai-free.svg
+  SvgGenImage get homeAiFree =>
+      const SvgGenImage('assets/svgs/home-ai-free.svg');
+
+  /// File path: assets/svgs/home-google-meet.svg
+  SvgGenImage get homeGoogleMeet =>
+      const SvgGenImage('assets/svgs/home-google-meet.svg');
+
+  /// File path: assets/svgs/home-logo.svg
+  SvgGenImage get homeLogo => const SvgGenImage('assets/svgs/home-logo.svg');
+
+  /// File path: assets/svgs/home-mentor-icon.svg
+  SvgGenImage get homeMentorIcon =>
+      const SvgGenImage('assets/svgs/home-mentor-icon.svg');
+
+  /// File path: assets/svgs/home_direction_banner.svg
+  SvgGenImage get homeDirectionBanner =>
+      const SvgGenImage('assets/svgs/home_direction_banner.svg');
 
   /// File path: assets/svgs/id-icon.svg
   SvgGenImage get idIcon => const SvgGenImage('assets/svgs/id-icon.svg');
@@ -427,6 +453,12 @@ class $AssetsSvgsGen {
         heartIcon16,
         heartIconFilled16,
         history,
+        homeAiFee,
+        homeAiFree,
+        homeGoogleMeet,
+        homeLogo,
+        homeMentorIcon,
+        homeDirectionBanner,
         idIcon,
         inputClearIcon,
         instagramIcon,
@@ -475,6 +507,39 @@ class $AssetsSvgsGen {
       ];
 }
 
+class $AssetsImagesHomeBannerGen {
+  const $AssetsImagesHomeBannerGen();
+
+  /// File path: assets/images/home_banner/home-banner.png
+  AssetGenImage get homeBanner =>
+      const AssetGenImage('assets/images/home_banner/home-banner.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [homeBanner];
+}
+
+class $AssetsImagesHomeBanner1Gen {
+  const $AssetsImagesHomeBanner1Gen();
+
+  /// File path: assets/images/home_banner_1/home-banner-1.png
+  AssetGenImage get homeBanner1 =>
+      const AssetGenImage('assets/images/home_banner_1/home-banner-1.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [homeBanner1];
+}
+
+class $AssetsImagesHomeLogoGen {
+  const $AssetsImagesHomeLogoGen();
+
+  /// File path: assets/images/home_logo/home-logo.png
+  AssetGenImage get homeLogo =>
+      const AssetGenImage('assets/images/home_logo/home-logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [homeLogo];
+}
+
 class $AssetsImagesIconsGen {
   const $AssetsImagesIconsGen();
 
@@ -488,6 +553,16 @@ class $AssetsImagesIconsGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [chatgpt, gemini];
+}
+
+class $AssetsImagesLogoGen {
+  const $AssetsImagesLogoGen();
+
+  /// File path: assets/images/logo/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo/logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [logo];
 }
 
 class Assets {

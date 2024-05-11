@@ -1,6 +1,5 @@
 import '../../../application/services/auth/auth.dart';
 import '../../../application/services/common/common.dart';
-import '../../../application/services/common/response/src/success_response.dart';
 import '../../../utilities/failure/failure.dart';
 import '../../../utilities/result/src/result.dart';
 import '../../data_source_error_handler_mixin.dart';

@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../bases/user_cubit/user_cubit.dart';
-import '../../gen/assets.gen.dart';
 import '../../shared/transitions/transitions.dart';
 import '../../shared/widgets/app_bar/common_app_bar.dart';
-import '../../shared/widgets/app_icon_button.dart';
 import '../../shared/widgets/item_divider.dart';
 import 'widgets/activity_section.dart';
 import 'widgets/header_profile_seaction.dart';
@@ -33,16 +31,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        actions: [
-          AppIconButton(
-            icon: Assets.svgs.settingsIcon.svg(),
-            onTap: () {
-              // const SettingRouteData().push(context);
-            },
-          ),
-        ],
-      ),
+      appBar: const CommonAppBar(),
       body: RefreshIndicator(
         onRefresh: () async {
           context.read<UserCubit>().fetchUserData();
