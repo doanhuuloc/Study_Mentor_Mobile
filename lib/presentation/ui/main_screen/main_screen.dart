@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:study_mentor_mobile/presentation/router/router_config/routes/history_branch/history_branch.dart';
 
 import '../../router/router_config/router_config.dart';
 import '../../shared/transitions/transitions.dart';
@@ -49,7 +50,7 @@ class MainScreen extends StatelessWidget {
         const HomeRouteData().go(context);
         break;
       case 1:
-        const HomeRouteData().go(context);
+        const HistoryRouteData().go(context);
         break;
 
       case 2:

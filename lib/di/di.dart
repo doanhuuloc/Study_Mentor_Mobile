@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:study_mentor_mobile/infrastructure/services_impl/ai_impl/data_source.dart';
 
+import '../application/services/ai/ai.dart';
 import '../application/services/app/app_config/app_config.dart';
 import '../application/services/app/app_data/app_username_service.dart';
 import '../application/services/app/locale_service/locale_service.dart';
@@ -16,6 +18,7 @@ import '../infrastructure/interceptors/auth_interceptor/auth_interceptor.dart';
 import '../infrastructure/interceptors/auth_interceptor/token_based_auth_interceptor.dart';
 import '../infrastructure/interceptors/logger_interceptor/logger_interceptor.dart';
 
+import '../infrastructure/services_impl/ai_impl/ai_controller_impl.dart';
 import '../infrastructure/services_impl/app_config_impl/app_config_impl.dart';
 import '../infrastructure/services_impl/app_data_impl/app_username_service_impl.dart';
 import '../infrastructure/services_impl/auth_impl/auth_controller_impl.dart';
@@ -38,6 +41,7 @@ class AppDIData {
     required this.config,
     required this.tokenService,
     required this.userController,
+    required this.aiController,
     required this.refreshTokenManager,
     required this.appUsernameService,
     required this.fileController,
@@ -47,6 +51,7 @@ class AppDIData {
   final AppConfig config;
   final AuthController authController;
   final UserController userController;
+  final AIController aiController;
   final TokenService tokenService;
   final RefreshTokenManager refreshTokenManager;
   final AppUsernameService appUsernameService;
@@ -91,6 +96,13 @@ class AppDIService implements DIService<AppDIData> {
       receiveTimeout: const Duration(minutes: 5),
     );
 
+    // dio AI options
+    final optionsAI = BaseOptions(
+      baseUrl: appConfig.baseUrlAI,
+      connectTimeout: const Duration(minutes: 5),
+      receiveTimeout: const Duration(minutes: 5),
+    );
+
     final loggerInterceptor = LoggerInterceptor();
 
     final tokenServiceDio = Dio(options);
@@ -119,6 +131,13 @@ class AppDIService implements DIService<AppDIData> {
       loggerInterceptor,
     ]);
 
+    // dio for ai
+    final dioAI = Dio(optionsAI);
+    dio.interceptors.addAll([
+      authInterceptor,
+      loggerInterceptor,
+    ]);
+
     // auth
     final AuthDataSource authDataSource = AuthDataSource(dio);
     final AuthController authController =
@@ -128,6 +147,11 @@ class AppDIService implements DIService<AppDIData> {
     final UserDataSource userDataSource = UserDataSource(dio);
     final UserController userController =
         UserControllerImpl(userDataSource: userDataSource);
+
+    // ai
+    final AIDataSource aiDataSource = AIDataSource(dioAI);
+    final AIController aiController =
+        AIControllerImpl(aiDataSource: aiDataSource);
 
     // file
     final FileDataSource fileDataSource = FileDataSource(dio);
@@ -151,6 +175,7 @@ class AppDIService implements DIService<AppDIData> {
       tokenService: tokenService,
       fileController: fileController,
       userController: userController,
+      aiController: aiController,
       appUsernameService: appUsernameService,
     );
   }

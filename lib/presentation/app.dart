@@ -52,7 +52,7 @@ class SuccessManiaApp extends StatelessWidget {
         child: Builder(
           builder: (context) {
             return MaterialApp.router(
-              title: 'SUCCESS MANIA',
+              title: 'STUDY MENTOR',
               debugShowCheckedModeBanner: false,
               locale: context.watch<LocaleCubit>().state,
               localizationsDelegates: S.localizationsDelegates,

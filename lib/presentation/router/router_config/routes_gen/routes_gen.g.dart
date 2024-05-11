@@ -171,6 +171,10 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
           ],
         ),
         GoRouteData.$route(
+          path: '/history',
+          factory: $HistoryRouteDataExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: '/profile',
           factory: $ProfileRouteDataExtension._fromState,
           routes: [
@@ -224,6 +228,24 @@ extension $HomeLoginRouteDataExtension on HomeLoginRouteData {
         queryParams: {
           if (redirectUrl != null) 'redirect-url': redirectUrl,
         },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $HistoryRouteDataExtension on HistoryRouteData {
+  static HistoryRouteData _fromState(GoRouterState state) =>
+      const HistoryRouteData();
+
+  String get location => GoRouteData.$location(
+        '/history',
       );
 
   void go(BuildContext context) => context.go(location);

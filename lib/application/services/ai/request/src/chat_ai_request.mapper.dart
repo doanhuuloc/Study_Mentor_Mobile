@@ -6,56 +6,6 @@
 
 part of 'chat_ai_request.dart';
 
-class ModelAIMapper extends EnumMapper<ModelAI> {
-  ModelAIMapper._();
-
-  static ModelAIMapper? _instance;
-  static ModelAIMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = ModelAIMapper._());
-    }
-    return _instance!;
-  }
-
-  static ModelAI fromValue(dynamic value) {
-    ensureInitialized();
-    return MapperContainer.globals.fromValue(value);
-  }
-
-  @override
-  ModelAI decode(dynamic value) {
-    switch (value) {
-      case 'PAY':
-        return ModelAI.pay;
-      case 'GEMINI':
-        return ModelAI.gemini;
-      case 'CHATGPT':
-        return ModelAI.chatgpt;
-      default:
-        throw MapperException.unknownEnumValue(value);
-    }
-  }
-
-  @override
-  dynamic encode(ModelAI self) {
-    switch (self) {
-      case ModelAI.pay:
-        return 'PAY';
-      case ModelAI.gemini:
-        return 'GEMINI';
-      case ModelAI.chatgpt:
-        return 'CHATGPT';
-    }
-  }
-}
-
-extension ModelAIMapperExtension on ModelAI {
-  String toValue() {
-    ModelAIMapper.ensureInitialized();
-    return MapperContainer.globals.toValue<ModelAI>(this) as String;
-  }
-}
-
 class ChatAIRequestMapper extends ClassMapperBase<ChatAIRequest> {
   ChatAIRequestMapper._();
 
@@ -63,7 +13,6 @@ class ChatAIRequestMapper extends ClassMapperBase<ChatAIRequest> {
   static ChatAIRequestMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChatAIRequestMapper._());
-      ModelAIMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -74,30 +23,14 @@ class ChatAIRequestMapper extends ClassMapperBase<ChatAIRequest> {
   static String? _$question(ChatAIRequest v) => v.question;
   static const Field<ChatAIRequest, String> _f$question =
       Field('question', _$question, opt: true);
-  static ModelAI? _$modelAI(ChatAIRequest v) => v.modelAI;
-  static const Field<ChatAIRequest, ModelAI> _f$modelAI =
-      Field('modelAI', _$modelAI, opt: true);
-  static String? _$userId(ChatAIRequest v) => v.userId;
-  static const Field<ChatAIRequest, String> _f$userId =
-      Field('userId', _$userId, opt: true);
-  static String? _$roomId(ChatAIRequest v) => v.roomId;
-  static const Field<ChatAIRequest, String> _f$roomId =
-      Field('roomId', _$roomId, opt: true);
 
   @override
   final MappableFields<ChatAIRequest> fields = const {
     #question: _f$question,
-    #modelAI: _f$modelAI,
-    #userId: _f$userId,
-    #roomId: _f$roomId,
   };
 
   static ChatAIRequest _instantiate(DecodingData data) {
-    return ChatAIRequest(
-        question: data.dec(_f$question),
-        modelAI: data.dec(_f$modelAI),
-        userId: data.dec(_f$userId),
-        roomId: data.dec(_f$roomId));
+    return ChatAIRequest(question: data.dec(_f$question));
   }
 
   @override
@@ -153,7 +86,7 @@ extension ChatAIRequestValueCopy<$R, $Out>
 
 abstract class ChatAIRequestCopyWith<$R, $In extends ChatAIRequest, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? question, ModelAI? modelAI, String? userId, String? roomId});
+  $R call({String? question});
   ChatAIRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -166,23 +99,11 @@ class _ChatAIRequestCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ChatAIRequest> $mapper =
       ChatAIRequestMapper.ensureInitialized();
   @override
-  $R call(
-          {Object? question = $none,
-          Object? modelAI = $none,
-          Object? userId = $none,
-          Object? roomId = $none}) =>
-      $apply(FieldCopyWithData({
-        if (question != $none) #question: question,
-        if (modelAI != $none) #modelAI: modelAI,
-        if (userId != $none) #userId: userId,
-        if (roomId != $none) #roomId: roomId
-      }));
+  $R call({Object? question = $none}) =>
+      $apply(FieldCopyWithData({if (question != $none) #question: question}));
   @override
-  ChatAIRequest $make(CopyWithData data) => ChatAIRequest(
-      question: data.get(#question, or: $value.question),
-      modelAI: data.get(#modelAI, or: $value.modelAI),
-      userId: data.get(#userId, or: $value.userId),
-      roomId: data.get(#roomId, or: $value.roomId));
+  ChatAIRequest $make(CopyWithData data) =>
+      ChatAIRequest(question: data.get(#question, or: $value.question));
 
   @override
   ChatAIRequestCopyWith<$R2, ChatAIRequest, $Out2> $chain<$R2, $Out2>(

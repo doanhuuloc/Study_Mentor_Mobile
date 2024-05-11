@@ -20,17 +20,38 @@ class ChatAIResponseMapper extends ClassMapperBase<ChatAIResponse> {
   @override
   final String id = 'ChatAIResponse';
 
-  static String? _$response(ChatAIResponse v) => v.response;
-  static const Field<ChatAIResponse, String> _f$response =
-      Field('response', _$response, opt: true);
+  static String? _$contactId(ChatAIResponse v) => v.contactId;
+  static const Field<ChatAIResponse, String> _f$contactId =
+      Field('contactId', _$contactId, opt: true);
+  static String? _$createAt(ChatAIResponse v) => v.createAt;
+  static const Field<ChatAIResponse, String> _f$createAt =
+      Field('createAt', _$createAt, opt: true);
+  static String? _$questionId(ChatAIResponse v) => v.questionId;
+  static const Field<ChatAIResponse, String> _f$questionId =
+      Field('questionId', _$questionId, opt: true);
+  static String? _$senderId(ChatAIResponse v) => v.senderId;
+  static const Field<ChatAIResponse, String> _f$senderId =
+      Field('senderId', _$senderId, opt: true);
+  static String? _$value(ChatAIResponse v) => v.value;
+  static const Field<ChatAIResponse, String> _f$value =
+      Field('value', _$value, opt: true);
 
   @override
   final MappableFields<ChatAIResponse> fields = const {
-    #response: _f$response,
+    #contactId: _f$contactId,
+    #createAt: _f$createAt,
+    #questionId: _f$questionId,
+    #senderId: _f$senderId,
+    #value: _f$value,
   };
 
   static ChatAIResponse _instantiate(DecodingData data) {
-    return ChatAIResponse(response: data.dec(_f$response));
+    return ChatAIResponse(
+        contactId: data.dec(_f$contactId),
+        createAt: data.dec(_f$createAt),
+        questionId: data.dec(_f$questionId),
+        senderId: data.dec(_f$senderId),
+        value: data.dec(_f$value));
   }
 
   @override
@@ -86,7 +107,12 @@ extension ChatAIResponseValueCopy<$R, $Out>
 
 abstract class ChatAIResponseCopyWith<$R, $In extends ChatAIResponse, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? response});
+  $R call(
+      {String? contactId,
+      String? createAt,
+      String? questionId,
+      String? senderId,
+      String? value});
   ChatAIResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -100,11 +126,26 @@ class _ChatAIResponseCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ChatAIResponse> $mapper =
       ChatAIResponseMapper.ensureInitialized();
   @override
-  $R call({Object? response = $none}) =>
-      $apply(FieldCopyWithData({if (response != $none) #response: response}));
+  $R call(
+          {Object? contactId = $none,
+          Object? createAt = $none,
+          Object? questionId = $none,
+          Object? senderId = $none,
+          Object? value = $none}) =>
+      $apply(FieldCopyWithData({
+        if (contactId != $none) #contactId: contactId,
+        if (createAt != $none) #createAt: createAt,
+        if (questionId != $none) #questionId: questionId,
+        if (senderId != $none) #senderId: senderId,
+        if (value != $none) #value: value
+      }));
   @override
-  ChatAIResponse $make(CopyWithData data) =>
-      ChatAIResponse(response: data.get(#response, or: $value.response));
+  ChatAIResponse $make(CopyWithData data) => ChatAIResponse(
+      contactId: data.get(#contactId, or: $value.contactId),
+      createAt: data.get(#createAt, or: $value.createAt),
+      questionId: data.get(#questionId, or: $value.questionId),
+      senderId: data.get(#senderId, or: $value.senderId),
+      value: data.get(#value, or: $value.value));
 
   @override
   ChatAIResponseCopyWith<$R2, ChatAIResponse, $Out2> $chain<$R2, $Out2>(

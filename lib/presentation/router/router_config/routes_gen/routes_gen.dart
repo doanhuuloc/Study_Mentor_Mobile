@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:study_mentor_mobile/presentation/router/router_config/routes/history_branch/history_branch.dart';
 import '../../../shared/base_infinite_loading/example.dart';
 import '../../../shared/widgets/dialogs/dialogs.dart';
 import '../../../shared/widgets/drop_down_bar/drop_down_bar.dart';
@@ -141,6 +142,9 @@ class DropdownSheetRouteData extends GoRouteData {
           path: HomeLoginRouteData.routeName,
         ),
       ],
+    ),
+    TypedGoRoute<HistoryRouteData>(
+      path: HistoryRouteData.routeName,
     ),
     TypedGoRoute<ProfileRouteData>(
       path: ProfileRouteData.routeName,

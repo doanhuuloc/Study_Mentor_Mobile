@@ -23,16 +23,13 @@ class AppConfigLoaderImpl with AppConfigLoader {
       final resolvedVersion = 'v$version';
 
       final appVariable = AppConfig(
-        // kakaoNativeAppKey: dotenv.env['KAKAO_NATIVE_APP_KEY'] ?? '',
         version: resolvedVersion,
         baseUrl: dotenv.env['BASE_URL'] ?? '',
-        // youtubePlayListId: dotenv.env['YOUTUBE_PLAYLIST_ID'] ?? '',
-        // youtubeApiKey: dotenv.env['YOUTUBE_API_KEY'] ?? '',
-        // clientTossKey: dotenv.env['CLIENT_KEY_TOSS'] ?? '',
-        // oneSignalAppId: dotenv.env['ONE_SIGNAL_APP_ID'] ?? '',
+        baseUrlAI: dotenv.env['BASE_URL_AI'] ?? '',
         appLink: dotenv.env['APP_LINK'] ?? '',
-        // sweettrackerBaseUrl: dotenv.env['SWEET_TRACKER_BASE_URL'] ?? '',
-        // sweettrackerApiKey: dotenv.env['SWEET_TRACKER_API_KEY'] ?? '',
+        chatPay: dotenv.env['ID_CHAT_PAY'] ?? '',
+        chatGemini: dotenv.env['ID_CHAT_GEMINI'] ?? '',
+        chatGpt: dotenv.env['ID_CHAT_CHATGPT'] ?? '',
       );
       return Right(appVariable);
     } catch (error) {

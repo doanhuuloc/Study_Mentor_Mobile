@@ -478,12 +478,16 @@ class $AssetsSvgsGen {
 class $AssetsImagesIconsGen {
   const $AssetsImagesIconsGen();
 
-  /// File path: assets/images/icons/kakao-icon.png
-  AssetGenImage get kakaoIcon =>
-      const AssetGenImage('assets/images/icons/kakao-icon.png');
+  /// File path: assets/images/icons/chatgpt.jpg
+  AssetGenImage get chatgpt =>
+      const AssetGenImage('assets/images/icons/chatgpt.jpg');
+
+  /// File path: assets/images/icons/gemini.png
+  AssetGenImage get gemini =>
+      const AssetGenImage('assets/images/icons/gemini.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [kakaoIcon];
+  List<AssetGenImage> get values => [chatgpt, gemini];
 }
 
 class Assets {
