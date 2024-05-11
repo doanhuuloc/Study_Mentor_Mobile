@@ -14,7 +14,7 @@ class AuthenticatedResponseMapper
   static AuthenticatedResponseMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AuthenticatedResponseMapper._());
-      JwtResponseMapper.ensureInitialized();
+      UserInfoResponseMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -22,22 +22,28 @@ class AuthenticatedResponseMapper
   @override
   final String id = 'AuthenticatedResponse';
 
-  static JwtResponse? _$tokenInfo(AuthenticatedResponse v) => v.tokenInfo;
-  static const Field<AuthenticatedResponse, JwtResponse> _f$tokenInfo =
-      Field('tokenInfo', _$tokenInfo, opt: true);
-  static int? _$userId(AuthenticatedResponse v) => v.userId;
-  static const Field<AuthenticatedResponse, int> _f$userId =
-      Field('userId', _$userId, opt: true);
+  static String? _$accessToken(AuthenticatedResponse v) => v.accessToken;
+  static const Field<AuthenticatedResponse, String> _f$accessToken =
+      Field('accessToken', _$accessToken, opt: true);
+  static String? _$refreshToken(AuthenticatedResponse v) => v.refreshToken;
+  static const Field<AuthenticatedResponse, String> _f$refreshToken =
+      Field('refreshToken', _$refreshToken, opt: true);
+  static UserInfoResponse? _$user(AuthenticatedResponse v) => v.user;
+  static const Field<AuthenticatedResponse, UserInfoResponse> _f$user =
+      Field('user', _$user, opt: true);
 
   @override
   final MappableFields<AuthenticatedResponse> fields = const {
-    #tokenInfo: _f$tokenInfo,
-    #userId: _f$userId,
+    #accessToken: _f$accessToken,
+    #refreshToken: _f$refreshToken,
+    #user: _f$user,
   };
 
   static AuthenticatedResponse _instantiate(DecodingData data) {
     return AuthenticatedResponse(
-        tokenInfo: data.dec(_f$tokenInfo), userId: data.dec(_f$userId));
+        accessToken: data.dec(_f$accessToken),
+        refreshToken: data.dec(_f$refreshToken),
+        user: data.dec(_f$user));
   }
 
   @override
@@ -97,8 +103,8 @@ abstract class AuthenticatedResponseCopyWith<
     $R,
     $In extends AuthenticatedResponse,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
-  JwtResponseCopyWith<$R, JwtResponse, JwtResponse>? get tokenInfo;
-  $R call({JwtResponse? tokenInfo, int? userId});
+  UserInfoResponseCopyWith<$R, UserInfoResponse, UserInfoResponse>? get user;
+  $R call({String? accessToken, String? refreshToken, UserInfoResponse? user});
   AuthenticatedResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -112,18 +118,23 @@ class _AuthenticatedResponseCopyWithImpl<$R, $Out>
   late final ClassMapperBase<AuthenticatedResponse> $mapper =
       AuthenticatedResponseMapper.ensureInitialized();
   @override
-  JwtResponseCopyWith<$R, JwtResponse, JwtResponse>? get tokenInfo =>
-      $value.tokenInfo?.copyWith.$chain((v) => call(tokenInfo: v));
+  UserInfoResponseCopyWith<$R, UserInfoResponse, UserInfoResponse>? get user =>
+      $value.user?.copyWith.$chain((v) => call(user: v));
   @override
-  $R call({Object? tokenInfo = $none, Object? userId = $none}) =>
+  $R call(
+          {Object? accessToken = $none,
+          Object? refreshToken = $none,
+          Object? user = $none}) =>
       $apply(FieldCopyWithData({
-        if (tokenInfo != $none) #tokenInfo: tokenInfo,
-        if (userId != $none) #userId: userId
+        if (accessToken != $none) #accessToken: accessToken,
+        if (refreshToken != $none) #refreshToken: refreshToken,
+        if (user != $none) #user: user
       }));
   @override
   AuthenticatedResponse $make(CopyWithData data) => AuthenticatedResponse(
-      tokenInfo: data.get(#tokenInfo, or: $value.tokenInfo),
-      userId: data.get(#userId, or: $value.userId));
+      accessToken: data.get(#accessToken, or: $value.accessToken),
+      refreshToken: data.get(#refreshToken, or: $value.refreshToken),
+      user: data.get(#user, or: $value.user));
 
   @override
   AuthenticatedResponseCopyWith<$R2, AuthenticatedResponse, $Out2>

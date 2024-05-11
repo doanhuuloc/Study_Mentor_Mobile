@@ -14,7 +14,6 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
   BootstrapCubit({
     required this.localeCubit,
     required this.localeService,
-    // required this.termAndCondStatusService,
     required this.authCubit,
     required this.appUsernameService,
   }) : super(
@@ -24,7 +23,6 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
   }
 
   final AuthCubit authCubit;
-  // final AppTermAndCondStatusService termAndCondStatusService;
   final AppUsernameService appUsernameService;
   final LocaleService localeService;
   final LocaleCubit localeCubit;
@@ -46,8 +44,6 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
   }
 
   void _init() async {
-    // final haveReadTermAndCondFuture =
-    //     termAndCondStatusService.haveReadTermAndCondYet();
     final oldUsernameFuture = appUsernameService.loadUsername();
     final loadLocaleFuture = localeService.loadLocale();
     await Future.wait([

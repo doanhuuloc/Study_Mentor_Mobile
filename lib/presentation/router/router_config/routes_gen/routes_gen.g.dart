@@ -162,6 +162,31 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
         GoRouteData.$route(
           path: '/home',
           factory: $HomeRouteDataExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'login',
+              parentNavigatorKey: HomeLoginRouteData.$parentNavigatorKey,
+              factory: $HomeLoginRouteDataExtension._fromState,
+            ),
+          ],
+        ),
+        GoRouteData.$route(
+          path: '/profile',
+          factory: $ProfileRouteDataExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'login',
+              parentNavigatorKey: ProfileLoginRouteData.$parentNavigatorKey,
+              factory: $ProfileLoginRouteDataExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'register',
+                  parentNavigatorKey: RegisterRouteData.$parentNavigatorKey,
+                  factory: $RegisterRouteDataExtension._fromState,
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );
@@ -176,6 +201,88 @@ extension $HomeRouteDataExtension on HomeRouteData {
 
   String get location => GoRouteData.$location(
         '/home',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $HomeLoginRouteDataExtension on HomeLoginRouteData {
+  static HomeLoginRouteData _fromState(GoRouterState state) =>
+      HomeLoginRouteData(
+        redirectUrl: state.uri.queryParameters['redirect-url'],
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/login',
+        queryParams: {
+          if (redirectUrl != null) 'redirect-url': redirectUrl,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ProfileRouteDataExtension on ProfileRouteData {
+  static ProfileRouteData _fromState(GoRouterState state) =>
+      const ProfileRouteData();
+
+  String get location => GoRouteData.$location(
+        '/profile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ProfileLoginRouteDataExtension on ProfileLoginRouteData {
+  static ProfileLoginRouteData _fromState(GoRouterState state) =>
+      ProfileLoginRouteData(
+        redirectUrl: state.uri.queryParameters['redirect-url'],
+      );
+
+  String get location => GoRouteData.$location(
+        '/profile/login',
+        queryParams: {
+          if (redirectUrl != null) 'redirect-url': redirectUrl,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $RegisterRouteDataExtension on RegisterRouteData {
+  static RegisterRouteData _fromState(GoRouterState state) =>
+      const RegisterRouteData();
+
+  String get location => GoRouteData.$location(
+        '/profile/login/register',
       );
 
   void go(BuildContext context) => context.go(location);

@@ -1,19 +1,21 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'jwt_response.dart';
+import '../../../user/user.dart';
 
 part 'authenticated_response.mapper.dart';
 
 @MappableClass()
 class AuthenticatedResponse with AuthenticatedResponseMappable {
   const AuthenticatedResponse({
-    this.tokenInfo,
-    this.userId,
+    this.accessToken,
+    this.refreshToken,
+    this.user,
   });
 
   factory AuthenticatedResponse.fromJson(Map<String, dynamic> json) =>
       AuthenticatedResponseMapper.fromJson(json);
 
-  final JwtResponse? tokenInfo;
-  final int? userId;
+  final String? accessToken;
+  final String? refreshToken;
+  final UserInfoResponse? user;
 }

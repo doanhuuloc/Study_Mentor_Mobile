@@ -43,6 +43,7 @@ class MainScreen extends StatelessWidget {
   }
 
   void onChangeTab(BuildContext context, int index) {
+    print('object $index');
     switch (index) {
       case 0:
         const HomeRouteData().go(context);
@@ -50,17 +51,9 @@ class MainScreen extends StatelessWidget {
       case 1:
         const HomeRouteData().go(context);
         break;
+
       case 2:
-        const HomeRouteData().go(context);
-        break;
-      case 3:
-        const HomeRouteData().go(context);
-        break;
-      case 4:
-        const HomeRouteData().go(context);
-        break;
-      case 5:
-        const HomeRouteData().go(context);
+        const ProfileRouteData().go(context);
         break;
     }
   }
@@ -73,17 +66,8 @@ class MainScreen extends StatelessWidget {
     if (location.startsWith(const HomeRouteData().location)) {
       return 1;
     }
-    if (location.startsWith(const HomeRouteData().location)) {
+    if (location.startsWith(const ProfileRouteData().location)) {
       return 2;
-    }
-    if (location.startsWith(const HomeRouteData().location)) {
-      return 3;
-    }
-    if (location.startsWith(const HomeRouteData().location)) {
-      return 4;
-    }
-    if (location.startsWith(const HomeRouteData().location)) {
-      return 5;
     }
     return 0;
   }

@@ -11,5 +11,6 @@ abstract interface class RefreshTokenManager {
 
   Future<void> saveRefreshToken(String token);
 
-  Future<Result<Failure, JwtResponse>> performRefreshToken(String oldTokens);
+  Future<Result<Failure, AuthenticatedResponse>> performRefreshToken(
+      String oldTokens);
 }

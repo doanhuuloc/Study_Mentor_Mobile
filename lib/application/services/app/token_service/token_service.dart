@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import '../../auth/auth.dart';
 import 'refresh_token_manager.dart';
 
 typedef ExpiredTokenCallback = void Function();
@@ -8,11 +7,13 @@ typedef ExpiredTokenCallback = void Function();
 class RefreshTokenResult {
   const RefreshTokenResult({
     required this.success,
-    required this.jwtResponse,
+    this.accessToken,
+    this.refreshToken,
   });
 
   final bool success;
-  final JwtResponse? jwtResponse;
+  final String? accessToken;
+  final String? refreshToken;
 }
 
 class TokenService extends ChangeNotifier {
@@ -59,15 +60,16 @@ class TokenService extends ChangeNotifier {
 
   @mustCallSuper
   @protected
-  void setTokenInternal(covariant JwtResponse token) {
-    _accessToken = token.token;
+  void setTokenInternal(covariant String? token) {
+    _accessToken = token;
   }
 
   /// save refresh token and set/ save current token information
-  Future<void> setToken(covariant JwtResponse token) async {
-    setTokenInternal(token);
-    if (token.refreshToken != null) {
-      await refreshTokenManager.saveRefreshToken(token.refreshToken!);
+  Future<void> setToken(
+      covariant String? accessToken, covariant String? refreshToken) async {
+    setTokenInternal(accessToken);
+    if (refreshToken != null) {
+      await refreshTokenManager.saveRefreshToken(refreshToken);
     }
   }
 
@@ -79,7 +81,8 @@ class TokenService extends ChangeNotifier {
       if (shouldTriggerExpired) {
         triggerExpired();
       }
-      return const RefreshTokenResult(success: false, jwtResponse: null);
+      return const RefreshTokenResult(
+          success: false, accessToken: null, refreshToken: null);
     }
 
     final tokenResponse =
@@ -88,10 +91,15 @@ class TokenService extends ChangeNotifier {
       if (shouldTriggerExpired) {
         triggerExpired();
       }
-      return const RefreshTokenResult(success: false, jwtResponse: null);
+      return const RefreshTokenResult(
+          success: false, accessToken: null, refreshToken: null);
     }
-    await setToken(tokenResponse.right);
-    return RefreshTokenResult(success: true, jwtResponse: tokenResponse.right);
+    await setToken(
+        tokenResponse.right.accessToken, tokenResponse.right.refreshToken);
+    return RefreshTokenResult(
+        success: true,
+        accessToken: tokenResponse.right.accessToken,
+        refreshToken: tokenResponse.right.refreshToken);
   }
 
   /// clear runtime tokens data

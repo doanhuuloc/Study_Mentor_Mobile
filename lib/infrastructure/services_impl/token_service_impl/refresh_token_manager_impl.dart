@@ -22,13 +22,13 @@ class RefreshTokenManagerImpl implements RefreshTokenManager {
   }
 
   @override
-  Future<Result<Failure, JwtResponse>> performRefreshToken(
+  Future<Result<Failure, AuthenticatedResponse>> performRefreshToken(
       String oldTokens) async {
     final refreshTokenResult = await authController
         .refreshToken(RefreshTokenRequest(refreshToken: oldTokens));
     return refreshTokenResult.mapResult(
       onLeft: (failure) => failure,
-      onRight: (value) => value.tokenInfo ?? const JwtResponse(),
+      onRight: (value) => value,
     );
   }
 

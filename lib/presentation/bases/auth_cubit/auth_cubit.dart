@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:study_mentor_mobile/application/services/user/response/response.dart';
 // import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../../application/services/app/token_service/refresh_token_manager.dart';
@@ -42,22 +44,17 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
 
   void _loggedInSuccess({
     String? redirectUrl,
-    required int? userId,
+    // required UserInfoResponse? user,
   }) async {
     sessionCubit.sessionStarted();
-    bool isUserReady = true;
-    final userInfoResult = await userController.getUserRegistrationStatus();
-    userInfoResult.handleRight((value) {
-      isUserReady = value.registrationCompleted ?? true;
-    });
-
-    // if (userId != null) {
-    //   OneSignal.login(userId.toString());
-    // }
+    // final userInfoResult = await userController.getUserRegistrationStatus();
+    // userInfoResult.handleRight((value) {
+    //   isUserReady = value.registrationCompleted ?? true;
+    // });
 
     emit(AuthStatusLoggedInState(
       redirectUrl: redirectUrl,
-      userNeedVerify: !isUserReady,
+      userNeedVerify: true,
     ));
   }
 
@@ -68,7 +65,7 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
   }) async {
     final loginResponse = await authController.login(
       LoginRequest(
-        username: userName,
+        email: userName,
         password: password,
       ),
     );
@@ -76,10 +73,8 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
       return loginResponse.left;
     }
     await tokenService.setToken(
-      loginResponse.right.tokenInfo ?? const JwtResponse(),
-    );
-    _loggedInSuccess(
-        redirectUrl: redirectUrl, userId: loginResponse.right.userId);
+        loginResponse.right.accessToken, loginResponse.right.refreshToken);
+    _loggedInSuccess(redirectUrl: redirectUrl);
     return null;
   }
 
@@ -99,7 +94,6 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
       if (refreshTokenSuccess.success) {
         _loggedInSuccess(
           redirectUrl: redirectUrl,
-          userId: refreshTokenSuccess.jwtResponse?.userId,
         );
         return true;
       }
@@ -111,85 +105,25 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
     }
   }
 
-  Future<Failure?> loginWithKakao({
-    required String accessToken,
-    String? redirectUrl,
-  }) async {
-    final loginWithKakaoResponse = await authController.loginWithKakao(
-      LoginWithKakaoRequest(
-        accessToken: accessToken,
-      ),
-    );
-    if (loginWithKakaoResponse.isLeft) {
-      return loginWithKakaoResponse.left;
-    }
-    await tokenService.setToken(
-      loginWithKakaoResponse.right.tokenInfo ?? const JwtResponse(),
-    );
-    _loggedInSuccess(
-        redirectUrl: redirectUrl, userId: loginWithKakaoResponse.right.userId);
-    return null;
-  }
-
-  Future<Failure?> loginWithApple({
-    required String idToken,
-    String? redirectUrl,
-  }) async {
-    final loginWithKakaoResponse = await authController.loginWithApple(
-      LoginWithAppleRequest(
-        idToken: idToken,
-      ),
-    );
-    if (loginWithKakaoResponse.isLeft) {
-      return loginWithKakaoResponse.left;
-    }
-    await tokenService.setToken(
-      loginWithKakaoResponse.right.tokenInfo ?? const JwtResponse(),
-    );
-    _loggedInSuccess(
-        redirectUrl: redirectUrl, userId: loginWithKakaoResponse.right.userId);
-    return null;
-  }
-
-  Future<Failure?> loginWithNaver({
-    required String accessToken,
-    String? redirectUrl,
-  }) async {
-    final loginWithNaverResponse = await authController.loginWithNaver(
-      LoginWithNaverRequest(
-        accessToken: accessToken,
-      ),
-    );
-    if (loginWithNaverResponse.isLeft) {
-      return loginWithNaverResponse.left;
-    }
-    await tokenService.setToken(
-      loginWithNaverResponse.right.tokenInfo ?? const JwtResponse(),
-    );
-    _loggedInSuccess(
-        redirectUrl: redirectUrl, userId: loginWithNaverResponse.right.userId);
-    return null;
-  }
-
-  Future<Failure?> loginWithGoogle({
-    required String idToken,
-    String? redirectUrl,
-  }) async {
-    final loginWithGoogleResponse = await authController.loginWithGoogle(
-      LoginWithGoogleRequest(
-        idToken: idToken,
-      ),
-    );
-    if (loginWithGoogleResponse.isLeft) {
-      return loginWithGoogleResponse.left;
-    }
-    await tokenService.setToken(
-      loginWithGoogleResponse.right.tokenInfo ?? const JwtResponse(),
-    );
-    _loggedInSuccess(
-        redirectUrl: redirectUrl, userId: loginWithGoogleResponse.right.userId);
-    return null;
-  }
+  // Future<Failure?> loginWithGoogle({
+  //   required String idToken,
+  //   String? redirectUrl,
+  // }) async {
+  //   final loginWithGoogleResponse = await authController.loginWithGoogle(
+  //     LoginWithGoogleRequest(
+  //       idToken: idToken,
+  //     ),
+  //   );
+  //   if (loginWithGoogleResponse.isLeft) {
+  //     return loginWithGoogleResponse.left;
+  //   }
+  //   await tokenService.setToken(
+  //     loginWithGoogleResponse.right.tokenInfo ?? const JwtResponse(),
+  //   );
+  //   _loggedInSuccess(
+  //       redirectUrl: redirectUrl, userId: loginWithGoogleResponse.right.userId);
+  //   return null;
+  // }
 
   Future<void> logout() async {
     final refreshToken = await refreshTokenManager.loadRefreshToken();

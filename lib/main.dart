@@ -35,7 +35,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:provider/provider.dart';
 
 import 'di/di.dart';
@@ -60,8 +59,6 @@ void main() async {
   ]);
 
   final diData = await initDIServiceFuture;
-
-  KakaoSdk.init(nativeAppKey: diData.config.kakaoNativeAppKey);
 
   runApp(SuccessManiaApp(
     data: diData,

@@ -57,39 +57,9 @@ class MainBottomNavigationBar extends StatelessWidget {
               Expanded(
                 child: _BottomNavBarItem(
                   selected: selected == 2,
-                  title: S.of(context).curator,
-                  onTap: () {
-                    onSelected?.call(2);
-                  },
-                  iconPath: Assets.svgs.tabBarFeed.path,
-                ),
-              ),
-              Expanded(
-                child: _BottomNavBarItem(
-                  selected: selected == 3,
-                  title: S.of(context).news,
-                  onTap: () {
-                    onSelected?.call(3);
-                  },
-                  iconPath: Assets.svgs.tabBarNews.path,
-                ),
-              ),
-              Expanded(
-                child: _BottomNavBarItem(
-                  selected: selected == 4,
-                  title: S.of(context).store,
-                  onTap: () {
-                    onSelected?.call(4);
-                  },
-                  iconPath: Assets.svgs.tabBarShop.path,
-                ),
-              ),
-              Expanded(
-                child: _BottomNavBarItem(
-                  selected: selected == 5,
                   title: S.of(context).profileNavText,
                   onTap: () {
-                    onSelected?.call(5);
+                    onSelected?.call(2);
                   },
                   iconPath: Assets.svgs.tabBarProfile.path,
                 ),

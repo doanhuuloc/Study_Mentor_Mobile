@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
 
-import '../../../application/services/app/app_data/app_term_and_cond_status_service.dart';
 import '../../../application/services/app/app_data/app_username_service.dart';
 import '../../../application/services/app/locale_service/locale_service.dart';
 import '../../../application/services/app/token_service/refresh_token_manager.dart';

@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:nested/nested.dart';
 
 import '../../../bases/auth_cubit/auth_cubit.dart';
-import '../../../bases/bootstrap_cubit/bootstrap_cubit.dart';
 import '../../../bases/navigation_context_resolver/navigation_context_resolver.dart';
 import '../../../router/router_config/router_config.dart';
 

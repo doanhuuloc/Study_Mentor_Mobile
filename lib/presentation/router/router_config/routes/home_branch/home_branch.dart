@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:study_mentor_mobile/presentation/router/app_nav_key/app_nav_key.dart';
 
 import '../../../../ui/home_screen/home_screen.dart';
+import '../../../../ui/login_screen/login_screen.dart';
 
 class HomeBranchData extends StatefulShellBranchData {
   const HomeBranchData();
@@ -18,32 +20,20 @@ class HomeRouteData extends GoRouteData {
   }
 }
 
-// class DrawerRouteData extends GoRouteData {
-//   const DrawerRouteData();
+class HomeLoginRouteData extends GoRouteData {
+  const HomeLoginRouteData({
+    this.redirectUrl,
+  });
 
-//   static const routeName = 'drawer';
-//   static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+  final String? redirectUrl;
 
-//   @override
-//   Page<void> buildPage(BuildContext context, GoRouterState state) {
-//     return DrawerScreen.buildPage(context, state);
-//   }
-// }
+  static const routeName = 'login';
+  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
 
-// class HomeLoginRouteData extends GoRouteData {
-//   const HomeLoginRouteData({
-//     this.redirectUrl,
-//   });
-
-//   final String? redirectUrl;
-
-//   static const routeName = 'login';
-//   static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
-
-//   @override
-//   Widget build(BuildContext context, GoRouterState state) {
-//     return LoginScreen(
-//       redirectUrl: redirectUrl,
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return LoginScreen(
+      redirectUrl: redirectUrl,
+    );
+  }
+}

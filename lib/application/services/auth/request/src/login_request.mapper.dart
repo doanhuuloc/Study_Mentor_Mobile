@@ -20,22 +20,21 @@ class LoginRequestMapper extends ClassMapperBase<LoginRequest> {
   @override
   final String id = 'LoginRequest';
 
-  static String _$username(LoginRequest v) => v.username;
-  static const Field<LoginRequest, String> _f$username =
-      Field('username', _$username);
+  static String _$email(LoginRequest v) => v.email;
+  static const Field<LoginRequest, String> _f$email = Field('email', _$email);
   static String _$password(LoginRequest v) => v.password;
   static const Field<LoginRequest, String> _f$password =
       Field('password', _$password);
 
   @override
   final MappableFields<LoginRequest> fields = const {
-    #username: _f$username,
+    #email: _f$email,
     #password: _f$password,
   };
 
   static LoginRequest _instantiate(DecodingData data) {
     return LoginRequest(
-        username: data.dec(_f$username), password: data.dec(_f$password));
+        email: data.dec(_f$email), password: data.dec(_f$password));
   }
 
   @override
@@ -90,7 +89,7 @@ extension LoginRequestValueCopy<$R, $Out>
 
 abstract class LoginRequestCopyWith<$R, $In extends LoginRequest, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? username, String? password});
+  $R call({String? email, String? password});
   LoginRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -103,13 +102,13 @@ class _LoginRequestCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LoginRequest> $mapper =
       LoginRequestMapper.ensureInitialized();
   @override
-  $R call({String? username, String? password}) => $apply(FieldCopyWithData({
-        if (username != null) #username: username,
+  $R call({String? email, String? password}) => $apply(FieldCopyWithData({
+        if (email != null) #email: email,
         if (password != null) #password: password
       }));
   @override
   LoginRequest $make(CopyWithData data) => LoginRequest(
-      username: data.get(#username, or: $value.username),
+      email: data.get(#email, or: $value.email),
       password: data.get(#password, or: $value.password));
 
   @override

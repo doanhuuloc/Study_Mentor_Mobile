@@ -130,17 +130,30 @@ class DropdownSheetRouteData extends GoRouteData {
   routes: <TypedRoute<RouteData>>[
     TypedGoRoute<HomeRouteData>(
       path: HomeRouteData.routeName,
-      // routes: <TypedRoute<RouteData>>[
-      // TypedGoRoute<DrawerRouteData>(
-      //   path: DrawerRouteData.routeName,
-      // ),
-      // TypedGoRoute<NotificationRouteData>(
-      //   path: NotificationRouteData.routeName,
-      // ),
-      // TypedGoRoute<HomeLoginRouteData>(
-      //   path: HomeLoginRouteData.routeName,
-      // ),
-      // ],
+      routes: <TypedRoute<RouteData>>[
+        // TypedGoRoute<DrawerRouteData>(
+        //   path: DrawerRouteData.routeName,
+        // ),
+        // TypedGoRoute<NotificationRouteData>(
+        //   path: NotificationRouteData.routeName,
+        // ),
+        TypedGoRoute<HomeLoginRouteData>(
+          path: HomeLoginRouteData.routeName,
+        ),
+      ],
+    ),
+    TypedGoRoute<ProfileRouteData>(
+      path: ProfileRouteData.routeName,
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<ProfileLoginRouteData>(
+            path: ProfileLoginRouteData.routeName,
+            routes: [
+              TypedGoRoute<RegisterRouteData>(
+                  path: RegisterRouteData.routeName),
+            ]),
+        // TypedGoRoute<SettingRouteData>(
+        //   path: SettingRouteData.routeName,
+      ],
     ),
   ],
 )
