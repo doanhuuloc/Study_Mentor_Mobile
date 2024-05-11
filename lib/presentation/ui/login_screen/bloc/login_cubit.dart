@@ -28,7 +28,7 @@ class LoginCubit extends SafeCubit<LoginState> {
 
   void onLoginWithUserInfo() async {
     final loginFuture = authCubit.loginWithUserInfo(
-      userName: state.emailField.value,
+      email: state.emailField.value,
       password: state.passwordField.value,
       redirectUrl: redirectUrl,
     );
@@ -57,18 +57,18 @@ class LoginCubit extends SafeCubit<LoginState> {
   //   emit(state.copyWith(loginFlowCompleted: true));
   // }
 
-  void onLoginWithGoogle(String idToken) async {
-    final loginWithGoogleFuture = authCubit.loginWithGoogle(
-      idToken: idToken,
-      redirectUrl: redirectUrl,
-    );
+  // void onLoginWithGoogle(String idToken) async {
+  //   final loginWithGoogleFuture = authCubit.loginWithGoogle(
+  //     idToken: idToken,
+  //     redirectUrl: redirectUrl,
+  //   );
 
-    final loadingLoginWithGoogleFailure =
-        await loadingManager.startLoading(future: loginWithGoogleFuture);
-    if (loadingLoginWithGoogleFailure != null) {
-      failureHandlerManager.handle(loadingLoginWithGoogleFailure);
-      return;
-    }
-    emit(state.copyWith(loginFlowCompleted: true));
-  }
+  //   final loadingLoginWithGoogleFailure =
+  //       await loadingManager.startLoading(future: loginWithGoogleFuture);
+  //   if (loadingLoginWithGoogleFailure != null) {
+  //     failureHandlerManager.handle(loadingLoginWithGoogleFailure);
+  //     return;
+  //   }
+  //   emit(state.copyWith(loginFlowCompleted: true));
+  // }
 }

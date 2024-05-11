@@ -11,10 +11,11 @@ abstract class AuthDataSource {
   factory AuthDataSource(Dio dio, {String baseUrl}) = _AuthDataSource;
 
   @POST('/api/users/login')
-  Future<AuthenticatedResponse> login(@Body() LoginRequest request);
+  Future<BaseResponse<AuthenticatedResponse>> login(
+      @Body() LoginRequest request);
 
-  @POST('/v1/auth/refresh-token')
-  Future<AuthenticatedResponse> refreshToken(
+  @POST('/api/users/refresh-token')
+  Future<BaseResponse<AuthenticatedResponse>> refreshToken(
       @Body() RefreshTokenRequest request);
 
   @DELETE('/v1/auth/logout')

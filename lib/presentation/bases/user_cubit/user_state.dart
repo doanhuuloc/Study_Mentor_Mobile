@@ -8,12 +8,12 @@ class UserState extends Equatable {
   });
 
   final String? userFullName;
-  final UserDTO? detail;
+  final UserInfoResponse? detail;
   final ApiStatus apiStatus;
 
   UserState copyWith({
     ApiStatus? apiStatus,
-    UserDTO? detail,
+    UserInfoResponse? detail,
     String? userFullName,
   }) {
     return UserState(

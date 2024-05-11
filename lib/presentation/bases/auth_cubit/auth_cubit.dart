@@ -54,26 +54,26 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
 
     emit(AuthStatusLoggedInState(
       redirectUrl: redirectUrl,
-      userNeedVerify: true,
+      userNeedVerify: false,
     ));
   }
 
   Future<Failure?> loginWithUserInfo({
-    required String userName,
+    required String email,
     required String password,
     String? redirectUrl,
   }) async {
     final loginResponse = await authController.login(
       LoginRequest(
-        email: userName,
+        email: email,
         password: password,
       ),
     );
     if (loginResponse.isLeft) {
       return loginResponse.left;
     }
-    await tokenService.setToken(
-        loginResponse.right.accessToken, loginResponse.right.refreshToken);
+    await tokenService.setToken(loginResponse.right.data.accessToken,
+        loginResponse.right.data.refreshToken);
     _loggedInSuccess(redirectUrl: redirectUrl);
     return null;
   }
@@ -92,6 +92,7 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
           .refreshTokens(shouldTriggerExpired: false)
           .timeout(timeOut);
       if (refreshTokenSuccess.success) {
+        print('succeeeeeeee $redirectUrl');
         _loggedInSuccess(
           redirectUrl: redirectUrl,
         );
@@ -135,10 +136,10 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
   }
 
   void _logoutWithReason(LogoutReason reason, {String? url}) {
-    if (reason == LogoutReason.userLogout ||
-        reason == LogoutReason.sessionExpired) {
-      // OneSignal.logout();
-    }
+    // if (reason == LogoutReason.userLogout ||
+    //     reason == LogoutReason.sessionExpired) {
+    //   // OneSignal.logout();
+    // }
     emit(AuthStatusLoggedOutState(
       logoutReason: reason,
       url: url,

@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../bases/bootstrap_cubit/bootstrap_cubit.dart';
 import '../../gen/app_colors.dart';
+import '../../gen/assets.gen.dart';
 import '../../shared/transitions/transitions.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -57,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Center(
             child: Transform.scale(
               scale: 2,
-              // child: Assets.svgs.logo.svg(color: AppColors.blue.shade500),
+              child: Assets.images.logo.image(),
             ),
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../application/services/app/token_service/refresh_token_manager.dart';
 import '../../../application/services/auth/auth.dart';
+import '../../../application/services/common/common.dart';
 import '../../../utilities/failure/failure.dart';
 import '../../../utilities/result/result.dart';
 
@@ -22,8 +23,8 @@ class RefreshTokenManagerImpl implements RefreshTokenManager {
   }
 
   @override
-  Future<Result<Failure, AuthenticatedResponse>> performRefreshToken(
-      String oldTokens) async {
+  Future<Result<Failure, BaseResponse<AuthenticatedResponse>>>
+      performRefreshToken(String oldTokens) async {
     final refreshTokenResult = await authController
         .refreshToken(RefreshTokenRequest(refreshToken: oldTokens));
     return refreshTokenResult.mapResult(

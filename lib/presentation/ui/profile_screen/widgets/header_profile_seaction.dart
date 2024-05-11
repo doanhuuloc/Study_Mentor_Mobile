@@ -75,16 +75,17 @@ class HeaderProfileSection extends StatelessWidget {
                           ),
                         )
                       : ProfileInfoSection(
-                          imageUrl: userState.detail?.avatarUrl,
-                          name: userState.detail?.name ?? '',
-                          description: userState.detail?.bio ?? '',
-                          point: userState.detail?.point,
+                          imageUrl: userState.detail?.avatar?.fileKey != null
+                              ? 'https://storage.googleapis.com/study-mentor/${userState.detail?.avatar?.fileKey}'
+                              : '',
+                          name: userState.detail?.fullName ?? '',
+                          description: 'tao ne',
                         ),
                 ),
                 const SizedBox(height: 24),
-                BusinessCardAction(
-                  userId: userState.detail?.id ?? 1,
-                ),
+                // BusinessCardAction(
+                //   userId: userState.detail?.id ?? 1,
+                // ),
               ],
             );
           }

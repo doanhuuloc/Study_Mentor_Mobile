@@ -70,10 +70,10 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
       localeCubit.bootstrapCompleted(value);
     });
     emit(BootstrapState(
-      // haveReadTermAndCond: haveReadTermAndCond,
       initialUrl: initialLink,
       username: oldUsername,
     ));
-    authCubit.loginByRefreshToken(redirectUrl: initialLink);
+    print('loi, initialLink: $initialLink');
+    authCubit.loginByRefreshToken(redirectUrl: initialLink ?? '/home');
   }
 }

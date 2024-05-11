@@ -35,6 +35,7 @@ class LoggerInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (kDebugMode) {
       logging.e({
+        'method response': err.requestOptions.method,
         'uri': err.response?.realUri,
         'statusCode': err.response?.statusCode,
         'data': err.response?.data,

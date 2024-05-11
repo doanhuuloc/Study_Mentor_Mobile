@@ -94,12 +94,12 @@ class TokenService extends ChangeNotifier {
       return const RefreshTokenResult(
           success: false, accessToken: null, refreshToken: null);
     }
-    await setToken(
-        tokenResponse.right.accessToken, tokenResponse.right.refreshToken);
+    await setToken(tokenResponse.right.data.accessToken,
+        tokenResponse.right.data.refreshToken);
     return RefreshTokenResult(
         success: true,
-        accessToken: tokenResponse.right.accessToken,
-        refreshToken: tokenResponse.right.refreshToken);
+        accessToken: tokenResponse.right.data.accessToken,
+        refreshToken: tokenResponse.right.data.refreshToken);
   }
 
   /// clear runtime tokens data

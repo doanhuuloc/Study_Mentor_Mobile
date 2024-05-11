@@ -1,4 +1,5 @@
 import '../../../application/services/auth/auth.dart';
+import '../../../application/services/common/common.dart';
 import '../../../application/services/common/response/src/success_response.dart';
 import '../../../utilities/failure/failure.dart';
 import '../../../utilities/result/src/result.dart';
@@ -13,12 +14,13 @@ class AuthControllerImpl with AuthController, DataSourceErrorHandler {
   final AuthDataSource authDataSource;
 
   @override
-  Future<Result<Failure, AuthenticatedResponse>> login(LoginRequest request) {
+  Future<Result<Failure, BaseResponse<AuthenticatedResponse>>> login(
+      LoginRequest request) {
     return handleApiResult(future: () => authDataSource.login(request));
   }
 
   @override
-  Future<Result<Failure, AuthenticatedResponse>> refreshToken(
+  Future<Result<Failure, BaseResponse<AuthenticatedResponse>>> refreshToken(
       RefreshTokenRequest request) {
     return handleApiResult(future: () => authDataSource.refreshToken(request));
   }

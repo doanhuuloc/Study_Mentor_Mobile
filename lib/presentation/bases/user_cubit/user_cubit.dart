@@ -35,7 +35,7 @@ class UserCubit extends SafeCubit<UserState> {
 
     getUserInfoResult.handleRight((value) {
       emit(state.copyWith(
-        detail: value,
+        detail: value.data,
         apiStatus: ApiStatus.success,
       ));
     });
@@ -45,7 +45,7 @@ class UserCubit extends SafeCubit<UserState> {
     });
   }
 
-  void setUserData(UserDTO userDetail) {
+  void setUserData(UserInfoResponse userDetail) {
     emit(state.copyWith(apiStatus: ApiStatus.success, detail: userDetail));
   }
 

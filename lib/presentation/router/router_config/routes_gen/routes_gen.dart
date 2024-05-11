@@ -6,7 +6,7 @@ import '../../../shared/widgets/drop_down_bar/drop_down_bar.dart';
 import '../../../shared/widgets/drop_down_bar/widgets/drop_down_sheet.dart';
 import '../../../shared/widgets/image_picker_sheet/image_picker_sheet.dart';
 import '../../../ui/main_screen/main_screen.dart';
-import '../../../ui/splash_screen/splash_sceen.dart';
+import '../../../ui/splash_screen/splash_screen.dart';
 import '../../app_nav_key/app_nav_key.dart';
 import '../routes/routes.dart';
 

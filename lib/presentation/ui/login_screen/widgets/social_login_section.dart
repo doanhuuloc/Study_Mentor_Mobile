@@ -48,29 +48,29 @@ class SocialLoginSection extends StatelessWidget {
             _SocialLogin(
               icon: Assets.svgs.googleIcon.svg(),
               onTap: () async {
-                try {
-                  final GoogleSignInAccount? googleUser =
-                      await GoogleSignIn().signIn();
+                // try {
+                //   final GoogleSignInAccount? googleUser =
+                //       await GoogleSignIn().signIn();
 
-                  final GoogleSignInAuthentication? googleAuth =
-                      await googleUser?.authentication;
+                //   final GoogleSignInAuthentication? googleAuth =
+                //       await googleUser?.authentication;
 
-                  final credential = GoogleAuthProvider.credential(
-                    accessToken: googleAuth?.accessToken,
-                    idToken: googleAuth?.idToken,
-                  );
-                  final auth2 = await FirebaseAuth.instance
-                      .signInWithCredential(credential);
+                //   final credential = GoogleAuthProvider.credential(
+                //     accessToken: googleAuth?.accessToken,
+                //     idToken: googleAuth?.idToken,
+                //   );
+                //   final auth2 = await FirebaseAuth.instance
+                //       .signInWithCredential(credential);
 
-                  final idToken = await auth2.user?.getIdToken();
+                //   final idToken = await auth2.user?.getIdToken();
 
-                  if (!context.mounted || idToken == null) {
-                    return;
-                  }
-                  context.read<LoginCubit>().onLoginWithGoogle(idToken);
-                } catch (err) {
-                  logging.e(err);
-                }
+                //   if (!context.mounted || idToken == null) {
+                //     return;
+                //   }
+                //   context.read<LoginCubit>().onLoginWithGoogle(idToken);
+                // } catch (err) {
+                //   logging.e(err);
+                // }
               },
             ),
             if (Platform.isIOS) const SizedBox(width: 16),
