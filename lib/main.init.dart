@@ -52,9 +52,13 @@ import 'application/services/education/response/src/create_question_response.dar
     as p29;
 import 'application/services/education/response/src/get_structure_education_response.dart'
     as p30;
-import 'application/services/file/request/src/signed_url_request.dart' as p31;
-import 'application/services/file/request/src/upload_file_request.dart' as p32;
-import 'application/services/file/response/src/signed_url_response.dart' as p33;
+import 'application/services/file/request/src/file_request.dart' as p31;
+import 'application/services/file/request/src/signed_url_request.dart' as p32;
+import 'application/services/file/request/src/upload_file_request.dart' as p33;
+import 'application/services/file/response/src/file_reponse.dart' as p34;
+import 'application/services/file/response/src/signed_url_response.dart' as p35;
+import 'application/services/user/request/src/update_profile_request.dart'
+    as p36;
 
 void initializeMappers() {
   p0.AuthMethodMapper.ensureInitialized();
@@ -92,7 +96,11 @@ void initializeMappers() {
   p30.LevelResponseMapper.ensureInitialized();
   p30.GradeResponseMapper.ensureInitialized();
   p30.SubjectResponseMapper.ensureInitialized();
-  p31.SignedUrlRequestMapper.ensureInitialized();
-  p32.UploadFileRequestMapper.ensureInitialized();
-  p33.SignedUrlResponseMapper.ensureInitialized();
+  p31.FileRequestMapper.ensureInitialized();
+  p32.SignedUrlRequestMapper.ensureInitialized();
+  p33.UploadFileRequestMapper.ensureInitialized();
+  p34.FileReponseMapper.ensureInitialized();
+  p35.SignedUrlResponseMapper.ensureInitialized();
+  p36.UpdateProfileRequestMapper.ensureInitialized();
+  p36.GenderMapper.ensureInitialized();
 }
