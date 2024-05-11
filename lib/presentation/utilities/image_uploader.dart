@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import '../../application/services/file/controller/controller.dart';
+import '../../application/services/file/request/request.dart';
 import '../shared/handlers/failure_handler/failure_handler_manager.dart';
 
 class ImageUploader {

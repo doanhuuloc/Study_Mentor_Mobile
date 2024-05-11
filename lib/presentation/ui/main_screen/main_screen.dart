@@ -4,6 +4,7 @@ import 'package:study_mentor_mobile/presentation/router/router_config/routes/his
 
 import '../../router/router_config/router_config.dart';
 import '../../shared/transitions/transitions.dart';
+import '../../utilities/request_login.dart';
 import 'main_pop_scope.dart';
 import 'widgets/main_bottom_navigation_bar.dart';
 
@@ -43,13 +44,19 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  void onChangeTab(BuildContext context, int index) {
+  void onChangeTab(BuildContext context, int index) async {
     switch (index) {
       case 0:
         const HomeRouteData().go(context);
         break;
       case 1:
-        const HistoryRouteData().go(context);
+        final isSuccess = await requestLoginAction(context);
+        if (!isSuccess) {
+          return;
+        }
+        if (context.mounted) {
+          const HistoryRouteData().go(context);
+        }
         break;
 
       case 2:

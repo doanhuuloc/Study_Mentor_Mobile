@@ -8,13 +8,13 @@ class HistoryState {
   });
 
   final bool loading;
-  final GetListRoomChatResponse? listChatGpt;
-  final GetListRoomChatResponse? listChatGemini;
+  final List<ListRoomChatResponse>? listChatGpt;
+  final List<ListRoomChatResponse>? listChatGemini;
 
   HistoryState copyWith({
     bool? loading,
-    GetListRoomChatResponse? listChatGpt,
-    GetListRoomChatResponse? listChatGemini,
+    List<ListRoomChatResponse>? listChatGpt,
+    List<ListRoomChatResponse>? listChatGemini,
   }) {
     return HistoryState(
       loading: loading ?? this.loading,

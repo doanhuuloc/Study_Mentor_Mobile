@@ -10,8 +10,7 @@ import 'application/services/ai/response/src/create_roomchat_response.dart'
     as p3;
 import 'application/services/ai/response/src/get_detailed_message_roomchat_response.dart'
     as p4;
-import 'application/services/ai/response/src/get_list_roomchat_response.dart'
-    as p5;
+import 'application/services/ai/response/src/list_roomchat_response.dart' as p5;
 import 'application/services/auth/dto/src/auth_method.dart' as p6;
 import 'application/services/auth/dto/src/otp_info.dart' as p7;
 import 'application/services/auth/request/src/change_my_password_request.dart'
@@ -52,7 +51,6 @@ void initializeMappers() {
   p2.ChatAIResponseMapper.ensureInitialized();
   p3.CreateRoomChatResponseMapper.ensureInitialized();
   p4.GetDetailedMessageRoomChatResponseMapper.ensureInitialized();
-  p5.GetListRoomChatResponseMapper.ensureInitialized();
   p5.ListRoomChatResponseMapper.ensureInitialized();
   p6.AuthMethodMapper.ensureInitialized();
   p7.OTPInfoMapper.ensureInitialized();

@@ -1,18 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'get_list_roomchat_response.mapper.dart';
-
-@MappableClass()
-class GetListRoomChatResponse with GetListRoomChatResponseMappable {
-  const GetListRoomChatResponse({
-    this.response,
-  });
-
-  factory GetListRoomChatResponse.fromJson(Map<String, dynamic> json) =>
-      GetListRoomChatResponseMapper.fromJson(json);
-
-  final List<ListRoomChatResponse>? response;
-}
+part 'list_roomchat_response.mapper.dart';
 
 @MappableClass()
 class ListRoomChatResponse with ListRoomChatResponseMappable {

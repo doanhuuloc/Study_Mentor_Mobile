@@ -10,7 +10,7 @@ mixin AIController {
     required String roomId,
   });
 
-  Future<Result<Failure, GetListRoomChatResponse>> getListRoomChat({
+  Future<Result<Failure, List<ListRoomChatResponse>>> getListRoomChat({
     required String userId,
     required String idChatAI,
   });

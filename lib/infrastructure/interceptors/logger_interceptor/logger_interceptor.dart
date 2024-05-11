@@ -33,6 +33,7 @@ class LoggerInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
+    print('vao day  ${kDebugMode} ');
     if (kDebugMode) {
       logging.e({
         'method response': err.requestOptions.method,

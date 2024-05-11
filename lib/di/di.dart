@@ -137,7 +137,10 @@ class AppDIService implements DIService<AppDIData> {
     ]);
 
     // dio for ai
-    final dioAI = Dio(optionsAI);
+    options.baseUrl = appConfig.baseUrlAI;
+    options.contentType = Headers.jsonContentType;
+
+    final dioAI = Dio(options);
     dioAI.interceptors.addAll([
       authInterceptor,
       loggerInterceptor,
@@ -154,7 +157,7 @@ class AppDIService implements DIService<AppDIData> {
         UserControllerImpl(userDataSource: userDataSource);
 
     // ai
-    final AIDataSource aiDataSource = AIDataSource(dioAI);
+    final AIDataSource aiDataSource = AIDataSource(dio);
     final AIController aiController =
         AIControllerImpl(aiDataSource: aiDataSource);
 

@@ -52,7 +52,7 @@ class _AIDataSource implements AIDataSource {
   }
 
   @override
-  Future<GetListRoomChatResponse> getListRoomChat({
+  Future<List<ListRoomChatResponse>> getListRoomChat({
     required String userId,
     required String idChatAI,
   }) async {
@@ -60,8 +60,8 @@ class _AIDataSource implements AIDataSource {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetListRoomChatResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ListRoomChatResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -77,7 +77,10 @@ class _AIDataSource implements AIDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = GetListRoomChatResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            ListRoomChatResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

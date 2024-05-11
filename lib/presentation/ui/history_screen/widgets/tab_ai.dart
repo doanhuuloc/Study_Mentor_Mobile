@@ -16,13 +16,6 @@ class TabAI extends StatefulWidget {
 enum FilterAI { chatgpt, gemini }
 
 class _TabAIState extends State<TabAI> {
-  @override
-  void initState() {
-    context.read<HistoryCubit>().getListChatGpt();
-    context.read<HistoryCubit>().getListChatGemini();
-    super.initState();
-  }
-
   FilterAI filterAI = FilterAI.chatgpt;
 
   @override
@@ -54,7 +47,7 @@ class _TabAIState extends State<TabAI> {
           const SizedBox(height: 10),
           if (filterAI == FilterAI.chatgpt &&
               context.read<HistoryCubit>().state.listChatGpt != null)
-            ...(context.read<HistoryCubit>().state.listChatGpt!.response!.map(
+            ...(context.read<HistoryCubit>().state.listChatGpt!.map(
                   (e) => MessageBox(
                     avatar: AssetImage(Assets.images.icons.chatgpt.path),
                     title: 'Chat GPT',
@@ -65,12 +58,7 @@ class _TabAIState extends State<TabAI> {
                 )),
           if (filterAI == FilterAI.gemini &&
               context.read<HistoryCubit>().state.listChatGemini != null)
-            ...(context
-                .read<HistoryCubit>()
-                .state
-                .listChatGemini!
-                .response!
-                .map(
+            ...(context.read<HistoryCubit>().state.listChatGemini!.map(
                   (e) => MessageBox(
                     avatar: AssetImage(Assets.images.icons.gemini.path),
                     title: 'Gemini',

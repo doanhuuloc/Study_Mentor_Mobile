@@ -61,25 +61,28 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
         ),
         body: BlocProvider<HistoryCubit>(
+          lazy: false,
           create: (BuildContext context) {
             return HistoryCubit(
                 aiController: context.read<AIController>(),
                 appConfig: context.read<AppConfig>(),
-                userCubit: context.read<UserCubit>(),
+                userId: context.read<UserCubit>().state.detail?.id ?? '',
                 failureHandlerManager: context.read<FailureHandlerManager>());
           },
-          child: const TabBarView(children: [
-            TabAI(),
-            SingleChildScrollView(
-              child: Text("2"),
-            ),
-            SingleChildScrollView(
-              child: Text("3"),
-            ),
-            SingleChildScrollView(
-              child: Text("3"),
-            ),
-          ]),
+          child: Builder(builder: (context) {
+            return const TabBarView(children: [
+              TabAI(),
+              SingleChildScrollView(
+                child: Text("2"),
+              ),
+              SingleChildScrollView(
+                child: Text("3"),
+              ),
+              SingleChildScrollView(
+                child: Text("3"),
+              ),
+            ]);
+          }),
         ),
       ),
     );

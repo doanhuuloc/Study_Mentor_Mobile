@@ -27,7 +27,7 @@ class AIControllerImpl with AIController, DataSourceErrorHandler {
   }
 
   @override
-  Future<Result<Failure, GetListRoomChatResponse>> getListRoomChat(
+  Future<Result<Failure, List<ListRoomChatResponse>>> getListRoomChat(
       {required String userId, required String idChatAI}) {
     return handleApiResult(
         future: () =>

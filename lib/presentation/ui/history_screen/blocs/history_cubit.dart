@@ -8,36 +8,37 @@ import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'history_state.dart';
 
 class HistoryCubit extends SafeCubit<HistoryState> {
-  HistoryCubit(
-      {required this.aiController,
-      required this.appConfig,
-      required this.userCubit,
-      required this.failureHandlerManager})
-      : super(const HistoryState()) {
+  HistoryCubit({
+    required this.aiController,
+    required this.appConfig,
+    required this.userId,
+    required this.failureHandlerManager,
+  }) : super(const HistoryState()) {
     _fetchData();
   }
 
   final AIController aiController;
   final AppConfig appConfig;
-  final UserCubit userCubit;
+  final String userId;
   final FailureHandlerManager failureHandlerManager;
 
   Future<void> getListChatGpt() async {
     emit(state.copyWith(loading: true));
     final listChatGpt = await aiController.getListRoomChat(
       // userId: userCubit.state.detail!.id!,
-      userId: "c00478d9-020a-4b38-8eea-68c4178aca61",
+      userId: userId,
       idChatAI: appConfig.chatGpt,
     );
+    if (listChatGpt.isLeft) {
+      failureHandlerManager.handle(listChatGpt.left);
+    }
 
-    listChatGpt.handleLeft((failure) {
-      failureHandlerManager.handle(failure);
-    });
-
-    emit(state.copyWith(
-      loading: false,
-      listChatGpt: listChatGpt.right,
-    ));
+    if (listChatGpt.isRight) {
+      emit(state.copyWith(
+        loading: false,
+        listChatGpt: listChatGpt.right,
+      ));
+    }
   }
 
   Future<void> getListChatGemini() async {
@@ -52,14 +53,16 @@ class HistoryCubit extends SafeCubit<HistoryState> {
       failureHandlerManager.handle(failure);
     });
 
-    emit(state.copyWith(
-      loading: false,
-      listChatGemini: listChatGemini.right,
-    ));
+    if (listChatGemini.isRight) {
+      emit(state.copyWith(
+        loading: false,
+        listChatGemini: listChatGemini.right,
+      ));
+    }
   }
 
   Future<void> _fetchData() async {
-    await Future.wait([]);
+    await getListChatGemini();
   }
 
   void reload() {
