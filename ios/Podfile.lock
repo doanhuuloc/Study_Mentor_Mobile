@@ -199,8 +199,6 @@ PODS:
     - FlutterMacOS
   - sign_in_with_apple (0.0.1):
     - Flutter
-  - super_native_extensions (0.0.1):
-    - Flutter
   - SwiftyGif (5.4.5)
   - TOCropViewController (2.6.1)
   - tosspayments_webview_flutter (0.0.1):
@@ -236,7 +234,6 @@ DEPENDENCIES:
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
-  - super_native_extensions (from `.symlinks/plugins/super_native_extensions/ios`)
   - tosspayments_webview_flutter (from `.symlinks/plugins/tosspayments_webview_flutter/ios`)
   - uni_links (from `.symlinks/plugins/uni_links/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -310,8 +307,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sign_in_with_apple:
     :path: ".symlinks/plugins/sign_in_with_apple/ios"
-  super_native_extensions:
-    :path: ".symlinks/plugins/super_native_extensions/ios"
   tosspayments_webview_flutter:
     :path: ".symlinks/plugins/tosspayments_webview_flutter/ios"
   uni_links:
@@ -362,7 +357,6 @@ SPEC CHECKSUMS:
   share_plus: c3fef564749587fc939ef86ffb283ceac0baf9f5
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
-  super_native_extensions: 4916b3c627a9c7fffdc48a23a9eca0b1ac228fa7
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   tosspayments_webview_flutter: ceae304825a077de594d01ee39dd0ce2307adb4e

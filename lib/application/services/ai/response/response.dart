@@ -1,0 +1,1 @@
+export 'src/chat_ai_response.dart';

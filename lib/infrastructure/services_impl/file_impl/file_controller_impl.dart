@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:mime/mime.dart';
-import 'package:study_mentor_mobile/application/services/file/request/src/signed_url_request.dart';
-import 'package:study_mentor_mobile/application/services/file/request/src/upload_file_request.dart';
 
 import '../../../application/failures/generic/generic_failure.dart';
 import '../../../application/services/common/common.dart';
