@@ -15,14 +15,19 @@ class UserControllerImpl with UserController, DataSourceErrorHandler {
   final UserDataSource userDataSource;
 
   @override
-  Future<Result<Failure, BaseResponse>> updateAvatar(
+  Future<Result<Failure, BaseResponse<UserInfoResponse>>> getUserInfo() {
+    return handleApiResult(future: () => userDataSource.getUserInfo());
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<UserInfoResponse>>> updateAvatar(
       {required FileRequest fileRequest}) {
     return handleApiResult(
         future: () => userDataSource.updateAvatar(fileRequest));
   }
 
   @override
-  Future<Result<Failure, BaseResponse>> updateProfile(
+  Future<Result<Failure, BaseResponse<UserInfoResponse>>> updateProfile(
       {required UpdateProfileRequest updateProfileRequest}) {
     return handleApiResult(
         future: () => userDataSource.updateProfile(updateProfileRequest));

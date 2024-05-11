@@ -5,9 +5,11 @@ import '../../file/request/request.dart';
 import '../user.dart';
 
 mixin UserController {
-  Future<Result<Failure, BaseResponse>> updateProfile(
-      {required UpdateProfileRequest updateProfileRequest});
+  Future<Result<Failure, BaseResponse<UserInfoResponse>>> getUserInfo();
 
-  Future<Result<Failure, BaseResponse>> updateAvatar(
+  Future<Result<Failure, BaseResponse<UserInfoResponse>>> updateAvatar(
       {required FileRequest fileRequest});
+
+  Future<Result<Failure, BaseResponse<UserInfoResponse>>> updateProfile(
+      {required UpdateProfileRequest updateProfileRequest});
 }

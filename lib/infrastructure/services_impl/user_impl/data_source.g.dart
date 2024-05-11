@@ -19,7 +19,34 @@ class _UserDataSource implements UserDataSource {
   String? baseUrl;
 
   @override
-  Future<BaseResponse<dynamic>> updateProfile(
+  Future<BaseResponse<UserInfoResponse>> getUserInfo() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse<UserInfoResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/users/profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseResponse<UserInfoResponse>.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BaseResponse<UserInfoResponse>> updateProfile(
       UpdateProfileRequest updateProfileRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -27,7 +54,7 @@ class _UserDataSource implements UserDataSource {
     final _data = <String, dynamic>{};
     _data.addAll(updateProfileRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<dynamic>>(Options(
+        _setStreamType<BaseResponse<UserInfoResponse>>(Options(
       method: 'PATCH',
       headers: _headers,
       extra: _extra,
@@ -43,19 +70,20 @@ class _UserDataSource implements UserDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseResponse<dynamic>.fromJson(_result.data!);
+    final value = BaseResponse<UserInfoResponse>.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<BaseResponse<dynamic>> updateAvatar(FileRequest fileRequest) async {
+  Future<BaseResponse<UserInfoResponse>> updateAvatar(
+      FileRequest fileRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(fileRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<dynamic>>(Options(
+        _setStreamType<BaseResponse<UserInfoResponse>>(Options(
       method: 'PATCH',
       headers: _headers,
       extra: _extra,
@@ -71,7 +99,7 @@ class _UserDataSource implements UserDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseResponse<dynamic>.fromJson(_result.data!);
+    final value = BaseResponse<UserInfoResponse>.fromJson(_result.data!);
     return value;
   }
 

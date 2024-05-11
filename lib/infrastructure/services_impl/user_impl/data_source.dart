@@ -12,10 +12,14 @@ part 'data_source.g.dart';
 abstract class UserDataSource {
   factory UserDataSource(Dio dio, {String baseUrl}) = _UserDataSource;
 
+  @GET('/api/users/profile')
+  Future<BaseResponse<UserInfoResponse>> getUserInfo();
+
   @PATCH('/api/users/profile')
-  Future<BaseResponse> updateProfile(
+  Future<BaseResponse<UserInfoResponse>> updateProfile(
       @Body() UpdateProfileRequest updateProfileRequest);
 
   @PATCH('/api/users/profile/avatar')
-  Future<BaseResponse> updateAvatar(@Body() FileRequest fileRequest);
+  Future<BaseResponse<UserInfoResponse>> updateAvatar(
+      @Body() FileRequest fileRequest);
 }

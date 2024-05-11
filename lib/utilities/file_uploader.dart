@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:study_mentor_mobile/services/file/file_request.dart';
-import 'package:study_mentor_mobile/services/file/uploadFile.dart';
+import '../application/services/file/file.dart';
 
 class FileUploader {
   FileUploader({
