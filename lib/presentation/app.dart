@@ -17,7 +17,7 @@ import 'shared/handlers/auth_based_routing_handler/auth_based_routing_handler.da
 import 'shared/handlers/deeplink/app_deeplink_handler.dart';
 import 'shared/handlers/failure_handler/failure_handler.dart';
 import 'shared/handlers/loading_handler/loading_handler.dart';
-import 'shared/handlers/loading_handler/one_signal_handler.dart';
+// import 'shared/handlers/loading_handler/one_signal_handler.dart';
 import 'shared/status_bar_height_provider/status_bar_height_provider.dart';
 import 'shared/theme/theme.dart';
 
@@ -46,7 +46,7 @@ class SuccessManiaApp extends StatelessWidget {
           AppDeeplinkHandler(),
           StatusBarHeightProvider(),
           AssetsLoaderHandler(),
-          OneSignalHandler(),
+          // OneSignalHandler(),
           AppRoutingConfig(),
         ],
         child: Builder(

@@ -9,7 +9,7 @@ class AppConfig {
     required this.youtubeApiKey,
     required this.youtubePlayListId,
     required this.clientTossKey,
-    required this.oneSignalAppId,
+    // required this.oneSignalAppId,
     required this.appLink,
     required this.sweettrackerBaseUrl,
     required this.sweettrackerApiKey,
@@ -21,7 +21,7 @@ class AppConfig {
   final String youtubePlayListId;
   final String youtubeApiKey;
   final String clientTossKey;
-  final String oneSignalAppId;
+  // final String oneSignalAppId;
   final String appLink;
   final String sweettrackerBaseUrl;
   final String sweettrackerApiKey;

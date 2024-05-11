@@ -28,11 +28,8 @@ class _AuthBasedRoutingHandlerState
   bool _loginWhenStartedAttempt = true;
 
   void resolveGoHomeOrTermAccept(BuildContext context) {
-    final bootstrapState = context.read<BootstrapCubit>().state;
-    if (!bootstrapState.haveReadTermAndCond) {
-      // const TermAndCondAcceptRouteData().go(context);
-      return;
-    }
+    // final bootstrapState = context.read<BootstrapCubit>().state;
+
     const HomeRouteData().go(context);
   }
 

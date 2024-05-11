@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 
-import '../../../application/services/app/app_data/app_term_and_cond_status_service.dart';
 import '../../../application/services/app/app_data/app_username_service.dart';
 import '../../../application/services/app/locale_service/locale_service.dart';
 import '../auth_cubit/auth_cubit.dart';
@@ -15,17 +14,17 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
   BootstrapCubit({
     required this.localeCubit,
     required this.localeService,
-    required this.termAndCondStatusService,
+    // required this.termAndCondStatusService,
     required this.authCubit,
     required this.appUsernameService,
   }) : super(
-          const BootstrapState(haveReadTermAndCond: false),
+          const BootstrapState(),
         ) {
     _init();
   }
 
   final AuthCubit authCubit;
-  final AppTermAndCondStatusService termAndCondStatusService;
+  // final AppTermAndCondStatusService termAndCondStatusService;
   final AppUsernameService appUsernameService;
   final LocaleService localeService;
   final LocaleCubit localeCubit;
@@ -47,8 +46,8 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
   }
 
   void _init() async {
-    final haveReadTermAndCondFuture =
-        termAndCondStatusService.haveReadTermAndCondYet();
+    // final haveReadTermAndCondFuture =
+    //     termAndCondStatusService.haveReadTermAndCondYet();
     final oldUsernameFuture = appUsernameService.loadUsername();
     final loadLocaleFuture = localeService.loadLocale();
     await Future.wait([
@@ -56,14 +55,14 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
       loadLocaleFuture,
       _deeplinkInitialLinkCompleter.future,
       _splashScreenDurationCompleted.future,
-      haveReadTermAndCondFuture,
+      // haveReadTermAndCondFuture,
     ]);
     final initialLink = await _deeplinkInitialLinkCompleter.future;
 
-    bool haveReadTermAndCond = false;
-    (await haveReadTermAndCondFuture).handleRight((value) {
-      haveReadTermAndCond = value;
-    });
+    // bool haveReadTermAndCond = false;
+    // (await haveReadTermAndCondFuture).handleRight((value) {
+    //   haveReadTermAndCond = value;
+    // });
 
     String? oldUsername;
     (await oldUsernameFuture).handleRight((value) {
@@ -75,7 +74,7 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
       localeCubit.bootstrapCompleted(value);
     });
     emit(BootstrapState(
-      haveReadTermAndCond: haveReadTermAndCond,
+      // haveReadTermAndCond: haveReadTermAndCond,
       initialUrl: initialLink,
       username: oldUsername,
     ));

@@ -86,7 +86,6 @@ flutter:
 
   assets:
     - .env
-    - .env.release
     - assets/fonts/
     - assets/svgs/
     - assets/images/
@@ -98,7 +97,6 @@ flutter_gen:
   line_length: 80
   integrations:
     flutter_svg: true
-
 # flutter_native_splash:
 #   color: "#FFFFFF"
 #   image: assets/images/splash_screen_native_logo/splash_screen_native_logo.png

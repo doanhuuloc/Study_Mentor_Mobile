@@ -61,8 +61,6 @@ class BlocInject extends SingleChildStatelessWidget with ChildlessAssertion {
           lazy: false,
           create: (context) {
             return BootstrapCubit(
-              termAndCondStatusService:
-                  context.read<AppTermAndCondStatusService>(),
               appUsernameService: context.read<AppUsernameService>(),
               authCubit: context.read<AuthCubit>(),
               localeCubit: context.read<LocaleCubit>(),

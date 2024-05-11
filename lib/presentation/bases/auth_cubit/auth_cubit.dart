@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+// import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../../application/services/app/token_service/refresh_token_manager.dart';
 import '../../../application/services/app/token_service/token_service.dart';
@@ -51,9 +51,9 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
       isUserReady = value.registrationCompleted ?? true;
     });
 
-    if (userId != null) {
-      OneSignal.login(userId.toString());
-    }
+    // if (userId != null) {
+    //   OneSignal.login(userId.toString());
+    // }
 
     emit(AuthStatusLoggedInState(
       redirectUrl: redirectUrl,
@@ -203,7 +203,7 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
   void _logoutWithReason(LogoutReason reason, {String? url}) {
     if (reason == LogoutReason.userLogout ||
         reason == LogoutReason.sessionExpired) {
-      OneSignal.logout();
+      // OneSignal.logout();
     }
     emit(AuthStatusLoggedOutState(
       logoutReason: reason,

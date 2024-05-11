@@ -29,7 +29,7 @@ class AppConfigLoaderImpl with AppConfigLoader {
         youtubePlayListId: dotenv.env['YOUTUBE_PLAYLIST_ID'] ?? '',
         youtubeApiKey: dotenv.env['YOUTUBE_API_KEY'] ?? '',
         clientTossKey: dotenv.env['CLIENT_KEY_TOSS'] ?? '',
-        oneSignalAppId: dotenv.env['ONE_SIGNAL_APP_ID'] ?? '',
+        // oneSignalAppId: dotenv.env['ONE_SIGNAL_APP_ID'] ?? '',
         appLink: dotenv.env['APP_LINK'] ?? '',
         sweettrackerBaseUrl: dotenv.env['SWEET_TRACKER_BASE_URL'] ?? '',
         sweettrackerApiKey: dotenv.env['SWEET_TRACKER_API_KEY'] ?? '',
