@@ -8,8 +8,8 @@ part of 'data_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _FileDataSource implements FileDataSource {
-  _FileDataSource(
+class _EducationDataSource implements EducationDataSource {
+  _EducationDataSource(
     this._dio, {
     this.baseUrl,
   });
@@ -19,22 +19,21 @@ class _FileDataSource implements FileDataSource {
   String? baseUrl;
 
   @override
-  Future<BaseResponse<SignedUrlResponse>> getSignedUrl(
-      SignedUrlRequest signedUrlRequest) async {
+  Future<BaseResponse<GetStructureEducationResponse>>
+      getStructureEducation() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(signedUrlRequest.toJson());
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<SignedUrlResponse>>(Options(
-      method: 'POST',
+        _setStreamType<BaseResponse<GetStructureEducationResponse>>(Options(
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/files/signed-url',
+              '/api/questions/structure-educations',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -43,7 +42,37 @@ class _FileDataSource implements FileDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseResponse<SignedUrlResponse>.fromJson(_result.data!);
+    final value =
+        BaseResponse<GetStructureEducationResponse>.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BaseResponse<CreateQuestionResponse>> createQuestion(
+      CreateQuestionRequest createQuestionRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(createQuestionRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse<CreateQuestionResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/questions',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseResponse<CreateQuestionResponse>.fromJson(_result.data!);
     return value;
   }
 

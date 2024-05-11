@@ -44,45 +44,17 @@ import 'application/services/auth/response/src/session_token_response.dart'
     as p23;
 import 'application/services/common/dto/src/language_type.dart' as p24;
 import 'application/services/common/dto/src/localized_field_value.dart' as p25;
-import 'application/services/common/response/src/paging_response.dart' as p26;
+import 'application/services/common/response/src/base_response.dart' as p26;
 import 'application/services/common/response/src/success_response.dart' as p27;
-import 'application/services/file/response/src/file_response.dart' as p28;
-import 'application/services/file/response/src/presigned_url_upload_response.dart'
+import 'application/services/education/request/src/create_question_request.dart'
+    as p28;
+import 'application/services/education/response/src/create_question_response.dart'
     as p29;
-import 'application/services/user/dto/src/notification_type.dart' as p30;
-import 'application/services/user/dto/src/social_media_type.dart' as p31;
-import 'application/services/user/dto/src/user_dto.dart' as p32;
-import 'application/services/user/request/src/check_exist_phone_number_request.dart'
-    as p33;
-import 'application/services/user/request/src/check_exist_username_request.dart'
-    as p34;
-import 'application/services/user/request/src/file_request.dart' as p35;
-import 'application/services/user/request/src/notification_setting_request.dart'
-    as p36;
-import 'application/services/user/request/src/profile_url_request.dart' as p37;
-import 'application/services/user/request/src/read_notification_request.dart'
-    as p38;
-import 'application/services/user/request/src/social_media_request.dart' as p39;
-import 'application/services/user/request/src/supplement_user_information_request.dart'
-    as p40;
-import 'application/services/user/request/src/update_user_avatar_request.dart'
-    as p41;
-import 'application/services/user/request/src/update_user_info_request.dart'
-    as p42;
-import 'application/services/user/response/src/check_exist_account_response.dart'
-    as p43;
-import 'application/services/user/response/src/get_referred_user_response.dart'
-    as p44;
-import 'application/services/user/response/src/notification_response.dart'
-    as p45;
-import 'application/services/user/response/src/notification_setting_response.dart'
-    as p46;
-import 'application/services/user/response/src/profile_url_response.dart'
-    as p47;
-import 'application/services/user/response/src/social_media_response.dart'
-    as p48;
-import 'application/services/user/response/src/user_registration_status_response.dart'
-    as p49;
+import 'application/services/education/response/src/get_structure_education_response.dart'
+    as p30;
+import 'application/services/file/request/src/signed_url_request.dart' as p31;
+import 'application/services/file/request/src/upload_file_request.dart' as p32;
+import 'application/services/file/response/src/signed_url_response.dart' as p33;
 
 void initializeMappers() {
   p0.AuthMethodMapper.ensureInitialized();
@@ -111,31 +83,16 @@ void initializeMappers() {
   p23.SessionTokenResponseMapper.ensureInitialized();
   p24.PostLanguageMapper.ensureInitialized();
   p25.LocalizedFieldValueMapper.ensureInitialized();
-  p26.PagingResponseMapper.ensureInitialized();
+  p26.BaseResponseMapper.ensureInitialized();
   p27.SuccessResponseMapper.ensureInitialized();
-  p28.FileResponseMapper.ensureInitialized();
-  p29.PresignedUrlUploadResponseMapper.ensureInitialized();
-  p30.NotificationTypeMapper.ensureInitialized();
-  p31.SocialMediaTypeMapper.ensureInitialized();
-  p32.UserDTOMapper.ensureInitialized();
-  p32.UserDetailDTOMapper.ensureInitialized();
-  p32.RoleMapper.ensureInitialized();
-  p32.AccountTypeMapper.ensureInitialized();
-  p33.CheckExistPhoneNumberRequestMapper.ensureInitialized();
-  p34.CheckExistUsernameRequestMapper.ensureInitialized();
-  p35.FileRequestMapper.ensureInitialized();
-  p36.NotificationSettingRequestMapper.ensureInitialized();
-  p37.ProfileUrlRequestMapper.ensureInitialized();
-  p38.ReadNotificationRequestMapper.ensureInitialized();
-  p39.SocialMediaRequestMapper.ensureInitialized();
-  p40.SupplementUserInformationRequestMapper.ensureInitialized();
-  p41.UpdateUserAvatarRequestMapper.ensureInitialized();
-  p42.UpdateUserInfoRequestMapper.ensureInitialized();
-  p43.CheckAccountExistedResponseMapper.ensureInitialized();
-  p44.GetReferredUserResponseMapper.ensureInitialized();
-  p45.NotificationResponseMapper.ensureInitialized();
-  p46.NotificationSettingResponseMapper.ensureInitialized();
-  p47.ProfileUrlResponseMapper.ensureInitialized();
-  p48.SocialMediaResponseMapper.ensureInitialized();
-  p49.UserRegistrationStatusResponseMapper.ensureInitialized();
+  p28.CreateQuestionRequestMapper.ensureInitialized();
+  p28.FileRequestMapper.ensureInitialized();
+  p29.CreateQuestionResponseMapper.ensureInitialized();
+  p30.GetStructureEducationResponseMapper.ensureInitialized();
+  p30.LevelResponseMapper.ensureInitialized();
+  p30.GradeResponseMapper.ensureInitialized();
+  p30.SubjectResponseMapper.ensureInitialized();
+  p31.SignedUrlRequestMapper.ensureInitialized();
+  p32.UploadFileRequestMapper.ensureInitialized();
+  p33.SignedUrlResponseMapper.ensureInitialized();
 }
