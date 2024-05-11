@@ -5,12 +5,9 @@ class DioInterceptorManager {
   InterceptorsWrapper? _interceptors;
 
   Dio get dioInstance {
-    if (_dio == null) {
-      _dio = Dio(BaseOptions(
-        validateStatus: (status) => status != null && status < 500,
-      ));
-      // _dio!.interceptors.add(DioInterceptor());
-    }
+    _dio ??= Dio(BaseOptions(
+      validateStatus: (status) => status != null && status < 500,
+    ));
     return _dio!;
   }
 
@@ -29,4 +26,3 @@ class DioInterceptorManager {
   //   return _interceptors!;
   // }
 }
-

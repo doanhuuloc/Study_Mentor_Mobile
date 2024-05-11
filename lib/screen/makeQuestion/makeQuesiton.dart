@@ -1,10 +1,6 @@
-import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -87,8 +83,7 @@ class _MakeQuestionScreenState extends State<MakeQuestionScreen> {
 
     final response = await EducationApi.createQuestion(
         data, context.read<UserViewModel>().user.accessToken);
-    print("hahah123 ${response}");
- 
+    print("hahah123 $response");
   }
 
   @override
@@ -104,7 +99,7 @@ class _MakeQuestionScreenState extends State<MakeQuestionScreen> {
           future: fecthData,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -125,7 +120,7 @@ class _MakeQuestionScreenState extends State<MakeQuestionScreen> {
                           textInputType: TextInputType.multiline,
                           fillColor: Colors.transparent,
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
+                            borderSide: const BorderSide(color: Colors.grey),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           minLines: 1,
@@ -256,14 +251,14 @@ class _MakeQuestionScreenState extends State<MakeQuestionScreen> {
                                       borderRadius: BorderRadius.circular(12))),
                               backgroundColor: MaterialStatePropertyAll(
                                   Theme.of(context).primaryColor),
-                              padding: MaterialStatePropertyAll(
+                              padding: const MaterialStatePropertyAll(
                                   EdgeInsets.symmetric(
                                       horizontal: 50, vertical: 15))),
                           onPressed: () async {
                             await submit();
                             context.go("/makequestion/findintrustor");
                           },
-                          child: Text(
+                          child: const Text(
                             "Continue",
                             style: TextStyle(color: Colors.white),
                           ),

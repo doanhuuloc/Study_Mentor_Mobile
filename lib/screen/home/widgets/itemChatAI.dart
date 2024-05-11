@@ -25,7 +25,7 @@ class ItemChatAI extends StatelessWidget {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(right: 5),
+                  padding: const EdgeInsets.only(right: 5),
                   child: SvgPicture.asset(
                     "assets/svgs/loader.svg",
                     height: 50,

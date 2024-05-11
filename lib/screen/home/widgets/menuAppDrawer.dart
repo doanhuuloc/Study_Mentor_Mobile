@@ -37,13 +37,13 @@ class MenuAppDrawer extends StatelessWidget {
                                       .read<UserViewModel>()
                                       .user
                                       .avatar!)) as ImageProvider
-                                  : AssetImage("assets/imgs/user.png"),
+                                  : const AssetImage("assets/imgs/user.png"),
                           fit: BoxFit.fill)),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   context.watch<UserViewModel>().user.fullName,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 )
               ],
             ),

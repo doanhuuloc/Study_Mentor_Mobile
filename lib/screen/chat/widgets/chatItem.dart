@@ -27,7 +27,7 @@ class ChatItem extends StatelessWidget {
               bottomRight: Radius.circular(100),
             ),
           ),
-          color: isOpposite ? Colors.blue : Color(0xffF3F9FA),
+          color: isOpposite ? Colors.blue : const Color(0xffF3F9FA),
           elevation: 0.0,
           child: Padding(
             padding: const EdgeInsets.all(8.0),

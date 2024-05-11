@@ -14,7 +14,7 @@ class CustomTextField extends StatefulWidget {
     this.autoFocus = false,
     this.textInputType = TextInputType.text,
     this.minLines,
-    this.maxLines=1,
+    this.maxLines = 1,
     this.readOnly = false,
     this.contentPadding,
     this.enabledBorder,
@@ -98,7 +98,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ? (value) => widget.onChanged!(value)
           : (value) {},
       decoration: InputDecoration(
-        
         errorStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         contentPadding: widget.contentPadding,
         hintText: widget.hintText,

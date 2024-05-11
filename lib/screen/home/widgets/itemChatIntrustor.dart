@@ -26,7 +26,7 @@ class ItemChatIntrustor extends StatelessWidget {
             Row(
               children: [
                 Padding(
-                    padding: EdgeInsets.only(right: 5),
+                    padding: const EdgeInsets.only(right: 5),
                     child: Image.asset(
                       "assets/imgs/user.png",
                       height: 50,
@@ -49,10 +49,10 @@ class ItemChatIntrustor extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(horizontal: 5),
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
                             height: 5,
                             width: 5,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.black,
                             ),

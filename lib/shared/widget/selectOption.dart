@@ -36,7 +36,8 @@ class SelectOption extends StatelessWidget {
             borderSide: BorderSide(color: theme.primaryColor)),
         filled: true,
         fillColor: backgroundColor ?? Colors.white,
-        contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
       ),
       value: selectedOption,
       onChanged: (newValue) {
@@ -64,7 +65,7 @@ class SelectOption extends StatelessWidget {
           value: option,
           child: Text(
             option,
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           ),
         );
       }).toList(),

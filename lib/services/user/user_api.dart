@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:study_mentor_mobile/services/file/uploadFile.dart';
 import 'package:study_mentor_mobile/utilities/file_uploader.dart';
 
 import '../../config/config.dart';

@@ -47,26 +47,26 @@ class _TutorScreenState extends State<TutorScreen> {
           future: fecthData,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else {
               return SingleChildScrollView(
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 20),
+                        margin: const EdgeInsets.symmetric(vertical: 20),
                         height: 150,
                         // width: 200,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 image: AssetImage("assets/imgs/user.png"),
                                 fit: BoxFit.fill)),
                       ),
-                      Text(
+                      const Text(
                         "Thông tin cá nhân",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
@@ -84,7 +84,7 @@ class _TutorScreenState extends State<TutorScreen> {
                       LineInfo(
                           title: "Giới tính",
                           content: tutorInfo["gender"].toString()),
-                      Text(
+                      const Text(
                         "Thông tin Giáo dục quan tâm",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),

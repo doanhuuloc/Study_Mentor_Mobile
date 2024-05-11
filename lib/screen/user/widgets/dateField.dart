@@ -29,10 +29,11 @@ class _DateFieldState extends State<DateField> {
   @override
   void initState() {
     super.initState();
-    if (widget.controller.text != "")
+    if (widget.controller.text != "") {
       selectedDate = format.parse(widget.controller.text);
-    else
-      selectedDate = DateTime(2000,1,1);
+    } else {
+      selectedDate = DateTime(2000, 1, 1);
+    }
   }
 
   String? validator(value) {

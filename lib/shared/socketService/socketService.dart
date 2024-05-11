@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
-import 'package:study_mentor_mobile/config/config.dart';
 
 class SocketService {
   static io.Socket? _socket;
@@ -8,7 +7,7 @@ class SocketService {
 
   static void connectserver() {
     _socket = io.io(
-        Config.socket_url,
+        "http://188.166.176.114:3000",
         io.OptionBuilder()
             .setTransports(['websocket'])
             .enableForceNew()
@@ -16,11 +15,11 @@ class SocketService {
 
     _socket?.onConnect(
       (data) async {
-        print("cout<< connect " + _socket!.id.toString());
+        print("cout<< connect ${_socket!.id}");
       },
     );
     _socket?.onDisconnect((data) {
-      print('cout<< disconnect' + data.toString());
+      print('cout<< disconnect$data');
     });
 
     _socket?.onConnectError((data) {

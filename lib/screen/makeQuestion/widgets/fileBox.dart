@@ -30,11 +30,13 @@ class FileBox extends StatelessWidget {
                 children: [
                   Text(
                     file.files.single.name,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w300),
                   ),
                   Text(
                     "${(file.files.single.size / 1024 / 1024).toStringAsFixed(3)}mb",
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w300),
                   ),
                 ],
               ),

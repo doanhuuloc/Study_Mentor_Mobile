@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:study_mentor_mobile/provider/user.dart';
-import 'package:study_mentor_mobile/services/tutor/tutor_api.dart';
 import 'package:study_mentor_mobile/shared/widget/customDivider.dart';
 import 'package:study_mentor_mobile/shared/widget/customTextField.dart';
 
@@ -82,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             color: Color(0xff2E4182),
@@ -91,24 +90,24 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _formKey,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 "Welcom to StudyMentor",
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 "Sign in your account",
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               CustomTextField(
                 controller: _emailController,
                 focusNode: _focusNodeEmail,
@@ -116,10 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: "Enter email",
                 validator: validEmail,
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                 textStyle: const TextStyle(color: Colors.white),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               CustomTextField(
                 controller: _passwordController,
                 focusNode: _focusNodePassword,
@@ -128,23 +127,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 validator: validPassword,
                 isPasswordField: true,
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                 textStyle: const TextStyle(color: Colors.white),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               TextButton(
                 onPressed: () {
                   // Navigator.pushNamed(context, Routes.forgot);
                 },
-                child: Text(
+                child: const Text(
                   "Forgot password?",
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _isLoading
                   ? Container(
                       alignment: Alignment.center,
@@ -171,49 +170,49 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Container(
                         alignment: Alignment.center,
                         height: 50,
-                        child: Text(
+                        child: const Text(
                           "Sign in",
-                          style: const TextStyle(
+                          style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   top: 15,
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 width: MediaQuery.of(context).size.width,
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const Expanded(child: CustomDivider()),
+                    Expanded(child: CustomDivider()),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 5),
                       child: Text(
                         "or",
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    const Expanded(child: CustomDivider()),
+                    Expanded(child: CustomDivider()),
                   ],
                 ),
               ),
               // SizedBox(
               //     width: MediaQuery.of(context).size.width * 0.5,
               //     child: const MethodsLogin()),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Don't have an account?",
-                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   GestureDetector(
                     onTap: () => context.go("/signup"),
                     child: Text(

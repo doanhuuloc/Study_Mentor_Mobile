@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:study_mentor_mobile/provider/user.dart';
@@ -190,7 +189,7 @@ class _EditProfileState extends State<EditProfile> {
                                 color: Theme.of(context).primaryColor,
                                 shape: BoxShape.circle,
                               ),
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               child: const Icon(
                                 Icons.edit,
                                 color: Colors.white,
@@ -280,7 +279,7 @@ class _EditProfileState extends State<EditProfile> {
                       gender = value;
                     });
                   },
-                  options: ["male", "female"],
+                  options: const ["male", "female"],
                 ),
                 const SizedBox(height: 10),
                 const Text(

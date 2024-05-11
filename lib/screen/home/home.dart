@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:study_mentor_mobile/screen/home/widgets/itemChatIntrustor.dart';
@@ -9,7 +8,6 @@ import 'package:study_mentor_mobile/shared/widget/customDivider.dart';
 
 import '../../provider/user.dart';
 import 'widgets/itemChatAI.dart';
-import 'widgets/itemFilter.dart';
 import 'widgets/menuAppDrawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -101,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> {
           toolbarHeight: 70,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          
           leading: Builder(builder: (context) {
             return GestureDetector(
               onTap: () => Scaffold.of(context).openDrawer(),
@@ -115,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? FileImage(File(
                                   context.read<UserViewModel>().user.avatar!))
                               as ImageProvider
-                          : AssetImage("assets/imgs/user.png"),
+                          : const AssetImage("assets/imgs/user.png"),
                       fit: BoxFit.fill,
                     )),
               ),

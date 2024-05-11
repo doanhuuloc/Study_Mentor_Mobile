@@ -139,7 +139,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                 textStyle: const TextStyle(color: Colors.white),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               CustomTextField(
                 controller: _emailController,
                 focusNode: _focusNodeEmail,
@@ -150,7 +150,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                 textStyle: const TextStyle(color: Colors.white),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
 
               SelectOption(
                 focusNode: FocusNode(),
@@ -163,10 +163,11 @@ class _SignupScreenState extends State<SignupScreen> {
                 },
                 textColor: Colors.white,
                 backgroundColor: Colors.transparent,
-                enableBorderSide: BorderSide(color: Colors.white, width: 1),
-                options: ["male", "female"],
+                enableBorderSide:
+                    const BorderSide(color: Colors.white, width: 1),
+                options: const ["male", "female"],
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               CustomTextField(
                 controller: _passwordController,
                 focusNode: _focusNodePassword,
@@ -175,7 +176,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 validator: validPassword,
                 isPasswordField: true,
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                 textStyle: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 20),

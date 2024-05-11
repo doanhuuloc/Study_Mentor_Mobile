@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:study_mentor_mobile/screen/chat/widgets/chatItem.dart';
 import 'package:study_mentor_mobile/shared/widget/customTextField.dart';
@@ -68,7 +66,7 @@ class _ChatScreenState extends State<ChatScreen> {
             "isOpposite": true,
           };
           print(data);
-          chats.insert(0,data);
+          chats.insert(0, data);
         });
         _messageController.clear();
       }
@@ -79,7 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Study Mentor AI"),
+        title: const Text("Study Mentor AI"),
         backgroundColor: Colors.white,
         elevation: 3,
         shadowColor: Colors.black,
@@ -88,7 +86,7 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           Expanded(
               child: ListView(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             reverse: true,
             children: chats.map((e) {
               return ChatItem(
@@ -98,11 +96,11 @@ class _ChatScreenState extends State<ChatScreen> {
             }).toList(),
           )),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(right: 20),
+                  padding: const EdgeInsets.only(right: 20),
                   child: SvgPicture.asset("assets/svgs/upload.svg"),
                 ),
                 Expanded(
@@ -113,12 +111,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     rightIcon: Icons.send,
                     textInputType: TextInputType.text,
                     hintText: "Nhập nội dung tin nhắn",
-                    hintStyle: TextStyle(color: Colors.black),
+                    hintStyle: const TextStyle(color: Colors.black),
                     iconColor: Theme.of(context).primaryColor,
                     fillColor: Colors.white,
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.grey)),
+                        borderSide: const BorderSide(color: Colors.grey)),
                     validator: (value) {
                       return null;
                     },

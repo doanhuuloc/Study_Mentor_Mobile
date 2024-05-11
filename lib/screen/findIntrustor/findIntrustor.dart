@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 
@@ -50,7 +48,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                                   borderRadius: BorderRadius.circular(12))),
                           backgroundColor: MaterialStatePropertyAll(
                               Theme.of(context).primaryColor),
-                          padding: MaterialStatePropertyAll(
+                          padding: const MaterialStatePropertyAll(
                               EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 10))),
                       onPressed: () {
@@ -150,7 +148,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.only(left: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -158,7 +156,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
+                                      const Text(
                                         "Long vu",
                                         style: TextStyle(
                                             fontSize: 16,
@@ -167,21 +165,22 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                                       Row(
                                         children: [
                                           Container(
-                                            margin: EdgeInsets.symmetric(
+                                            margin: const EdgeInsets.symmetric(
                                                 horizontal: 5),
                                             width: 1,
                                             height: 20,
                                             decoration: BoxDecoration(
                                                 border: Border.all()),
                                           ),
-                                          Text("23 tuoi"),
+                                          const Text("23 tuoi"),
                                         ],
                                       )
                                     ],
                                   ),
                                   RatingBarIndicator(
-                                    itemBuilder: (context, index) =>
-                                        Icon(Icons.star, color: Colors.orange),
+                                    itemBuilder: (context, index) => const Icon(
+                                        Icons.star,
+                                        color: Colors.orange),
                                     rating: 5,
                                     itemSize: 24,
                                   ),
@@ -202,7 +201,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.only(left: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -210,7 +209,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Long vu",
                                       style: TextStyle(
                                           fontSize: 16,
@@ -219,21 +218,22 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                                     Row(
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.symmetric(
+                                          margin: const EdgeInsets.symmetric(
                                               horizontal: 5),
                                           width: 1,
                                           height: 20,
                                           decoration: BoxDecoration(
                                               border: Border.all()),
                                         ),
-                                        Text("23 tuoi"),
+                                        const Text("23 tuoi"),
                                       ],
                                     )
                                   ],
                                 ),
                                 RatingBarIndicator(
-                                  itemBuilder: (context, index) =>
-                                      Icon(Icons.star, color: Colors.orange),
+                                  itemBuilder: (context, index) => const Icon(
+                                      Icons.star,
+                                      color: Colors.orange),
                                   rating: 5,
                                   itemSize: 24,
                                 ),
@@ -253,7 +253,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.only(left: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -261,7 +261,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Long vu",
                                       style: TextStyle(
                                           fontSize: 16,
@@ -270,21 +270,22 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen>
                                     Row(
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.symmetric(
+                                          margin: const EdgeInsets.symmetric(
                                               horizontal: 5),
                                           width: 1,
                                           height: 20,
                                           decoration: BoxDecoration(
                                               border: Border.all()),
                                         ),
-                                        Text("23 tuoi"),
+                                        const Text("23 tuoi"),
                                       ],
                                     )
                                   ],
                                 ),
                                 RatingBarIndicator(
-                                  itemBuilder: (context, index) =>
-                                      Icon(Icons.star, color: Colors.orange),
+                                  itemBuilder: (context, index) => const Icon(
+                                      Icons.star,
+                                      color: Colors.orange),
                                   rating: 5,
                                   itemSize: 24,
                                 ),

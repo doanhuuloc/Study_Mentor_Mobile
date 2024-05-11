@@ -154,7 +154,7 @@ class _HistoryScreenState extends State<HistoryScreen>
         shadowColor: Colors.black,
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             Container(

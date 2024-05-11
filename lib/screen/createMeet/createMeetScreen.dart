@@ -1,17 +1,9 @@
-import 'dart:io';
-
-import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:study_mentor_mobile/provider/user.dart';
 import 'package:study_mentor_mobile/services/education/education_api.dart';
-import 'package:study_mentor_mobile/shared/widget/customTextField.dart';
-import 'package:study_mentor_mobile/screen/makeQuestion/widgets/fileBox.dart';
 import 'package:study_mentor_mobile/shared/widget/selectOption.dart';
 
 class CreateMeetScreen extends StatefulWidget {
@@ -62,27 +54,28 @@ class _CreateMeetScreenState extends State<CreateMeetScreen> {
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10))),
-                    child: Text(
+                    child: const Text(
                       "Vui lòng thanh toán số tiền sau để tiếp tục giải đáp câu hỏi của bạn",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 30),
-                    child: Text(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: const Text(
                       "100.000 đ",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                         left: 30, right: 30, top: 10, bottom: 20),
                     child: ElevatedButton(
                         style: ButtonStyle(
@@ -91,7 +84,7 @@ class _CreateMeetScreenState extends State<CreateMeetScreen> {
                         onPressed: () {
                           context.go("/makequestion/findintrustor");
                         },
-                        child: Text(
+                        child: const Text(
                           "Thanh Toán",
                           style: TextStyle(
                               color: Colors.white,
@@ -142,7 +135,7 @@ class _CreateMeetScreenState extends State<CreateMeetScreen> {
           future: fecthData,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -236,14 +229,14 @@ class _CreateMeetScreenState extends State<CreateMeetScreen> {
                                       borderRadius: BorderRadius.circular(12))),
                               backgroundColor: MaterialStatePropertyAll(
                                   Theme.of(context).primaryColor),
-                              padding: MaterialStatePropertyAll(
+                              padding: const MaterialStatePropertyAll(
                                   EdgeInsets.symmetric(
                                       horizontal: 50, vertical: 15))),
                           onPressed: () async {
                             await submit();
                             context.go("/makequestion/findintrustor");
                           },
-                          child: Text(
+                          child: const Text(
                             "Continue",
                             style: TextStyle(color: Colors.white),
                           ),
