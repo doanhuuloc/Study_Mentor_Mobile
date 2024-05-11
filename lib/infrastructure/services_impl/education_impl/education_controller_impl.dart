@@ -10,11 +10,9 @@ import 'data_source.dart';
 class EducationControllerImpl with EducationController, DataSourceErrorHandler {
   const EducationControllerImpl({
     required this.educationDataSource,
-    required this.dio,
   });
 
   final EducationDataSource educationDataSource;
-  final Dio dio;
 
   @override
   Future<Result<Failure, BaseResponse<GetStructureEducationResponse>>>

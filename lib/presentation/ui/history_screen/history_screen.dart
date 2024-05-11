@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/presentation/shared/transitions/transitions.dart';
+import 'package:study_mentor_mobile/presentation/ui/history_screen/blocs/history_cubit.dart';
 
-import 'widgets/history_tab_view.dart';
+import '../../../application/services/ai/ai.dart';
+import '../../../application/services/app/app_config/app_config.dart';
+import '../../bases/user_cubit/user_cubit.dart';
+import 'widgets/tab_ai.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -54,18 +59,27 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ],
           ),
         ),
-        body: const TabBarView(children: [
-          HistoryTabView(),
-          SingleChildScrollView(
-            child: Text("2"),
-          ),
-          SingleChildScrollView(
-            child: Text("3"),
-          ),
-          SingleChildScrollView(
-            child: Text("3"),
-          ),
-        ]),
+        body: BlocProvider<HistoryCubit>(
+          create: (BuildContext context) {
+            return HistoryCubit(
+              aiController: context.read<AIController>(),
+              appConfig: context.read<AppConfig>(),
+              userCubit: context.read<UserCubit>(),
+            );
+          },
+          child: const TabBarView(children: [
+            TabAI(),
+            SingleChildScrollView(
+              child: Text("2"),
+            ),
+            SingleChildScrollView(
+              child: Text("3"),
+            ),
+            SingleChildScrollView(
+              child: Text("3"),
+            ),
+          ]),
+        ),
       ),
     );
   }

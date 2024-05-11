@@ -16,6 +16,8 @@ class ServiceInject extends SingleChildStatelessWidget with ChildlessAssertion {
         RepositoryProvider.value(value: appDIData.authController),
         RepositoryProvider.value(value: appDIData.userController),
         RepositoryProvider.value(value: appDIData.fileController),
+        RepositoryProvider.value(value: appDIData.aiController),
+        RepositoryProvider.value(value: appDIData.educationController),        
         RepositoryProvider.value(value: appDIData.localeService),
       ],
       child: child,

@@ -10,6 +10,7 @@ import '../application/services/app/locale_service/locale_service.dart';
 import '../application/services/app/token_service/refresh_token_manager.dart';
 import '../application/services/app/token_service/token_service.dart';
 import '../application/services/auth/auth.dart';
+import '../application/services/education/education.dart';
 import '../application/services/file/file.dart';
 
 import '../application/services/user/controller/controller.dart';
@@ -24,6 +25,8 @@ import '../infrastructure/services_impl/app_data_impl/app_username_service_impl.
 import '../infrastructure/services_impl/auth_impl/auth_controller_impl.dart';
 import '../infrastructure/services_impl/auth_impl/data_source.dart';
 
+import '../infrastructure/services_impl/education_impl/data_source.dart';
+import '../infrastructure/services_impl/education_impl/education_controller_impl.dart';
 import '../infrastructure/services_impl/file_impl/data_source.dart';
 import '../infrastructure/services_impl/file_impl/file_controller_impl.dart';
 import '../infrastructure/services_impl/locale_service_impl/locale_service_impl.dart';
@@ -45,6 +48,7 @@ class AppDIData {
     required this.refreshTokenManager,
     required this.appUsernameService,
     required this.fileController,
+    required this.educationController,
     required this.localeService,
   });
 
@@ -56,6 +60,7 @@ class AppDIData {
   final RefreshTokenManager refreshTokenManager;
   final AppUsernameService appUsernameService;
   final FileController fileController;
+  final EducationController educationController;
   final LocaleService localeService;
 }
 
@@ -158,6 +163,11 @@ class AppDIService implements DIService<AppDIData> {
     final FileController fileController =
         FileControllerImpl(fileDataSource: fileDataSource, dio: dio);
 
+    // education
+    final EducationDataSource educationDataSource = EducationDataSource(dio);
+    final EducationController educationController =
+        EducationControllerImpl(educationDataSource: educationDataSource);
+
     // app
     final AppUsernameService appUsernameService =
         AppUsernameServiceImpl(preferences: sharedPrefs);
@@ -176,6 +186,7 @@ class AppDIService implements DIService<AppDIData> {
       fileController: fileController,
       userController: userController,
       aiController: aiController,
+      educationController: educationController,
       appUsernameService: appUsernameService,
     );
   }
