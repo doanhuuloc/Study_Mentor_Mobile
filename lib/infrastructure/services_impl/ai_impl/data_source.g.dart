@@ -117,14 +117,14 @@ class _AIDataSource implements AIDataSource {
   }
 
   @override
-  Future<GetDetailedMessageRoomChatResponse> getDetailedMessageRoomChat(
+  Future<List<ChatAIResponse>> getDetailedMessageRoomChat(
       {required String roomId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetDetailedMessageRoomChatResponse>(Options(
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<ChatAIResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -140,7 +140,9 @@ class _AIDataSource implements AIDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = GetDetailedMessageRoomChatResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => ChatAIResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

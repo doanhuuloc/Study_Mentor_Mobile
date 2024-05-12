@@ -16,7 +16,7 @@ class ChatAIResponse with ChatAIResponseMappable {
       ChatAIResponseMapper.fromJson(json);
 
   final String? contactId;
-  final String? createAt;
+  final DateTime? createAt;
   final String? questionId;
   final String? senderId;
   final String? value;

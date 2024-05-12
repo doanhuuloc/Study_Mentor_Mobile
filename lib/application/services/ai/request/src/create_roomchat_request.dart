@@ -5,8 +5,8 @@ part 'create_roomchat_request.mapper.dart';
 @MappableClass()
 class CreateRoomChatRequest with CreateRoomChatRequestMappable {
   const CreateRoomChatRequest({
-    this.Title,
+    this.TitleRoom,
   });
 
-  final String? Title;
+  final String? TitleRoom;
 }

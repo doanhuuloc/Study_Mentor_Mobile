@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 
 import '../../../application/services/common/common.dart';
 import '../../../application/services/education/Education.dart';

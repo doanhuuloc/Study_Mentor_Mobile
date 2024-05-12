@@ -19,5 +19,5 @@ class ListRoomChatResponse with ListRoomChatResponseMappable {
   final String? Title;
   final String? SenderId;
   final String? RecipientId;
-  final String? createdAt;
+  final DateTime? createdAt;
 }

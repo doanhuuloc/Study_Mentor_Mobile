@@ -21,17 +21,17 @@ class CreateRoomChatRequestMapper
   @override
   final String id = 'CreateRoomChatRequest';
 
-  static String? _$Title(CreateRoomChatRequest v) => v.Title;
-  static const Field<CreateRoomChatRequest, String> _f$Title =
-      Field('Title', _$Title, opt: true);
+  static String? _$TitleRoom(CreateRoomChatRequest v) => v.TitleRoom;
+  static const Field<CreateRoomChatRequest, String> _f$TitleRoom =
+      Field('TitleRoom', _$TitleRoom, opt: true);
 
   @override
   final MappableFields<CreateRoomChatRequest> fields = const {
-    #Title: _f$Title,
+    #TitleRoom: _f$TitleRoom,
   };
 
   static CreateRoomChatRequest _instantiate(DecodingData data) {
-    return CreateRoomChatRequest(Title: data.dec(_f$Title));
+    return CreateRoomChatRequest(TitleRoom: data.dec(_f$TitleRoom));
   }
 
   @override
@@ -91,7 +91,7 @@ abstract class CreateRoomChatRequestCopyWith<
     $R,
     $In extends CreateRoomChatRequest,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? Title});
+  $R call({String? TitleRoom});
   CreateRoomChatRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -105,11 +105,11 @@ class _CreateRoomChatRequestCopyWithImpl<$R, $Out>
   late final ClassMapperBase<CreateRoomChatRequest> $mapper =
       CreateRoomChatRequestMapper.ensureInitialized();
   @override
-  $R call({Object? Title = $none}) =>
-      $apply(FieldCopyWithData({if (Title != $none) #Title: Title}));
+  $R call({Object? TitleRoom = $none}) => $apply(
+      FieldCopyWithData({if (TitleRoom != $none) #TitleRoom: TitleRoom}));
   @override
-  CreateRoomChatRequest $make(CopyWithData data) =>
-      CreateRoomChatRequest(Title: data.get(#Title, or: $value.Title));
+  CreateRoomChatRequest $make(CopyWithData data) => CreateRoomChatRequest(
+      TitleRoom: data.get(#TitleRoom, or: $value.TitleRoom));
 
   @override
   CreateRoomChatRequestCopyWith<$R2, CreateRoomChatRequest, $Out2>

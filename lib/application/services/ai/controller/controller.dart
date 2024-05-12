@@ -21,8 +21,7 @@ mixin AIController {
     required String idChatAI,
   });
 
-  Future<Result<Failure, GetDetailedMessageRoomChatResponse>>
-      getDetailedMessageRoomChat({
+  Future<Result<Failure, List<ChatAIResponse>>> getDetailedMessageRoomChat({
     required String roomId,
   });
 }

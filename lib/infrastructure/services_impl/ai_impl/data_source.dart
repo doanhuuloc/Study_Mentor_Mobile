@@ -32,7 +32,7 @@ abstract class AIDataSource {
   });
 
   @GET('/ai/listQuestion/{roomId}')
-  Future<GetDetailedMessageRoomChatResponse> getDetailedMessageRoomChat({
+  Future<List<ChatAIResponse>> getDetailedMessageRoomChat({
     @Path('roomId') required String roomId,
   });
 }

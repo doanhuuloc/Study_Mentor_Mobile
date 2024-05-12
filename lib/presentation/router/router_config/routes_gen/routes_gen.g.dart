@@ -164,6 +164,11 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
           factory: $HomeRouteDataExtension._fromState,
           routes: [
             GoRouteData.$route(
+              path: 'chat',
+              parentNavigatorKey: ChatRouteData.$parentNavigatorKey,
+              factory: $ChatRouteDataExtension._fromState,
+            ),
+            GoRouteData.$route(
               path: 'login',
               parentNavigatorKey: HomeLoginRouteData.$parentNavigatorKey,
               factory: $HomeLoginRouteDataExtension._fromState,
@@ -215,6 +220,27 @@ extension $HomeRouteDataExtension on HomeRouteData {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ChatRouteDataExtension on ChatRouteData {
+  static ChatRouteData _fromState(GoRouterState state) => ChatRouteData(
+        $extra: state.extra as String?,
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/chat',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
 }
 
 extension $HomeLoginRouteDataExtension on HomeLoginRouteData {

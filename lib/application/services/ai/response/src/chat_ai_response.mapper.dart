@@ -23,8 +23,8 @@ class ChatAIResponseMapper extends ClassMapperBase<ChatAIResponse> {
   static String? _$contactId(ChatAIResponse v) => v.contactId;
   static const Field<ChatAIResponse, String> _f$contactId =
       Field('contactId', _$contactId, opt: true);
-  static String? _$createAt(ChatAIResponse v) => v.createAt;
-  static const Field<ChatAIResponse, String> _f$createAt =
+  static DateTime? _$createAt(ChatAIResponse v) => v.createAt;
+  static const Field<ChatAIResponse, DateTime> _f$createAt =
       Field('createAt', _$createAt, opt: true);
   static String? _$questionId(ChatAIResponse v) => v.questionId;
   static const Field<ChatAIResponse, String> _f$questionId =
@@ -109,7 +109,7 @@ abstract class ChatAIResponseCopyWith<$R, $In extends ChatAIResponse, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call(
       {String? contactId,
-      String? createAt,
+      DateTime? createAt,
       String? questionId,
       String? senderId,
       String? value});

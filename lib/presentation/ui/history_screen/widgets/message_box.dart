@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../../../shared/theme/theme.dart';
 
 class MessageBox extends StatelessWidget {
   const MessageBox({
@@ -12,11 +15,12 @@ class MessageBox extends StatelessWidget {
   final ImageProvider avatar;
   final String title;
   final String content;
-  final String time;
+  final DateTime time;
   final VoidCallback voidCallback;
 
   @override
   Widget build(BuildContext context) {
+    final dateFormat = DateFormat("hh:mm");
     return InkWell(
       onTap: voidCallback,
       child: Container(
@@ -34,7 +38,6 @@ class MessageBox extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.amber,
                   image: DecorationImage(
                     image: avatar,
                     fit: BoxFit.cover,
@@ -49,10 +52,12 @@ class MessageBox extends StatelessWidget {
                     Text(
                       title,
                       overflow: TextOverflow.ellipsis,
+                      style: Styles.s14().withWeight(FontWeight.w300),
                     ),
                     Text(
                       content,
                       overflow: TextOverflow.ellipsis,
+                      style: Styles.s16(),
                     ),
                   ],
                 ),
@@ -61,12 +66,13 @@ class MessageBox extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  time,
+                  dateFormat.format(time),
+                  style: Styles.s13(),
                 ),
                 const SizedBox(width: 2),
                 const Icon(
                   Icons.arrow_forward_ios,
-                  size: 15,
+                  size: 14,
                 )
               ],
             )

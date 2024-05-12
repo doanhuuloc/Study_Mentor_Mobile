@@ -48,8 +48,8 @@ class AIControllerImpl with AIController, DataSourceErrorHandler {
   }
 
   @override
-  Future<Result<Failure, GetDetailedMessageRoomChatResponse>>
-      getDetailedMessageRoomChat({required String roomId}) {
+  Future<Result<Failure, List<ChatAIResponse>>> getDetailedMessageRoomChat(
+      {required String roomId}) {
     return handleApiResult(
         future: () => aiDataSource.getDetailedMessageRoomChat(roomId: roomId));
   }

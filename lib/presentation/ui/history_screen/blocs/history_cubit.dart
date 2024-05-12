@@ -3,7 +3,6 @@ import 'dart:async';
 import '../../../../application/services/ai/ai.dart';
 import '../../../../application/services/app/app_config/app_config.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
-import '../../../bases/user_cubit/user_cubit.dart';
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'history_state.dart';
 
@@ -25,7 +24,6 @@ class HistoryCubit extends SafeCubit<HistoryState> {
   Future<void> getListChatGpt() async {
     emit(state.copyWith(loading: true));
     final listChatGpt = await aiController.getListRoomChat(
-      // userId: userCubit.state.detail!.id!,
       userId: userId,
       idChatAI: appConfig.chatGpt,
     );
@@ -44,8 +42,7 @@ class HistoryCubit extends SafeCubit<HistoryState> {
   Future<void> getListChatGemini() async {
     emit(state.copyWith(loading: true));
     final listChatGemini = await aiController.getListRoomChat(
-      // userId: userCubit.state.detail!.id!,
-      userId: "c00478d9-020a-4b38-8eea-68c4178aca61",
+      userId: userId,
       idChatAI: appConfig.chatGemini,
     );
 
@@ -62,7 +59,7 @@ class HistoryCubit extends SafeCubit<HistoryState> {
   }
 
   Future<void> _fetchData() async {
-    await getListChatGemini();
+    await getListChatGpt();
   }
 
   void reload() {

@@ -32,8 +32,8 @@ class ListRoomChatResponseMapper extends ClassMapperBase<ListRoomChatResponse> {
   static String? _$RecipientId(ListRoomChatResponse v) => v.RecipientId;
   static const Field<ListRoomChatResponse, String> _f$RecipientId =
       Field('RecipientId', _$RecipientId, opt: true);
-  static String? _$createdAt(ListRoomChatResponse v) => v.createdAt;
-  static const Field<ListRoomChatResponse, String> _f$createdAt =
+  static DateTime? _$createdAt(ListRoomChatResponse v) => v.createdAt;
+  static const Field<ListRoomChatResponse, DateTime> _f$createdAt =
       Field('createdAt', _$createdAt, opt: true);
 
   @override
@@ -116,7 +116,7 @@ abstract class ListRoomChatResponseCopyWith<
       String? Title,
       String? SenderId,
       String? RecipientId,
-      String? createdAt});
+      DateTime? createdAt});
   ListRoomChatResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }

@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:study_mentor_mobile/presentation/gen/assets.gen.dart';
-import 'package:study_mentor_mobile/presentation/shared/widgets/tab_bar.dart';
+import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 
 import '../../../gen/app_colors.dart';
 import '../../../shared/theme/theme.dart';
@@ -30,7 +30,7 @@ class HomeMainContent extends StatelessWidget {
                   subTitle: 'Ai miễn phí',
                   icon: Assets.svgs.homeAiFree.svg(),
                   onTap: () {
-                    // const CompanySearchRoute().go(context);
+                    const ChatRouteData().push(context);
                   },
                 ),
               ),
