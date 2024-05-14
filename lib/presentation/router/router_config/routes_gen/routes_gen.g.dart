@@ -164,7 +164,20 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
           factory: $HomeRouteDataExtension._fromState,
           routes: [
             GoRouteData.$route(
-              path: 'chat',
+              path: 'createQuestion',
+              parentNavigatorKey: CreateQuestionRouteData.$parentNavigatorKey,
+              factory: $CreateQuestionRouteDataExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'findIntrustor',
+                  parentNavigatorKey:
+                      FindIntrustorRouteData.$parentNavigatorKey,
+                  factory: $FindIntrustorRouteDataExtension._fromState,
+                ),
+              ],
+            ),
+            GoRouteData.$route(
+              path: 'chat/:typeAI',
               parentNavigatorKey: ChatRouteData.$parentNavigatorKey,
               factory: $ChatRouteDataExtension._fromState,
             ),
@@ -172,6 +185,11 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
               path: 'login',
               parentNavigatorKey: HomeLoginRouteData.$parentNavigatorKey,
               factory: $HomeLoginRouteDataExtension._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'createGGMeet',
+              parentNavigatorKey: CreateGGMeetRouteData.$parentNavigatorKey,
+              factory: $CreateGGMeetRouteDataExtension._fromState,
             ),
           ],
         ),
@@ -194,6 +212,11 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
                   factory: $RegisterRouteDataExtension._fromState,
                 ),
               ],
+            ),
+            GoRouteData.$route(
+              path: 'editprofile',
+              parentNavigatorKey: EditProfileRouteData.$parentNavigatorKey,
+              factory: $EditProfileRouteDataExtension._fromState,
             ),
           ],
         ),
@@ -222,13 +245,50 @@ extension $HomeRouteDataExtension on HomeRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $CreateQuestionRouteDataExtension on CreateQuestionRouteData {
+  static CreateQuestionRouteData _fromState(GoRouterState state) =>
+      const CreateQuestionRouteData();
+
+  String get location => GoRouteData.$location(
+        '/home/createQuestion',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $FindIntrustorRouteDataExtension on FindIntrustorRouteData {
+  static FindIntrustorRouteData _fromState(GoRouterState state) =>
+      const FindIntrustorRouteData();
+
+  String get location => GoRouteData.$location(
+        '/home/createQuestion/findIntrustor',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 extension $ChatRouteDataExtension on ChatRouteData {
   static ChatRouteData _fromState(GoRouterState state) => ChatRouteData(
+        typeAI: _$TypeAIEnumMap._$fromName(state.pathParameters['typeAI']!),
         $extra: state.extra as String?,
       );
 
   String get location => GoRouteData.$location(
-        '/home/chat',
+        '/home/chat/${Uri.encodeComponent(_$TypeAIEnumMap[typeAI]!)}',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -243,6 +303,12 @@ extension $ChatRouteDataExtension on ChatRouteData {
       context.replace(location, extra: $extra);
 }
 
+const _$TypeAIEnumMap = {
+  TypeAI.chatgpt: 'chatgpt',
+  TypeAI.gemini: 'gemini',
+  TypeAI.pay: 'pay',
+};
+
 extension $HomeLoginRouteDataExtension on HomeLoginRouteData {
   static HomeLoginRouteData _fromState(GoRouterState state) =>
       HomeLoginRouteData(
@@ -254,6 +320,24 @@ extension $HomeLoginRouteDataExtension on HomeLoginRouteData {
         queryParams: {
           if (redirectUrl != null) 'redirect-url': redirectUrl,
         },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $CreateGGMeetRouteDataExtension on CreateGGMeetRouteData {
+  static CreateGGMeetRouteData _fromState(GoRouterState state) =>
+      const CreateGGMeetRouteData();
+
+  String get location => GoRouteData.$location(
+        '/home/createGGMeet',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -341,6 +425,29 @@ extension $RegisterRouteDataExtension on RegisterRouteData {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+extension $EditProfileRouteDataExtension on EditProfileRouteData {
+  static EditProfileRouteData _fromState(GoRouterState state) =>
+      const EditProfileRouteData();
+
+  String get location => GoRouteData.$location(
+        '/profile/editprofile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension<T extends Enum> on Map<T, String> {
+  T _$fromName(String value) =>
+      entries.singleWhere((element) => element.value == value).key;
 }
 
 RouteBase get $testLoadingRouteData => GoRouteData.$route(

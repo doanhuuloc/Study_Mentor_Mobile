@@ -59,7 +59,6 @@ class UpdateProfileRequestMapper extends ClassMapperBase<UpdateProfileRequest> {
   static UpdateProfileRequestMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = UpdateProfileRequestMapper._());
-      GenderMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -76,11 +75,11 @@ class UpdateProfileRequestMapper extends ClassMapperBase<UpdateProfileRequest> {
   static String? _$phone(UpdateProfileRequest v) => v.phone;
   static const Field<UpdateProfileRequest, String> _f$phone =
       Field('phone', _$phone, opt: true);
-  static String? _$dateOfBirth(UpdateProfileRequest v) => v.dateOfBirth;
-  static const Field<UpdateProfileRequest, String> _f$dateOfBirth =
+  static int? _$dateOfBirth(UpdateProfileRequest v) => v.dateOfBirth;
+  static const Field<UpdateProfileRequest, int> _f$dateOfBirth =
       Field('dateOfBirth', _$dateOfBirth, opt: true);
-  static Gender? _$gender(UpdateProfileRequest v) => v.gender;
-  static const Field<UpdateProfileRequest, Gender> _f$gender =
+  static int? _$gender(UpdateProfileRequest v) => v.gender;
+  static const Field<UpdateProfileRequest, int> _f$gender =
       Field('gender', _$gender, opt: true);
 
   @override
@@ -162,8 +161,8 @@ abstract class UpdateProfileRequestCopyWith<
       {String? fullName,
       String? email,
       String? phone,
-      String? dateOfBirth,
-      Gender? gender});
+      int? dateOfBirth,
+      int? gender});
   UpdateProfileRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }

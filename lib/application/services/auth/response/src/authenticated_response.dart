@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-import '../../../user/user.dart';
 
 part 'authenticated_response.mapper.dart';
 
@@ -9,7 +8,7 @@ class AuthenticatedResponse with AuthenticatedResponseMappable {
   const AuthenticatedResponse({
     this.accessToken,
     this.refreshToken,
-    this.user,
+    // this.user,
   });
 
   factory AuthenticatedResponse.fromJson(Map<String, dynamic> json) =>
@@ -17,5 +16,5 @@ class AuthenticatedResponse with AuthenticatedResponseMappable {
 
   final String? accessToken;
   final String? refreshToken;
-  final UserInfoResponse? user;
+  // final UserInfoResponse? user;
 }

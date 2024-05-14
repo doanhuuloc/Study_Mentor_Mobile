@@ -58,6 +58,25 @@ class HistoryCubit extends SafeCubit<HistoryState> {
     }
   }
 
+  Future<void> getListChayPay() async {
+    emit(state.copyWith(loading: true));
+    final listChatPay = await aiController.getListRoomChat(
+      userId: userId,
+      idChatAI: appConfig.chatPay,
+    );
+
+    listChatPay.handleLeft((failure) {
+      failureHandlerManager.handle(failure);
+    });
+
+    if (listChatPay.isRight) {
+      emit(state.copyWith(
+        loading: false,
+        listChatPay: listChatPay.right,
+      ));
+    }
+  }
+
   Future<void> _fetchData() async {
     await getListChatGpt();
   }

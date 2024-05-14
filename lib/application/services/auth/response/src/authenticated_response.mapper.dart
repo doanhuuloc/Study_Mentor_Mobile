@@ -14,7 +14,6 @@ class AuthenticatedResponseMapper
   static AuthenticatedResponseMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = AuthenticatedResponseMapper._());
-      UserInfoResponseMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -28,22 +27,17 @@ class AuthenticatedResponseMapper
   static String? _$refreshToken(AuthenticatedResponse v) => v.refreshToken;
   static const Field<AuthenticatedResponse, String> _f$refreshToken =
       Field('refreshToken', _$refreshToken, opt: true);
-  static UserInfoResponse? _$user(AuthenticatedResponse v) => v.user;
-  static const Field<AuthenticatedResponse, UserInfoResponse> _f$user =
-      Field('user', _$user, opt: true);
 
   @override
   final MappableFields<AuthenticatedResponse> fields = const {
     #accessToken: _f$accessToken,
     #refreshToken: _f$refreshToken,
-    #user: _f$user,
   };
 
   static AuthenticatedResponse _instantiate(DecodingData data) {
     return AuthenticatedResponse(
         accessToken: data.dec(_f$accessToken),
-        refreshToken: data.dec(_f$refreshToken),
-        user: data.dec(_f$user));
+        refreshToken: data.dec(_f$refreshToken));
   }
 
   @override
@@ -103,8 +97,7 @@ abstract class AuthenticatedResponseCopyWith<
     $R,
     $In extends AuthenticatedResponse,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
-  UserInfoResponseCopyWith<$R, UserInfoResponse, UserInfoResponse>? get user;
-  $R call({String? accessToken, String? refreshToken, UserInfoResponse? user});
+  $R call({String? accessToken, String? refreshToken});
   AuthenticatedResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -118,23 +111,15 @@ class _AuthenticatedResponseCopyWithImpl<$R, $Out>
   late final ClassMapperBase<AuthenticatedResponse> $mapper =
       AuthenticatedResponseMapper.ensureInitialized();
   @override
-  UserInfoResponseCopyWith<$R, UserInfoResponse, UserInfoResponse>? get user =>
-      $value.user?.copyWith.$chain((v) => call(user: v));
-  @override
-  $R call(
-          {Object? accessToken = $none,
-          Object? refreshToken = $none,
-          Object? user = $none}) =>
+  $R call({Object? accessToken = $none, Object? refreshToken = $none}) =>
       $apply(FieldCopyWithData({
         if (accessToken != $none) #accessToken: accessToken,
-        if (refreshToken != $none) #refreshToken: refreshToken,
-        if (user != $none) #user: user
+        if (refreshToken != $none) #refreshToken: refreshToken
       }));
   @override
   AuthenticatedResponse $make(CopyWithData data) => AuthenticatedResponse(
       accessToken: data.get(#accessToken, or: $value.accessToken),
-      refreshToken: data.get(#refreshToken, or: $value.refreshToken),
-      user: data.get(#user, or: $value.user));
+      refreshToken: data.get(#refreshToken, or: $value.refreshToken));
 
   @override
   AuthenticatedResponseCopyWith<$R2, AuthenticatedResponse, $Out2>

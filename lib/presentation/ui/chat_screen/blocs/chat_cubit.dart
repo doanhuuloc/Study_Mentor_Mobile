@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+
 import '../../../../application/services/ai/ai.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
@@ -11,8 +13,9 @@ class ChatCubit extends SafeCubit<ChatState> {
     required this.failureHandlerManager,
     required this.userId,
     required this.idChatAI,
+    required this.controller,
     this.roomId,
-  }) : super(ChatState(roomId: roomId)) {
+  }) : super(ChatState(roomId: roomId, listChat: [])) {
     if (roomId != null) {
       getListChat(roomId: roomId!);
     }
@@ -23,6 +26,7 @@ class ChatCubit extends SafeCubit<ChatState> {
   final String userId;
   final String idChatAI;
   final String? roomId;
+  final ScrollController controller;
 
   Future<void> getListChat({required String roomId}) async {
     final listChat =
@@ -33,47 +37,39 @@ class ChatCubit extends SafeCubit<ChatState> {
 
     if (listChat.isRight) {
       emit(state.copyWith(listChat: listChat.right));
+      controller.jumpTo(controller.position.maxScrollExtent);
     }
   }
 
   Future<void> sendMessageWithAI() async {
     final String message = state.messageField;
-    final String room = await createRoomChat(title: message);
-    if (room != "") {
-      final msgres = await aiController.chatAI(
-        chatAIRequest: ChatAIRequest(question: message),
-        userId: userId,
-        idChatAI: idChatAI,
-        roomId: room,
-      );
+    onChangedMessage("");
+    addChat(ChatAIResponse(
+      createAt: DateTime.now(),
+      value: message,
+      senderId: userId,
+    ));
 
-      if (msgres.isLeft) {
-        failureHandlerManager.handle(msgres.left);
-      }
+    final msgres = await aiController.chatAI(
+      chatAIRequest: ChatAIRequest(question: message),
+      userId: userId,
+      idChatAI: idChatAI,
+      roomId: state.roomId ?? "",
+    );
 
-      if (msgres.isRight) {
-        final newListChat = state.listChat;
-        newListChat.addAll([
-          ChatAIResponse(
-            createAt: DateTime.now(),
-            value: message,
-            senderId: userId,
-          ),
-          msgres.right,
-        ]);
+    if (msgres.isLeft) {
+      failureHandlerManager.handle(msgres.left);
+    }
 
-        emit(state.copyWith(listChat: newListChat));
-      }
+    if (msgres.isRight) {
+      addChat(msgres.right);
     }
   }
 
-  Future<String> createRoomChat({required String title}) async {
-    if (state.roomId != null) {
-      return "";
-    }
-
+  Future<void> createRoomChat() async {
     final roomres = await aiController.createRoomChat(
-      createRoomChatRequest: CreateRoomChatRequest(TitleRoom: title),
+      createRoomChatRequest:
+          CreateRoomChatRequest(TitleRoom: state.messageField),
       userId: userId,
       idChatAI: idChatAI,
     );
@@ -83,16 +79,16 @@ class ChatCubit extends SafeCubit<ChatState> {
     if (roomres.isRight) {
       emit(state.copyWith(roomId: roomres.right.RoomId));
     }
-    return roomres.right.RoomId ?? "";
   }
 
   void onChangedMessage(String value) {
     emit(state.copyWith(messageField: value));
   }
 
-  Future<void> _fetchData() async {}
-
-  void reload() {
-    _fetchData();
+  void addChat(ChatAIResponse chatAIresponse) {
+    final newListChat = state.listChat;
+    newListChat.add(chatAIresponse);
+    emit(state.copyWith(listChat: newListChat));
+    controller.jumpTo(controller.position.maxScrollExtent);
   }
 }

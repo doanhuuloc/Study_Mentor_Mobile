@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../application/services/ai/dto/enum.dart';
 import '../../../shared/base_infinite_loading/example.dart';
 import '../../../shared/widgets/dialogs/dialogs.dart';
 import '../../../shared/widgets/drop_down_bar/drop_down_bar.dart';
@@ -131,14 +132,21 @@ class DropdownSheetRouteData extends GoRouteData {
     TypedGoRoute<HomeRouteData>(
       path: HomeRouteData.routeName,
       routes: <TypedRoute<RouteData>>[
-        // TypedGoRoute<DrawerRouteData>(
-        //   path: DrawerRouteData.routeName,
-        // ),
+        TypedGoRoute<CreateQuestionRouteData>(
+            path: CreateQuestionRouteData.routeName,
+            routes: <TypedRoute<RouteData>>[
+              TypedGoRoute<FindIntrustorRouteData>(
+                path: FindIntrustorRouteData.routeName,
+              ),
+            ]),
         TypedGoRoute<ChatRouteData>(
           path: ChatRouteData.routeName,
         ),
         TypedGoRoute<HomeLoginRouteData>(
           path: HomeLoginRouteData.routeName,
+        ),
+        TypedGoRoute<CreateGGMeetRouteData>(
+          path: CreateGGMeetRouteData.routeName,
         ),
       ],
     ),
@@ -154,8 +162,9 @@ class DropdownSheetRouteData extends GoRouteData {
               TypedGoRoute<RegisterRouteData>(
                   path: RegisterRouteData.routeName),
             ]),
-        // TypedGoRoute<SettingRouteData>(
-        //   path: SettingRouteData.routeName,
+        TypedGoRoute<EditProfileRouteData>(
+          path: EditProfileRouteData.routeName,
+        ),
       ],
     ),
   ],

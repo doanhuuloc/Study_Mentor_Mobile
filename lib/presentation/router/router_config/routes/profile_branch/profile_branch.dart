@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/presentation/router/app_nav_key/app_nav_key.dart';
+import 'package:study_mentor_mobile/presentation/ui/edit_profile_screen/edit_profile_screen.dart';
 
 import '../../../../ui/login_screen/login_screen.dart';
 import '../../../../ui/profile_screen/profile_screen.dart';
@@ -50,4 +51,15 @@ class RegisterRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const RegisterScreen();
+}
+
+class EditProfileRouteData extends GoRouteData {
+  const EditProfileRouteData();
+
+  static const routeName = 'editprofile';
+  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const EditProfileScreen();
 }

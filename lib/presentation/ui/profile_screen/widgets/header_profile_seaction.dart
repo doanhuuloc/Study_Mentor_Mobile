@@ -78,13 +78,10 @@ class HeaderProfileSection extends StatelessWidget {
                               ? 'https://storage.googleapis.com/study-mentor/${userState.detail?.avatar?.fileKey}'
                               : '',
                           name: userState.detail?.fullName ?? '',
-                          description: 'tao ne',
+                          description: userState.detail?.email ?? '',
                         ),
                 ),
                 const SizedBox(height: 24),
-                // BusinessCardAction(
-                //   userId: userState.detail?.id ?? 1,
-                // ),
               ],
             );
           }

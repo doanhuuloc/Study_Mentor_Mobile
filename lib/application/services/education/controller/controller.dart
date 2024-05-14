@@ -4,7 +4,7 @@ import '../../common/common.dart';
 import '../education.dart';
 
 mixin EducationController {
-  Future<Result<Failure, BaseResponse<GetStructureEducationResponse>>>
+  Future<Result<Failure, BaseResponse<List<LevelResponse>>>>
       getStructureEducation();
 
   Future<Result<Failure, BaseResponse<CreateQuestionResponse>>> createQuestion(

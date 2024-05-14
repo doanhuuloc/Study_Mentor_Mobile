@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../gen/app_colors.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../gen/locale/app_localizations.dart';
 import '../../../shared/theme/theme.dart';
 
 class MainBottomNavigationBar extends StatelessWidget {
@@ -36,7 +35,7 @@ class MainBottomNavigationBar extends StatelessWidget {
             children: [
               Expanded(
                 child: _BottomNavBarItem(
-                  title: S.of(context).home,
+                  title: "Trang chủ",
                   onTap: () {
                     onSelected?.call(0);
                   },
@@ -47,7 +46,7 @@ class MainBottomNavigationBar extends StatelessWidget {
               Expanded(
                 child: _BottomNavBarItem(
                   selected: selected == 1,
-                  title: S.of(context).community,
+                  title: "Lịch sử",
                   onTap: () {
                     onSelected?.call(1);
                   },
@@ -57,7 +56,7 @@ class MainBottomNavigationBar extends StatelessWidget {
               Expanded(
                 child: _BottomNavBarItem(
                   selected: selected == 2,
-                  title: S.of(context).profileNavText,
+                  title: "Tài khoản",
                   onTap: () {
                     onSelected?.call(2);
                   },

@@ -23,25 +23,24 @@ import 'application/services/auth/response/src/authenticated_response.dart'
     as p12;
 import 'application/services/auth/response/src/session_token_response.dart'
     as p13;
-import 'application/services/auth/response/src/user_info_response.dart' as p14;
-import 'application/services/common/dto/src/language_type.dart' as p15;
-import 'application/services/common/dto/src/localized_field_value.dart' as p16;
-import 'application/services/common/response/src/base_response.dart' as p17;
-import 'application/services/common/response/src/success_response.dart' as p18;
+import 'application/services/common/dto/src/language_type.dart' as p14;
+import 'application/services/common/dto/src/localized_field_value.dart' as p15;
+import 'application/services/common/response/src/base_response.dart' as p16;
+import 'application/services/common/response/src/success_response.dart' as p17;
 import 'application/services/education/request/src/create_question_request.dart'
-    as p19;
+    as p18;
 import 'application/services/education/response/src/create_question_response.dart'
-    as p20;
+    as p19;
 import 'application/services/education/response/src/get_structure_education_response.dart'
-    as p21;
-import 'application/services/file/request/src/file_request.dart' as p22;
-import 'application/services/file/request/src/signed_url_request.dart' as p23;
-import 'application/services/file/request/src/upload_file_request.dart' as p24;
-import 'application/services/file/response/src/file_reponse.dart' as p25;
-import 'application/services/file/response/src/signed_url_response.dart' as p26;
+    as p20;
+import 'application/services/file/request/src/file_request.dart' as p21;
+import 'application/services/file/request/src/signed_url_request.dart' as p22;
+import 'application/services/file/request/src/upload_file_request.dart' as p23;
+import 'application/services/file/response/src/file_reponse.dart' as p24;
+import 'application/services/file/response/src/signed_url_response.dart' as p25;
 import 'application/services/user/request/src/update_profile_request.dart'
-    as p27;
-import 'application/services/user/response/src/user_info_response.dart' as p28;
+    as p26;
+import 'application/services/user/response/src/user_info_response.dart' as p27;
 
 void initializeMappers() {
   p0.ChatAIRequestMapper.ensureInitialized();
@@ -58,23 +57,21 @@ void initializeMappers() {
   p11.RefreshTokenRequestMapper.ensureInitialized();
   p12.AuthenticatedResponseMapper.ensureInitialized();
   p13.SessionTokenResponseMapper.ensureInitialized();
-  p14.UserInfoResponseMapper.ensureInitialized();
-  p15.PostLanguageMapper.ensureInitialized();
-  p16.LocalizedFieldValueMapper.ensureInitialized();
-  p17.BaseResponseMapper.ensureInitialized();
-  p18.SuccessResponseMapper.ensureInitialized();
-  p19.CreateQuestionRequestMapper.ensureInitialized();
-  p20.CreateQuestionResponseMapper.ensureInitialized();
-  p21.GetStructureEducationResponseMapper.ensureInitialized();
-  p21.LevelResponseMapper.ensureInitialized();
-  p21.GradeResponseMapper.ensureInitialized();
-  p21.SubjectResponseMapper.ensureInitialized();
-  p22.FileRequestMapper.ensureInitialized();
-  p23.SignedUrlRequestMapper.ensureInitialized();
-  p24.UploadFileRequestMapper.ensureInitialized();
-  p25.FileReponseMapper.ensureInitialized();
-  p26.SignedUrlResponseMapper.ensureInitialized();
-  p27.UpdateProfileRequestMapper.ensureInitialized();
-  p27.GenderMapper.ensureInitialized();
-  p28.UserInfoResponseMapper.ensureInitialized();
+  p14.PostLanguageMapper.ensureInitialized();
+  p15.LocalizedFieldValueMapper.ensureInitialized();
+  p16.BaseResponseMapper.ensureInitialized();
+  p17.SuccessResponseMapper.ensureInitialized();
+  p18.CreateQuestionRequestMapper.ensureInitialized();
+  p19.CreateQuestionResponseMapper.ensureInitialized();
+  p20.LevelResponseMapper.ensureInitialized();
+  p20.GradeResponseMapper.ensureInitialized();
+  p20.SubjectResponseMapper.ensureInitialized();
+  p21.FileRequestMapper.ensureInitialized();
+  p22.SignedUrlRequestMapper.ensureInitialized();
+  p23.UploadFileRequestMapper.ensureInitialized();
+  p24.FileReponseMapper.ensureInitialized();
+  p25.SignedUrlResponseMapper.ensureInitialized();
+  p26.UpdateProfileRequestMapper.ensureInitialized();
+  p26.GenderMapper.ensureInitialized();
+  p27.UserInfoResponseMapper.ensureInitialized();
 }

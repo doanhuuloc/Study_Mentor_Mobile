@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
-import 'package:study_mentor_mobile/presentation/router/router_config/routes/home_branch/home_branch.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/filters/selectable_chips.dart';
 
+import '../../../../application/services/ai/dto/enum.dart';
 import '../../../gen/assets.gen.dart';
 import '../blocs/history_cubit.dart';
 import '../blocs/history_state.dart';
@@ -15,8 +15,6 @@ class TabAI extends StatefulWidget {
   @override
   State<TabAI> createState() => _TabAIState();
 }
-
-enum FilterAI { chatgpt, gemini }
 
 class _TabAIState extends State<TabAI> {
   FilterAI filterAI = FilterAI.chatgpt;
@@ -60,9 +58,8 @@ class _TabAIState extends State<TabAI> {
             builder: (context, state) {
               return Column(
                 children: [
-                  if (filterAI == FilterAI.chatgpt &&
-                      context.read<HistoryCubit>().state.listChatGpt != null)
-                    ...(context.read<HistoryCubit>().state.listChatGpt!.map(
+                  if (filterAI == FilterAI.chatgpt)
+                    ...(context.read<HistoryCubit>().state.listChatGpt.map(
                           (e) => MessageBox(
                             avatar:
                                 AssetImage(Assets.images.icons.chatgpt.path),
@@ -70,20 +67,25 @@ class _TabAIState extends State<TabAI> {
                             content: e.Title ?? "",
                             time: e.createdAt ?? DateTime.now(),
                             voidCallback: () {
-                              ChatRouteData($extra: e.roomId).push(context);
+                              ChatRouteData(
+                                $extra: e.roomId,
+                                typeAI: TypeAI.chatgpt,
+                              ).push(context);
                             },
                           ),
                         )),
-                  if (filterAI == FilterAI.gemini &&
-                      context.read<HistoryCubit>().state.listChatGemini != null)
-                    ...(context.read<HistoryCubit>().state.listChatGemini!.map(
+                  if (filterAI == FilterAI.gemini)
+                    ...(context.read<HistoryCubit>().state.listChatGemini.map(
                           (e) => MessageBox(
                             avatar: AssetImage(Assets.images.icons.gemini.path),
                             title: 'Gemini',
                             content: e.Title ?? "",
                             time: e.createdAt ?? DateTime.now(),
                             voidCallback: () {
-                              ChatRouteData($extra: e.roomId).push(context);
+                              ChatRouteData(
+                                $extra: e.roomId,
+                                typeAI: TypeAI.gemini,
+                              ).push(context);
                             },
                           ),
                         )),

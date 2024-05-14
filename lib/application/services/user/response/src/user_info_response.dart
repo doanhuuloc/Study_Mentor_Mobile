@@ -27,7 +27,7 @@ class UserInfoResponse with UserInfoResponseMappable {
   final String? email;
   final int? role;
   final String? phone;
-  final DateTime? dateOfBirth;
+  final int? dateOfBirth;
   final int? gender;
   final int? status;
   final double? averageRate;

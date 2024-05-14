@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:study_mentor_mobile/presentation/gen/app_colors.dart';
+import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 import 'package:study_mentor_mobile/presentation/shared/transitions/transitions.dart';
+import 'package:study_mentor_mobile/presentation/shared/widgets/app_bar/common_app_bar.dart';
 import 'package:study_mentor_mobile/presentation/ui/history_screen/blocs/history_cubit.dart';
+import 'package:study_mentor_mobile/presentation/ui/history_screen/widgets/tab_ai_pay.dart';
 
 import '../../../application/services/ai/ai.dart';
 import '../../../application/services/app/app_config/app_config.dart';
@@ -38,27 +42,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("haha"),
-          bottom: const TabBar(
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
-            dividerHeight: 0,
-            tabs: [
-              Tab(
-                child: Text("AI thường"),
-              ),
-              Tab(
-                child: Text("AI hệ thống"),
-              ),
-              Tab(
-                child: Text("Người hướng dẫn"),
-              ),
-              Tab(
-                child: Text("GG Meet"),
-              ),
-            ],
+        appBar: CommonAppBar(
+          title: Text(
+            "Lịch sử",
+            style: Styles.s20(),
           ),
+          centerTitle: true,
+          color: AppColors.blue.shade50,
         ),
         body: BlocProvider<HistoryCubit>(
           lazy: false,
@@ -70,18 +60,41 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 failureHandlerManager: context.read<FailureHandlerManager>());
           },
           child: Builder(builder: (context) {
-            return const TabBarView(children: [
-              TabAI(),
-              SingleChildScrollView(
-                child: Text("2"),
-              ),
-              SingleChildScrollView(
-                child: Text("3"),
-              ),
-              SingleChildScrollView(
-                child: Text("3"),
-              ),
-            ]);
+            return const Column(
+              children: [
+                TabBar(
+                  isScrollable: true,
+                  tabAlignment: TabAlignment.start,
+                  dividerHeight: 0,
+                  tabs: [
+                    Tab(
+                      child: Text("AI thường"),
+                    ),
+                    Tab(
+                      child: Text("AI hệ thống"),
+                    ),
+                    Tab(
+                      child: Text("Người hướng dẫn"),
+                    ),
+                    Tab(
+                      child: Text("GG Meet"),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: TabBarView(children: [
+                    TabAI(),
+                    TabAIPay(),
+                    SingleChildScrollView(
+                      child: Text("3"),
+                    ),
+                    SingleChildScrollView(
+                      child: Text("3"),
+                    ),
+                  ]),
+                ),
+              ],
+            );
           }),
         ),
       ),

@@ -7,13 +7,16 @@ import '../../../application/services/app/locale_service/locale_service.dart';
 import '../../../application/services/app/token_service/refresh_token_manager.dart';
 import '../../../application/services/app/token_service/token_service.dart';
 import '../../../application/services/auth/controller/controller.dart';
+import '../../../application/services/file/file.dart';
 import '../../../application/services/user/user.dart';
 import '../../bases/auth_cubit/auth_cubit.dart';
 import '../../bases/bootstrap_cubit/bootstrap_cubit.dart';
 import '../../bases/childless_assertion/childless_assertion.dart';
+import '../../bases/file_cubit/file_cubit.dart';
 import '../../bases/locale_cubit/locale_cubit.dart';
 import '../../bases/session_cubit/session_cubit.dart';
 import '../../bases/user_cubit/user_cubit.dart';
+import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 
 class BlocInject extends SingleChildStatelessWidget with ChildlessAssertion {
   const BlocInject({super.key});
@@ -64,6 +67,15 @@ class BlocInject extends SingleChildStatelessWidget with ChildlessAssertion {
               authCubit: context.read<AuthCubit>(),
               localeCubit: context.read<LocaleCubit>(),
               localeService: context.read<LocaleService>(),
+            );
+          },
+        ),
+        BlocProvider<FileCubit>(
+          lazy: false,
+          create: (context) {
+            return FileCubit(
+              failureHandlerManager: context.read<FailureHandlerManager>(),
+              fileController: context.read<FileController>(),
             );
           },
         ),

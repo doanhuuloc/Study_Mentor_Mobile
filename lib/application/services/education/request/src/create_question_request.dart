@@ -6,16 +6,17 @@ part 'create_question_request.mapper.dart';
 
 @MappableClass()
 class CreateQuestionRequest with CreateQuestionRequestMappable {
-  const CreateQuestionRequest(
-      {required this.userId,
-      required this.subjectId,
-      required this.timeAnswer,
-      required this.content,
-      required this.attachFiles});
+  const CreateQuestionRequest({
+    required this.subjectId,
+    required this.numberOfStar,
+    required this.timeFindTutor,
+    required this.content,
+    required this.attachFiles,
+  });
 
-  final String userId;
   final String subjectId;
-  final int timeAnswer;
+  final int numberOfStar;
+  final int timeFindTutor;
   final String content;
   final List<FileRequest> attachFiles;
 }

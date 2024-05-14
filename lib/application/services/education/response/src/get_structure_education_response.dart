@@ -3,16 +3,6 @@ import 'package:dart_mappable/dart_mappable.dart';
 part 'get_structure_education_response.mapper.dart';
 
 @MappableClass()
-class GetStructureEducationResponse with GetStructureEducationResponseMappable {
-  const GetStructureEducationResponse({this.structure});
-
-  factory GetStructureEducationResponse.fromJson(Map<String, dynamic> json) =>
-      GetStructureEducationResponseMapper.fromJson(json);
-
-  final List<LevelResponse>? structure;
-}
-
-@MappableClass()
 class LevelResponse with LevelResponseMappable {
   const LevelResponse({
     this.id,

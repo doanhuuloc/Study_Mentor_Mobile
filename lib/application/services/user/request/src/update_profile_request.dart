@@ -12,12 +12,17 @@ enum Gender {
 
 @MappableClass()
 class UpdateProfileRequest with UpdateProfileRequestMappable {
-  const UpdateProfileRequest(
-      {this.fullName, this.email, this.phone, this.dateOfBirth, this.gender});
+  const UpdateProfileRequest({
+    this.fullName,
+    this.email,
+    this.phone,
+    this.dateOfBirth,
+    this.gender,
+  });
 
   final String? fullName;
   final String? email;
   final String? phone;
-  final String? dateOfBirth;
-  final Gender? gender;
+  final int? dateOfBirth;
+  final int? gender;
 }

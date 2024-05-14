@@ -1,4 +1,3 @@
-
 import '../../../application/services/common/common.dart';
 import '../../../application/services/education/Education.dart';
 import '../../../utilities/failure/failure.dart';
@@ -14,7 +13,7 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
   final EducationDataSource educationDataSource;
 
   @override
-  Future<Result<Failure, BaseResponse<GetStructureEducationResponse>>>
+  Future<Result<Failure, BaseResponse<List<LevelResponse>>>>
       getStructureEducation() {
     return handleApiResult(
         future: () => educationDataSource.getStructureEducation());

@@ -22,15 +22,15 @@ class CreateQuestionRequestMapper
   @override
   final String id = 'CreateQuestionRequest';
 
-  static String _$userId(CreateQuestionRequest v) => v.userId;
-  static const Field<CreateQuestionRequest, String> _f$userId =
-      Field('userId', _$userId);
   static String _$subjectId(CreateQuestionRequest v) => v.subjectId;
   static const Field<CreateQuestionRequest, String> _f$subjectId =
       Field('subjectId', _$subjectId);
-  static int _$timeAnswer(CreateQuestionRequest v) => v.timeAnswer;
-  static const Field<CreateQuestionRequest, int> _f$timeAnswer =
-      Field('timeAnswer', _$timeAnswer);
+  static int _$numberOfStar(CreateQuestionRequest v) => v.numberOfStar;
+  static const Field<CreateQuestionRequest, int> _f$numberOfStar =
+      Field('numberOfStar', _$numberOfStar);
+  static int _$timeFindTutor(CreateQuestionRequest v) => v.timeFindTutor;
+  static const Field<CreateQuestionRequest, int> _f$timeFindTutor =
+      Field('timeFindTutor', _$timeFindTutor);
   static String _$content(CreateQuestionRequest v) => v.content;
   static const Field<CreateQuestionRequest, String> _f$content =
       Field('content', _$content);
@@ -41,18 +41,18 @@ class CreateQuestionRequestMapper
 
   @override
   final MappableFields<CreateQuestionRequest> fields = const {
-    #userId: _f$userId,
     #subjectId: _f$subjectId,
-    #timeAnswer: _f$timeAnswer,
+    #numberOfStar: _f$numberOfStar,
+    #timeFindTutor: _f$timeFindTutor,
     #content: _f$content,
     #attachFiles: _f$attachFiles,
   };
 
   static CreateQuestionRequest _instantiate(DecodingData data) {
     return CreateQuestionRequest(
-        userId: data.dec(_f$userId),
         subjectId: data.dec(_f$subjectId),
-        timeAnswer: data.dec(_f$timeAnswer),
+        numberOfStar: data.dec(_f$numberOfStar),
+        timeFindTutor: data.dec(_f$timeFindTutor),
         content: data.dec(_f$content),
         attachFiles: data.dec(_f$attachFiles));
   }
@@ -117,9 +117,9 @@ abstract class CreateQuestionRequestCopyWith<
   ListCopyWith<$R, FileRequest,
       FileRequestCopyWith<$R, FileRequest, FileRequest>> get attachFiles;
   $R call(
-      {String? userId,
-      String? subjectId,
-      int? timeAnswer,
+      {String? subjectId,
+      int? numberOfStar,
+      int? timeFindTutor,
       String? content,
       List<FileRequest>? attachFiles});
   CreateQuestionRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
@@ -141,23 +141,23 @@ class _CreateQuestionRequestCopyWithImpl<$R, $Out>
           (v, t) => v.copyWith.$chain(t), (v) => call(attachFiles: v));
   @override
   $R call(
-          {String? userId,
-          String? subjectId,
-          int? timeAnswer,
+          {String? subjectId,
+          int? numberOfStar,
+          int? timeFindTutor,
           String? content,
           List<FileRequest>? attachFiles}) =>
       $apply(FieldCopyWithData({
-        if (userId != null) #userId: userId,
         if (subjectId != null) #subjectId: subjectId,
-        if (timeAnswer != null) #timeAnswer: timeAnswer,
+        if (numberOfStar != null) #numberOfStar: numberOfStar,
+        if (timeFindTutor != null) #timeFindTutor: timeFindTutor,
         if (content != null) #content: content,
         if (attachFiles != null) #attachFiles: attachFiles
       }));
   @override
   CreateQuestionRequest $make(CopyWithData data) => CreateQuestionRequest(
-      userId: data.get(#userId, or: $value.userId),
       subjectId: data.get(#subjectId, or: $value.subjectId),
-      timeAnswer: data.get(#timeAnswer, or: $value.timeAnswer),
+      numberOfStar: data.get(#numberOfStar, or: $value.numberOfStar),
+      timeFindTutor: data.get(#timeFindTutor, or: $value.timeFindTutor),
       content: data.get(#content, or: $value.content),
       attachFiles: data.get(#attachFiles, or: $value.attachFiles));
 

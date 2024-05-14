@@ -12,7 +12,7 @@ abstract class EducationDataSource {
   factory EducationDataSource(Dio dio, {String baseUrl}) = _EducationDataSource;
 
   @GET('/api/questions/structure-educations')
-  Future<BaseResponse<GetStructureEducationResponse>> getStructureEducation();
+  Future<BaseResponse<List<LevelResponse>>> getStructureEducation();
 
   @POST('/api/questions')
   Future<BaseResponse<CreateQuestionResponse>> createQuestion(

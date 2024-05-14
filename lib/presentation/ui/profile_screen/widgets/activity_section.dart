@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bases/auth_cubit/auth_cubit.dart';
 import '../../../gen/app_colors.dart';
-import '../../../gen/locale/app_localizations.dart';
+import '../../../router/router_config/router_config.dart';
 import '../../../shared/theme/src/app_style.dart';
 import '../../../shared/widgets/gap_items.dart';
 import '../../../shared/widgets/item_divider.dart';
 import '../../../utilities/request_login.dart';
-// import '../../address_managent_screen/address_management_screen.dart';
 
 class ActivitiesSection extends StatelessWidget {
   const ActivitiesSection({super.key});
@@ -25,56 +26,30 @@ class ActivitiesSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
             child: Text(
-              S.of(context).activity,
+              "Tài khoản",
               style: styleTitle,
             ),
           ),
           _ItemActivity(
-            title: S.of(context).followManagement,
+            title: "Thay đổi thông tin cá nhân",
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
                 return;
               }
               if (isLoggedIn) {
-                // const FollowManagementRouteData().go(context);
+                const EditProfileRouteData().push(context);
               }
             },
           ),
           _ItemActivity(
-            title: S.of(context).favoritesBulletinBoard,
+            title: "Thay đổi mật khẩu",
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
                 return;
               }
-              if (isLoggedIn) {
-                // const FavoritesBulletinBoardRouteData().go(context);
-              }
-            },
-          ),
-          _ItemActivity(
-            title: S.of(context).curationActivities,
-            onTap: () async {
-              final isLoggedIn = await requestLoginAction(context);
-              if (!context.mounted) {
-                return;
-              }
-              if (isLoggedIn) {
-                // const CuratorActivitiesRouteData().go(context);
-              }
-            },
-          ),
-          _ItemActivity(
-            title: S.of(context).communityActivities,
-            onTap: () async {
-              final isLoggedIn = await requestLoginAction(context);
-              if (!context.mounted) {
-                return;
-              }
-              if (isLoggedIn) {
-                // const CommunityActivitiesRouteData().go(context);
-              }
+              if (isLoggedIn) {}
             },
           ),
         ], gap: 0),
@@ -86,45 +61,38 @@ class ActivitiesSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
             child: Text(
-              S.of(context).store,
+              "Cài đặt",
               style: styleTitle,
             ),
           ),
           _ItemActivity(
-            title: S.of(context).myDeliveryInformation,
+            title: "Ngôn ngữ",
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
                 return;
               }
-              if (isLoggedIn) {
-                // const AddressRouteData(addressType: AddressType.management)
-                //     .push(context);
-              }
+              if (isLoggedIn) {}
             },
           ),
           _ItemActivity(
-            title: S.of(context).checkOrderDeliveryDetails,
+            title: "Thông báo",
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
                 return;
               }
-              if (isLoggedIn) {
-                // const CheckOrderDeliveryDetailRouteData().go(context);
-              }
+              if (isLoggedIn) {}
             },
           ),
           _ItemActivity(
-            title: S.of(context).inquiryDetails,
+            title: "Chế độ bóng đêm",
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
                 return;
               }
-              if (isLoggedIn) {
-                // const InquiryHistoryRouteData().go(context);
-              }
+              if (isLoggedIn) {}
             },
           ),
         ], gap: 0),
@@ -134,22 +102,16 @@ class ActivitiesSection extends StatelessWidget {
         ),
         GapItems(
           items: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-              child: Text(
-                S.of(context).etc,
-                style: styleTitle,
-              ),
-            ),
             _ItemActivity(
-              title: S.of(context).recommenderStatus,
+              title: "Đăng xuất",
+              textColor: AppColors.red,
               onTap: () async {
                 final isLoggedIn = await requestLoginAction(context);
                 if (!context.mounted) {
                   return;
                 }
                 if (isLoggedIn) {
-                  // const ReferralRouteData().go(context);
+                  context.read<AuthCubit>().logout();
                 }
               },
             ),
@@ -162,10 +124,15 @@ class ActivitiesSection extends StatelessWidget {
 }
 
 class _ItemActivity extends StatelessWidget {
-  const _ItemActivity({required this.title, this.onTap});
+  const _ItemActivity({
+    required this.title,
+    this.onTap,
+    this.textColor,
+  });
 
   final String title;
   final VoidCallback? onTap;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +149,7 @@ class _ItemActivity extends StatelessWidget {
                 style: Styles.s15()
                     .withHeight(24 / 15)
                     .withLetterSpacing(-2.5 / 100)
-                    .withColor(AppColors.text.main),
+                    .withColor(textColor ?? AppColors.text.main),
               ),
             ],
           ),
