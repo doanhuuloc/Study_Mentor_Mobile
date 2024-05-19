@@ -140,6 +140,9 @@ class $AssetsSvgsGen {
   SvgGenImage get changeColor =>
       const SvgGenImage('assets/svgs/change-color.svg');
 
+  /// File path: assets/svgs/chat.svg
+  SvgGenImage get chat => const SvgGenImage('assets/svgs/chat.svg');
+
   /// File path: assets/svgs/check-icon.svg
   SvgGenImage get checkIcon => const SvgGenImage('assets/svgs/check-icon.svg');
 
@@ -212,6 +215,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/filter-menu-16.svg
   SvgGenImage get filterMenu16 =>
       const SvgGenImage('assets/svgs/filter-menu-16.svg');
+
+  /// File path: assets/svgs/finding.svg
+  SvgGenImage get finding => const SvgGenImage('assets/svgs/finding.svg');
 
   /// File path: assets/svgs/gmail-icon.svg
   SvgGenImage get gmailIcon => const SvgGenImage('assets/svgs/gmail-icon.svg');
@@ -429,6 +435,7 @@ class $AssetsSvgsGen {
         cartIcon,
         changeBg,
         changeColor,
+        chat,
         checkIcon,
         chevronDown24,
         chevronLeft24,
@@ -448,6 +455,7 @@ class $AssetsSvgsGen {
         failedIcon,
         file,
         filterMenu16,
+        finding,
         gmailIcon,
         googleIcon,
         heartIcon16,

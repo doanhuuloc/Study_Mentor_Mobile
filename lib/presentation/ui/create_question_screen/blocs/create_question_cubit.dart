@@ -59,7 +59,7 @@ class CreateQuestionCubit extends SafeCubit<CreateQuestionState> {
     }
   }
 
-  Future<void> createQuestion() async {
+  Future<CreateQuestionResponse> createQuestion() async {
     final res = await educationController.createQuestion(
         createQuestionRequest: CreateQuestionRequest(
       subjectId: state.subject?.id ?? "",
@@ -75,7 +75,9 @@ class CreateQuestionCubit extends SafeCubit<CreateQuestionState> {
 
     if (res.isRight) {
       emit(state.copyWith(createQuestionResponse: res.right.data));
+      return res.right.data;
     }
+    return const CreateQuestionResponse();
   }
 
   void onChangeLevel(LevelResponse level) {

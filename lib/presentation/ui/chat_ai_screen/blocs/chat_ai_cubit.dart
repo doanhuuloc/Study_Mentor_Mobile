@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import '../../../../application/services/ai/ai.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
-import 'chat_state.dart';
+import 'chat_ai_state.dart';
 
-class ChatCubit extends SafeCubit<ChatState> {
-  ChatCubit({
+class ChatAICubit extends SafeCubit<ChatAIState> {
+  ChatAICubit({
     required this.aiController,
     required this.failureHandlerManager,
     required this.userId,
     required this.idChatAI,
     required this.controller,
     this.roomId,
-  }) : super(ChatState(roomId: roomId, listChat: [])) {
+  }) : super(ChatAIState(roomId: roomId, listChat: [])) {
     if (roomId != null) {
       getListChat(roomId: roomId!);
     }

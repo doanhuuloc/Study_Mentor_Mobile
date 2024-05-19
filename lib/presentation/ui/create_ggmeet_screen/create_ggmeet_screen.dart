@@ -8,7 +8,6 @@ import 'package:study_mentor_mobile/presentation/shared/widgets/textfields/commo
 
 import '../../../application/services/education/education.dart';
 import '../../gen/app_colors.dart';
-import '../../router/router_config/router_config.dart';
 import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import '../../shared/widgets/app_bar/common_app_bar.dart';
 import '../../shared/widgets/buttons/primary_button.dart';
@@ -215,8 +214,8 @@ class _CreateGGMeetScreenState extends State<CreateGGMeetScreen> {
                                         actions: [
                                           ElevatedButton(
                                               onPressed: () {
-                                                const FindIntrustorRouteData()
-                                                    .go(context);
+                                                // const FindIntrustorRouteData()
+                                                //     .go(context);
                                               },
                                               child: Text(
                                                 "Thanh toán",

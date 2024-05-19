@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-
 part 'authenticated_response.mapper.dart';
 
 @MappableClass()

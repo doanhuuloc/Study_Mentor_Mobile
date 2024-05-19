@@ -1,4 +1,3 @@
-
 import '../../../../application/services/education/education.dart';
 
 class CreateGGMeetState {

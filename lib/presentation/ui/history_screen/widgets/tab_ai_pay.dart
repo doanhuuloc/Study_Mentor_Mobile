@@ -42,7 +42,7 @@ class _TabAIPayState extends State<TabAIPay> {
                           content: e.Title ?? "",
                           time: e.createdAt ?? DateTime.now(),
                           voidCallback: () {
-                            ChatRouteData(
+                            ChatAIRouteData(
                               $extra: e.roomId,
                               typeAI: TypeAI.gemini,
                             ).push(context);

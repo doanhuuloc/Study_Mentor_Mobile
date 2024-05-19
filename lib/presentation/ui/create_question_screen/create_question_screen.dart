@@ -272,37 +272,32 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                           return PrimaryButton.round(
                             onPressed: state.canSubmit
                                 ? () async {
-                                    await context
+                                    final response = await context
                                         .read<CreateQuestionCubit>()
                                         .createQuestion();
-                                    final String price = context
-                                            .read<CreateQuestionCubit>()
-                                            .state
-                                            .createQuestionResponse
-                                            ?.price
-                                            ?.toStringAsFixed(0) ??
-                                        "";
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text(
-                                          "Bạn cần thanh toán $priceđ để tiếp tục giải đáp câu hỏi",
-                                          style: Styles.s15(),
+                                    if (response ==
+                                        const CreateQuestionResponse()) {
+                                      return;
+                                    }
+                                    final subjectId = context
+                                        .read<CreateQuestionCubit>()
+                                        .state
+                                        .subject
+                                        ?.id;
+                                    if (await ConfirmRouteData(
+                                      title:
+                                          "Bạn cần thanh toán ${response.price?.toStringAsFixed(0)} để tiếp tục giải đáp câu hỏi",
+                                      content: "",
+                                      rejectTitle: "Hủy",
+                                      acceptTitle: "Thanh toán",
+                                    ).push(context)) {
+                                      FindIntrustorRouteData(
+                                        $extra: FindIntrustorExtraData(
+                                          questionId: response.questionId ?? "",
+                                          subjectId: subjectId ?? "",
                                         ),
-                                        actions: [
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                const FindIntrustorRouteData()
-                                                    .go(context);
-                                              },
-                                              child: Text(
-                                                "Thanh toán",
-                                                style: Styles.s16().withWeight(
-                                                    FontWeight.w600),
-                                              ))
-                                        ],
-                                      ),
-                                    );
+                                      ).pushReplacement(context);
+                                    }
                                   }
                                 : null,
                             title: "Tiếp tục",

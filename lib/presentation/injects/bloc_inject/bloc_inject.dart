@@ -8,6 +8,7 @@ import '../../../application/services/app/token_service/refresh_token_manager.da
 import '../../../application/services/app/token_service/token_service.dart';
 import '../../../application/services/auth/controller/controller.dart';
 import '../../../application/services/file/file.dart';
+import '../../../application/services/socket/controller/controller.dart';
 import '../../../application/services/user/user.dart';
 import '../../bases/auth_cubit/auth_cubit.dart';
 import '../../bases/bootstrap_cubit/bootstrap_cubit.dart';
@@ -15,6 +16,7 @@ import '../../bases/childless_assertion/childless_assertion.dart';
 import '../../bases/file_cubit/file_cubit.dart';
 import '../../bases/locale_cubit/locale_cubit.dart';
 import '../../bases/session_cubit/session_cubit.dart';
+import '../../bases/socket_cubit/socket_cubit.dart';
 import '../../bases/user_cubit/user_cubit.dart';
 import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 
@@ -25,6 +27,14 @@ class BlocInject extends SingleChildStatelessWidget with ChildlessAssertion {
   Widget buildWithNoneNullChild(BuildContext context, Widget child) {
     return Nested(
       children: [
+        BlocProvider<SocketCubit>(
+          lazy: false,
+          create: (context) {
+            return SocketCubit(
+              socketController: context.read<SocketController>(),
+            );
+          },
+        ),
         BlocProvider<SessionCubit>(
           lazy: false,
           create: (context) {
@@ -37,6 +47,7 @@ class BlocInject extends SingleChildStatelessWidget with ChildlessAssertion {
             return UserCubit(
               userController: context.read<UserController>(),
               sessionCubit: context.read<SessionCubit>(),
+              socketCubit: context.read<SocketCubit>(),
             );
           },
         ),

@@ -13,6 +13,7 @@ import '../application/services/auth/auth.dart';
 import '../application/services/education/education.dart';
 import '../application/services/file/file.dart';
 
+import '../application/services/socket/controller/controller.dart';
 import '../application/services/user/controller/controller.dart';
 
 import '../infrastructure/interceptors/auth_interceptor/auth_interceptor.dart';
@@ -31,6 +32,7 @@ import '../infrastructure/services_impl/file_impl/data_source.dart';
 import '../infrastructure/services_impl/file_impl/file_controller_impl.dart';
 import '../infrastructure/services_impl/locale_service_impl/locale_service_impl.dart';
 
+import '../infrastructure/services_impl/socket_impl/socket_impl.dart';
 import '../infrastructure/services_impl/token_service_impl/refresh_token_manager_impl.dart';
 
 import '../infrastructure/services_impl/user_impl/data_source.dart';
@@ -49,6 +51,7 @@ class AppDIData {
     required this.appUsernameService,
     required this.fileController,
     required this.educationController,
+    required this.socketController,
     required this.localeService,
   });
 
@@ -61,6 +64,7 @@ class AppDIData {
   final AppUsernameService appUsernameService;
   final FileController fileController;
   final EducationController educationController;
+  final SocketController socketController;
   final LocaleService localeService;
 }
 
@@ -168,6 +172,10 @@ class AppDIService implements DIService<AppDIData> {
     final EducationController educationController =
         EducationControllerImpl(educationDataSource: educationDataSource);
 
+    // socket
+    final SocketController socketController =
+        SocketControllerImpl(socketUrl: appConfig.socketUrl);
+
     // app
     final AppUsernameService appUsernameService =
         AppUsernameServiceImpl(preferences: sharedPrefs);
@@ -187,6 +195,7 @@ class AppDIService implements DIService<AppDIData> {
       userController: userController,
       aiController: aiController,
       educationController: educationController,
+      socketController: socketController,
       appUsernameService: appUsernameService,
     );
   }

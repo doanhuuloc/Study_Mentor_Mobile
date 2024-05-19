@@ -17,4 +17,19 @@ abstract class EducationDataSource {
   @POST('/api/questions')
   Future<BaseResponse<CreateQuestionResponse>> createQuestion(
       @Body() CreateQuestionRequest createQuestionRequest);
+
+  @POST('/api/questions/{questionId}/rating')
+  Future<dynamic> rateQuestion({
+    @Path('questionId') required String questionId,
+    @Body() required RateQuestionRequest rateQuestionRequest,
+  });
+
+  @POST('/api/questions/{questionId}/find-tutor/system')
+  Future<FindTutorResponse> findTutor({
+    @Path('questionId') required String questionId,
+  });
+  @POST('/api/questions/{questionId}')
+  Future<BaseResponse<GetQuestionInfoResponse>> getQuestionInfo({
+    @Path('questionId') required String questionId,
+  });
 }

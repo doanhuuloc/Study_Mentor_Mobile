@@ -14,20 +14,20 @@ import '../../gen/assets.gen.dart';
 import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import '../../shared/widgets/app_bar/common_app_bar.dart';
 import '../../shared/widgets/textfields/common_textfield.dart';
-import 'blocs/chat_cubit.dart';
-import 'blocs/chat_state.dart';
+import 'blocs/chat_ai_cubit.dart';
+import 'blocs/chat_ai_state.dart';
 import 'widgets/chatItem.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key, this.roomId, required this.typeAI});
+class ChatAIScreen extends StatefulWidget {
+  const ChatAIScreen({super.key, this.roomId, required this.typeAI});
   final String? roomId;
   final TypeAI typeAI;
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ChatAIScreen> createState() => _ChatAIScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatAIScreenState extends State<ChatAIScreen> {
   late final String idChatAI;
   late final String avatar;
   late final String title;
@@ -59,9 +59,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ChatCubit>(
+    return BlocProvider<ChatAICubit>(
       create: (context) {
-        return ChatCubit(
+        return ChatAICubit(
           aiController: context.read<AIController>(),
           failureHandlerManager: context.read<FailureHandlerManager>(),
           userId: context.read<UserCubit>().state.detail?.id ?? "",
@@ -111,7 +111,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   )
                 ],
               ),
-              body: BlocConsumer<ChatCubit, ChatState>(
+              body: BlocConsumer<ChatAICubit, ChatAIState>(
                 listener: (context, state) {
                   scrollController
                       .jumpTo(scrollController.position.maxScrollExtent);
@@ -124,7 +124,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         controller: scrollController,
                         padding: const EdgeInsets.all(10),
                         children:
-                            context.read<ChatCubit>().state.listChat.map((e) {
+                            context.read<ChatAICubit>().state.listChat.map((e) {
                           return ChatItem(
                             content: e.value ?? "",
                             dateTime: e.createAt ?? DateTime.now(),
@@ -142,7 +142,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 textEditingController: messageController,
                                 onChanged: (value) {
                                   context
-                                      .read<ChatCubit>()
+                                      .read<ChatAICubit>()
                                       .onChangedMessage(value);
                                 },
                                 textInputAction: TextInputAction.newline,
@@ -160,11 +160,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                   onTap: () async {
                                     if (widget.roomId == null) {
                                       await context
-                                          .read<ChatCubit>()
+                                          .read<ChatAICubit>()
                                           .createRoomChat();
                                     }
                                     context
-                                        .read<ChatCubit>()
+                                        .read<ChatAICubit>()
                                         .sendMessageWithAI();
                                     messageController.clear();
                                   }),

@@ -67,7 +67,7 @@ class _TabAIState extends State<TabAI> {
                             content: e.Title ?? "",
                             time: e.createdAt ?? DateTime.now(),
                             voidCallback: () {
-                              ChatRouteData(
+                              ChatAIRouteData(
                                 $extra: e.roomId,
                                 typeAI: TypeAI.chatgpt,
                               ).push(context);
@@ -82,7 +82,7 @@ class _TabAIState extends State<TabAI> {
                             content: e.Title ?? "",
                             time: e.createdAt ?? DateTime.now(),
                             voidCallback: () {
-                              ChatRouteData(
+                              ChatAIRouteData(
                                 $extra: e.roomId,
                                 typeAI: TypeAI.gemini,
                               ).push(context);

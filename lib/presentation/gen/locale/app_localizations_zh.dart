@@ -116,8 +116,7 @@ class SZh extends S {
 
   @override
   String commonCurrencyFormat(double value) {
-    final intl.NumberFormat valueNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat valueNumberFormat = intl.NumberFormat.decimalPattern(localeName);
     final String valueString = valueNumberFormat.format(value);
 
     return '$valueString원';

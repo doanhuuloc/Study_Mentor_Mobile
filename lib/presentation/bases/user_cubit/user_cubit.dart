@@ -6,6 +6,7 @@ import '../../../application/services/user/user.dart';
 import '../../../utilities/api_status/api_status.dart';
 import '../bloc_utils/safe_cubit/safe_cubit.dart';
 import '../session_cubit/session_cubit.dart';
+import '../socket_cubit/socket_cubit.dart';
 
 part 'user_state.dart';
 
@@ -13,6 +14,7 @@ class UserCubit extends SafeCubit<UserState> {
   UserCubit({
     required this.userController,
     required this.sessionCubit,
+    required this.socketCubit,
   }) : super(const UserState()) {
     _sessionSubscription = sessionCubit.stream.listen((state) {
       switch (state.status) {
@@ -28,6 +30,7 @@ class UserCubit extends SafeCubit<UserState> {
   StreamSubscription<SessionState>? _sessionSubscription;
   final SessionCubit sessionCubit;
   final UserController userController;
+  final SocketCubit socketCubit;
 
   Future<void> fetchUserData() async {
     emit(state.copyWith(apiStatus: ApiStatus.loading));
@@ -38,6 +41,7 @@ class UserCubit extends SafeCubit<UserState> {
         detail: value.data,
         apiStatus: ApiStatus.success,
       ));
+      socketCubit.connect(userId: value.data.id ?? "");
     });
 
     getUserInfoResult.handleLeft((value) {

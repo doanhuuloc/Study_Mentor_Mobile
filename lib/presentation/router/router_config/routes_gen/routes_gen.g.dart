@@ -173,13 +173,35 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
                   parentNavigatorKey:
                       FindIntrustorRouteData.$parentNavigatorKey,
                   factory: $FindIntrustorRouteDataExtension._fromState,
+                  routes: [
+                    GoRouteData.$route(
+                      path: 'findingIntrustor',
+                      parentNavigatorKey:
+                          FindingIntrustorRouteData.$parentNavigatorKey,
+                      factory: $FindingIntrustorRouteDataExtension._fromState,
+                      routes: [
+                        GoRouteData.$route(
+                          path: 'intrustorAnswer',
+                          parentNavigatorKey:
+                              IntrustorAnswerRouteData.$parentNavigatorKey,
+                          factory:
+                              $IntrustorAnswerRouteDataExtension._fromState,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
             GoRouteData.$route(
-              path: 'chat/:typeAI',
-              parentNavigatorKey: ChatRouteData.$parentNavigatorKey,
-              factory: $ChatRouteDataExtension._fromState,
+              path: 'chatai/:typeAI',
+              parentNavigatorKey: ChatAIRouteData.$parentNavigatorKey,
+              factory: $ChatAIRouteDataExtension._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'chatintrustor',
+              parentNavigatorKey: ChatIntrustorRouteData.$parentNavigatorKey,
+              factory: $ChatIntrustorRouteDataExtension._fromState,
             ),
             GoRouteData.$route(
               path: 'login',
@@ -265,10 +287,32 @@ extension $CreateQuestionRouteDataExtension on CreateQuestionRouteData {
 
 extension $FindIntrustorRouteDataExtension on FindIntrustorRouteData {
   static FindIntrustorRouteData _fromState(GoRouterState state) =>
-      const FindIntrustorRouteData();
+      FindIntrustorRouteData(
+        $extra: state.extra as FindIntrustorExtraData?,
+      );
 
   String get location => GoRouteData.$location(
         '/home/createQuestion/findIntrustor',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
+}
+
+extension $FindingIntrustorRouteDataExtension on FindingIntrustorRouteData {
+  static FindingIntrustorRouteData _fromState(GoRouterState state) =>
+      const FindingIntrustorRouteData();
+
+  String get location => GoRouteData.$location(
+        '/home/createQuestion/findIntrustor/findingIntrustor',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -281,14 +325,32 @@ extension $FindIntrustorRouteDataExtension on FindIntrustorRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ChatRouteDataExtension on ChatRouteData {
-  static ChatRouteData _fromState(GoRouterState state) => ChatRouteData(
+extension $IntrustorAnswerRouteDataExtension on IntrustorAnswerRouteData {
+  static IntrustorAnswerRouteData _fromState(GoRouterState state) =>
+      const IntrustorAnswerRouteData();
+
+  String get location => GoRouteData.$location(
+        '/home/createQuestion/findIntrustor/findingIntrustor/intrustorAnswer',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ChatAIRouteDataExtension on ChatAIRouteData {
+  static ChatAIRouteData _fromState(GoRouterState state) => ChatAIRouteData(
         typeAI: _$TypeAIEnumMap._$fromName(state.pathParameters['typeAI']!),
         $extra: state.extra as String?,
       );
 
   String get location => GoRouteData.$location(
-        '/home/chat/${Uri.encodeComponent(_$TypeAIEnumMap[typeAI]!)}',
+        '/home/chatai/${Uri.encodeComponent(_$TypeAIEnumMap[typeAI]!)}',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -308,6 +370,28 @@ const _$TypeAIEnumMap = {
   TypeAI.gemini: 'gemini',
   TypeAI.pay: 'pay',
 };
+
+extension $ChatIntrustorRouteDataExtension on ChatIntrustorRouteData {
+  static ChatIntrustorRouteData _fromState(GoRouterState state) =>
+      ChatIntrustorRouteData(
+        $extra: state.extra as ChatIntrustorExtraData?,
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/chatintrustor',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
+}
 
 extension $HomeLoginRouteDataExtension on HomeLoginRouteData {
   static HomeLoginRouteData _fromState(GoRouterState state) =>

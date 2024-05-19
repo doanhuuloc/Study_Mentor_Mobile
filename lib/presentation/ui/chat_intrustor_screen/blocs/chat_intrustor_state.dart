@@ -1,7 +1,6 @@
-import '../../../../application/services/ai/ai.dart';
 
-class ChatState {
-  const ChatState({
+class ChatIntrustorState {
+  const ChatIntrustorState({
     this.loading = false,
     this.listChat = const [],
     this.roomId,
@@ -9,17 +8,17 @@ class ChatState {
   });
 
   final bool loading;
-  final List<ChatAIResponse> listChat;
+  final List listChat;
   final String? roomId;
   final String messageField;
 
-  ChatState copyWith({
+  ChatIntrustorState copyWith({
     bool? loading,
-    List<ChatAIResponse>? listChat,
+    List? listChat,
     String? roomId,
     String? messageField,
   }) {
-    return ChatState(
+    return ChatIntrustorState(
       loading: loading ?? this.loading,
       listChat: listChat ?? this.listChat,
       roomId: roomId ?? this.roomId,

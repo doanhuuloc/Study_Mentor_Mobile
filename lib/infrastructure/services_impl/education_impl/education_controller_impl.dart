@@ -26,4 +26,28 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
         future: () =>
             educationDataSource.createQuestion(createQuestionRequest));
   }
+
+  @override
+  Future<Result<Failure, FindTutorResponse>> findTutor(
+      {required String questionId}) {
+    return handleApiResult(
+        future: () => educationDataSource.findTutor(questionId: questionId));
+  }
+
+  @override
+  Future<Result<Failure, dynamic>> rateQuestion(
+      {required String questionId,
+      required RateQuestionRequest rateQuestionRequest}) {
+    return handleApiResult(
+        future: () => educationDataSource.rateQuestion(
+            questionId: questionId, rateQuestionRequest: rateQuestionRequest));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<GetQuestionInfoResponse>>>
+      getQuestionInfoResponse({required String questionId}) {
+    return handleApiResult(
+        future: () =>
+            educationDataSource.getQuestionInfo(questionId: questionId));
+  }
 }

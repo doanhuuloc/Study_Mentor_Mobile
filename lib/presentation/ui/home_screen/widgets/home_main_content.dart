@@ -44,7 +44,7 @@ class HomeMainContent extends StatelessWidget {
                   subTitle: 'Ai nâng cấp',
                   icon: Assets.svgs.homeAiFee.svg(),
                   onTap: () {
-                    const ChatRouteData(typeAI: TypeAI.pay).push(context);
+                    const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
                   },
                 ),
               ),
@@ -254,7 +254,7 @@ class _SelectAIDialog extends StatelessWidget {
                 title: "ChatGPT",
                 content: "Lấy từ gpt-3.5-turbo",
                 onTap: () {
-                  const ChatRouteData(typeAI: TypeAI.chatgpt).push(context);
+                  const ChatAIRouteData(typeAI: TypeAI.chatgpt).push(context);
                   Navigator.pop(context);
                 },
               ),
@@ -264,7 +264,7 @@ class _SelectAIDialog extends StatelessWidget {
                 title: "Gemini",
                 content: "The multi-modal model from Google's Gemini family",
                 onTap: () {
-                  const ChatRouteData(typeAI: TypeAI.gemini).push(context);
+                  const ChatAIRouteData(typeAI: TypeAI.gemini).push(context);
                   Navigator.pop(context);
                 },
               ),

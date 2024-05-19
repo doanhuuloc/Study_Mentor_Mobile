@@ -13,87 +13,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  late final TextEditingController _nameController;
-  final FocusNode _focusNodeName = FocusNode();
-  bool _isFocusName = false;
-
-  final TextEditingController _emailController = TextEditingController();
-  final FocusNode _focusNodeEmail = FocusNode();
-  bool _isFocusEmail = false;
-
-  String? gender;
-
-  final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _focusNodePassword = FocusNode();
-  bool _isFocusPassword = false;
-
-  final bool _isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController();
-    _focusNodeName.addListener(() {
-      setState(() {
-        _isFocusName = _focusNodeName.hasFocus;
-      });
-    });
-
-    _focusNodeEmail.addListener(() {
-      setState(() {
-        _isFocusEmail = _focusNodeEmail.hasFocus;
-      });
-    });
-    _focusNodePassword.addListener(() {
-      setState(() {
-        _isFocusPassword = _focusNodePassword.hasFocus;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _focusNodeName.dispose();
-    _focusNodeEmail.dispose();
-    _focusNodePassword.dispose();
-  }
-
-  String? validEmail(String value) {
-    final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
-
-    return null;
-  }
-
-  String? validPassword(String value) {
-    return null;
-  }
-
-  // _signup() async {
-  //   if (_formKey.currentState!.validate()) {
-  //     setState(() {
-  //       _isLoading = true;
-  //     });
-
-  //     final Map<String, dynamic> data = {
-  //       "fullName": _nameController.text,
-  //       "email": _emailController.text,
-  //       "gender": gender == "male" ? 0 : 1,
-  //       "password": _passwordController.text,
-  //       "type": 0
-  //     };
-
-  //     final response = await UserApi.signup(data);
-  //     context.read<UserViewModel>().initData(response["data"]);
-
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -107,7 +26,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             color: Color(0xff2E4182),
           ),
           child: Form(
-            key: _formKey,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               const SizedBox(height: 10),
@@ -179,40 +97,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
               //   textStyle: const TextStyle(color: Colors.white),
               // ),
               const SizedBox(height: 20),
-              _isLoading
-                  ? Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: theme.primaryColor,
-                          borderRadius: BorderRadius.circular(12)),
-                      height: 50,
-                      child: const CircularProgressIndicator(
+              ElevatedButton(
+                onPressed: () async {
+                  // await _signup();
+                  context.go("/");
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll(theme.primaryColor),
+                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)))),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 50,
+                  child: const Text(
+                    "Sign up",
+                    style: TextStyle(
                         color: Colors.white,
-                      ),
-                    )
-                  : ElevatedButton(
-                      onPressed: () async {
-                        // await _signup();
-                        context.go("/");
-                      },
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(theme.primaryColor),
-                          shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)))),
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 50,
-                        child: const Text(
-                          "Sign up",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
               const SizedBox(height: 15),
               Container(
                 margin: const EdgeInsets.only(

@@ -1,4 +1,3 @@
-
 import '../../../../application/services/education/education.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../bases/file_cubit/file_cubit.dart';

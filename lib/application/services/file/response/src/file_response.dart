@@ -1,10 +1,10 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'file_reponse.mapper.dart';
+part 'file_response.mapper.dart';
 
 @MappableClass()
-class FileReponse with FileReponseMappable {
-  const FileReponse({
+class FileResponse with FileResponseMappable {
+  const FileResponse({
     this.fileName,
     this.fileKey,
   });

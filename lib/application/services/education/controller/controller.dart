@@ -9,4 +9,12 @@ mixin EducationController {
 
   Future<Result<Failure, BaseResponse<CreateQuestionResponse>>> createQuestion(
       {required CreateQuestionRequest createQuestionRequest});
+  Future<Result<Failure, dynamic>> rateQuestion({
+    required String questionId,
+    required RateQuestionRequest rateQuestionRequest,
+  });
+  Future<Result<Failure, FindTutorResponse>> findTutor(
+      {required String questionId});
+  Future<Result<Failure, BaseResponse<GetQuestionInfoResponse>>>
+      getQuestionInfoResponse({required String questionId});
 }

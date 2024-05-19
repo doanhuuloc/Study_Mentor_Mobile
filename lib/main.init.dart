@@ -29,18 +29,31 @@ import 'application/services/common/response/src/base_response.dart' as p16;
 import 'application/services/common/response/src/success_response.dart' as p17;
 import 'application/services/education/request/src/create_question_request.dart'
     as p18;
-import 'application/services/education/response/src/create_question_response.dart'
+import 'application/services/education/request/src/rate_question_request.dart'
     as p19;
-import 'application/services/education/response/src/get_structure_education_response.dart'
+import 'application/services/education/response/src/create_question_response.dart'
     as p20;
-import 'application/services/file/request/src/file_request.dart' as p21;
-import 'application/services/file/request/src/signed_url_request.dart' as p22;
-import 'application/services/file/request/src/upload_file_request.dart' as p23;
-import 'application/services/file/response/src/file_reponse.dart' as p24;
-import 'application/services/file/response/src/signed_url_response.dart' as p25;
+import 'application/services/education/response/src/find_tutor_response.dart'
+    as p21;
+import 'application/services/education/response/src/get_question_info_response.dart'
+    as p22;
+import 'application/services/education/response/src/get_structure_education_response.dart'
+    as p23;
+import 'application/services/file/request/src/file_request.dart' as p24;
+import 'application/services/file/request/src/signed_url_request.dart' as p25;
+import 'application/services/file/request/src/upload_file_request.dart' as p26;
+import 'application/services/file/response/src/file_response.dart' as p27;
+import 'application/services/file/response/src/signed_url_response.dart' as p28;
+import 'application/services/socket/dto/src/create_roomchat.dart' as p29;
+import 'application/services/socket/dto/src/emit_get_tutor.dart' as p30;
+import 'application/services/socket/dto/src/notification.dart' as p31;
+import 'application/services/socket/dto/src/on_get_tutor.dart' as p32;
+import 'application/services/socket/dto/src/receive_message.dart' as p33;
+import 'application/services/socket/dto/src/send_message.dart' as p34;
+import 'application/services/socket/dto/src/send_notification.dart' as p35;
 import 'application/services/user/request/src/update_profile_request.dart'
-    as p26;
-import 'application/services/user/response/src/user_info_response.dart' as p27;
+    as p36;
+import 'application/services/user/response/src/user_info_response.dart' as p37;
 
 void initializeMappers() {
   p0.ChatAIRequestMapper.ensureInitialized();
@@ -62,16 +75,27 @@ void initializeMappers() {
   p16.BaseResponseMapper.ensureInitialized();
   p17.SuccessResponseMapper.ensureInitialized();
   p18.CreateQuestionRequestMapper.ensureInitialized();
-  p19.CreateQuestionResponseMapper.ensureInitialized();
-  p20.LevelResponseMapper.ensureInitialized();
-  p20.GradeResponseMapper.ensureInitialized();
-  p20.SubjectResponseMapper.ensureInitialized();
-  p21.FileRequestMapper.ensureInitialized();
-  p22.SignedUrlRequestMapper.ensureInitialized();
-  p23.UploadFileRequestMapper.ensureInitialized();
-  p24.FileReponseMapper.ensureInitialized();
-  p25.SignedUrlResponseMapper.ensureInitialized();
-  p26.UpdateProfileRequestMapper.ensureInitialized();
-  p26.GenderMapper.ensureInitialized();
-  p27.UserInfoResponseMapper.ensureInitialized();
+  p19.RateQuestionRequestMapper.ensureInitialized();
+  p20.CreateQuestionResponseMapper.ensureInitialized();
+  p21.FindTutorResponseMapper.ensureInitialized();
+  p22.GetQuestionInfoResponseMapper.ensureInitialized();
+  p23.LevelResponseMapper.ensureInitialized();
+  p23.GradeResponseMapper.ensureInitialized();
+  p23.SubjectResponseMapper.ensureInitialized();
+  p24.FileRequestMapper.ensureInitialized();
+  p25.SignedUrlRequestMapper.ensureInitialized();
+  p26.UploadFileRequestMapper.ensureInitialized();
+  p27.FileResponseMapper.ensureInitialized();
+  p28.SignedUrlResponseMapper.ensureInitialized();
+  p29.CreateRoomChatMapper.ensureInitialized();
+  p30.EmitGetTutorMapper.ensureInitialized();
+  p31.NotificationMapper.ensureInitialized();
+  p32.OnGetTutorMapper.ensureInitialized();
+  p32.TutorMapper.ensureInitialized();
+  p33.ReceiveMessageMapper.ensureInitialized();
+  p34.SendMessageMapper.ensureInitialized();
+  p35.SendNotificationMapper.ensureInitialized();
+  p36.UpdateProfileRequestMapper.ensureInitialized();
+  p36.GenderMapper.ensureInitialized();
+  p37.UserInfoResponseMapper.ensureInitialized();
 }
