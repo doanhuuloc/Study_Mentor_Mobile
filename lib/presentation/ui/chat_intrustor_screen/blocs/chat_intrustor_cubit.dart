@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:socket_io_client/socket_io_client.dart';
+import 'package:study_mentor_mobile/utilities/logging/logging.dart';
 
 import '../../../../application/services/socket/dto/dto.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
@@ -17,7 +19,8 @@ class ChatIntrustorCubit extends SafeCubit<ChatIntrustorState> {
     required this.controller,
     required this.roomId,
   }) : super(ChatIntrustorState(roomId: roomId, listChat: [])) {
-    getListChat(roomId: roomId);
+    // getListChat(roomId: roomId);
+    receiveMessage();
   }
 
   final FailureHandlerManager failureHandlerManager;
@@ -40,7 +43,13 @@ class ChatIntrustorCubit extends SafeCubit<ChatIntrustorState> {
   }
 
   void sendMessage() {
-    addChat();
+    addChat(ReceiveMessage(
+      content: state.messageField,
+      roomId: roomId,
+      senderId: userId,
+      recipientId: intrustor.id,
+      createdAt: DateTime.now(),
+    ));
     socketCubit.sendMessage(
         sendMessage: SendMessage(
       content: state.messageField,
@@ -51,8 +60,19 @@ class ChatIntrustorCubit extends SafeCubit<ChatIntrustorState> {
   }
 
   void receiveMessage() {
+    logging.i("on");
+    Socket s = io(
+        "http://188.166.176.114:3000?userId=c00478d9-020a-4b38-8eea-68c4178aca61",
+        OptionBuilder().setTransports(['websocket']).enableForceNew().build());
+    s.on(SocketEvent.RECEIVE_MESSAGE.event, (data) {
+      logging.i(data);
+    });
+    // socketCubit.state.socket!.on("receive-message", (data) {
+    //   logging.i(data);
+    // });
+
     socketCubit.receiveMessage((ReceiveMessage receiveMessage) {
-      addChat();
+      addChat(receiveMessage);
     });
   }
 
@@ -60,9 +80,7 @@ class ChatIntrustorCubit extends SafeCubit<ChatIntrustorState> {
     emit(state.copyWith(messageField: value));
   }
 
-  void addChat() {
-    // final newListChat = state.listChat;
-    // newListChat.add();
-    // emit(state.copyWith(listChat: newListChat));
+  void addChat(ReceiveMessage message) {
+    emit(state.copyWith(listChat: [...state.listChat, message]));
   }
 }

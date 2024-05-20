@@ -67,8 +67,8 @@ class _IntrustorAnswerScreenState extends State<IntrustorAnswerScreen> {
                             context.read<IntrustorAnswerCubit>().state.roomId ??
                                 "",
                         intrustor:
-                            context.read<IntrustorAnswerCubit>().state.tutor ??
-                                const Tutor(),
+                            // context.read<IntrustorAnswerCubit>().state.tutor ??
+                                const Tutor(id: "33eb37d4-85d7-4422-b065-9d369046e0e2"),
                       ),
                     ).push(context);
                   },

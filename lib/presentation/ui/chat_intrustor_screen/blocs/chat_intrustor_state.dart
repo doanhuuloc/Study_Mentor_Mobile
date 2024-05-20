@@ -1,3 +1,4 @@
+import '../../../../application/services/socket/dto/dto.dart';
 
 class ChatIntrustorState {
   const ChatIntrustorState({
@@ -8,13 +9,13 @@ class ChatIntrustorState {
   });
 
   final bool loading;
-  final List listChat;
+  final List<ReceiveMessage> listChat;
   final String? roomId;
   final String messageField;
 
   ChatIntrustorState copyWith({
     bool? loading,
-    List? listChat,
+    List<ReceiveMessage>? listChat,
     String? roomId,
     String? messageField,
   }) {

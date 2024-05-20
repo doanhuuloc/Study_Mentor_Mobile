@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:study_mentor_mobile/application/services/ai/dto/enum.dart';
+import 'package:study_mentor_mobile/application/services/socket/dto/dto.dart';
 import 'package:study_mentor_mobile/presentation/gen/assets.gen.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 
@@ -70,7 +71,13 @@ class HomeMainContent extends StatelessWidget {
                   subTitle: 'Tìm kiếm người hướng dẫn qua google meet',
                   icon: Assets.svgs.homeGoogleMeet.svg(),
                   onTap: () {
-                    const CreateGGMeetRouteData().push(context);
+                    // const CreateGGMeetRouteData().push(context);
+                    const ChatIntrustorRouteData(
+                            $extra: ChatIntrustorExtraData(
+                                roomId: "b9a66b1d-fdc6-4a86-966f-4016f2e5e927",
+                                intrustor: Tutor(
+                                    id: "33eb37d4-85d7-4422-b065-9d369046e0e2")))
+                        .push(context);
                   },
                 ),
               ),

@@ -45,6 +45,7 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
       },
       child: Builder(
         builder: (context) {
+          context.read<ChatIntrustorCubit>();
           return Scaffold(
               appBar: CommonAppBar(
                 title: Row(
@@ -99,10 +100,9 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                             .listChat
                             .map((e) {
                           return ChatItem(
-                            content: e.value ?? "",
-                            dateTime: e.createAt ?? DateTime.now(),
-                            isOpposite: e.senderId !=
-                                context.read<UserCubit>().state.detail?.id,
+                            content: e.content ?? "",
+                            dateTime: e.createdAt ?? DateTime.now(),
+                            isOpposite: e.senderId == e.recipientId,
                           );
                         }).toList(),
                       )),
@@ -131,6 +131,9 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                                     color: AppColors.blue,
                                   ),
                                   onTap: () async {
+                                    context
+                                        .read<ChatIntrustorCubit>()
+                                        .sendMessage();
                                     messageController.clear();
                                   }),
                             ),
