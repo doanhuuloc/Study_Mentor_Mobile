@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:study_mentor_mobile/application/services/ai/dto/enum.dart';
-import 'package:study_mentor_mobile/application/services/socket/dto/dto.dart';
 import 'package:study_mentor_mobile/presentation/gen/assets.gen.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 
+import '../../../../application/services/socket/dto/dto.dart';
 import '../../../gen/app_colors.dart';
 import '../../../shared/theme/theme.dart';
 import '../../../shared/widgets/buttons/common_button.dart';
@@ -72,11 +72,12 @@ class HomeMainContent extends StatelessWidget {
                   icon: Assets.svgs.homeGoogleMeet.svg(),
                   onTap: () {
                     // const CreateGGMeetRouteData().push(context);
-                    const ChatIntrustorRouteData(
+                             const ChatIntrustorRouteData(
                             $extra: ChatIntrustorExtraData(
                                 roomId: "b9a66b1d-fdc6-4a86-966f-4016f2e5e927",
                                 intrustor: Tutor(
-                                    id: "33eb37d4-85d7-4422-b065-9d369046e0e2")))
+                                    id: "0e3cbd8b-7d30-42c4-ba7a-2b6d8d8a114f",
+                                    avatar: "avatar/8a8d09ba-0930-46f4-9a3b-a7c6e367e879.jpg",fullName: "LONGVU")))
                         .push(context);
                   },
                 ),

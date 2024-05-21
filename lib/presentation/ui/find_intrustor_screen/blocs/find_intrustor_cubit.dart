@@ -52,6 +52,7 @@ class FindIntrustorCubit extends SafeCubit<FindIntrustorState> {
       subjectId: subjectId,
       userId: "",
     ));
+    
     socketCubit.onGetTutorAvailable(
       (OnGetTutor onGetTutor) => {
         emit(

@@ -70,22 +70,22 @@ class SocketControllerImpl with SocketController {
   @override
   void sendMessage({Socket? socket, required SendMessage sendMessage}) {
     logging.i(sendMessage);
-    socket?.emit(SocketEvent.SEND_MESSAGE.event, sendMessage
-    // {
-    //   "senderId":sendMessage.senderId,
-    //   "recipientId":sendMessage.recipientId,
-    //   "content":sendMessage.content,
-    //   "files":sendMessage.files,
-    // }
-    );
+    socket?.emit(SocketEvent.SEND_MESSAGE.event, sendMessage);
   }
 
   @override
   void receiveMessage({Socket? socket, required Function function}) {
-      logging.i("on receive message");
+    logging.i("on receive message");
 
     socket?.on(SocketEvent.RECEIVE_MESSAGE.event, (data) {
-      final ReceiveMessage receiveMessage = data;
+      final ReceiveMessage receiveMessage = ReceiveMessage(
+        senderId: data["senderId"],
+        recipientId: data["recipientId"],
+        createdAt: DateTime.now(),
+        content: data["content"],
+        roomId: data["roomId"],
+        files: data["files"]
+      );
       logging.i(receiveMessage);
       function(receiveMessage);
     });

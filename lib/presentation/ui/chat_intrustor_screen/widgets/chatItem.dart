@@ -6,11 +6,12 @@ import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart
 class ChatItem extends StatelessWidget {
   const ChatItem({
     super.key,
+    this.files,
     required this.content,
     required this.dateTime,
     required this.isOpposite,
   });
-
+  final String? files;
   final String content;
   final DateTime dateTime;
   final bool isOpposite;
@@ -20,7 +21,13 @@ class ChatItem extends StatelessWidget {
     return Column(
       crossAxisAlignment:
           isOpposite ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-      children: <Widget>[
+      children: [
+        if (files != null)
+          Image.network(
+            "https://storage.googleapis.com/study-mentor/${files ?? ""}",
+            height: 200,
+            // width: 200,
+          ),
         Card(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(

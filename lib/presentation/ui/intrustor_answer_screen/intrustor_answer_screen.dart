@@ -61,16 +61,13 @@ class _IntrustorAnswerScreenState extends State<IntrustorAnswerScreen> {
                     ),
                   ),
                   onTap: () {
-                    ChatIntrustorRouteData(
-                      $extra: ChatIntrustorExtraData(
-                        roomId:
-                            context.read<IntrustorAnswerCubit>().state.roomId ??
-                                "",
-                        intrustor:
-                            // context.read<IntrustorAnswerCubit>().state.tutor ??
-                                const Tutor(id: "33eb37d4-85d7-4422-b065-9d369046e0e2"),
-                      ),
-                    ).push(context);
+                    const ChatIntrustorRouteData(
+                            $extra: ChatIntrustorExtraData(
+                                roomId: "b9a66b1d-fdc6-4a86-966f-4016f2e5e927",
+                                intrustor: Tutor(
+                                    id: "0e3cbd8b-7d30-42c4-ba7a-2b6d8d8a114f",
+                                    avatar: "avatar/8a8d09ba-0930-46f4-9a3b-a7c6e367e879.jpg",fullName: "LONGVU")))
+                        .push(context);
                   },
                 ),
               ),
