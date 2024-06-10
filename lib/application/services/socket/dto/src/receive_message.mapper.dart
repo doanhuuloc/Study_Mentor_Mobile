@@ -13,6 +13,7 @@ class ReceiveMessageMapper extends ClassMapperBase<ReceiveMessage> {
   static ReceiveMessageMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ReceiveMessageMapper._());
+      FileRequestMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -32,8 +33,8 @@ class ReceiveMessageMapper extends ClassMapperBase<ReceiveMessage> {
   static String? _$content(ReceiveMessage v) => v.content;
   static const Field<ReceiveMessage, String> _f$content =
       Field('content', _$content, opt: true);
-  static String? _$files(ReceiveMessage v) => v.files;
-  static const Field<ReceiveMessage, String> _f$files =
+  static List<FileRequest>? _$files(ReceiveMessage v) => v.files;
+  static const Field<ReceiveMessage, List<FileRequest>> _f$files =
       Field('files', _$files, opt: true);
   static DateTime? _$createdAt(ReceiveMessage v) => v.createdAt;
   static const Field<ReceiveMessage, DateTime> _f$createdAt =
@@ -112,12 +113,14 @@ extension ReceiveMessageValueCopy<$R, $Out>
 
 abstract class ReceiveMessageCopyWith<$R, $In extends ReceiveMessage, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, FileRequest,
+      FileRequestCopyWith<$R, FileRequest, FileRequest>>? get files;
   $R call(
       {String? senderId,
       String? recipientId,
       String? roomId,
       String? content,
-      String? files,
+      List<FileRequest>? files,
       DateTime? createdAt});
   ReceiveMessageCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
@@ -131,6 +134,13 @@ class _ReceiveMessageCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<ReceiveMessage> $mapper =
       ReceiveMessageMapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, FileRequest,
+          FileRequestCopyWith<$R, FileRequest, FileRequest>>?
+      get files => $value.files != null
+          ? ListCopyWith($value.files!, (v, t) => v.copyWith.$chain(t),
+              (v) => call(files: v))
+          : null;
   @override
   $R call(
           {Object? senderId = $none,

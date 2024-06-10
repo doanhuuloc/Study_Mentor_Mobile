@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
-import '../../../application/services/socket/dto/dto.dart';
+import '../../../application/services/user/response/response.dart';
+import '../../bases/file_cubit/file_cubit.dart';
 import '../../bases/socket_cubit/socket_cubit.dart';
 import '../../bases/user_cubit/user_cubit.dart';
 import '../../gen/app_colors.dart';
@@ -20,7 +25,7 @@ class ChatIntrustorScreen extends StatefulWidget {
   const ChatIntrustorScreen(
       {super.key, required this.roomId, required this.intrustor});
   final String roomId;
-  final Tutor intrustor;
+  final UserInfoResponse intrustor;
 
   @override
   State<ChatIntrustorScreen> createState() => _ChatIntrustorScreenState();
@@ -37,6 +42,7 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
         return ChatIntrustorCubit(
           failureHandlerManager: context.read<FailureHandlerManager>(),
           socketCubit: context.read<SocketCubit>(),
+          fileCubit: context.read<FileCubit>(),
           userId: context.read<UserCubit>().state.detail?.id ?? "",
           intrustor: widget.intrustor,
           roomId: widget.roomId,
@@ -57,7 +63,7 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
-                            "https://storage.googleapis.com/study-mentor/${widget.intrustor.avatar ?? ""}",
+                            "https://storage.googleapis.com/study-mentor/${widget.intrustor.avatar?.fileKey ?? ""}",
                           ),
                           fit: BoxFit.cover,
                         ),
@@ -98,46 +104,136 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                           );
                         }).toList(),
                       )),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Row(
+                      Container(
+                        decoration:
+                            BoxDecoration(color: AppColors.blue.shade50),
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
                           children: [
-                            AppIconButton(
-                              icon: Assets.svgs.uploadIcon.svg(),
-                              onTap: () async {
-                                // ignore: unused_local_variable
-                                final file = await showModalBottomSheet(
-                                    context: context,
-                                    builder: (context) =>
-                                        const ChooseFileBottomSheet());
-                              },
-                            ),
-                            Expanded(
-                              child: CommonTextField(
-                                textEditingController: messageController,
-                                onChanged: (value) {
-                                  context
-                                      .read<ChatIntrustorCubit>()
-                                      .onChangedMessage(value);
-                                },
-                                textInputAction: TextInputAction.newline,
-                                minLines: 1,
-                                maxLines: null,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: AppIconButton(
-                                  icon: const Icon(
-                                    Icons.send,
-                                    color: AppColors.blue,
+                            if (state.listIMGPicker.length +
+                                    state.listFilePicker.length !=
+                                0)
+                              SizedBox(
+                                height: 80,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: state.listIMGPicker.length +
+                                      state.listFilePicker.length,
+                                  itemBuilder: (context, index) => Stack(
+                                    children: [
+                                      if (index < state.listIMGPicker.length)
+                                        Container(
+                                          margin: const EdgeInsets.all(10),
+                                          width: 60,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: FileImage(File(state
+                                                      .listIMGPicker[index]
+                                                      .path)))),
+                                        ),
+                                      if (index >= state.listIMGPicker.length)
+                                        Container(
+                                          margin: const EdgeInsets.all(10),
+                                          width: 60,
+                                          child:
+                                              Assets.svgs.file.svg(width: 60),
+                                        ),
+                                      Positioned(
+                                        top: 0,
+                                        right: 0,
+                                        child: Material(
+                                          color: Colors.white,
+                                          type: MaterialType.transparency,
+                                          child: InkWell(
+                                            onTap: () {
+                                              if (index <
+                                                  state.listIMGPicker.length) {
+                                                context
+                                                    .read<ChatIntrustorCubit>()
+                                                    .removeImgPicker(state
+                                                        .listIMGPicker[index]);
+                                              }
+                                              if (index >=
+                                                  state.listIMGPicker.length) {
+                                                context
+                                                    .read<ChatIntrustorCubit>()
+                                                    .removeFilePicker(state
+                                                        .listFilePicker[index]);
+                                              }
+                                            },
+                                            splashColor: Colors.red,
+                                            borderRadius:
+                                                BorderRadius.circular(1000),
+                                            child: Ink(
+                                                decoration: const BoxDecoration(
+                                                    color: AppColors.white,
+                                                    shape: BoxShape.circle),
+                                                child: const Icon(
+                                                  Icons.cancel_sharp,
+                                                  color: AppColors.red,
+                                                )),
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
+                                ),
+                              ),
+                            Row(
+                              children: [
+                                AppIconButton(
+                                  icon: Assets.svgs.uploadIcon.svg(),
                                   onTap: () async {
-                                    context
-                                        .read<ChatIntrustorCubit>()
-                                        .sendMessage();
-                                    messageController.clear();
-                                  }),
+                                    // ignore: unused_local_variable
+                                    final file = await showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) =>
+                                            const ChooseFileBottomSheet());
+                                    if (file.runtimeType == XFile) {
+                                      context
+                                          .read<ChatIntrustorCubit>()
+                                          .addImgPicker(file);
+                                    }
+
+                                    if (file.runtimeType == FilePickerResult) {
+                                      context
+                                          .read<ChatIntrustorCubit>()
+                                          .addFilePicker(file);
+                                    }
+                                  },
+                                ),
+                                Expanded(
+                                  child: CommonTextField(
+                                    textEditingController: messageController,
+                                    onChanged: (value) {
+                                      context
+                                          .read<ChatIntrustorCubit>()
+                                          .onChangedMessage(value);
+                                    },
+                                    textInputAction: TextInputAction.newline,
+                                    minLines: 1,
+                                    maxLines: null,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: AppIconButton(
+                                      icon: const Icon(
+                                        Icons.send,
+                                        color: AppColors.blue,
+                                      ),
+                                      onTap: () async {
+                                        context
+                                            .read<ChatIntrustorCubit>()
+                                            .sendMessage();
+                                        messageController.clear();
+                                        context
+                                            .read<ChatIntrustorCubit>()
+                                            .onChangedMessage("");
+                                      }),
+                                ),
+                              ],
                             ),
                           ],
                         ),

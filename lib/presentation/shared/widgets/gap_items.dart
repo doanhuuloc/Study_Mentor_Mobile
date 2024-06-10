@@ -8,6 +8,7 @@ class GapItems extends StatelessWidget {
     this.axis = Axis.vertical,
     this.separate,
     this.crossAxisAlignmentRow = CrossAxisAlignment.start,
+    this.mainAxisAlignment,
   });
 
   final double gap;
@@ -15,6 +16,7 @@ class GapItems extends StatelessWidget {
   final Widget? separate;
   final List<Widget> items;
   final CrossAxisAlignment crossAxisAlignmentRow;
+  final MainAxisAlignment? mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +33,14 @@ class GapItems extends StatelessWidget {
     }
     if (axis == Axis.horizontal) {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.spaceBetween,
         crossAxisAlignment: crossAxisAlignmentRow,
         mainAxisSize: MainAxisSize.min,
         children: renderItem,
       );
     }
     return Column(
+      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: renderItem,

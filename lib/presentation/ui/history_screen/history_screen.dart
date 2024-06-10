@@ -7,9 +7,11 @@ import 'package:study_mentor_mobile/presentation/shared/transitions/transitions.
 import 'package:study_mentor_mobile/presentation/shared/widgets/app_bar/common_app_bar.dart';
 import 'package:study_mentor_mobile/presentation/ui/history_screen/blocs/history_cubit.dart';
 import 'package:study_mentor_mobile/presentation/ui/history_screen/widgets/tab_ai_pay.dart';
+import 'package:study_mentor_mobile/presentation/ui/history_screen/widgets/tab_tutor.dart';
 
 import '../../../application/services/ai/ai.dart';
 import '../../../application/services/app/app_config/app_config.dart';
+import '../../../application/services/education/education.dart';
 import '../../bases/user_cubit/user_cubit.dart';
 import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'widgets/tab_ai.dart';
@@ -55,6 +57,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           create: (BuildContext context) {
             return HistoryCubit(
                 aiController: context.read<AIController>(),
+                educationController: context.read<EducationController>(),
                 appConfig: context.read<AppConfig>(),
                 userId: context.read<UserCubit>().state.detail?.id ?? '',
                 failureHandlerManager: context.read<FailureHandlerManager>());
@@ -85,9 +88,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   child: TabBarView(children: [
                     TabAI(),
                     TabAIPay(),
-                    SingleChildScrollView(
-                      child: Text("3"),
-                    ),
+                    TabTutor(),
                     SingleChildScrollView(
                       child: Text("3"),
                     ),

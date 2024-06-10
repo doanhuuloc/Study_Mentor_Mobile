@@ -16,6 +16,7 @@ class FindIntrustorCubit extends SafeCubit<FindIntrustorState> {
     required this.subjectId,
     required this.userId,
   }) : super(const FindIntrustorState()) {
+    onGetTutor();
     getTutor();
   }
 
@@ -44,25 +45,27 @@ class FindIntrustorCubit extends SafeCubit<FindIntrustorState> {
     emit(state.copyWith(findingWithSystem: value));
   }
 
-  void getTutor() {
-    socketCubit.emitGetTutorAvailable(
-        getTutor: EmitGetTutor(
-      page: state.page,
-      pageSize: 10,
-      subjectId: subjectId,
-      userId: "",
-    ));
-    
+  void onGetTutor() {
     socketCubit.onGetTutorAvailable(
       (OnGetTutor onGetTutor) => {
         emit(
           state.copyWith(
             page: onGetTutor.nextPage,
             totalPages: onGetTutor.totalPages,
-            tutor: onGetTutor.tutor,
+            tutor: onGetTutor.data,
           ),
         ),
       },
     );
+  }
+
+  void getTutor() {
+    socketCubit.emitGetTutorAvailable(
+        getTutor: EmitGetTutor(
+      page: state.page,
+      pageSize: 10,
+      subjectId: subjectId,
+      userId: userId,
+    ));
   }
 }

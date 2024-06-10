@@ -1,24 +1,39 @@
-import '../../../../application/services/socket/dto/dto.dart';
+import 'package:study_mentor_mobile/application/services/socket/dto/src/get_answer.dart';
+
+import '../../../../application/services/education/education.dart';
 
 class IntrustorAnswerState {
   const IntrustorAnswerState({
     this.isLoading = false,
-    this.tutor,
     this.roomId,
+    this.answer,
+    this.meetingUrl,
+    this.questionId,
+    this.questionInfo,
   });
 
   final bool isLoading;
-  final Tutor? tutor;
   final String? roomId;
+  final String? questionId;
+  final GetQuestionInfoResponse? questionInfo;
+  final Answer? answer;
+  final String? meetingUrl;
 
   copyWith({
     bool? isLoading,
-    Tutor? tutor,
     String? roomId,
+    String? questionId,
+    GetQuestionInfoResponse? questionInfo,
+    Answer? answer,
+    String? meetingUrl,
   }) {
     return IntrustorAnswerState(
-        isLoading: isLoading ?? this.isLoading,
-        tutor: tutor ?? this.tutor,
-        roomId: roomId ?? this.roomId);
+      isLoading: isLoading ?? this.isLoading,
+      roomId: roomId ?? this.roomId,
+      questionId: questionId ?? this.questionId,
+      questionInfo: questionInfo ?? this.questionInfo,
+      answer: answer ?? this.answer,
+      meetingUrl: meetingUrl ?? this.meetingUrl,
+    );
   }
 }

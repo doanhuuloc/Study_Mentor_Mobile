@@ -1,3 +1,9 @@
+import 'package:study_mentor_mobile/application/services/education/request/src/create_ggmeet_request.dart';
+import 'package:study_mentor_mobile/application/services/socket/dto/src/get_accpet_tutor_info.dart';
+import 'package:study_mentor_mobile/application/services/socket/dto/src/get_answer.dart';
+import 'package:study_mentor_mobile/application/services/education/response/src/create_ggmeet_response.dart';
+import 'package:study_mentor_mobile/application/services/socket/dto/src/picked-tutor-accepted-question.dart';
+
 import '../../../application/services/socket/controller/controller.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import '../../../application/services/socket/dto/dto.dart';
@@ -39,15 +45,6 @@ class SocketControllerImpl with SocketController {
   }
 
   @override
-  void intrustorAccepted({Socket? socket}) {
-    logging.i("on intrustor accepted");
-
-    socket?.on(SocketEvent.INTRUSTORACCEPTED.event, (data) {
-      logging.i(data);
-    });
-  }
-
-  @override
   void disconnect({Socket? socket, required String userId}) {
     socket?.emit(SocketEvent.DISCONNECT.event);
   }
@@ -78,14 +75,8 @@ class SocketControllerImpl with SocketController {
     logging.i("on receive message");
 
     socket?.on(SocketEvent.RECEIVE_MESSAGE.event, (data) {
-      final ReceiveMessage receiveMessage = ReceiveMessage(
-        senderId: data["senderId"],
-        recipientId: data["recipientId"],
-        createdAt: DateTime.now(),
-        content: data["content"],
-        roomId: data["roomId"],
-        files: data["files"]
-      );
+      final ReceiveMessage receiveMessage = ReceiveMessage.fromJson(data);
+
       logging.i(receiveMessage);
       function(receiveMessage);
     });
@@ -99,8 +90,9 @@ class SocketControllerImpl with SocketController {
 
   @override
   void onGetTutorAvailable({Socket? socket, required Function function}) {
+    logging.i("on get tutor available");
     socket?.on(SocketEvent.ON_GET_TUTORS_AVAILABLE.event, (data) {
-      final OnGetTutor onGetTutor = data;
+      final OnGetTutor onGetTutor = OnGetTutor.fromJson(data);
       logging.i(onGetTutor);
       function(onGetTutor);
     });
@@ -109,9 +101,41 @@ class SocketControllerImpl with SocketController {
   @override
   void getVoucher({Socket? socket}) {
     logging.i("on get voucher");
-
     socket?.on(SocketEvent.GET_VOUCHET.event, (data) {
       logging.i(data);
     });
   }
+
+  @override
+  void getGetAcceptTutorInfo({Socket? socket, required Function function}) {
+    logging.i("on get tutor info");
+    socket?.on(SocketEvent.GET_ACCEPT_TUTOR_INFO.event, (data) {
+      logging.i(data);
+      GetAcceptTutorInfo tutor = GetAcceptTutorInfo.fromJson(data);
+      function(tutor.data);
+    });
+  }
+
+  @override
+  void pickedTutorAcceptedQuestion(
+      {Socket? socket, required Function function}) {
+    logging.i("on picked tutor accepted question");
+    socket?.on(SocketEvent.PICKED_TUTOR_ACCEPTED_QUESTION.event, (data) {
+      logging.i(data);
+      PickedTutorAcceptedQuestion pickedtutor =
+          PickedTutorAcceptedQuestion.fromJson(data);
+      function(pickedtutor);
+    });
+  }
+
+  @override
+  void getAnswer({Socket? socket, required Function function}) {
+    logging.i("on get answer");
+    socket?.on(SocketEvent.GET_ANSWER.event, (data) {
+      logging.i(data);
+      final GetAnswer answer = GetAnswer.fromJson(data);
+      function(answer);
+    });
+  }
+
 }

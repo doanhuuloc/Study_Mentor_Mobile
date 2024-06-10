@@ -4,7 +4,6 @@ import 'package:study_mentor_mobile/application/services/ai/dto/enum.dart';
 import 'package:study_mentor_mobile/presentation/gen/assets.gen.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 
-import '../../../../application/services/socket/dto/dto.dart';
 import '../../../gen/app_colors.dart';
 import '../../../shared/theme/theme.dart';
 import '../../../shared/widgets/buttons/common_button.dart';
@@ -32,9 +31,13 @@ class HomeMainContent extends StatelessWidget {
                   subTitle: 'Ai miễn phí',
                   icon: Assets.svgs.homeAiFree.svg(),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const _SelectAIDialog());
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (context) => const _SelectAIDialog());
+
+                    IntrustorAnswerRouteData(
+                            questionId: "39caed83-d3da-4a30-bbbf-362379c59882")
+                        .push(context);
                   },
                 ),
               ),
@@ -71,14 +74,7 @@ class HomeMainContent extends StatelessWidget {
                   subTitle: 'Tìm kiếm người hướng dẫn qua google meet',
                   icon: Assets.svgs.homeGoogleMeet.svg(),
                   onTap: () {
-                    // const CreateGGMeetRouteData().push(context);
-                             const ChatIntrustorRouteData(
-                            $extra: ChatIntrustorExtraData(
-                                roomId: "b9a66b1d-fdc6-4a86-966f-4016f2e5e927",
-                                intrustor: Tutor(
-                                    id: "0e3cbd8b-7d30-42c4-ba7a-2b6d8d8a114f",
-                                    avatar: "avatar/8a8d09ba-0930-46f4-9a3b-a7c6e367e879.jpg",fullName: "LONGVU")))
-                        .push(context);
+                    const CreateGGMeetRouteData().push(context);
                   },
                 ),
               ),

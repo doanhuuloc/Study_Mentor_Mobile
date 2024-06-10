@@ -1,20 +1,15 @@
-import '../../../../application/services/socket/dto/dto.dart';
+import '../../../../application/services/user/response/response.dart';
 
 class FindingIntrustorState {
   const FindingIntrustorState({
-    this.isLoading = false,
+    this.tutor,
   });
 
-  final bool isLoading;
+  final UserInfoResponse? tutor;
 
   copyWith({
-    bool? isLoading,
-    int? page,
-    int? totalPages,
-    List<Tutor>? tutor,
+    UserInfoResponse? tutor,
   }) {
-    return FindingIntrustorState(
-      isLoading: isLoading ?? this.isLoading,
-    );
+    return FindingIntrustorState(tutor: tutor ?? this.tutor);
   }
 }

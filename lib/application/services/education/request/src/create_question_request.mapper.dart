@@ -38,6 +38,12 @@ class CreateQuestionRequestMapper
       v.attachFiles;
   static const Field<CreateQuestionRequest, List<FileRequest>> _f$attachFiles =
       Field('attachFiles', _$attachFiles);
+  static String? _$voucherCode(CreateQuestionRequest v) => v.voucherCode;
+  static const Field<CreateQuestionRequest, String> _f$voucherCode =
+      Field('voucherCode', _$voucherCode, opt: true);
+  static int? _$timeMeeting(CreateQuestionRequest v) => v.timeMeeting;
+  static const Field<CreateQuestionRequest, int> _f$timeMeeting =
+      Field('timeMeeting', _$timeMeeting, opt: true);
 
   @override
   final MappableFields<CreateQuestionRequest> fields = const {
@@ -46,6 +52,8 @@ class CreateQuestionRequestMapper
     #timeFindTutor: _f$timeFindTutor,
     #content: _f$content,
     #attachFiles: _f$attachFiles,
+    #voucherCode: _f$voucherCode,
+    #timeMeeting: _f$timeMeeting,
   };
 
   static CreateQuestionRequest _instantiate(DecodingData data) {
@@ -54,7 +62,9 @@ class CreateQuestionRequestMapper
         numberOfStar: data.dec(_f$numberOfStar),
         timeFindTutor: data.dec(_f$timeFindTutor),
         content: data.dec(_f$content),
-        attachFiles: data.dec(_f$attachFiles));
+        attachFiles: data.dec(_f$attachFiles),
+        voucherCode: data.dec(_f$voucherCode),
+        timeMeeting: data.dec(_f$timeMeeting));
   }
 
   @override
@@ -121,7 +131,9 @@ abstract class CreateQuestionRequestCopyWith<
       int? numberOfStar,
       int? timeFindTutor,
       String? content,
-      List<FileRequest>? attachFiles});
+      List<FileRequest>? attachFiles,
+      String? voucherCode,
+      int? timeMeeting});
   CreateQuestionRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -145,13 +157,17 @@ class _CreateQuestionRequestCopyWithImpl<$R, $Out>
           int? numberOfStar,
           int? timeFindTutor,
           String? content,
-          List<FileRequest>? attachFiles}) =>
+          List<FileRequest>? attachFiles,
+          Object? voucherCode = $none,
+          Object? timeMeeting = $none}) =>
       $apply(FieldCopyWithData({
         if (subjectId != null) #subjectId: subjectId,
         if (numberOfStar != null) #numberOfStar: numberOfStar,
         if (timeFindTutor != null) #timeFindTutor: timeFindTutor,
         if (content != null) #content: content,
-        if (attachFiles != null) #attachFiles: attachFiles
+        if (attachFiles != null) #attachFiles: attachFiles,
+        if (voucherCode != $none) #voucherCode: voucherCode,
+        if (timeMeeting != $none) #timeMeeting: timeMeeting
       }));
   @override
   CreateQuestionRequest $make(CopyWithData data) => CreateQuestionRequest(
@@ -159,7 +175,9 @@ class _CreateQuestionRequestCopyWithImpl<$R, $Out>
       numberOfStar: data.get(#numberOfStar, or: $value.numberOfStar),
       timeFindTutor: data.get(#timeFindTutor, or: $value.timeFindTutor),
       content: data.get(#content, or: $value.content),
-      attachFiles: data.get(#attachFiles, or: $value.attachFiles));
+      attachFiles: data.get(#attachFiles, or: $value.attachFiles),
+      voucherCode: data.get(#voucherCode, or: $value.voucherCode),
+      timeMeeting: data.get(#timeMeeting, or: $value.timeMeeting));
 
   @override
   CreateQuestionRequestCopyWith<$R2, CreateQuestionRequest, $Out2>

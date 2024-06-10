@@ -13,6 +13,7 @@ class SendMessageMapper extends ClassMapperBase<SendMessage> {
   static SendMessageMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SendMessageMapper._());
+      FileRequestMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -32,8 +33,8 @@ class SendMessageMapper extends ClassMapperBase<SendMessage> {
   static String? _$content(SendMessage v) => v.content;
   static const Field<SendMessage, String> _f$content =
       Field('content', _$content, opt: true);
-  static String? _$files(SendMessage v) => v.files;
-  static const Field<SendMessage, String> _f$files =
+  static List<FileRequest>? _$files(SendMessage v) => v.files;
+  static const Field<SendMessage, List<FileRequest>> _f$files =
       Field('files', _$files, opt: true);
 
   @override
@@ -105,12 +106,14 @@ extension SendMessageValueCopy<$R, $Out>
 
 abstract class SendMessageCopyWith<$R, $In extends SendMessage, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, FileRequest,
+      FileRequestCopyWith<$R, FileRequest, FileRequest>>? get files;
   $R call(
       {String? senderId,
       String? recipientId,
       String? roomId,
       String? content,
-      String? files});
+      List<FileRequest>? files});
   SendMessageCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -122,6 +125,13 @@ class _SendMessageCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<SendMessage> $mapper =
       SendMessageMapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, FileRequest,
+          FileRequestCopyWith<$R, FileRequest, FileRequest>>?
+      get files => $value.files != null
+          ? ListCopyWith($value.files!, (v, t) => v.copyWith.$chain(t),
+              (v) => call(files: v))
+          : null;
   @override
   $R call(
           {Object? senderId = $none,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_mentor_mobile/application/services/user/response/src/user_info_response.dart';
 import 'package:study_mentor_mobile/presentation/ui/find_intrustor_screen/widgets/intrustor_item.dart';
 
 import '../../../application/services/education/education.dart';
@@ -44,7 +45,10 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
         return BlocListener<FindIntrustorCubit, FindIntrustorState>(
           listener: (context, state) async {
             if (state.findingWithSystem) {
-              if (!await const FindingIntrustorRouteData().push(context)) {
+              final navigate =
+                  await FindingIntrustorRouteData(questionId: widget.questionId)
+                      .push(context);
+              if (navigate == null || navigate == false) {
                 if (mounted) {
                   context
                       .read<FindIntrustorCubit>()
@@ -73,6 +77,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                           style: Styles.s16().withWeight(FontWeight.w600),
                         ),
                       ),
+                      const SizedBox(width: 20),
                       SizedBox(
                         height: 50,
                         width: 75,
@@ -90,41 +95,47 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                     style: Styles.s16().withWeight(FontWeight.w600),
                   ),
                   Expanded(
-                      child: RefreshIndicator(
-                    onRefresh: () async {},
-                    child: SingleChildScrollView(
-                      child:
-                          BlocBuilder<FindIntrustorCubit, FindIntrustorState>(
-                        buildWhen: (previous, current) =>
-                            previous.tutor != current.tutor,
-                        builder: (context, state) {
-                          return GapItems(
-                            gap: 10,
-                            items: [
-                              IntrustorItem(
-                                name: "Long Vu",
-                                numberOfStar: 5,
-                                voidCallback: () {
-                                  const IntrustorAnswerRouteData().push(context);
-                                },
+                      child: SingleChildScrollView(
+                        child:
+                            BlocBuilder<FindIntrustorCubit, FindIntrustorState>(
+                          buildWhen: (previous, current) =>
+                              previous.tutor != current.tutor,
+                          builder: (context, state) {
+                            return RefreshIndicator(
+                              onRefresh: () async{
+                                
+                              },
+                              child: GapItems(
+                                gap: 10,
+                                items: [
+                                  ...context
+                                      .read<FindIntrustorCubit>()
+                                      .state
+                                      .tutor
+                                      .map(
+                                        (e) => IntrustorItem(
+                                          name: e.fullName ?? "",
+                                          numberOfStar: e.averageRate ?? 0,
+                                          avatar: e.avatar ?? "",
+                                          voidCallback: () {
+                                            IntrustorInfoRouteData(
+                                                    $extra: IntrustorInfoExtraData(
+                                                        intrustor: UserInfoResponse(
+                                                          id: e.id,
+                                                          fullName: e.fullName,
+                                                        ),
+                                                        questionId:
+                                                            widget.questionId))
+                                                .push(context);
+                                          },
+                                        ),
+                                      ),
+                                ],
                               ),
-                              ...context
-                                  .read<FindIntrustorCubit>()
-                                  .state
-                                  .tutor
-                                  .map(
-                                    (e) => IntrustorItem(
-                                      name: e.fullName ?? "",
-                                      numberOfStar: e.averageRate ?? 0,
-                                      voidCallback: () {},
-                                    ),
-                                  ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ))
+                            );
+                          },
+                        ),
+                      ))
                 ],
               ),
             ),

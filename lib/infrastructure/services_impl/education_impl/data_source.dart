@@ -28,8 +28,33 @@ abstract class EducationDataSource {
   Future<FindTutorResponse> findTutor({
     @Path('questionId') required String questionId,
   });
-  @POST('/api/questions/{questionId}')
+  @GET('/api/questions/{questionId}')
   Future<BaseResponse<GetQuestionInfoResponse>> getQuestionInfo({
     @Path('questionId') required String questionId,
   });
+
+  @POST('/api/users/student/pick-tutor')
+  Future<BaseResponse<dynamic>> pickIntrustor(
+      @Body() PickIntrustorRequest pickIntrustorRequest);
+
+  @GET('/api/users/student/voucher')
+  Future<BaseResponse<List<VoucherReponse>>> getVoucher();
+
+  @POST('/api/questions/calculate-price')
+  Future<BaseResponse<CalculatePriceReponse>> calculatePrice(
+      @Body() CalculatePriceRequest calculatePriceRequest);
+
+  @GET('/api/users/questions')
+  Future<BaseResponse<List<GetQuestionInfoResponse>>> getListQuestion(
+      {@Query('status') required String status});
+
+  @PATCH('/api/questions/{questionId}')
+  Future<BaseResponse<dynamic>> updateQuestionStatus({
+    @Path('questionId') required String questionId,
+    @Body() required UpdateQuestionStatusRequest updateQuestionStatusRequest,
+  });
+
+    @POST('/api/users/create/ggMeet')
+  Future<BaseResponse<CreateGGMeetResponse>> createGGMeet(
+      @Body() CreateGGMeetRequest createGGMeetRequest);
 }

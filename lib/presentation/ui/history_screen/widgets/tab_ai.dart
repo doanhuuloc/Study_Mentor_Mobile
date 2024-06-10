@@ -88,7 +88,9 @@ class _TabAIState extends State<TabAI> {
                   separatorBuilder: (context, index) => const Divider(),
                   itemBuilder: (context, index) {
                     return MessageBox(
-                      avatar: AssetImage(Assets.images.icons.chatgpt.path),
+                      avatar: AssetImage(filterAI == FilterAI.chatgpt
+                          ? Assets.images.icons.chatgpt.path
+                          : Assets.images.icons.gemini.path),
                       title:
                           filterAI == FilterAI.chatgpt ? 'Chat GPT' : 'Gemini',
                       content: listChat[index].Title ?? "",

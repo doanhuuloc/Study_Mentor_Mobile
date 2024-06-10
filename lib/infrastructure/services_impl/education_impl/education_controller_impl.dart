@@ -50,4 +50,47 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
         future: () =>
             educationDataSource.getQuestionInfo(questionId: questionId));
   }
+
+  @override
+  Future<Result<Failure, BaseResponse>> pickIntrustor(
+      {required PickIntrustorRequest pickIntrustorRequest}) {
+    return handleApiResult(
+        future: () => educationDataSource.pickIntrustor(pickIntrustorRequest));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<List<VoucherReponse>>>> getVoucher() {
+    return handleApiResult(future: () => educationDataSource.getVoucher());
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<CalculatePriceReponse>>> calculatePrice(
+      {required CalculatePriceRequest calculatePriceRequest}) {
+    return handleApiResult(
+        future: () =>
+            educationDataSource.calculatePrice(calculatePriceRequest));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<List<GetQuestionInfoResponse>>>>
+      getListQuestion({required String status}) {
+    return handleApiResult(
+        future: () => educationDataSource.getListQuestion(status: status));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<dynamic>>> updateQuestionStatus(
+      {required UpdateQuestionStatusRequest updateQuestionStatusRequest}) {
+    return handleApiResult(
+        future: () => educationDataSource.updateQuestionStatus(
+            questionId: updateQuestionStatusRequest.questionId,
+            updateQuestionStatusRequest: updateQuestionStatusRequest));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<CreateGGMeetResponse>>> createGGMeet(
+      {required CreateGGMeetRequest createGGMeetRequest}) {
+    return handleApiResult(
+        future: () => educationDataSource.createGGMeet(createGGMeetRequest));
+  }
 }

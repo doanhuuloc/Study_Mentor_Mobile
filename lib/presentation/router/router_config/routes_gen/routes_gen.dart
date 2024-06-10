@@ -137,16 +137,15 @@ class DropdownSheetRouteData extends GoRouteData {
           routes: <TypedRoute<RouteData>>[
             TypedGoRoute<FindIntrustorRouteData>(
               path: FindIntrustorRouteData.routeName,
-              routes: <TypedRoute<RouteData>>[
-                TypedGoRoute<FindingIntrustorRouteData>(
-                  path: FindingIntrustorRouteData.routeName,
-                  routes: <TypedRoute<RouteData>>[
-                    TypedGoRoute<IntrustorAnswerRouteData>(
-                      path: IntrustorAnswerRouteData.routeName,
-                    ),
-                  ],
-                ),
-              ],
+            ),
+            TypedGoRoute<FindingIntrustorRouteData>(
+              path: FindingIntrustorRouteData.routeName,
+            ),
+            TypedGoRoute<IntrustorAnswerRouteData>(
+              path: IntrustorAnswerRouteData.routeName,
+            ),
+            TypedGoRoute<IntrustorInfoRouteData>(
+              path: IntrustorInfoRouteData.routeName,
             ),
           ],
         ),

@@ -3,15 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/application/services/ai/dto/enum.dart';
 import 'package:study_mentor_mobile/presentation/router/app_nav_key/app_nav_key.dart';
 
-import '../../../../../application/services/socket/dto/dto.dart';
+import '../../../../../application/services/education/education.dart';
+import '../../../../../application/services/user/user.dart';
 import '../../../../ui/chat_ai_screen/chat_ai_screen.dart';
 import '../../../../ui/chat_intrustor_screen/chat_intrustor_screen.dart';
-import '../../../../ui/create_ggmeet_screen/create_ggmeet_screen.dart';
 import '../../../../ui/create_question_screen/create_question_screen.dart';
 import '../../../../ui/find_intrustor_screen/find_intrustor_screen.dart';
 import '../../../../ui/finding_intrustor_screen/finding_intrustor_screen.dart';
 import '../../../../ui/home_screen/home_screen.dart';
 import '../../../../ui/intrustor_answer_screen/intrustor_answer_screen.dart';
+import '../../../../ui/intrustor_info_screen/intrustor_info_screen.dart';
 import '../../../../ui/login_screen/login_screen.dart';
 
 class HomeBranchData extends StatefulShellBranchData {
@@ -68,7 +69,7 @@ class ChatIntrustorExtraData {
     required this.roomId,
     required this.intrustor,
   });
-  final Tutor intrustor;
+  final UserInfoResponse intrustor;
   final String roomId;
 }
 
@@ -81,7 +82,7 @@ class ChatIntrustorRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return ChatIntrustorScreen(
-      intrustor: $extra?.intrustor ?? const Tutor(),
+      intrustor: $extra?.intrustor ?? const UserInfoResponse(),
       roomId: $extra?.roomId ?? "",
     );
   }
@@ -94,7 +95,22 @@ class CreateQuestionRouteData extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const CreateQuestionScreen();
+    return const CreateQuestionScreen(
+      questionType: QuestionType.FILE,
+    );
+  }
+}
+
+class CreateGGMeetRouteData extends GoRouteData {
+  const CreateGGMeetRouteData();
+  static const routeName = 'createGGMeet';
+  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const CreateQuestionScreen(
+      questionType: QuestionType.GGMEET,
+    );
   }
 }
 
@@ -108,11 +124,13 @@ class FindIntrustorExtraData {
 }
 
 class FindIntrustorRouteData extends GoRouteData {
-  const FindIntrustorRouteData({this.$extra});
-  static const routeName = 'findIntrustor';
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+  const FindIntrustorRouteData(
+      {required this.$extra, required this.questionId});
 
   final FindIntrustorExtraData? $extra;
+  final String questionId;
+  static const routeName = 'findIntrustor/:questionId';
+  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -124,35 +142,54 @@ class FindIntrustorRouteData extends GoRouteData {
 }
 
 class FindingIntrustorRouteData extends GoRouteData {
-  const FindingIntrustorRouteData();
-  static const routeName = 'findingIntrustor';
+  const FindingIntrustorRouteData({required this.questionId});
+  final String questionId;
+  static const routeName = 'findingIntrustor/:questionId';
   static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const FindingIntrustorScreen();
+    return FindingIntrustorScreen(
+      questionId: questionId,
+    );
   }
 }
 
 class IntrustorAnswerRouteData extends GoRouteData {
-  const IntrustorAnswerRouteData();
-
-  static const routeName = 'intrustorAnswer';
+  const IntrustorAnswerRouteData({required this.questionId});
+  final String questionId;
+  static const routeName = 'intrustorAnswer/:questionId';
   static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const IntrustorAnswerScreen();
+    return IntrustorAnswerScreen(
+      questionId: questionId,
+    );
   }
 }
 
-class CreateGGMeetRouteData extends GoRouteData {
-  const CreateGGMeetRouteData();
-  static const routeName = 'createGGMeet';
+class IntrustorInfoExtraData {
+  const IntrustorInfoExtraData({
+    required this.intrustor,
+    this.questionId,
+  });
+  final UserInfoResponse intrustor;
+  final String? questionId;
+}
+
+class IntrustorInfoRouteData extends GoRouteData {
+  const IntrustorInfoRouteData({required this.$extra});
+  static const routeName = 'intrustorInfo';
   static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+
+  final IntrustorInfoExtraData $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const CreateGGMeetScreen();
+    return IntrustorInfoScreen(
+      intrustor: $extra.intrustor,
+      questionId: $extra.questionId,
+    );
   }
 }

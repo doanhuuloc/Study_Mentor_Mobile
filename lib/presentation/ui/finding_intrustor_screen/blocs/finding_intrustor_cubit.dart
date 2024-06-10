@@ -1,4 +1,5 @@
 import '../../../../application/services/education/education.dart';
+import '../../../../application/services/user/user.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../bases/socket_cubit/socket_cubit.dart';
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
@@ -18,7 +19,9 @@ class FindingIntrustorCubit extends SafeCubit<FindingIntrustorState> {
   final SocketCubit socketCubit;
 
   void findingIntrustor() {
-    socketCubit.intrustorAccepted();
+    socketCubit.getAcceptTutorInfo((UserInfoResponse? tutor) {
+      emit(state.copyWith(tutor: tutor));
+    });
     socketCubit.getVoucher();
   }
 }

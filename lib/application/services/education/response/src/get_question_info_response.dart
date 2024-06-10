@@ -1,6 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
 import '../../../file/file.dart';
+import '../../../socket/dto/src/get_answer.dart';
 import '../../../user/user.dart';
 import '../../education.dart';
 
@@ -10,6 +11,7 @@ part 'get_question_info_response.mapper.dart';
 class GetQuestionInfoResponse with GetQuestionInfoResponseMappable {
   const GetQuestionInfoResponse({
     this.id,
+    this.title,
     this.createdAt,
     this.updatedAt,
     this.answerTime,
@@ -20,23 +22,36 @@ class GetQuestionInfoResponse with GetQuestionInfoResponseMappable {
     this.type,
     this.fileQuestions,
     this.student,
+    this.tutor,
     this.subject,
     this.answers,
+    this.isAccepted,
+    this.isAnswered,
+    this.questionType,
+    this.meetingURL,
+    this.timeMetting,
   });
   factory GetQuestionInfoResponse.fromJson(Map<String, dynamic> json) =>
       GetQuestionInfoResponseMapper.fromJson(json);
 
   final String? id;
+  final String? title;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? answerTime;
   final String? content;
   final String? price;
-  final int? status;
+  final QuestionStatus? status;
   final bool? isPaid;
   final int? type;
-  final FileResponse? fileQuestions;
+  final List<FileResponse>? fileQuestions;
   final UserInfoResponse? student;
+  final UserInfoResponse? tutor;
   final SubjectResponse? subject;
-  final dynamic answers;
+  final List<Answer>? answers;
+  final bool? isAccepted;
+  final bool? isAnswered;
+  final QuestionType? questionType;
+  final int? timeMetting;
+  final String? meetingURL;
 }

@@ -1,4 +1,5 @@
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:study_mentor_mobile/application/services/education/request/src/create_ggmeet_request.dart';
 import '../dto/dto.dart';
 
 mixin SocketController {
@@ -18,7 +19,6 @@ mixin SocketController {
     Socket? socket,
     required CreateRoomChat createRoomChat,
   });
-  void intrustorAccepted({Socket? socket});
 
   void sendMessage({
     Socket? socket,
@@ -38,4 +38,10 @@ mixin SocketController {
     required Function function,
   });
   void getVoucher({Socket? socket});
+
+  void getGetAcceptTutorInfo({Socket? socket, required Function function});
+  void pickedTutorAcceptedQuestion(
+      {Socket? socket, required Function function});
+
+  void getAnswer({Socket? socket, required Function function});
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_mentor_mobile/presentation/gen/app_colors.dart';
 import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/image_loading.dart';
@@ -13,7 +12,6 @@ import '../../bases/file_cubit/file_cubit.dart';
 import '../../bases/user_cubit/user_cubit.dart';
 import '../../shared/theme/theme.dart';
 import '../../shared/widgets/buttons/bottom_button.dart';
-import '../../shared/widgets/buttons/primary_button.dart';
 import '../../shared/widgets/drop_down_bar/drop_down_bar.dart';
 import 'blocs/edit_profile_cubit.dart';
 import 'blocs/edit_profile_state.dart';

@@ -4,7 +4,11 @@ import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 import '../../../shared/theme/theme.dart';
 
 class QuestionSummary extends StatelessWidget {
-  const QuestionSummary({super.key});
+  const QuestionSummary(
+      {super.key, required this.subjectName, required this.price});
+
+  final String subjectName;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class QuestionSummary extends StatelessWidget {
               ),
               Expanded(
                   child: Text(
-                "môn lol",
+                subjectName,
                 style: Styles.s15(),
               )),
             ],
@@ -42,7 +46,7 @@ class QuestionSummary extends StatelessWidget {
               ),
               Expanded(
                   child: Text(
-                "1500000000",
+                price,
                 style: Styles.s15(),
               )),
             ],

@@ -21,9 +21,9 @@ class OnGetTutorMapper extends ClassMapperBase<OnGetTutor> {
   @override
   final String id = 'OnGetTutor';
 
-  static List<Tutor>? _$tutor(OnGetTutor v) => v.tutor;
-  static const Field<OnGetTutor, List<Tutor>> _f$tutor =
-      Field('tutor', _$tutor, opt: true);
+  static List<Tutor>? _$data(OnGetTutor v) => v.data;
+  static const Field<OnGetTutor, List<Tutor>> _f$data =
+      Field('data', _$data, opt: true);
   static int? _$pageSize(OnGetTutor v) => v.pageSize;
   static const Field<OnGetTutor, int> _f$pageSize =
       Field('pageSize', _$pageSize, opt: true);
@@ -42,7 +42,7 @@ class OnGetTutorMapper extends ClassMapperBase<OnGetTutor> {
 
   @override
   final MappableFields<OnGetTutor> fields = const {
-    #tutor: _f$tutor,
+    #data: _f$data,
     #pageSize: _f$pageSize,
     #total: _f$total,
     #previousPage: _f$previousPage,
@@ -52,7 +52,7 @@ class OnGetTutorMapper extends ClassMapperBase<OnGetTutor> {
 
   static OnGetTutor _instantiate(DecodingData data) {
     return OnGetTutor(
-        tutor: data.dec(_f$tutor),
+        data: data.dec(_f$data),
         pageSize: data.dec(_f$pageSize),
         total: data.dec(_f$total),
         previousPage: data.dec(_f$previousPage),
@@ -111,9 +111,9 @@ extension OnGetTutorValueCopy<$R, $Out>
 
 abstract class OnGetTutorCopyWith<$R, $In extends OnGetTutor, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, Tutor, TutorCopyWith<$R, Tutor, Tutor>>? get tutor;
+  ListCopyWith<$R, Tutor, TutorCopyWith<$R, Tutor, Tutor>>? get data;
   $R call(
-      {List<Tutor>? tutor,
+      {List<Tutor>? data,
       int? pageSize,
       int? total,
       int? previousPage,
@@ -131,21 +131,21 @@ class _OnGetTutorCopyWithImpl<$R, $Out>
   late final ClassMapperBase<OnGetTutor> $mapper =
       OnGetTutorMapper.ensureInitialized();
   @override
-  ListCopyWith<$R, Tutor, TutorCopyWith<$R, Tutor, Tutor>>? get tutor =>
-      $value.tutor != null
-          ? ListCopyWith($value.tutor!, (v, t) => v.copyWith.$chain(t),
-              (v) => call(tutor: v))
+  ListCopyWith<$R, Tutor, TutorCopyWith<$R, Tutor, Tutor>>? get data =>
+      $value.data != null
+          ? ListCopyWith($value.data!, (v, t) => v.copyWith.$chain(t),
+              (v) => call(data: v))
           : null;
   @override
   $R call(
-          {Object? tutor = $none,
+          {Object? data = $none,
           Object? pageSize = $none,
           Object? total = $none,
           Object? previousPage = $none,
           Object? nextPage = $none,
           Object? totalPages = $none}) =>
       $apply(FieldCopyWithData({
-        if (tutor != $none) #tutor: tutor,
+        if (data != $none) #data: data,
         if (pageSize != $none) #pageSize: pageSize,
         if (total != $none) #total: total,
         if (previousPage != $none) #previousPage: previousPage,
@@ -154,7 +154,7 @@ class _OnGetTutorCopyWithImpl<$R, $Out>
       }));
   @override
   OnGetTutor $make(CopyWithData data) => OnGetTutor(
-      tutor: data.get(#tutor, or: $value.tutor),
+      data: data.get(#data, or: $value.data),
       pageSize: data.get(#pageSize, or: $value.pageSize),
       total: data.get(#total, or: $value.total),
       previousPage: data.get(#previousPage, or: $value.previousPage),

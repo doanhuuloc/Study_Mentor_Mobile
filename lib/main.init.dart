@@ -27,33 +27,52 @@ import 'application/services/common/dto/src/language_type.dart' as p14;
 import 'application/services/common/dto/src/localized_field_value.dart' as p15;
 import 'application/services/common/response/src/base_response.dart' as p16;
 import 'application/services/common/response/src/success_response.dart' as p17;
-import 'application/services/education/request/src/create_question_request.dart'
-    as p18;
-import 'application/services/education/request/src/rate_question_request.dart'
+import 'application/services/education/dto/enum.dart' as p18;
+import 'application/services/education/request/src/calculate_price_request.dart'
     as p19;
-import 'application/services/education/response/src/create_question_response.dart'
+import 'application/services/education/request/src/create_ggmeet_request.dart'
     as p20;
-import 'application/services/education/response/src/find_tutor_response.dart'
+import 'application/services/education/request/src/create_question_request.dart'
     as p21;
-import 'application/services/education/response/src/get_question_info_response.dart'
+import 'application/services/education/request/src/pick_intrustor_request.dart'
     as p22;
-import 'application/services/education/response/src/get_structure_education_response.dart'
+import 'application/services/education/request/src/rate_question_request.dart'
     as p23;
-import 'application/services/file/request/src/file_request.dart' as p24;
-import 'application/services/file/request/src/signed_url_request.dart' as p25;
-import 'application/services/file/request/src/upload_file_request.dart' as p26;
-import 'application/services/file/response/src/file_response.dart' as p27;
-import 'application/services/file/response/src/signed_url_response.dart' as p28;
-import 'application/services/socket/dto/src/create_roomchat.dart' as p29;
-import 'application/services/socket/dto/src/emit_get_tutor.dart' as p30;
-import 'application/services/socket/dto/src/notification.dart' as p31;
-import 'application/services/socket/dto/src/on_get_tutor.dart' as p32;
-import 'application/services/socket/dto/src/receive_message.dart' as p33;
-import 'application/services/socket/dto/src/send_message.dart' as p34;
-import 'application/services/socket/dto/src/send_notification.dart' as p35;
+import 'application/services/education/request/src/update_question_status_request.dart'
+    as p24;
+import 'application/services/education/response/src/calculate_price_response.dart'
+    as p25;
+import 'application/services/education/response/src/create_ggmeet_response.dart'
+    as p26;
+import 'application/services/education/response/src/create_question_response.dart'
+    as p27;
+import 'application/services/education/response/src/find_tutor_response.dart'
+    as p28;
+import 'application/services/education/response/src/get_question_info_response.dart'
+    as p29;
+import 'application/services/education/response/src/get_structure_education_response.dart'
+    as p30;
+import 'application/services/education/response/src/get_voucher_response.dart'
+    as p31;
+import 'application/services/file/request/src/file_request.dart' as p32;
+import 'application/services/file/request/src/signed_url_request.dart' as p33;
+import 'application/services/file/request/src/upload_file_request.dart' as p34;
+import 'application/services/file/response/src/file_response.dart' as p35;
+import 'application/services/file/response/src/signed_url_response.dart' as p36;
+import 'application/services/socket/dto/src/create_roomchat.dart' as p37;
+import 'application/services/socket/dto/src/emit_get_tutor.dart' as p38;
+import 'application/services/socket/dto/src/get_accpet_tutor_info.dart' as p39;
+import 'application/services/socket/dto/src/get_answer.dart' as p40;
+import 'application/services/socket/dto/src/notification.dart' as p41;
+import 'application/services/socket/dto/src/on_get_tutor.dart' as p42;
+import 'application/services/socket/dto/src/picked-tutor-accepted-question.dart'
+    as p43;
+import 'application/services/socket/dto/src/receive_message.dart' as p44;
+import 'application/services/socket/dto/src/send_message.dart' as p45;
+import 'application/services/socket/dto/src/send_notification.dart' as p46;
 import 'application/services/user/request/src/update_profile_request.dart'
-    as p36;
-import 'application/services/user/response/src/user_info_response.dart' as p37;
+    as p47;
+import 'application/services/user/response/src/user_info_response.dart' as p48;
 
 void initializeMappers() {
   p0.ChatAIRequestMapper.ensureInitialized();
@@ -74,28 +93,43 @@ void initializeMappers() {
   p15.LocalizedFieldValueMapper.ensureInitialized();
   p16.BaseResponseMapper.ensureInitialized();
   p17.SuccessResponseMapper.ensureInitialized();
-  p18.CreateQuestionRequestMapper.ensureInitialized();
-  p19.RateQuestionRequestMapper.ensureInitialized();
-  p20.CreateQuestionResponseMapper.ensureInitialized();
-  p21.FindTutorResponseMapper.ensureInitialized();
-  p22.GetQuestionInfoResponseMapper.ensureInitialized();
-  p23.LevelResponseMapper.ensureInitialized();
-  p23.GradeResponseMapper.ensureInitialized();
-  p23.SubjectResponseMapper.ensureInitialized();
-  p24.FileRequestMapper.ensureInitialized();
-  p25.SignedUrlRequestMapper.ensureInitialized();
-  p26.UploadFileRequestMapper.ensureInitialized();
-  p27.FileResponseMapper.ensureInitialized();
-  p28.SignedUrlResponseMapper.ensureInitialized();
-  p29.CreateRoomChatMapper.ensureInitialized();
-  p30.EmitGetTutorMapper.ensureInitialized();
-  p31.NotificationMapper.ensureInitialized();
-  p32.OnGetTutorMapper.ensureInitialized();
-  p32.TutorMapper.ensureInitialized();
-  p33.ReceiveMessageMapper.ensureInitialized();
-  p34.SendMessageMapper.ensureInitialized();
-  p35.SendNotificationMapper.ensureInitialized();
-  p36.UpdateProfileRequestMapper.ensureInitialized();
-  p36.GenderMapper.ensureInitialized();
-  p37.UserInfoResponseMapper.ensureInitialized();
+  p18.QuestionStatusMapper.ensureInitialized();
+  p18.QuestionTypeMapper.ensureInitialized();
+  p19.CalculatePriceRequestMapper.ensureInitialized();
+  p20.CreateGGMeetRequestMapper.ensureInitialized();
+  p21.CreateQuestionRequestMapper.ensureInitialized();
+  p22.PickIntrustorRequestMapper.ensureInitialized();
+  p23.RateQuestionRequestMapper.ensureInitialized();
+  p24.UpdateQuestionStatusRequestMapper.ensureInitialized();
+  p25.CalculatePriceReponseMapper.ensureInitialized();
+  p26.CreateGGMeetResponseMapper.ensureInitialized();
+  p27.CreateQuestionResponseMapper.ensureInitialized();
+  p28.FindTutorResponseMapper.ensureInitialized();
+  p29.GetQuestionInfoResponseMapper.ensureInitialized();
+  p30.LevelResponseMapper.ensureInitialized();
+  p30.GradeResponseMapper.ensureInitialized();
+  p30.SubjectResponseMapper.ensureInitialized();
+  p31.VoucherReponseMapper.ensureInitialized();
+  p32.FileRequestMapper.ensureInitialized();
+  p33.SignedUrlRequestMapper.ensureInitialized();
+  p34.UploadFileRequestMapper.ensureInitialized();
+  p35.FileResponseMapper.ensureInitialized();
+  p36.SignedUrlResponseMapper.ensureInitialized();
+  p37.CreateRoomChatMapper.ensureInitialized();
+  p38.EmitGetTutorMapper.ensureInitialized();
+  p39.GetAcceptTutorInfoMapper.ensureInitialized();
+  p40.GetAnswerMapper.ensureInitialized();
+  p40.DataGetAnswerMapper.ensureInitialized();
+  p40.AnswerMapper.ensureInitialized();
+  p41.NotificationMapper.ensureInitialized();
+  p42.OnGetTutorMapper.ensureInitialized();
+  p42.TutorMapper.ensureInitialized();
+  p43.PickedTutorAcceptedQuestionMapper.ensureInitialized();
+  p43.DataPickedTutorAcceptedQuestionMapper.ensureInitialized();
+  p44.ReceiveMessageMapper.ensureInitialized();
+  p45.SendMessageMapper.ensureInitialized();
+  p46.SendNotificationMapper.ensureInitialized();
+  p47.UpdateProfileRequestMapper.ensureInitialized();
+  p47.GenderMapper.ensureInitialized();
+  p48.UserInfoResponseMapper.ensureInitialized();
 }

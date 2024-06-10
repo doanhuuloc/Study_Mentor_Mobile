@@ -1,6 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:study_mentor_mobile/presentation/bases/file_cubit/file_cubit.dart';
@@ -9,19 +8,18 @@ import 'package:study_mentor_mobile/presentation/shared/widgets/buttons/bottom_b
 import 'package:study_mentor_mobile/presentation/shared/widgets/drop_down_bar/drop_down_bar.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/textfields/common_textfield.dart';
-
 import '../../../application/services/education/education.dart';
 import '../../gen/app_colors.dart';
 import '../../router/router_config/router_config.dart';
 import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import '../../shared/widgets/app_bar/common_app_bar.dart';
-import '../../shared/widgets/buttons/primary_button.dart';
 import 'blocs/create_question_cubit.dart';
 import 'blocs/create_question_state.dart';
 import 'widgets/fileBox.dart';
 
 class CreateQuestionScreen extends StatefulWidget {
-  const CreateQuestionScreen({super.key});
+  const CreateQuestionScreen({super.key, required this.questionType});
+  final QuestionType questionType;
 
   @override
   State<CreateQuestionScreen> createState() => _CreateQuestionScreenState();
@@ -35,6 +33,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
         fileCubit: context.read<FileCubit>(),
         failureHandlerManager: context.read<FailureHandlerManager>(),
         educationController: context.read<EducationController>(),
+        questionType: widget.questionType,
       ),
       child: Builder(builder: (context) {
         return Scaffold(
@@ -257,10 +256,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                                         .map((e) => DropDownBarData<int>(
                                             value: e, title: "$e sao"))
                                         .toList(),
-                                    value: context
-                                        .read<CreateQuestionCubit>()
-                                        .state
-                                        .numberOfStar,
+                                    value: state.numberOfStar,
                                     onChanged: (value) => context
                                         .read<CreateQuestionCubit>()
                                         .onChangeNumberOfStar(value),
@@ -269,58 +265,284 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                               );
                             },
                           ),
-                          Text(
-                            "Thời gian tìm người hướng dẫn",
-                            style: Styles.s18().withWeight(FontWeight.w600),
+                          BlocBuilder<CreateQuestionCubit, CreateQuestionState>(
+                            buildWhen: (previous, current) =>
+                                previous.findingTimeField !=
+                                current.findingTimeField,
+                            builder: (context, state) {
+                              return GapItems(
+                                gap: 10,
+                                crossAxisAlignmentRow: CrossAxisAlignment.start,
+                                items: [
+                                  Text(
+                                    "Thời gian tìm người hướng dẫn",
+                                    style: Styles.s18()
+                                        .withWeight(FontWeight.w600),
+                                  ),
+                                  DropDownBar(
+                                    data: [
+                                      10,
+                                      20,
+                                      30,
+                                      45,
+                                      60,
+                                      120,
+                                      360,
+                                      720,
+                                      1440
+                                    ]
+                                        .map((e) => DropDownBarData<int>(
+                                            value: e,
+                                            title: e < 60
+                                                ? "$e phút"
+                                                : "${e ~/ 60} giờ"))
+                                        .toList(),
+                                    value: state.findingTimeField,
+                                    onChanged: (value) => context
+                                        .read<CreateQuestionCubit>()
+                                        .onChangeFindingTime(value),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                          CommonTextField(
-                            maxLines: 1,
-                            onChanged: (value) => context
-                                .read<CreateQuestionCubit>()
-                                .onChangeFindingTime(value),
+                          if (widget.questionType == QuestionType.GGMEET)
+                            BlocBuilder<CreateQuestionCubit,
+                                CreateQuestionState>(
+                              buildWhen: (previous, current) =>
+                                  previous.timeMeeting != current.timeMeeting,
+                              builder: (context, state) {
+                                return GapItems(
+                                  gap: 10,
+                                  crossAxisAlignmentRow:
+                                      CrossAxisAlignment.start,
+                                  items: [
+                                    Text(
+                                      "Thời gian giải đáp câu hỏi",
+                                      style: Styles.s18()
+                                          .withWeight(FontWeight.w600),
+                                    ),
+                                    DropDownBar(
+                                      data: [
+                                        10,
+                                        20,
+                                        30,
+                                        45,
+                                        60,
+                                        120,
+                                        360,
+                                        720,
+                                        1440
+                                      ]
+                                          .map((e) => DropDownBarData<int>(
+                                              value: e,
+                                              title: e < 60
+                                                  ? "$e phút"
+                                                  : "${e ~/ 60} giờ"))
+                                          .toList(),
+                                      value: state.timeMeeting,
+                                      onChanged: (value) => context
+                                          .read<CreateQuestionCubit>()
+                                          .onChangeTimeMeeting(value),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          BlocBuilder<CreateQuestionCubit, CreateQuestionState>(
+                            buildWhen: (previous, current) =>
+                                previous.selectedVoucher !=
+                                    current.selectedVoucher ||
+                                previous.vouchers != current.vouchers,
+                            builder: (context, state) {
+                              return GapItems(
+                                gap: 10,
+                                crossAxisAlignmentRow: CrossAxisAlignment.start,
+                                items: [
+                                  Text(
+                                    "Voucher",
+                                    style: Styles.s18()
+                                        .withWeight(FontWeight.w600),
+                                  ),
+                                  DropDownBar(
+                                    hintText: (state.vouchers?.length ?? 0) <= 0
+                                        ? "Bạn không có bất kỳ voucher nào"
+                                        : null,
+                                    data: state.vouchers
+                                            ?.map((e) =>
+                                                DropDownBarData<VoucherReponse>(
+                                                    value: e,
+                                                    title: e.code ?? ""))
+                                            .toList() ??
+                                        [],
+                                    value: state.selectedVoucher,
+                                    enabled: (state.vouchers?.length ?? 0) > 0,
+                                    onChanged: (value) => context
+                                        .read<CreateQuestionCubit>()
+                                        .onChangeVoucher(
+                                            value as VoucherReponse),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
+                          BlocListener<CreateQuestionCubit,
+                              CreateQuestionState>(
+                            listenWhen: (prev, curr) {
+                              if (prev.canSubmit != curr.canSubmit) {
+                                return true;
+                              }
+                              return prev.subject != curr.subject ||
+                                  prev.findingTimeField !=
+                                      curr.findingTimeField ||
+                                  prev.numberOfStar != curr.numberOfStar ||
+                                  prev.selectedVoucher != curr.selectedVoucher;
+                            },
+                            listener: (context, state) {
+                              if (state.canSubmit) {
+                                context
+                                    .read<CreateQuestionCubit>()
+                                    .calculatePrice();
+                              }
+                            },
+                            child: BlocBuilder<CreateQuestionCubit,
+                                CreateQuestionState>(
+                              buildWhen: (previous, current) =>
+                                  previous.calculatePriceReponse !=
+                                      current.calculatePriceReponse ||
+                                  previous.canSubmit != current.canSubmit,
+                              builder: (context, state) {
+                                if (state.calculatePriceReponse == null ||
+                                    !state.canSubmit) {
+                                  return const SizedBox();
+                                } else {
+                                  double priceVoucher =
+                                      (state.calculatePriceReponse?.price ??
+                                              0) -
+                                          (state.calculatePriceReponse
+                                                  ?.promoPrice ??
+                                              0);
+                                  return GapItems(
+                                    crossAxisAlignmentRow:
+                                        CrossAxisAlignment.start,
+                                    items: [
+                                      Text(
+                                        "Thông tin thanh toán",
+                                        style: Styles.s18()
+                                            .withWeight(FontWeight.w600),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Tổng tiền thanh toán",
+                                            style: Styles.s16()
+                                                .withWeight(FontWeight.w300),
+                                          ),
+                                          Text(
+                                            "${state.calculatePriceReponse?.price?.toStringAsFixed(0)}",
+                                            style: Styles.s16()
+                                                .withWeight(FontWeight.w300),
+                                          ),
+                                        ],
+                                      ),
+                                      if (priceVoucher > 0)
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Voucher giảm giá",
+                                              style: Styles.s16()
+                                                  .withWeight(FontWeight.w300),
+                                            ),
+                                            Text(
+                                              "- ${priceVoucher.toStringAsFixed(0)}",
+                                              style: Styles.s16()
+                                                  .withWeight(FontWeight.w300),
+                                            ),
+                                          ],
+                                        ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Tổng số tiền",
+                                            style: Styles.s16()
+                                                .withWeight(FontWeight.w500),
+                                          ),
+                                          Text(
+                                            "${state.calculatePriceReponse?.promoPrice?.toStringAsFixed(0)}",
+                                            style: Styles.s16()
+                                                .withWeight(FontWeight.w500)
+                                                .withColor(Colors.red),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                          BlocBuilder<CreateQuestionCubit, CreateQuestionState>(
+                              buildWhen: (prev, curr) {
+                            return prev.canSubmit != curr.canSubmit;
+                          }, builder: (context, state) {
+                            return BottomButton(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              title: 'Thanh toán',
+                              onPress: state.canSubmit
+                                  ? () async {
+                                      final response = await context
+                                          .read<CreateQuestionCubit>()
+                                          .createQuestion();
+                                      if (response ==
+                                          const CreateQuestionResponse()) {
+                                        return;
+                                      }
+                                      FindIntrustorRouteData(
+                                              $extra: FindIntrustorExtraData(
+                                                questionId:
+                                                    response.questionId ?? "",
+                                                subjectId:
+                                                    state.subject?.id ?? "",
+                                              ),
+                                              questionId:
+                                                  response.questionId ?? "")
+                                          .pushReplacement(context);
+
+                                      // final subjectId = context
+                                      //     .read<CreateQuestionCubit>()
+                                      //     .state
+                                      //     .subject
+                                      //     ?.id;
+                                      // if (await ConfirmRouteData(
+                                      //   title:
+                                      //       "Bạn cần thanh toán ${response.price?.toStringAsFixed(0)} để tiếp tục giải đáp câu hỏi",
+                                      //   content: "",
+                                      //   rejectTitle: "Hủy",
+                                      //   acceptTitle: "Thanh toán",
+                                      // ).push(context)) {
+                                      //   FindIntrustorRouteData(
+                                      //           $extra: FindIntrustorExtraData(
+                                      //             questionId: response.questionId ?? "",
+                                      //             subjectId: subjectId ?? "",
+                                      //           ),
+                                      //           questionId: response.questionId ?? "")
+                                      //       .pushReplacement(context);
+                                      // }
+                                    }
+                                  : null,
+                            );
+                          }),
                         ],
                       ),
                     ),
                   ),
                 ),
-                BlocBuilder<CreateQuestionCubit, CreateQuestionState>(
-                    buildWhen: (prev, curr) {
-                  return prev.canSubmit != curr.canSubmit;
-                }, builder: (context, state) {
-                  return BottomButton(
-                    title: 'Tiếp tục',
-                    onPress: state.canSubmit
-                        ? () async {
-                            final response = await context
-                                .read<CreateQuestionCubit>()
-                                .createQuestion();
-                            if (response == const CreateQuestionResponse()) {
-                              return;
-                            }
-                            final subjectId = context
-                                .read<CreateQuestionCubit>()
-                                .state
-                                .subject
-                                ?.id;
-                            if (await ConfirmRouteData(
-                              title:
-                                  "Bạn cần thanh toán ${response.price?.toStringAsFixed(0)} để tiếp tục giải đáp câu hỏi",
-                              content: "",
-                              rejectTitle: "Hủy",
-                              acceptTitle: "Thanh toán",
-                            ).push(context)) {
-                              FindIntrustorRouteData(
-                                $extra: FindIntrustorExtraData(
-                                  questionId: response.questionId ?? "",
-                                  subjectId: subjectId ?? "",
-                                ),
-                              ).pushReplacement(context);
-                            }
-                          }
-                        : null,
-                  );
-                }),
               ],
             ));
       }),

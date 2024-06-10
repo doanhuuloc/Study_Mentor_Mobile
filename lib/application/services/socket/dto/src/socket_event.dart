@@ -3,16 +3,20 @@
 enum SocketEvent {
   DISCONNECT('disconnect'),
   CREATE_CHAT('create-chat'),
-  INTRUSTORACCEPTED("tutor-accepted-question"),
   NOTIFICATION('notification'),
   SEND_NOTIFICATION('sendNotification'),
   SEND_MESSAGE('send-message'),
   RECEIVE_MESSAGE('receive-message'),
   QUESTION('question'),
-  EMIT_GET_TUTORS_AVAILABLE('tutorsAvailable'),
-  ON_GET_TUTORS_AVAILABLE('tutorsAvailable'),
+  EMIT_GET_TUTORS_AVAILABLE('tutors-available'),
+  ON_GET_TUTORS_AVAILABLE('get-tutors-available'),
   GET_VOUCHET("get-voucher"),
-  ERROR('error');
+  ERROR('error'),
+  GET_ACCEPT_TUTOR_INFO('tutor-accepted-question'),
+  PICKED_TUTOR_ACCEPTED_QUESTION('picked-tutor-accepted-question'),
+  GET_ANSWER('answer'),
+  CREATE_GGMEET('create-ggmeet'),
+  GET_LINK_GGMEET('receive-ggmeet');
 
   final String event;
 

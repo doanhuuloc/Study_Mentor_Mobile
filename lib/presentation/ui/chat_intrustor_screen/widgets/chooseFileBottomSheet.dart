@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,7 +13,7 @@ class ChooseFileBottomSheet extends StatelessWidget {
     return Wrap(
       children: [
         Ink(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.white,
           ),
           child: Column(
@@ -70,7 +68,7 @@ class ChooseFileBottomSheet extends StatelessWidget {
                           await FilePicker.platform.pickFiles();
 
                       if (result != null) {
-                        File file = File(result.files.single.path!);
+                        Navigator.of(context).pop(result);
                       }
                     },
                     child: Container(

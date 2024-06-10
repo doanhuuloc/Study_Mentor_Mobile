@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:study_mentor_mobile/application/services/file/file.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 
 import '../../../shared/theme/theme.dart';
 import 'fileBox.dart';
 
 class QuestionInfoBox extends StatelessWidget {
-  const QuestionInfoBox({super.key});
+  const QuestionInfoBox({super.key, required this.question, this.fileResponse});
+  final String question;
+  final List<FileResponse>? fileResponse;
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +41,18 @@ class QuestionInfoBox extends StatelessWidget {
           MarkdownBody(
               styleSheet: MarkdownStyleSheet.fromTheme(
                   ThemeData(textTheme: TextTheme(bodyMedium: Styles.s15()))),
-              data:
-                  "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself."),
+              data: question),
           Text(
             "Tệp đính kèm",
             style: Styles.s15().withWeight(FontWeight.w600),
           ),
-          FileBox(
-            name: "question.doc",
-            download: () {},
-          ),
-          FileBox(
-            name: "question.doc",
-            download: () {},
+          Column(
+            children: (fileResponse ?? []).map((file) {
+              return FileBox(
+                name: file.fileName ?? "",
+                download: () {},
+              );
+            }).toList(),
           ),
         ],
       ),

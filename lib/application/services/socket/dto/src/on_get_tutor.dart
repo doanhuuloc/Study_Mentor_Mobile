@@ -5,7 +5,7 @@ part 'on_get_tutor.mapper.dart';
 @MappableClass()
 class OnGetTutor with OnGetTutorMappable {
   const OnGetTutor({
-    this.tutor,
+    this.data,
     this.pageSize,
     this.total,
     this.previousPage,
@@ -16,7 +16,7 @@ class OnGetTutor with OnGetTutorMappable {
   factory OnGetTutor.fromJson(Map<String, dynamic> json) =>
       OnGetTutorMapper.fromJson(json);
 
-  final List<Tutor>? tutor;
+  final List<Tutor>? data;
   final int? pageSize;
   final int? total;
   final int? previousPage;

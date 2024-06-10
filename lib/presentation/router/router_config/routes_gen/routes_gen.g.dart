@@ -169,27 +169,28 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
               factory: $CreateQuestionRouteDataExtension._fromState,
               routes: [
                 GoRouteData.$route(
-                  path: 'findIntrustor',
+                  path: 'findIntrustor/:questionId',
                   parentNavigatorKey:
                       FindIntrustorRouteData.$parentNavigatorKey,
                   factory: $FindIntrustorRouteDataExtension._fromState,
-                  routes: [
-                    GoRouteData.$route(
-                      path: 'findingIntrustor',
-                      parentNavigatorKey:
-                          FindingIntrustorRouteData.$parentNavigatorKey,
-                      factory: $FindingIntrustorRouteDataExtension._fromState,
-                      routes: [
-                        GoRouteData.$route(
-                          path: 'intrustorAnswer',
-                          parentNavigatorKey:
-                              IntrustorAnswerRouteData.$parentNavigatorKey,
-                          factory:
-                              $IntrustorAnswerRouteDataExtension._fromState,
-                        ),
-                      ],
-                    ),
-                  ],
+                ),
+                GoRouteData.$route(
+                  path: 'findingIntrustor/:questionId',
+                  parentNavigatorKey:
+                      FindingIntrustorRouteData.$parentNavigatorKey,
+                  factory: $FindingIntrustorRouteDataExtension._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'intrustorAnswer/:questionId',
+                  parentNavigatorKey:
+                      IntrustorAnswerRouteData.$parentNavigatorKey,
+                  factory: $IntrustorAnswerRouteDataExtension._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'intrustorInfo',
+                  parentNavigatorKey:
+                      IntrustorInfoRouteData.$parentNavigatorKey,
+                  factory: $IntrustorInfoRouteDataExtension._fromState,
                 ),
               ],
             ),
@@ -288,11 +289,12 @@ extension $CreateQuestionRouteDataExtension on CreateQuestionRouteData {
 extension $FindIntrustorRouteDataExtension on FindIntrustorRouteData {
   static FindIntrustorRouteData _fromState(GoRouterState state) =>
       FindIntrustorRouteData(
+        questionId: state.pathParameters['questionId']!,
         $extra: state.extra as FindIntrustorExtraData?,
       );
 
   String get location => GoRouteData.$location(
-        '/home/createQuestion/findIntrustor',
+        '/home/createQuestion/findIntrustor/${Uri.encodeComponent(questionId)}',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -309,10 +311,12 @@ extension $FindIntrustorRouteDataExtension on FindIntrustorRouteData {
 
 extension $FindingIntrustorRouteDataExtension on FindingIntrustorRouteData {
   static FindingIntrustorRouteData _fromState(GoRouterState state) =>
-      const FindingIntrustorRouteData();
+      FindingIntrustorRouteData(
+        questionId: state.pathParameters['questionId']!,
+      );
 
   String get location => GoRouteData.$location(
-        '/home/createQuestion/findIntrustor/findingIntrustor',
+        '/home/createQuestion/findingIntrustor/${Uri.encodeComponent(questionId)}',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -327,10 +331,12 @@ extension $FindingIntrustorRouteDataExtension on FindingIntrustorRouteData {
 
 extension $IntrustorAnswerRouteDataExtension on IntrustorAnswerRouteData {
   static IntrustorAnswerRouteData _fromState(GoRouterState state) =>
-      const IntrustorAnswerRouteData();
+      IntrustorAnswerRouteData(
+        questionId: state.pathParameters['questionId']!,
+      );
 
   String get location => GoRouteData.$location(
-        '/home/createQuestion/findIntrustor/findingIntrustor/intrustorAnswer',
+        '/home/createQuestion/intrustorAnswer/${Uri.encodeComponent(questionId)}',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -341,6 +347,28 @@ extension $IntrustorAnswerRouteDataExtension on IntrustorAnswerRouteData {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+extension $IntrustorInfoRouteDataExtension on IntrustorInfoRouteData {
+  static IntrustorInfoRouteData _fromState(GoRouterState state) =>
+      IntrustorInfoRouteData(
+        $extra: state.extra as IntrustorInfoExtraData,
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/createQuestion/intrustorInfo',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
 }
 
 extension $ChatAIRouteDataExtension on ChatAIRouteData {

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import '../../../../application/services/ai/ai.dart';
 import '../../../../application/services/app/app_config/app_config.dart';
+import '../../../../application/services/education/education.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'history_state.dart';
@@ -9,6 +10,7 @@ import 'history_state.dart';
 class HistoryCubit extends SafeCubit<HistoryState> {
   HistoryCubit({
     required this.aiController,
+    required this.educationController,
     required this.appConfig,
     required this.userId,
     required this.failureHandlerManager,
@@ -17,6 +19,7 @@ class HistoryCubit extends SafeCubit<HistoryState> {
   }
 
   final AIController aiController;
+  final EducationController educationController;
   final AppConfig appConfig;
   final String userId;
   final FailureHandlerManager failureHandlerManager;
@@ -73,6 +76,23 @@ class HistoryCubit extends SafeCubit<HistoryState> {
       emit(state.copyWith(
         loading: false,
         listChatPay: listChatPay.right,
+      ));
+    }
+  }
+
+  Future<void> getListQuestion(QuestionStatus questionStatus) async {
+    emit(state.copyWith(loading: true));
+    final listQuestion =
+        await educationController.getListQuestion(status: questionStatus.name);
+
+    if (listQuestion.isLeft) {
+      failureHandlerManager.handle(listQuestion.left);
+    }
+
+    if (listQuestion.isRight) {
+      emit(state.copyWith(
+        loading: false,
+        listQuestion: listQuestion.right.data,
       ));
     }
   }

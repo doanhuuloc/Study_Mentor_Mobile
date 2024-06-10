@@ -10,10 +10,12 @@ class IntrustorItem extends StatelessWidget {
     required this.name,
     required this.numberOfStar,
     required this.voidCallback,
+    required this.avatar,
   });
   final String name;
   final int numberOfStar;
   final VoidCallback voidCallback;
+  final String avatar;
 
   @override
   Widget build(BuildContext context) {

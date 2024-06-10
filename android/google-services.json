@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1074227343663",
+    "project_id": "study-mentor-9999",
+    "storage_bucket": "study-mentor-9999.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074227343663:android:86809172b542154a38f1da",
+        "android_client_info": {
+          "package_name": "com.sm.study_mentor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074227343663-1i69brqpbehc870imurmfvtt9iso9mr0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWq7rGXCDCMWbrCVr9c658N9CcwBuiSZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074227343663-1i69brqpbehc870imurmfvtt9iso9mr0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -32,10 +32,6 @@ class SocketCubit extends SafeCubit<SocketState> {
         socket: state.socket!, createRoomChat: createRoomChat);
   }
 
-  void intrustorAccepted() {
-    socketController.intrustorAccepted(socket: state.socket);
-  }
-
   void sendMessage({required SendMessage sendMessage}) {
     socketController.sendMessage(
         socket: state.socket, sendMessage: sendMessage);
@@ -62,5 +58,19 @@ class SocketCubit extends SafeCubit<SocketState> {
 
   void getVoucher() {
     socketController.getVoucher(socket: state.socket);
+  }
+
+  void getAcceptTutorInfo(Function function) {
+    socketController.getGetAcceptTutorInfo(
+        socket: state.socket, function: function);
+  }
+
+  void pickedTutorAcceptedQuestion(Function function) {
+    socketController.pickedTutorAcceptedQuestion(
+        socket: state.socket, function: function);
+  }
+
+  void getAnswer(Function function) {
+    socketController.getAnswer(socket: state.socket, function: function);
   }
 }

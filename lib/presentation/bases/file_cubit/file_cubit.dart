@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
-
 import '../../../application/services/file/file.dart';
 import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import '../bloc_utils/safe_cubit/safe_cubit.dart';
@@ -56,14 +54,13 @@ class FileCubit extends SafeCubit<FileState> {
     return null;
   }
 
-  Future<List<FileRequest>> uploadListFile(
-      List<FilePickerResult> listFile) async {
+  Future<List<FileRequest>> uploadListFile(List<FileData> listFile) async {
     final List<FileRequest> result = [];
     final List<FileRequest?> files = await Future.wait(
       listFile.map((file) async {
         final fileres = await uploadFile(
-          File(file.files.single.path ?? ""),
-          file.files.single.name,
+          file.file,
+          file.fileName,
         );
         return fileres;
       }).toList(),
