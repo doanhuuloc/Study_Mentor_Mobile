@@ -52,8 +52,11 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
     ));
 
     final msgres = await aiController.chatAI(
-      chatAIRequest: SendMessage(content: message, senderId:userId, recipientId: idChatAI,roomId: state.roomId)
-    );
+        chatAIRequest: SendMessage(
+            content: message,
+            senderId: userId,
+            recipientId: idChatAI,
+            roomId: state.roomId));
 
     if (msgres.isLeft) {
       failureHandlerManager.handle(msgres.left);

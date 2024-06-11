@@ -54,7 +54,7 @@ abstract class EducationDataSource {
     @Body() required UpdateQuestionStatusRequest updateQuestionStatusRequest,
   });
 
-    @POST('/api/users/create/ggMeet')
+  @POST('/api/users/create/ggMeet')
   Future<BaseResponse<CreateGGMeetResponse>> createGGMeet(
       @Body() CreateGGMeetRequest createGGMeetRequest);
 }

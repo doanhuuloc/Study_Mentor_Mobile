@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-
 part 'calculate_price_request.mapper.dart';
 
 @MappableClass()

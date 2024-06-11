@@ -116,7 +116,8 @@ class SKo extends S {
 
   @override
   String commonCurrencyFormat(double value) {
-    final intl.NumberFormat valueNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
     final String valueString = valueNumberFormat.format(value);
 
     return '$valueString원';
@@ -720,7 +721,8 @@ class SKo extends S {
   String get goToLoginPage => '로그인 페이지로 이동';
 
   @override
-  String get pleaseLoginToViewRegisteredInformation => '이 기능은 로그인이 필요합니다. 로그인하시겠습니까?';
+  String get pleaseLoginToViewRegisteredInformation =>
+      '이 기능은 로그인이 필요합니다. 로그인하시겠습니까?';
 
   @override
   String get alertProductAddedToCart => '장바구니에 추가된 제품';
@@ -967,7 +969,8 @@ class SKo extends S {
   String get dord1004 => '주문은 未確認 - 確認済み - 배달 중 상태에서만 취소할 수 있습니다.';
 
   @override
-  String get dord1005 => '관리자만 주문 상태를 다음과 같이 변경할 수 있습니다: 未確認 -> 確認済み -> 배달 중 -> 配送済み';
+  String get dord1005 =>
+      '관리자만 주문 상태를 다음과 같이 변경할 수 있습니다: 未確認 -> 確認済み -> 배달 중 -> 配送済み';
 
   @override
   String get dord1006 => '관리자만 주문 상태를 다음과 같이 환불할 수 있습니다: 취소 -> 환불';
@@ -1165,7 +1168,8 @@ class SKo extends S {
   String get startDelivery => '배송출발';
 
   @override
-  String get deliveryInformationHasNotBeenUpdated => '배송정보가 업데이트되지 않았습니다. 나중에 다시 시도 해주십시오';
+  String get deliveryInformationHasNotBeenUpdated =>
+      '배송정보가 업데이트되지 않았습니다. 나중에 다시 시도 해주십시오';
 
   @override
   String get dicountInvalid => '할인 금액은 주문 금액의 30%를 초과할 수 없습니다.';

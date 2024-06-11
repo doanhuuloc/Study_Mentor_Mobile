@@ -116,7 +116,8 @@ class SEn extends S {
 
   @override
   String commonCurrencyFormat(double value) {
-    final intl.NumberFormat valueNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
     final String valueString = valueNumberFormat.format(value);
 
     return '$valueString won';
@@ -192,7 +193,8 @@ class SEn extends S {
   String get placeHolderPassword => 'Password';
 
   @override
-  String get validationPassword => 'Combination of alphanumeric and special characters, 8-16 characters';
+  String get validationPassword =>
+      'Combination of alphanumeric and special characters, 8-16 characters';
 
   @override
   String get doubleCheck => 'Double check';
@@ -216,7 +218,8 @@ class SEn extends S {
   String get verify => 'Verify';
 
   @override
-  String get placeHolderReferrerPhoneNumber => 'Referrer phone number (optional)';
+  String get placeHolderReferrerPhoneNumber =>
+      'Referrer phone number (optional)';
 
   @override
   String get usernameExisted => 'This username already exists.';
@@ -231,10 +234,12 @@ class SEn extends S {
   String get empty => 'This field cannot be empty.';
 
   @override
-  String get usernameInvalid => 'Combination of alphanumeric, minimum 6 characters';
+  String get usernameInvalid =>
+      'Combination of alphanumeric, minimum 6 characters';
 
   @override
-  String get passwordInvalid => 'Combination of alphanumeric and special characters, minimum 8 characters';
+  String get passwordInvalid =>
+      'Combination of alphanumeric and special characters, minimum 8 characters';
 
   @override
   String get confirmPasswordNotMatch => 'Passwords do not match';
@@ -246,7 +251,8 @@ class SEn extends S {
   String get otpInvalid => '6-digit number allowed';
 
   @override
-  String get phoneNumberNotExisted => 'This phone number does not exist in the application.';
+  String get phoneNumberNotExisted =>
+      'This phone number does not exist in the application.';
 
   @override
   String usernameOfPhoneNumber(String phoneNumber) {
@@ -271,7 +277,8 @@ class SEn extends S {
   String get pleaseEnterPassword => 'Please enter the password to reset.';
 
   @override
-  String get passwordCondition => '(Combination of alphanumeric and special characters, minimum 8 characters)';
+  String get passwordCondition =>
+      '(Combination of alphanumeric and special characters, minimum 8 characters)';
 
   @override
   String get button => 'Button';
@@ -413,7 +420,8 @@ class SEn extends S {
   String get personalInfoTermAccept => '(required) Agree to privacy policy';
 
   @override
-  String get smTermAccept => '(Required) Agree to Success Mania Mall terms of service';
+  String get smTermAccept =>
+      '(Required) Agree to Success Mania Mall terms of service';
 
   @override
   String get view => 'View';
@@ -422,7 +430,8 @@ class SEn extends S {
   String get agreeToTermAndCond => 'Agree to terms and conditions';
 
   @override
-  String get successSecretOfTop1 => 'Success Secrets from Top 1%\nof entrepreneurs';
+  String get successSecretOfTop1 =>
+      'Success Secrets from Top 1%\nof entrepreneurs';
 
   @override
   String get termAndCondDetails => 'Terms and conditions details';
@@ -714,13 +723,15 @@ class SEn extends S {
   String get loginAndSignUp => 'Login and sign up';
 
   @override
-  String get youNeedToLoginToAccessThisContent => 'You need to login to access this content';
+  String get youNeedToLoginToAccessThisContent =>
+      'You need to login to access this content';
 
   @override
   String get goToLoginPage => 'Go to login page';
 
   @override
-  String get pleaseLoginToViewRegisteredInformation => 'Please login to view registered information. Would you like to log in?';
+  String get pleaseLoginToViewRegisteredInformation =>
+      'Please login to view registered information. Would you like to log in?';
 
   @override
   String get alertProductAddedToCart => 'Product added to cart alert';
@@ -742,7 +753,8 @@ class SEn extends S {
   }
 
   @override
-  String get orderProductAgree => 'I have checked the product name, price, and delivery information of the product to be ordered, and agree to purchase it.';
+  String get orderProductAgree =>
+      'I have checked the product name, price, and delivery information of the product to be ordered, and agree to purchase it.';
 
   @override
   String get addToCart => 'Add to cart';
@@ -766,7 +778,8 @@ class SEn extends S {
   String get paymentFailedMessage => 'Payment failed.\nPlease try again.';
 
   @override
-  String get paymentSuccessMessage => 'Payment completed.\nThank you for your order.';
+  String get paymentSuccessMessage =>
+      'Payment completed.\nThank you for your order.';
 
   @override
   String get apply => 'Apply';
@@ -784,7 +797,8 @@ class SEn extends S {
   String get invalidEmailFormat => 'Invalid email format';
 
   @override
-  String get areYouSureYouWantToUnregister => 'Are you sure you want to unregister?';
+  String get areYouSureYouWantToUnregister =>
+      'Are you sure you want to unregister?';
 
   @override
   String get areYouSureYouWantToDelete => 'Are you sure you want to delete?';
@@ -880,7 +894,8 @@ class SEn extends S {
   String get dcrt1000 => 'Cart not found';
 
   @override
-  String get dcrt1001 => 'Product quantity must be less than or equal to the quantity in stock';
+  String get dcrt1001 =>
+      'Product quantity must be less than or equal to the quantity in stock';
 
   @override
   String get dc1000 => 'can\'t add sub-category of second depth category';
@@ -961,16 +976,20 @@ class SEn extends S {
   String get dord1002 => 'Order does not belong to this user';
 
   @override
-  String get dord1003 => 'Order only cancel in order status : UNCONFIRMED - CONFIRMED';
+  String get dord1003 =>
+      'Order only cancel in order status : UNCONFIRMED - CONFIRMED';
 
   @override
-  String get dord1004 => 'Order only cancel in order status : UNCONFIRMED - CONFIRMED - DELIVERING';
+  String get dord1004 =>
+      'Order only cancel in order status : UNCONFIRMED - CONFIRMED - DELIVERING';
 
   @override
-  String get dord1005 => 'Admin only change Order status follow this : UNCONFIRMED -> CONFIRMED -> DELIVERING -> DELIVERED';
+  String get dord1005 =>
+      'Admin only change Order status follow this : UNCONFIRMED -> CONFIRMED -> DELIVERING -> DELIVERED';
 
   @override
-  String get dord1006 => 'Admin only refund Order status follow this : CANCEL -> REFUND';
+  String get dord1006 =>
+      'Admin only refund Order status follow this : CANCEL -> REFUND';
 
   @override
   String get dord1007 => 'Refund fail';
@@ -979,7 +998,8 @@ class SEn extends S {
   String get aos1 => 'Order Session not found';
 
   @override
-  String get aos2 => 'Product quantity must be less than or equal to the quantity in stock';
+  String get aos2 =>
+      'Product quantity must be less than or equal to the quantity in stock';
 
   @override
   String get dpst1000 => 'post not found';
@@ -1099,7 +1119,8 @@ class SEn extends S {
   String get sw500 => 'Server error.';
 
   @override
-  String get connectionFailure => 'can not connect to server. Please try again later';
+  String get connectionFailure =>
+      'can not connect to server. Please try again later';
 
   @override
   String get timeoutFailure => 'request timeout';
@@ -1144,7 +1165,8 @@ class SEn extends S {
   String get viewDetails => 'View details';
 
   @override
-  String get areYouSureYouWantToCancelThisOrder => 'Are you sure you want to cancel this order?';
+  String get areYouSureYouWantToCancelThisOrder =>
+      'Are you sure you want to cancel this order?';
 
   @override
   String get deliveryStatus => 'Delivery status';
@@ -1165,7 +1187,8 @@ class SEn extends S {
   String get startDelivery => 'Start Delivery';
 
   @override
-  String get deliveryInformationHasNotBeenUpdated => 'Delivery information has not been updated. Please try again later';
+  String get deliveryInformationHasNotBeenUpdated =>
+      'Delivery information has not been updated. Please try again later';
 
   @override
   String get dicountInvalid => 'Discount cannot exceed 30% of order value';

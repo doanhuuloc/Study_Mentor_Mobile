@@ -1,7 +1,5 @@
-import 'package:study_mentor_mobile/application/services/education/request/src/create_ggmeet_request.dart';
 import 'package:study_mentor_mobile/application/services/socket/dto/src/get_accpet_tutor_info.dart';
 import 'package:study_mentor_mobile/application/services/socket/dto/src/get_answer.dart';
-import 'package:study_mentor_mobile/application/services/education/response/src/create_ggmeet_response.dart';
 import 'package:study_mentor_mobile/application/services/socket/dto/src/picked-tutor-accepted-question.dart';
 
 import '../../../application/services/socket/controller/controller.dart';
@@ -137,5 +135,4 @@ class SocketControllerImpl with SocketController {
       function(answer);
     });
   }
-
 }

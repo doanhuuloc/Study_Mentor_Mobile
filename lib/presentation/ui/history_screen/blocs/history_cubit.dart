@@ -39,8 +39,8 @@ class HistoryCubit extends SafeCubit<HistoryState> {
         loading: false,
         listChatGpt: listChatGpt.right,
       ));
-    }else{
-      emit(state.copyWith(loading:false));
+    } else {
+      emit(state.copyWith(loading: false));
     }
   }
 

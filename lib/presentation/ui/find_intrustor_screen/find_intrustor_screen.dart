@@ -96,46 +96,43 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                   ),
                   Expanded(
                       child: SingleChildScrollView(
-                        child:
-                            BlocBuilder<FindIntrustorCubit, FindIntrustorState>(
-                          buildWhen: (previous, current) =>
-                              previous.tutor != current.tutor,
-                          builder: (context, state) {
-                            return RefreshIndicator(
-                              onRefresh: () async{
-                                
-                              },
-                              child: GapItems(
-                                gap: 10,
-                                items: [
-                                  ...context
-                                      .read<FindIntrustorCubit>()
-                                      .state
-                                      .tutor
-                                      .map(
-                                        (e) => IntrustorItem(
-                                          name: e.fullName ?? "",
-                                          numberOfStar: e.averageRate ?? 0,
-                                          avatar: e.avatar ?? "",
-                                          voidCallback: () {
-                                            IntrustorInfoRouteData(
-                                                    $extra: IntrustorInfoExtraData(
-                                                        intrustor: UserInfoResponse(
-                                                          id: e.id,
-                                                          fullName: e.fullName,
-                                                        ),
-                                                        questionId:
-                                                            widget.questionId))
-                                                .push(context);
-                                          },
-                                        ),
-                                      ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ))
+                    child: BlocBuilder<FindIntrustorCubit, FindIntrustorState>(
+                      buildWhen: (previous, current) =>
+                          previous.tutor != current.tutor,
+                      builder: (context, state) {
+                        return RefreshIndicator(
+                          onRefresh: () async {},
+                          child: GapItems(
+                            gap: 10,
+                            items: [
+                              ...context
+                                  .read<FindIntrustorCubit>()
+                                  .state
+                                  .tutor
+                                  .map(
+                                    (e) => IntrustorItem(
+                                      name: e.fullName ?? "",
+                                      numberOfStar: e.averageRate ?? 0,
+                                      avatar: e.avatar ?? "",
+                                      voidCallback: () {
+                                        IntrustorInfoRouteData(
+                                                $extra: IntrustorInfoExtraData(
+                                                    intrustor: UserInfoResponse(
+                                                      id: e.id,
+                                                      fullName: e.fullName,
+                                                    ),
+                                                    questionId:
+                                                        widget.questionId))
+                                            .push(context);
+                                      },
+                                    ),
+                                  ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ))
                 ],
               ),
             ),

@@ -33,7 +33,7 @@ class Answer with AnswerMappable {
 
   factory Answer.fromJson(Map<String, dynamic> json) =>
       AnswerMapper.fromJson(json);
-      
+
   final String? id;
   final DateTime? createdAt;
   final DateTime? updatedAt;

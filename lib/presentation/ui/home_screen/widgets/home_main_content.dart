@@ -35,7 +35,7 @@ class HomeMainContent extends StatelessWidget {
                     //     context: context,
                     //     builder: (context) => const _SelectAIDialog());
 
-                    IntrustorAnswerRouteData(
+                    const IntrustorAnswerRouteData(
                             questionId: "39caed83-d3da-4a30-bbbf-362379c59882")
                         .push(context);
                   },
