@@ -50,23 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCgMQLSVQH34Ol9vbcX1QPtUwFfsikhZGY',
-    appId: '1:722720840680:android:9b5341e846c452dbfae25d',
-    messagingSenderId: '722720840680',
-    projectId: 'success-mania-86e8e',
-    storageBucket: 'success-mania-86e8e.appspot.com',
+    apiKey: 'AIzaSyCWq7rGXCDCMWbrCVr9c658N9CcwBuiSZs',
+    appId: '1:1074227343663:android:272873bb970f706b38f1da',
+    messagingSenderId: '1074227343663',
+    projectId: 'study-mentor-9999',
+    storageBucket: 'study-mentor-9999.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAMdNlX-bV_35cIEJE_dQedXWKyfu9nnSk',
-    appId: '1:722720840680:ios:3ed9c97eb13d5da6fae25d',
-    messagingSenderId: '722720840680',
-    projectId: 'success-mania-86e8e',
-    storageBucket: 'success-mania-86e8e.appspot.com',
-    androidClientId:
-        '722720840680-674f4160gc6ifmrl90p91vf6960icsmo.apps.googleusercontent.com',
-    iosClientId:
-        '722720840680-6a4tfvj4fhfqg1hbf1o3p3a0v2nsijco.apps.googleusercontent.com',
-    iosBundleId: 'com.successMania.successManiaMobile',
+    apiKey: 'AIzaSyCoQosdj6jzr3mNNOR0e6SU6XNY8gEN8xI',
+    appId: '1:1074227343663:ios:26633f95ea8dfef338f1da',
+    messagingSenderId: '1074227343663',
+    projectId: 'study-mentor-9999',
+    storageBucket: 'study-mentor-9999.appspot.com',
+    iosBundleId: 'com.sm.studymentor',
   );
 }

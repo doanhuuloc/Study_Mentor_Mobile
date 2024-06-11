@@ -51,5 +51,8 @@
 	<string>Để chọn một hình ảnh hoặc chọn một hình đại diện được sử dụng trong bài đánh giá của bạn</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Để ghi âm và chia sẻ bài đánh giá của bạn</string>
+	<!-- FirebaseMessagingAutoInitEnabled = NO -->
+	<key>FirebaseMessagingAutoInitEnabled</key>
+	<false/>
 </dict>
 </plist>

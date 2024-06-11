@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
+import 'package:study_mentor_mobile/presentation/shared/handlers/loading_handler/push_notification_handler.dart';
 
 import '../di/di.dart';
 import 'bases/global_key_provider/global_key_provider.dart';
@@ -47,6 +48,7 @@ class SuccessManiaApp extends StatelessWidget {
           StatusBarHeightProvider(),
           AssetsLoaderHandler(),
           // OneSignalHandler(),
+          PushNotificationHandler(),
           AppRoutingConfig(),
         ],
         child: Builder(

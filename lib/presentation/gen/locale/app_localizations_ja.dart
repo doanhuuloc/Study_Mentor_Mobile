@@ -116,8 +116,7 @@ class SJa extends S {
 
   @override
   String commonCurrencyFormat(double value) {
-    final intl.NumberFormat valueNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat valueNumberFormat = intl.NumberFormat.decimalPattern(localeName);
     final String valueString = valueNumberFormat.format(value);
 
     return '$valueString원';
@@ -721,8 +720,7 @@ class SJa extends S {
   String get goToLoginPage => 'ログインページへ移動';
 
   @override
-  String get pleaseLoginToViewRegisteredInformation =>
-      'この機能を利用するにはログインが必要です。ログインしますか？';
+  String get pleaseLoginToViewRegisteredInformation => 'この機能を利用するにはログインが必要です。ログインしますか？';
 
   @override
   String get alertProductAddedToCart => 'カートに追加された製品';
@@ -969,8 +967,7 @@ class SJa extends S {
   String get dord1004 => '注文は次の注文ステータスのみキャンセルできます: 未確認 - 確認済み - 配送中';
 
   @override
-  String get dord1005 =>
-      '管理者のみが注文ステータスを次のように変更できます: 未確認 -> 確認済み -> 配送中 -> 配達済み';
+  String get dord1005 => '管理者のみが注文ステータスを次のように変更できます: 未確認 -> 確認済み -> 配送中 -> 配達済み';
 
   @override
   String get dord1006 => '管理者のみが注文ステータスを次のように払い戻すことができます: キャンセル -> 返金';
@@ -1168,8 +1165,7 @@ class SJa extends S {
   String get startDelivery => '配送開始';
 
   @override
-  String get deliveryInformationHasNotBeenUpdated =>
-      '配信情報は更新されていません。 後でもう一度試してください';
+  String get deliveryInformationHasNotBeenUpdated => '配信情報は更新されていません。 後でもう一度試してください';
 
   @override
   String get dicountInvalid => '割引は注文金額の 30% を超えることはできません';
