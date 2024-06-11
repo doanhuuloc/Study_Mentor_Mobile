@@ -1,4 +1,5 @@
 import '../../../application/services/ai/ai.dart';
+import '../../../application/services/socket/dto/dto.dart';
 import '../../../utilities/failure/failure.dart';
 import '../../../utilities/result/result.dart';
 import '../../data_source_error_handler_mixin.dart';
@@ -13,15 +14,9 @@ class AIControllerImpl with AIController, DataSourceErrorHandler {
 
   @override
   Future<Result<Failure, ChatAIResponse>> chatAI(
-      {required ChatAIRequest chatAIRequest,
-      required String userId,
-      required String idChatAI,
-      required String roomId}) {
+      {required SendMessage chatAIRequest}) {
     return handleApiResult(
         future: () => aiDataSource.chatAI(
-              userId: userId,
-              idChatAI: idChatAI,
-              roomId: roomId,
               chatAIRequest: chatAIRequest,
             ));
   }

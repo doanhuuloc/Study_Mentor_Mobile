@@ -13,6 +13,7 @@ class ChatAIResponseMapper extends ClassMapperBase<ChatAIResponse> {
   static ChatAIResponseMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ChatAIResponseMapper._());
+      FileRequestMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -20,9 +21,9 @@ class ChatAIResponseMapper extends ClassMapperBase<ChatAIResponse> {
   @override
   final String id = 'ChatAIResponse';
 
-  static String? _$contactId(ChatAIResponse v) => v.contactId;
-  static const Field<ChatAIResponse, String> _f$contactId =
-      Field('contactId', _$contactId, opt: true);
+  static String? _$recipientId(ChatAIResponse v) => v.recipientId;
+  static const Field<ChatAIResponse, String> _f$recipientId =
+      Field('recipientId', _$recipientId, opt: true);
   static DateTime? _$createAt(ChatAIResponse v) => v.createAt;
   static const Field<ChatAIResponse, DateTime> _f$createAt =
       Field('createAt', _$createAt, opt: true);
@@ -32,26 +33,31 @@ class ChatAIResponseMapper extends ClassMapperBase<ChatAIResponse> {
   static String? _$senderId(ChatAIResponse v) => v.senderId;
   static const Field<ChatAIResponse, String> _f$senderId =
       Field('senderId', _$senderId, opt: true);
-  static String? _$value(ChatAIResponse v) => v.value;
-  static const Field<ChatAIResponse, String> _f$value =
-      Field('value', _$value, opt: true);
+  static String? _$content(ChatAIResponse v) => v.content;
+  static const Field<ChatAIResponse, String> _f$content =
+      Field('content', _$content, opt: true);
+  static FileRequest? _$files(ChatAIResponse v) => v.files;
+  static const Field<ChatAIResponse, FileRequest> _f$files =
+      Field('files', _$files, opt: true);
 
   @override
   final MappableFields<ChatAIResponse> fields = const {
-    #contactId: _f$contactId,
+    #recipientId: _f$recipientId,
     #createAt: _f$createAt,
     #questionId: _f$questionId,
     #senderId: _f$senderId,
-    #value: _f$value,
+    #content: _f$content,
+    #files: _f$files,
   };
 
   static ChatAIResponse _instantiate(DecodingData data) {
     return ChatAIResponse(
-        contactId: data.dec(_f$contactId),
+        recipientId: data.dec(_f$recipientId),
         createAt: data.dec(_f$createAt),
         questionId: data.dec(_f$questionId),
         senderId: data.dec(_f$senderId),
-        value: data.dec(_f$value));
+        content: data.dec(_f$content),
+        files: data.dec(_f$files));
   }
 
   @override
@@ -107,12 +113,14 @@ extension ChatAIResponseValueCopy<$R, $Out>
 
 abstract class ChatAIResponseCopyWith<$R, $In extends ChatAIResponse, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  FileRequestCopyWith<$R, FileRequest, FileRequest>? get files;
   $R call(
-      {String? contactId,
+      {String? recipientId,
       DateTime? createAt,
       String? questionId,
       String? senderId,
-      String? value});
+      String? content,
+      FileRequest? files});
   ChatAIResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -126,26 +134,32 @@ class _ChatAIResponseCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ChatAIResponse> $mapper =
       ChatAIResponseMapper.ensureInitialized();
   @override
+  FileRequestCopyWith<$R, FileRequest, FileRequest>? get files =>
+      $value.files?.copyWith.$chain((v) => call(files: v));
+  @override
   $R call(
-          {Object? contactId = $none,
+          {Object? recipientId = $none,
           Object? createAt = $none,
           Object? questionId = $none,
           Object? senderId = $none,
-          Object? value = $none}) =>
+          Object? content = $none,
+          Object? files = $none}) =>
       $apply(FieldCopyWithData({
-        if (contactId != $none) #contactId: contactId,
+        if (recipientId != $none) #recipientId: recipientId,
         if (createAt != $none) #createAt: createAt,
         if (questionId != $none) #questionId: questionId,
         if (senderId != $none) #senderId: senderId,
-        if (value != $none) #value: value
+        if (content != $none) #content: content,
+        if (files != $none) #files: files
       }));
   @override
   ChatAIResponse $make(CopyWithData data) => ChatAIResponse(
-      contactId: data.get(#contactId, or: $value.contactId),
+      recipientId: data.get(#recipientId, or: $value.recipientId),
       createAt: data.get(#createAt, or: $value.createAt),
       questionId: data.get(#questionId, or: $value.questionId),
       senderId: data.get(#senderId, or: $value.senderId),
-      value: data.get(#value, or: $value.value));
+      content: data.get(#content, or: $value.content),
+      files: data.get(#files, or: $value.files));
 
   @override
   ChatAIResponseCopyWith<$R2, ChatAIResponse, $Out2> $chain<$R2, $Out2>(

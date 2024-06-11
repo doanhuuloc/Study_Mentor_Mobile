@@ -8,13 +8,16 @@ mixin SocketController {
     Socket? socket,
     required String userId,
   });
+
   void sendNotification({
     Socket? socket,
     required SendNotification sendNotification,
   });
+
   void notification({
     Socket? socket,
   });
+  
   void createRoomChat({
     Socket? socket,
     required CreateRoomChat createRoomChat,

@@ -3,6 +3,7 @@ import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../application/services/ai/ai.dart';
+import '../../../application/services/socket/dto/dto.dart';
 
 part 'data_source.g.dart';
 
@@ -12,10 +13,7 @@ abstract class AIDataSource {
 
   @POST('/ai/chatAI/{userId}/{idChatAI}/{roomId}')
   Future<ChatAIResponse> chatAI({
-    @Path('userId') required String userId,
-    @Path('idChatAI') required String idChatAI,
-    @Path('roomId') required String roomId,
-    @Body() required ChatAIRequest chatAIRequest,
+    @Body() required SendMessage chatAIRequest,
   });
 
   @GET('/ai/listRoom/{userId}/{idChatAI}')

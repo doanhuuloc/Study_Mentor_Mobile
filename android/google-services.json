@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1074227343663:android:86809172b542154a38f1da",
+        "mobilesdk_app_id": "1:1074227343663:android:272873bb970f706b38f1da",
         "android_client_info": {
-          "package_name": "com.sm.study_mentor"
+          "package_name": "com.sm.studymentor"
         }
       },
       "oauth_client": [

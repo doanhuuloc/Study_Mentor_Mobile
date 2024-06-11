@@ -19,12 +19,7 @@ class _AIDataSource implements AIDataSource {
   String? baseUrl;
 
   @override
-  Future<ChatAIResponse> chatAI({
-    required String userId,
-    required String idChatAI,
-    required String roomId,
-    required ChatAIRequest chatAIRequest,
-  }) async {
+  Future<ChatAIResponse> chatAI({required SendMessage chatAIRequest}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -38,7 +33,7 @@ class _AIDataSource implements AIDataSource {
     )
             .compose(
               _dio.options,
-              '/ai/chatAI/${userId}/${idChatAI}/${roomId}',
+              '/ai/chatAI/{userId}/{idChatAI}/{roomId}',
               queryParameters: queryParameters,
               data: _data,
             )

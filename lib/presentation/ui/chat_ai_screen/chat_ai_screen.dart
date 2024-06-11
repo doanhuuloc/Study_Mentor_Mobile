@@ -126,7 +126,7 @@ class _ChatAIScreenState extends State<ChatAIScreen> {
                         children:
                             context.read<ChatAICubit>().state.listChat.map((e) {
                           return ChatItem(
-                            content: e.value ?? "",
+                            content: e.content ?? "",
                             dateTime: e.createAt ?? DateTime.now(),
                             isOpposite: e.senderId !=
                                 context.read<UserCubit>().state.detail?.id,

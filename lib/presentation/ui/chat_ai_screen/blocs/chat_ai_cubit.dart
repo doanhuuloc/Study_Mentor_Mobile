@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../../application/services/ai/ai.dart';
+import '../../../../application/services/socket/dto/dto.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'chat_ai_state.dart';
@@ -46,15 +47,12 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
     onChangedMessage("");
     addChat(ChatAIResponse(
       createAt: DateTime.now(),
-      value: message,
+      content: message,
       senderId: userId,
     ));
 
     final msgres = await aiController.chatAI(
-      chatAIRequest: ChatAIRequest(question: message),
-      userId: userId,
-      idChatAI: idChatAI,
-      roomId: state.roomId ?? "",
+      chatAIRequest: SendMessage(content: message, senderId:userId, recipientId: idChatAI,roomId: state.roomId)
     );
 
     if (msgres.isLeft) {

@@ -1,4 +1,4 @@
-package com.sm.study_mentor
+package com.sm.studymentor
 
 import io.flutter.embedding.android.FlutterActivity
 
