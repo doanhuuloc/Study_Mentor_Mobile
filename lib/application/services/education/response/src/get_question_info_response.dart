@@ -10,7 +10,7 @@ part 'get_question_info_response.mapper.dart';
 @MappableClass()
 class GetQuestionInfoResponse with GetQuestionInfoResponseMappable {
   const GetQuestionInfoResponse({
-    this.id,
+    this.questionId,
     this.title,
     this.createdAt,
     this.updatedAt,
@@ -34,7 +34,7 @@ class GetQuestionInfoResponse with GetQuestionInfoResponseMappable {
   factory GetQuestionInfoResponse.fromJson(Map<String, dynamic> json) =>
       GetQuestionInfoResponseMapper.fromJson(json);
 
-  final String? id;
+  final String? questionId;
   final String? title;
   final DateTime? createdAt;
   final DateTime? updatedAt;

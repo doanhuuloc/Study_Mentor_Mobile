@@ -83,12 +83,15 @@ class $AssetsImagesGen {
 
   $AssetsImagesLogoGen get logo => const $AssetsImagesLogoGen();
 
+  /// File path: assets/images/teacher.png
+  AssetGenImage get teacher => const AssetGenImage('assets/images/teacher.png');
+
   /// File path: assets/images/user.png
   AssetGenImage get user => const AssetGenImage('assets/images/user.png');
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [ai, aipre, intrustor, ggmeet, loader, user];
+      [ai, aipre, intrustor, ggmeet, loader, teacher, user];
 }
 
 class $AssetsSvgsGen {
@@ -197,6 +200,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/drawer-menu.svg
   SvgGenImage get drawerMenu =>
       const SvgGenImage('assets/svgs/drawer-menu.svg');
+
+  /// File path: assets/svgs/empty-data.svg
+  SvgGenImage get emptyData => const SvgGenImage('assets/svgs/empty-data.svg');
 
   /// File path: assets/svgs/eye-icon-16.svg
   SvgGenImage get eyeIcon16 => const SvgGenImage('assets/svgs/eye-icon-16.svg');
@@ -333,6 +339,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/qa-q-icon.svg
   SvgGenImage get qaQIcon => const SvgGenImage('assets/svgs/qa-q-icon.svg');
 
+  /// File path: assets/svgs/report.svg
+  SvgGenImage get report => const SvgGenImage('assets/svgs/report.svg');
+
   /// File path: assets/svgs/search-icon.svg
   SvgGenImage get searchIcon =>
       const SvgGenImage('assets/svgs/search-icon.svg');
@@ -450,6 +459,7 @@ class $AssetsSvgsGen {
         dotsHorizontalIcon24,
         dotsHorizontalIcon,
         drawerMenu,
+        emptyData,
         eyeIcon16,
         facebookIcon,
         failedIcon,
@@ -489,6 +499,7 @@ class $AssetsSvgsGen {
         productInTransit,
         qaAIcon,
         qaQIcon,
+        report,
         searchIcon,
         sendCommentIcon,
         settingNotification,

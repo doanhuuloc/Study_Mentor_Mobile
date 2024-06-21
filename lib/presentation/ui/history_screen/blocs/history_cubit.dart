@@ -86,7 +86,6 @@ class HistoryCubit extends SafeCubit<HistoryState> {
     emit(state.copyWith(loading: true));
     final listQuestion =
         await educationController.getListQuestion(status: questionStatus.name);
-
     if (listQuestion.isLeft) {
       failureHandlerManager.handle(listQuestion.left);
     }
@@ -94,9 +93,15 @@ class HistoryCubit extends SafeCubit<HistoryState> {
     if (listQuestion.isRight) {
       emit(state.copyWith(
         loading: false,
-        listQuestion: listQuestion.right.data,
+        listQuestion: questionStatus == state.currentTabTutor
+            ? listQuestion.right.data
+            : null,
       ));
     }
+  }
+
+  void setTabTutor(QuestionStatus value) {
+    emit(state.copyWith(currentTabTutor: value));
   }
 
   Future<void> _fetchData() async {

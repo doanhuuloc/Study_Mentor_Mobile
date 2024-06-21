@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_mentor_mobile/application/services/user/response/src/user_info_response.dart';
+import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
 import 'package:study_mentor_mobile/presentation/ui/find_intrustor_screen/widgets/intrustor_item.dart';
 
 import '../../../application/services/education/education.dart';
@@ -102,32 +103,56 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                       builder: (context, state) {
                         return RefreshIndicator(
                           onRefresh: () async {},
-                          child: GapItems(
-                            gap: 10,
-                            items: [
-                              ...context
-                                  .read<FindIntrustorCubit>()
-                                  .state
-                                  .tutor
-                                  .map(
-                                    (e) => IntrustorItem(
-                                      name: e.fullName ?? "",
-                                      numberOfStar: e.averageRate ?? 0,
-                                      avatar: e.avatar ?? "",
-                                      voidCallback: () {
-                                        IntrustorInfoRouteData(
-                                                $extra: IntrustorInfoExtraData(
-                                                    intrustor: UserInfoResponse(
-                                                      id: e.id,
-                                                      fullName: e.fullName,
-                                                    ),
-                                                    questionId:
-                                                        widget.questionId))
-                                            .push(context);
-                                      },
-                                    ),
+                          child: AppShimmer(
+                            enabled: state.tutor == null,
+                            child: state.tutor == null
+                                ? GapItems(
+                                    gap: 10,
+                                    items: [
+                                      ...List.generate(4, (idx) => idx)
+                                          .map(
+                                            (e) => IntrustorItem(
+                                              name: "",
+                                              numberOfStar: 5,
+                                              voidCallback: () {},
+                                              avatar: "",
+                                              loading: true,
+                                            ),
+                                          )
+                                          .toList(),
+                                    ],
+                                  )
+                                : GapItems(
+                                    gap: 10,
+                                    items: [
+                                      ...(context
+                                                  .read<FindIntrustorCubit>()
+                                                  .state
+                                                  .tutor ??
+                                              [])
+                                          .map(
+                                        (e) => IntrustorItem(
+                                          name: e.fullName ?? "",
+                                          numberOfStar: e.averageRate ?? 0,
+                                          avatar: e.avatar ?? "",
+                                          voidCallback: () {
+                                            IntrustorInfoRouteData(
+                                                    $extra:
+                                                        IntrustorInfoExtraData(
+                                                            intrustor:
+                                                                UserInfoResponse(
+                                                              id: e.id,
+                                                              fullName:
+                                                                  e.fullName,
+                                                            ),
+                                                            questionId: widget
+                                                                .questionId))
+                                                .push(context);
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                            ],
                           ),
                         );
                       },

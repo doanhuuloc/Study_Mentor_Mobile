@@ -7,8 +7,10 @@ class LoginRequest with LoginRequestMappable {
   const LoginRequest({
     required this.email,
     required this.password,
+    this.fcmToken,
   });
 
   final String email;
   final String password;
+  final String? fcmToken;
 }

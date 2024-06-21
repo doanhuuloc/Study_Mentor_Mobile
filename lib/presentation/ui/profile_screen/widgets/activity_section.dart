@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_mentor_mobile/presentation/shared/widgets/drop_down_bar/drop_down_bar.dart';
 
 import '../../../bases/auth_cubit/auth_cubit.dart';
 import '../../../gen/app_colors.dart';
@@ -86,13 +87,20 @@ class ActivitiesSection extends StatelessWidget {
             },
           ),
           _ItemActivity(
-            title: "Chế độ bóng đêm",
+            title: "Chế độ sáng",
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
                 return;
               }
-              if (isLoggedIn) {}
+              if (isLoggedIn) {
+                final selected = await const DropdownSheetRouteData($extra: [
+                  DropDownBarData(value: 0, title: "Sáng"),
+                  DropDownBarData(value: 1, title: "Tối"),
+                ]).push(context);
+
+                if (selected == 0) {}
+              }
             },
           ),
         ], gap: 0),
@@ -126,11 +134,13 @@ class ActivitiesSection extends StatelessWidget {
 class _ItemActivity extends StatelessWidget {
   const _ItemActivity({
     required this.title,
+    this.content,
     this.onTap,
     this.textColor,
   });
 
   final String title;
+  final String? content;
   final VoidCallback? onTap;
   final Color? textColor;
 
@@ -143,6 +153,7 @@ class _ItemActivity extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 title,
@@ -151,6 +162,18 @@ class _ItemActivity extends StatelessWidget {
                     .withLetterSpacing(-2.5 / 100)
                     .withColor(textColor ?? AppColors.text.main),
               ),
+              if (content != null)
+                Row(
+                  children: [
+                    Text(
+                      content ?? "",
+                      style: Styles.s15()
+                          .withHeight(24 / 15)
+                          .withLetterSpacing(-2.5 / 100)
+                          .withColor(textColor ?? AppColors.text.main),
+                    ),
+                  ],
+                ),
             ],
           ),
         ),

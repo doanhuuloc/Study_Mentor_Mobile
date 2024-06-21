@@ -22,6 +22,9 @@ class CreateQuestionRequestMapper
   @override
   final String id = 'CreateQuestionRequest';
 
+  static String? _$title(CreateQuestionRequest v) => v.title;
+  static const Field<CreateQuestionRequest, String> _f$title =
+      Field('title', _$title, opt: true);
   static String _$subjectId(CreateQuestionRequest v) => v.subjectId;
   static const Field<CreateQuestionRequest, String> _f$subjectId =
       Field('subjectId', _$subjectId);
@@ -47,6 +50,7 @@ class CreateQuestionRequestMapper
 
   @override
   final MappableFields<CreateQuestionRequest> fields = const {
+    #title: _f$title,
     #subjectId: _f$subjectId,
     #numberOfStar: _f$numberOfStar,
     #timeFindTutor: _f$timeFindTutor,
@@ -58,6 +62,7 @@ class CreateQuestionRequestMapper
 
   static CreateQuestionRequest _instantiate(DecodingData data) {
     return CreateQuestionRequest(
+        title: data.dec(_f$title),
         subjectId: data.dec(_f$subjectId),
         numberOfStar: data.dec(_f$numberOfStar),
         timeFindTutor: data.dec(_f$timeFindTutor),
@@ -127,7 +132,8 @@ abstract class CreateQuestionRequestCopyWith<
   ListCopyWith<$R, FileRequest,
       FileRequestCopyWith<$R, FileRequest, FileRequest>> get attachFiles;
   $R call(
-      {String? subjectId,
+      {String? title,
+      String? subjectId,
       int? numberOfStar,
       int? timeFindTutor,
       String? content,
@@ -153,7 +159,8 @@ class _CreateQuestionRequestCopyWithImpl<$R, $Out>
           (v, t) => v.copyWith.$chain(t), (v) => call(attachFiles: v));
   @override
   $R call(
-          {String? subjectId,
+          {Object? title = $none,
+          String? subjectId,
           int? numberOfStar,
           int? timeFindTutor,
           String? content,
@@ -161,6 +168,7 @@ class _CreateQuestionRequestCopyWithImpl<$R, $Out>
           Object? voucherCode = $none,
           Object? timeMeeting = $none}) =>
       $apply(FieldCopyWithData({
+        if (title != $none) #title: title,
         if (subjectId != null) #subjectId: subjectId,
         if (numberOfStar != null) #numberOfStar: numberOfStar,
         if (timeFindTutor != null) #timeFindTutor: timeFindTutor,
@@ -171,6 +179,7 @@ class _CreateQuestionRequestCopyWithImpl<$R, $Out>
       }));
   @override
   CreateQuestionRequest $make(CopyWithData data) => CreateQuestionRequest(
+      title: data.get(#title, or: $value.title),
       subjectId: data.get(#subjectId, or: $value.subjectId),
       numberOfStar: data.get(#numberOfStar, or: $value.numberOfStar),
       timeFindTutor: data.get(#timeFindTutor, or: $value.timeFindTutor),

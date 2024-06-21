@@ -83,8 +83,10 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
       {required UpdateQuestionStatusRequest updateQuestionStatusRequest}) {
     return handleApiResult(
         future: () => educationDataSource.updateQuestionStatus(
-            questionId: updateQuestionStatusRequest.questionId,
-            updateQuestionStatusRequest: updateQuestionStatusRequest));
+                questionId: updateQuestionStatusRequest.questionId,
+                updateQuestionStatusRequest: {
+                  "status": updateQuestionStatusRequest.status,
+                }));
   }
 
   @override
@@ -92,5 +94,28 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
       {required CreateGGMeetRequest createGGMeetRequest}) {
     return handleApiResult(
         future: () => educationDataSource.createGGMeet(createGGMeetRequest));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<PaymentLinkResponse>>> payment(
+      {required PaymentLinkRequest paymentLinkRequest}) {
+    return handleApiResult(
+        future: () => educationDataSource.payment(paymentLinkRequest));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse>> reportTutor(
+      {required ReportTutorRequest reportTutorRequest}) {
+    return handleApiResult(
+        future: () => educationDataSource.reportTutor(reportTutorRequest));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse>> cancelFindSystemQuestion(
+      {required CancelFindSystemQuestionRequest
+          cancelFindSystemQuestionRequest}) {
+    return handleApiResult(
+        future: () => educationDataSource.cancelFindSystemQuestion(
+            questionId: cancelFindSystemQuestionRequest.questionId));
   }
 }

@@ -29,14 +29,16 @@ class _FindingIntrustorScreenState extends State<FindingIntrustorScreen> {
               failureHandlerManager: context.read<FailureHandlerManager>(),
               educationController: context.read<EducationController>(),
               socketCubit: context.read<SocketCubit>(),
+              questionId: widget.questionId,
             ),
         child: Builder(builder: (context) {
           context.read<FindingIntrustorCubit>();
           return BlocListener<FindingIntrustorCubit, FindingIntrustorState>(
             listener: (context, state) {
               if (state.tutor != null) {
-                IntrustorAnswerRouteData(questionId: widget.questionId)
-                    .push(context);
+                DetailedQuestionRouteData(
+                        questionId: widget.questionId, $extra: state.tutor)
+                    .pushReplacement(context);
               }
             },
             child: Scaffold(
@@ -75,8 +77,12 @@ class _FindingIntrustorScreenState extends State<FindingIntrustorScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CommonButton(
-                          onTap: () {
-                            Navigator.pop(context, false);
+                          onTap: () async {
+                            if (await context
+                                .read<FindingIntrustorCubit>()
+                                .cancelFindSystemQuestion()) {
+                              Navigator.pop(context, false);
+                            }
                           },
                           padding: const EdgeInsets.all(15),
                           wrapContent: true,

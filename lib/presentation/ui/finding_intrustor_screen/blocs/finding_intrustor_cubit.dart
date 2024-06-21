@@ -10,6 +10,7 @@ class FindingIntrustorCubit extends SafeCubit<FindingIntrustorState> {
     required this.failureHandlerManager,
     required this.educationController,
     required this.socketCubit,
+    required this.questionId,
   }) : super(const FindingIntrustorState()) {
     findingIntrustor();
   }
@@ -17,11 +18,26 @@ class FindingIntrustorCubit extends SafeCubit<FindingIntrustorState> {
   final FailureHandlerManager failureHandlerManager;
   final EducationController educationController;
   final SocketCubit socketCubit;
-
+  final String questionId;
   void findingIntrustor() {
     socketCubit.getAcceptTutorInfo((UserInfoResponse? tutor) {
       emit(state.copyWith(tutor: tutor));
     });
     socketCubit.getVoucher();
+  }
+
+  Future<bool> cancelFindSystemQuestion() async {
+    final res = await educationController.cancelFindSystemQuestion(
+        cancelFindSystemQuestionRequest:
+            CancelFindSystemQuestionRequest(questionId: questionId));
+    if (res.isLeft) {
+      failureHandlerManager.handle(res.left);
+    }
+
+    if (res.isRight) {
+      return true;
+    }
+
+    return false;
   }
 }

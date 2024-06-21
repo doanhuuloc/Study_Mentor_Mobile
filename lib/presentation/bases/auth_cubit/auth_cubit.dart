@@ -60,11 +60,13 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
     required String email,
     required String password,
     String? redirectUrl,
+    String? fcmToken,
   }) async {
     final loginResponse = await authController.login(
       LoginRequest(
         email: email,
         password: password,
+        fcmToken: fcmToken,
       ),
     );
     if (loginResponse.isLeft) {

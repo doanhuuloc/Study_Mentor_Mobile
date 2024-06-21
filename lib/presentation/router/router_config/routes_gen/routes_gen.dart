@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../application/services/ai/dto/enum.dart';
+import '../../../../application/services/education/education.dart';
+import '../../../../application/services/user/user.dart';
 import '../../../shared/base_infinite_loading/example.dart';
 import '../../../shared/widgets/dialogs/dialogs.dart';
 import '../../../shared/widgets/drop_down_bar/drop_down_bar.dart';
@@ -134,20 +136,20 @@ class DropdownSheetRouteData extends GoRouteData {
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<CreateQuestionRouteData>(
           path: CreateQuestionRouteData.routeName,
+        ),
+        TypedGoRoute<FindIntrustorRouteData>(
+          path: FindIntrustorRouteData.routeName,
           routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<FindIntrustorRouteData>(
-              path: FindIntrustorRouteData.routeName,
-            ),
             TypedGoRoute<FindingIntrustorRouteData>(
               path: FindingIntrustorRouteData.routeName,
             ),
-            TypedGoRoute<IntrustorAnswerRouteData>(
-              path: IntrustorAnswerRouteData.routeName,
-            ),
-            TypedGoRoute<IntrustorInfoRouteData>(
-              path: IntrustorInfoRouteData.routeName,
-            ),
           ],
+        ),
+        TypedGoRoute<DetailedQuestionRouteData>(
+          path: DetailedQuestionRouteData.routeName,
+        ),
+        TypedGoRoute<IntrustorInfoRouteData>(
+          path: IntrustorInfoRouteData.routeName,
         ),
         TypedGoRoute<ChatAIRouteData>(
           path: ChatAIRouteData.routeName,
@@ -160,6 +162,9 @@ class DropdownSheetRouteData extends GoRouteData {
         ),
         TypedGoRoute<CreateGGMeetRouteData>(
           path: CreateGGMeetRouteData.routeName,
+        ),
+        TypedGoRoute<ReportQuestionRouteData>(
+          path: ReportQuestionRouteData.routeName,
         ),
       ],
     ),

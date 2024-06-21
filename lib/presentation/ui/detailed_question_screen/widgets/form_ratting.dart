@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/textfields/common_textfield.dart';
 
 import '../../../gen/assets.gen.dart';
 
 class FormRatting extends StatefulWidget {
-  const FormRatting({super.key, required this.rate});
+  const FormRatting({super.key, required this.rate, required this.name});
 
   final Future<bool> Function(String, int) rate;
+  final String name;
 
   @override
   State<FormRatting> createState() => _FormRattingState();
@@ -29,7 +31,7 @@ class _FormRattingState extends State<FormRatting> {
               children: [
                 const SizedBox(height: 10),
                 const Text(
-                  "Reviews",
+                  "Đánh giá",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 Image.asset(
@@ -39,8 +41,8 @@ class _FormRattingState extends State<FormRatting> {
                   fit: BoxFit.fill,
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  "LOC DOAN",
+                Text(
+                  widget.name,
                   style: TextStyle(fontSize: 18),
                 ),
                 Row(
@@ -72,7 +74,7 @@ class _FormRattingState extends State<FormRatting> {
                     final res = await widget.rate(
                         textEditingController.text, rate.toInt());
                     if (res) {
-                      // const HomeRouteData().go(context);
+                      context.pop(true);
                     }
                   },
                   child: Container(

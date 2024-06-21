@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:study_mentor_mobile/presentation/bases/file_cubit/file_cubit.dart';
+import 'package:study_mentor_mobile/presentation/shared/handlers/loading_handler/loading_manager.dart';
 import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/buttons/bottom_button.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/drop_down_bar/drop_down_bar.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/textfields/common_textfield.dart';
+import 'package:study_mentor_mobile/utilities/launch_url.dart';
 import '../../../application/services/education/education.dart';
 import '../../gen/app_colors.dart';
 import '../../router/router_config/router_config.dart';
@@ -32,6 +34,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
       create: (context) => CreateQuestionCubit(
         fileCubit: context.read<FileCubit>(),
         failureHandlerManager: context.read<FailureHandlerManager>(),
+        loadingManager: context.read<LoadingManager>(),
         educationController: context.read<EducationController>(),
         questionType: widget.questionType,
       ),
@@ -52,6 +55,15 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                         gap: 10,
                         crossAxisAlignmentRow: CrossAxisAlignment.start,
                         items: [
+                          Text(
+                            "Tiêu đề câu hỏi",
+                            style: Styles.s18().withWeight(FontWeight.w600),
+                          ),
+                          CommonTextField(
+                            onChanged: (value) => context
+                                .read<CreateQuestionCubit>()
+                                .onChangeTitle(value),
+                          ),
                           Text(
                             "Nội dung câu hỏi",
                             style: Styles.s18().withWeight(FontWeight.w600),
@@ -489,11 +501,14 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                           ),
                           BlocBuilder<CreateQuestionCubit, CreateQuestionState>(
                               buildWhen: (prev, curr) {
-                            return prev.canSubmit != curr.canSubmit;
+                            return prev.canSubmit != curr.canSubmit ||
+                                prev.calculatePriceReponse !=
+                                    curr.calculatePriceReponse;
                           }, builder: (context, state) {
                             return BottomButton(
                               padding: const EdgeInsets.symmetric(vertical: 20),
-                              title: 'Thanh toán',
+                              title:
+                                  'Thanh toán ${state.canSubmit ? '${state.calculatePriceReponse?.promoPrice?.toStringAsFixed(0)} đồng' : ""}',
                               onPress: state.canSubmit
                                   ? () async {
                                       final response = await context
@@ -503,37 +518,19 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                                           const CreateQuestionResponse()) {
                                         return;
                                       }
-                                      FindIntrustorRouteData(
-                                              $extra: FindIntrustorExtraData(
-                                                questionId:
-                                                    response.questionId ?? "",
-                                                subjectId:
-                                                    state.subject?.id ?? "",
-                                              ),
+
+                                      final checkoutUrl = await context
+                                          .read<CreateQuestionCubit>()
+                                          .payment();
+                                      if (checkoutUrl != "") {
+                                        await appLaunchUrl(
+                                            checkoutUrl, context);
+                                      }
+
+                                      DetailedQuestionRouteData(
                                               questionId:
                                                   response.questionId ?? "")
-                                          .pushReplacement(context);
-
-                                      // final subjectId = context
-                                      //     .read<CreateQuestionCubit>()
-                                      //     .state
-                                      //     .subject
-                                      //     ?.id;
-                                      // if (await ConfirmRouteData(
-                                      //   title:
-                                      //       "Bạn cần thanh toán ${response.price?.toStringAsFixed(0)} để tiếp tục giải đáp câu hỏi",
-                                      //   content: "",
-                                      //   rejectTitle: "Hủy",
-                                      //   acceptTitle: "Thanh toán",
-                                      // ).push(context)) {
-                                      //   FindIntrustorRouteData(
-                                      //           $extra: FindIntrustorExtraData(
-                                      //             questionId: response.questionId ?? "",
-                                      //             subjectId: subjectId ?? "",
-                                      //           ),
-                                      //           questionId: response.questionId ?? "")
-                                      //       .pushReplacement(context);
-                                      // }
+                                          .go(context);
                                     }
                                   : null,
                             );

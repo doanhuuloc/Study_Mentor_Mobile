@@ -18,7 +18,7 @@ abstract class AuthDataSource {
   Future<BaseResponse<AuthenticatedResponse>> refreshToken(
       @Body() RefreshTokenRequest request);
 
-  @DELETE('/v1/auth/logout')
+  @DELETE('/v1/users/logout')
   Future<SuccessResponse> logout(@Body() LogoutRequest request);
 
   @POST('/v1/auth/change-password')

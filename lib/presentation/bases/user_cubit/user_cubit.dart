@@ -53,6 +53,10 @@ class UserCubit extends SafeCubit<UserState> {
     emit(state.copyWith(apiStatus: ApiStatus.success, detail: userDetail));
   }
 
+  void setFcmToken(String? fcmToken) {
+    emit(state.copyWith(fcmToken: fcmToken));
+  }
+
   @override
   Future<void> close() async {
     await _sessionSubscription?.cancel();

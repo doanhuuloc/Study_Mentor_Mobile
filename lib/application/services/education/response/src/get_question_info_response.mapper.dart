@@ -28,9 +28,9 @@ class GetQuestionInfoResponseMapper
   @override
   final String id = 'GetQuestionInfoResponse';
 
-  static String? _$id(GetQuestionInfoResponse v) => v.id;
-  static const Field<GetQuestionInfoResponse, String> _f$id =
-      Field('id', _$id, opt: true);
+  static String? _$questionId(GetQuestionInfoResponse v) => v.questionId;
+  static const Field<GetQuestionInfoResponse, String> _f$questionId =
+      Field('questionId', _$questionId, opt: true);
   static String? _$title(GetQuestionInfoResponse v) => v.title;
   static const Field<GetQuestionInfoResponse, String> _f$title =
       Field('title', _$title, opt: true);
@@ -93,7 +93,7 @@ class GetQuestionInfoResponseMapper
 
   @override
   final MappableFields<GetQuestionInfoResponse> fields = const {
-    #id: _f$id,
+    #questionId: _f$questionId,
     #title: _f$title,
     #createdAt: _f$createdAt,
     #updatedAt: _f$updatedAt,
@@ -117,7 +117,7 @@ class GetQuestionInfoResponseMapper
 
   static GetQuestionInfoResponse _instantiate(DecodingData data) {
     return GetQuestionInfoResponse(
-        id: data.dec(_f$id),
+        questionId: data.dec(_f$questionId),
         title: data.dec(_f$title),
         createdAt: data.dec(_f$createdAt),
         updatedAt: data.dec(_f$updatedAt),
@@ -203,7 +203,7 @@ abstract class GetQuestionInfoResponseCopyWith<
   SubjectResponseCopyWith<$R, SubjectResponse, SubjectResponse>? get subject;
   ListCopyWith<$R, Answer, AnswerCopyWith<$R, Answer, Answer>>? get answers;
   $R call(
-      {String? id,
+      {String? questionId,
       String? title,
       DateTime? createdAt,
       DateTime? updatedAt,
@@ -260,7 +260,7 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
           : null;
   @override
   $R call(
-          {Object? id = $none,
+          {Object? questionId = $none,
           Object? title = $none,
           Object? createdAt = $none,
           Object? updatedAt = $none,
@@ -281,7 +281,7 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
           Object? meetingURL = $none,
           Object? timeMetting = $none}) =>
       $apply(FieldCopyWithData({
-        if (id != $none) #id: id,
+        if (questionId != $none) #questionId: questionId,
         if (title != $none) #title: title,
         if (createdAt != $none) #createdAt: createdAt,
         if (updatedAt != $none) #updatedAt: updatedAt,
@@ -304,7 +304,7 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
       }));
   @override
   GetQuestionInfoResponse $make(CopyWithData data) => GetQuestionInfoResponse(
-      id: data.get(#id, or: $value.id),
+      questionId: data.get(#questionId, or: $value.questionId),
       title: data.get(#title, or: $value.title),
       createdAt: data.get(#createdAt, or: $value.createdAt),
       updatedAt: data.get(#updatedAt, or: $value.updatedAt),

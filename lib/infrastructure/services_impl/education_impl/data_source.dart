@@ -51,10 +51,23 @@ abstract class EducationDataSource {
   @PATCH('/api/questions/{questionId}')
   Future<BaseResponse<dynamic>> updateQuestionStatus({
     @Path('questionId') required String questionId,
-    @Body() required UpdateQuestionStatusRequest updateQuestionStatusRequest,
+    @Body() required Map<String, dynamic> updateQuestionStatusRequest,
   });
 
   @POST('/api/users/create/ggMeet')
   Future<BaseResponse<CreateGGMeetResponse>> createGGMeet(
       @Body() CreateGGMeetRequest createGGMeetRequest);
+
+  @POST('/api/payment/payment-link')
+  Future<BaseResponse<PaymentLinkResponse>> payment(
+      @Body() PaymentLinkRequest paymentLinkRequest);
+
+  @POST('/api/users/student/report-student')
+  Future<BaseResponse<PaymentLinkResponse>> reportTutor(
+      @Body() ReportTutorRequest reportTutorRequest);
+
+  @POST('/api/questions/{questionId}/cancel-find-tutor/system')
+  Future<BaseResponse<PaymentLinkResponse>> cancelFindSystemQuestion({
+    @Path('questionId') required String questionId,
+  });
 }

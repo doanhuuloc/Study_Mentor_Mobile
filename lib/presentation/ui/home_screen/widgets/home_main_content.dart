@@ -31,13 +31,9 @@ class HomeMainContent extends StatelessWidget {
                   subTitle: 'Ai miễn phí',
                   icon: Assets.svgs.homeAiFree.svg(),
                   onTap: () {
-                    // showDialog(
-                    //     context: context,
-                    //     builder: (context) => const _SelectAIDialog());
-
-                    const IntrustorAnswerRouteData(
-                            questionId: "39caed83-d3da-4a30-bbbf-362379c59882")
-                        .push(context);
+                    showDialog(
+                        context: context,
+                        builder: (context) => const _SelectAIDialog());
                   },
                 ),
               ),

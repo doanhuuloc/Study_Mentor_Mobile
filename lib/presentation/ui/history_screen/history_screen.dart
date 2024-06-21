@@ -42,7 +42,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: CommonAppBar(
           title: Text(
@@ -79,9 +79,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     Tab(
                       child: Text("Người hướng dẫn"),
                     ),
-                    Tab(
-                      child: Text("GG Meet"),
-                    ),
                   ],
                 ),
                 Expanded(
@@ -89,9 +86,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     TabAI(),
                     TabAIPay(),
                     TabTutor(),
-                    SingleChildScrollView(
-                      child: Text("3"),
-                    ),
                   ]),
                 ),
               ],

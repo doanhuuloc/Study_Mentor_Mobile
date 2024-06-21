@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:study_mentor_mobile/application/services/education/education.dart';
+import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
-import 'package:study_mentor_mobile/presentation/ui/intrustor_answer_screen/blocs/intrustor_answer_cubit.dart';
-import 'package:study_mentor_mobile/presentation/ui/intrustor_answer_screen/blocs/intrustor_answer_state.dart';
-import 'package:study_mentor_mobile/utilities/logging/logging.dart';
+
+import 'package:study_mentor_mobile/utilities/launch_url.dart';
 
 import '../../../shared/theme/theme.dart';
+import '../blocs/detailed_question_cubit.dart';
+import '../blocs/detailed_question_state.dart';
 import 'fileBox.dart';
 
 class AnswerInfoBox extends StatelessWidget {
-  const AnswerInfoBox({super.key});
+  const AnswerInfoBox({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<IntrustorAnswerCubit, IntrustorAnswerState>(
+    return BlocBuilder<DetailedQuestionCubit, DetailedQuestionState>(
       builder: (context, state) {
-        logging.i(state.answer?.fileAttachmentAnswers);
         return Padding(
           padding: const EdgeInsets.only(left: 10),
           child: GapItems(
@@ -35,20 +39,27 @@ class AnswerInfoBox extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "Thông tin câu trả lời",
+                        state.questionInfo?.questionType == QuestionType.GGMEET
+                            ? "Link Google Meet"
+                            : "Thông tin câu trả lời",
                         style: Styles.s16().withWeight(FontWeight.w600),
                       ),
                     ),
                   ),
                 ],
               ),
-              if (state.answer == null)
+              if (state.questionInfo?.questionType == QuestionType.FILE &&
+                  state.answer == null)
                 Container(
                     alignment: Alignment.center,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const CircularProgressIndicator(),
+                        AppShimmer(
+                            child: Container(
+                          height: 100,
+                          decoration: const BoxDecoration(color: Colors.black),
+                        )),
                         const SizedBox(height: 20),
                         Text(
                           "Người hướng dẫn đang trả lời câu hỏi",
@@ -56,7 +67,8 @@ class AnswerInfoBox extends StatelessWidget {
                         )
                       ],
                     )),
-              if (state.answer != null)
+              if (state.questionInfo?.questionType == QuestionType.FILE &&
+                  state.answer != null)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -85,6 +97,32 @@ class AnswerInfoBox extends StatelessWidget {
                       )
                   ],
                 ),
+              if (state.questionInfo?.questionType == QuestionType.GGMEET &&
+                  state.meetingUrl != "")
+                Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    Text(
+                      "Vui lòng tham gia link google meet bên dưới để cùng với người hướng dẫn trả lời câu hỏi của bạn",
+                      style: Styles.s16(),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            child: Text("${state.meetingUrl}"),
+                            onPressed: () {
+                              if (state.meetingUrl != "") {
+                                appLaunchUrl(state.meetingUrl ?? "", context);
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
             ],
           ),
         );

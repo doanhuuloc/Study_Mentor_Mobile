@@ -7,6 +7,7 @@ part 'create_question_request.mapper.dart';
 @MappableClass()
 class CreateQuestionRequest with CreateQuestionRequestMappable {
   const CreateQuestionRequest({
+    this.title,
     required this.subjectId,
     required this.numberOfStar,
     required this.timeFindTutor,
@@ -16,6 +17,7 @@ class CreateQuestionRequest with CreateQuestionRequestMappable {
     this.timeMeeting,
   });
 
+  final String? title;
   final String subjectId;
   final int numberOfStar;
   final int timeFindTutor;

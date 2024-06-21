@@ -33,7 +33,7 @@ class _AIDataSource implements AIDataSource {
     )
             .compose(
               _dio.options,
-              '/ai/chatAI/{userId}/{idChatAI}/{roomId}',
+              '/ai/chatAI',
               queryParameters: queryParameters,
               data: _data,
             )

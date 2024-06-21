@@ -11,7 +11,7 @@ part 'data_source.g.dart';
 abstract class AIDataSource {
   factory AIDataSource(Dio dio, {String baseUrl}) = _AIDataSource;
 
-  @POST('/ai/chatAI/{userId}/{idChatAI}/{roomId}')
+  @POST('/ai/chatAI')
   Future<ChatAIResponse> chatAI({
     @Body() required SendMessage chatAIRequest,
   });

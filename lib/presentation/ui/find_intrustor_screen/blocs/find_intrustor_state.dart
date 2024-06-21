@@ -5,14 +5,14 @@ class FindIntrustorState {
     this.isLoading = false,
     this.page = 0,
     this.totalPages = 1,
-    this.tutor = const [],
+    this.tutor,
     this.findingWithSystem = false,
   });
 
   final bool isLoading;
   final int page;
   final int totalPages;
-  final List<Tutor> tutor;
+  final List<Tutor>? tutor;
   final bool findingWithSystem;
 
   copyWith({
@@ -26,7 +26,7 @@ class FindIntrustorState {
       isLoading: isLoading ?? this.isLoading,
       page: page ?? this.page,
       totalPages: totalPages ?? this.totalPages,
-      tutor: [...this.tutor, ...tutor ?? []],
+      tutor: [...this.tutor ?? [], ...tutor ?? []],
       findingWithSystem: findingWithSystem ?? this.findingWithSystem,
     );
   }

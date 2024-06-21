@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:study_mentor_mobile/presentation/bases/user_cubit/user_cubit.dart';
 
 import '../../bases/auth_cubit/auth_cubit.dart';
 import '../../gen/assets.gen.dart';
@@ -53,6 +54,7 @@ class LoginScreen extends StatelessWidget {
           loadingManager: context.read<LoadingManager>(),
           failureHandlerManager: context.read<FailureHandlerManager>(),
           authCubit: context.read<AuthCubit>(),
+          userCubit: context.read<UserCubit>(),
         );
       },
       child: BlocListener<LoginCubit, LoginState>(

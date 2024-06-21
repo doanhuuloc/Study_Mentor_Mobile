@@ -11,7 +11,9 @@ class IntrustorItem extends StatelessWidget {
     required this.numberOfStar,
     required this.voidCallback,
     required this.avatar,
+    this.loading = false,
   });
+  final bool loading;
   final String name;
   final int numberOfStar;
   final VoidCallback voidCallback;
@@ -45,10 +47,18 @@ class IntrustorItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          name,
-                          style: Styles.s16().withWeight(FontWeight.w600),
-                        ),
+                        if (loading)
+                          Container(
+                            height: 16,
+                            width: 200,
+                            decoration:
+                                const BoxDecoration(color: Colors.black),
+                          )
+                        else
+                          Text(
+                            name,
+                            style: Styles.s16().withWeight(FontWeight.w600),
+                          ),
                         RatingBarIndicator(
                           itemBuilder: (context, index) =>
                               const Icon(Icons.star, color: Colors.orange),

@@ -29,4 +29,13 @@ mixin EducationController {
       {required UpdateQuestionStatusRequest updateQuestionStatusRequest});
   Future<Result<Failure, BaseResponse<CreateGGMeetResponse>>> createGGMeet(
       {required CreateGGMeetRequest createGGMeetRequest});
+
+  Future<Result<Failure, BaseResponse<PaymentLinkResponse>>> payment(
+      {required PaymentLinkRequest paymentLinkRequest});
+
+  Future<Result<Failure, BaseResponse<dynamic>>> reportTutor(
+      {required ReportTutorRequest reportTutorRequest});
+      
+      Future<Result<Failure, BaseResponse<dynamic>>> cancelFindSystemQuestion(
+      {required CancelFindSystemQuestionRequest cancelFindSystemQuestionRequest});
 }

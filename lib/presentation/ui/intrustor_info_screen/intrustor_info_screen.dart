@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
+import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
+import 'package:study_mentor_mobile/presentation/shared/handlers/loading_handler/loading_manager.dart';
 import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/app_bar/common_app_bar.dart';
-import 'package:study_mentor_mobile/presentation/shared/widgets/buttons/bottom_button.dart';
+import 'package:study_mentor_mobile/presentation/shared/widgets/buttons/primary_button.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 import '../../../application/services/education/education.dart';
 import '../../../application/services/user/user.dart';
@@ -34,16 +36,24 @@ class _IntrustorInfoScreenState extends State<IntrustorInfoScreen> {
               failureHandlerManager: context.read<FailureHandlerManager>(),
               educationController: context.read<EducationController>(),
               socketCubit: context.read<SocketCubit>(),
+              loadingManager: context.read<LoadingManager>(),
             ),
         child: Builder(builder: (context) {
           context.read<IntrustorInfoCubit>();
           return BlocBuilder<IntrustorInfoCubit, IntrustorInfoState>(
             builder: (context, state) {
               return BlocListener<IntrustorInfoCubit, IntrustorInfoState>(
+                listenWhen: (previous, current) =>
+                    state.isAccepted != state.isAccepted,
                 listener: (context, state) {
                   if (state.isAccepted == 1) {
-                    IntrustorAnswerRouteData(
+                    DetailedQuestionRouteData(
                             questionId: widget.questionId ?? "")
+                        .go(context);
+                  } else {
+                    const AlertRouteData(
+                            content:
+                                "Người hướng dẫn từ chối trả lời câu hỏi của bạn")
                         .push(context);
                   }
                 },
@@ -169,15 +179,26 @@ class _IntrustorInfoScreenState extends State<IntrustorInfoScreen> {
                         ),
                       ),
                       if (widget.questionId != null)
-                        BottomButton(
-                          title: "Chập nhận",
-                          textStyle: Styles.s18().withWeight(FontWeight.w600),
-                          onPress: () {
-                            context.read<IntrustorInfoCubit>().pickIntrustor(
-                                PickIntrustorRequest(
-                                    tutorId: widget.intrustor.id ?? "",
-                                    questionId: widget.questionId ?? ""));
-                          },
+                        AppShimmer(
+                          enabled: state.waittingTutor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: PrimaryButton.square(
+                              title: state.waittingTutor ? "" : "Chập nhận",
+                              textStyle:
+                                  Styles.s18().withWeight(FontWeight.w600),
+                              onPressed: () {
+                                context
+                                    .read<IntrustorInfoCubit>()
+                                    .pickIntrustor(
+                                      PickIntrustorRequest(
+                                        tutorId: widget.intrustor.id ?? "",
+                                        questionId: widget.questionId ?? "",
+                                      ),
+                                    );
+                              },
+                            ),
+                          ),
                         ),
                     ],
                   ),

@@ -7,9 +7,15 @@ import '../../../shared/theme/theme.dart';
 import 'fileBox.dart';
 
 class QuestionInfoBox extends StatelessWidget {
-  const QuestionInfoBox({super.key, required this.question, this.fileResponse});
+  const QuestionInfoBox({
+    super.key,
+    this.loading = false,
+    required this.question,
+    this.fileResponse,
+  });
   final String question;
   final List<FileResponse>? fileResponse;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -38,22 +44,37 @@ class QuestionInfoBox extends StatelessWidget {
               ),
             ],
           ),
-          MarkdownBody(
-              styleSheet: MarkdownStyleSheet.fromTheme(
-                  ThemeData(textTheme: TextTheme(bodyMedium: Styles.s15()))),
-              data: question),
-          Text(
-            "Tệp đính kèm",
-            style: Styles.s15().withWeight(FontWeight.w600),
-          ),
-          Column(
-            children: (fileResponse ?? []).map((file) {
-              return FileBox(
-                name: file.fileName ?? "",
-                download: () {},
-              );
-            }).toList(),
-          ),
+          if (loading)
+            Container(
+              height: 150,
+              margin: const EdgeInsets.only(right: 10),
+              decoration: const BoxDecoration(color: Colors.black),
+            )
+          else
+            MarkdownBody(
+                styleSheet: MarkdownStyleSheet.fromTheme(
+                    ThemeData(textTheme: TextTheme(bodyMedium: Styles.s15()))),
+                data: question),
+          if ((fileResponse ?? []).isNotEmpty)
+            Text(
+              "Tệp đính kèm",
+              style: Styles.s15().withWeight(FontWeight.w600),
+            ),
+          if (loading)
+            Container(
+              height: 60,
+              margin: const EdgeInsets.only(right: 10),
+              decoration: const BoxDecoration(color: Colors.black),
+            )
+          else
+            Column(
+              children: (fileResponse ?? []).map((file) {
+                return FileBox(
+                  name: file.fileName ?? "",
+                  download: () {},
+                );
+              }).toList(),
+            ),
         ],
       ),
     );

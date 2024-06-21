@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/application/services/ai/dto/enum.dart';
 import 'package:study_mentor_mobile/presentation/router/app_nav_key/app_nav_key.dart';
+import 'package:study_mentor_mobile/presentation/ui/report_question_screen/report_question_screen.dart';
 
 import '../../../../../application/services/education/education.dart';
 import '../../../../../application/services/user/user.dart';
@@ -11,7 +12,7 @@ import '../../../../ui/create_question_screen/create_question_screen.dart';
 import '../../../../ui/find_intrustor_screen/find_intrustor_screen.dart';
 import '../../../../ui/finding_intrustor_screen/finding_intrustor_screen.dart';
 import '../../../../ui/home_screen/home_screen.dart';
-import '../../../../ui/intrustor_answer_screen/intrustor_answer_screen.dart';
+import '../../../../ui/detailed_question_screen/detailed_question_screen.dart';
 import '../../../../ui/intrustor_info_screen/intrustor_info_screen.dart';
 import '../../../../ui/login_screen/login_screen.dart';
 
@@ -155,16 +156,18 @@ class FindingIntrustorRouteData extends GoRouteData {
   }
 }
 
-class IntrustorAnswerRouteData extends GoRouteData {
-  const IntrustorAnswerRouteData({required this.questionId});
+class DetailedQuestionRouteData extends GoRouteData {
+  const DetailedQuestionRouteData({required this.questionId, this.$extra});
   final String questionId;
-  static const routeName = 'intrustorAnswer/:questionId';
+  final UserInfoResponse? $extra;
+  static const routeName = 'detailedQuestion/:questionId';
   static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return IntrustorAnswerScreen(
+    return DetailedQuestionScreen(
       questionId: questionId,
+      tutor: $extra,
     );
   }
 }
@@ -190,6 +193,21 @@ class IntrustorInfoRouteData extends GoRouteData {
     return IntrustorInfoScreen(
       intrustor: $extra.intrustor,
       questionId: $extra.questionId,
+    );
+  }
+}
+
+class ReportQuestionRouteData extends GoRouteData {
+  const ReportQuestionRouteData({required this.$extra});
+  static const routeName = 'reportQuestion';
+  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+
+  final GetQuestionInfoResponse $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ReportQuestionScreen(
+      questionInfo: $extra,
     );
   }
 }

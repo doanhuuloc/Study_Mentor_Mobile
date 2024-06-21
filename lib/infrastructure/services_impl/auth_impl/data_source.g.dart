@@ -91,7 +91,7 @@ class _AuthDataSource implements AuthDataSource {
     )
             .compose(
               _dio.options,
-              '/v1/auth/logout',
+              '/v1/users/logout',
               queryParameters: queryParameters,
               data: _data,
             )
