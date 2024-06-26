@@ -73,9 +73,13 @@ class _AuthBasedRoutingHandlerState
     flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (details) {
-        if (details.payload != "") {
-          handleClickNotification(details.payload!);
-        }
+        // if (details.payload != "") {
+        //   handleClickNotification(details.payload!);
+        // }
+        logging.i("go");
+        const DetailedQuestionRouteData(
+                questionId: "745e3b7e-bc9d-4e05-a041-13b952896b9f")
+            .go(context);
       },
     );
 

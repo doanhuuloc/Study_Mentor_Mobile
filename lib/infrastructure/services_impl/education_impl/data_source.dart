@@ -67,7 +67,7 @@ abstract class EducationDataSource {
       @Body() ReportTutorRequest reportTutorRequest);
 
   @POST('/api/questions/{questionId}/cancel-find-tutor/system')
-  Future<BaseResponse<PaymentLinkResponse>> cancelFindSystemQuestion({
+  Future<BaseResponse<dynamic>> cancelFindSystemQuestion({
     @Path('questionId') required String questionId,
   });
 }

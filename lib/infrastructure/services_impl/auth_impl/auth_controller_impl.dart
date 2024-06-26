@@ -29,13 +29,6 @@ class AuthControllerImpl with AuthController, DataSourceErrorHandler {
     return handleApiResult(future: () => authDataSource.logout(request));
   }
 
-  @override
-  Future<Result<Failure, SuccessResponse>> changePassword(
-      ChangePasswordRequest request) {
-    return handleApiResult(
-        future: () => authDataSource.changePassword(request));
-  }
-
   // @override
   // Future<Result<Failure, AuthenticatedResponse>> loginWithGoogle(
   //     LoginWithGoogleRequest request) {
@@ -44,9 +37,8 @@ class AuthControllerImpl with AuthController, DataSourceErrorHandler {
   // }
 
   @override
-  Future<Result<Failure, SuccessResponse>> changeMyPassword(
-      ChangeMyPasswordRequest request) {
-    return handleApiResult(
-        future: () => authDataSource.changeMyPassword(request));
+  Future<Result<Failure, BaseResponse<AuthenticatedResponse>>> register(
+      RegisterRequest request) {
+    return handleApiResult(future: () => authDataSource.register(request));
   }
 }

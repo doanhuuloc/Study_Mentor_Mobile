@@ -78,6 +78,21 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
     return null;
   }
 
+  Future<Failure?> registerWithUserInfo({
+    required RegisterRequest request,
+    String? redirectUrl,
+    String? fcmToken,
+  }) async {
+    final regiterResponse = await authController.register(request);
+    if (regiterResponse.isLeft) {
+      return regiterResponse.left;
+    }
+    await tokenService.setToken(regiterResponse.right.data.accessToken,
+        regiterResponse.right.data.refreshToken);
+    _loggedInSuccess(redirectUrl: redirectUrl);
+    return null;
+  }
+
   Future<bool> loginByRefreshToken({
     String? redirectUrl,
     Duration timeOut = const Duration(seconds: 3),

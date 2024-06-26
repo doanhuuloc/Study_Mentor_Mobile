@@ -392,14 +392,14 @@ class _EducationDataSource implements EducationDataSource {
   }
 
   @override
-  Future<BaseResponse<PaymentLinkResponse>> cancelFindSystemQuestion(
+  Future<BaseResponse<dynamic>> cancelFindSystemQuestion(
       {required String questionId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<PaymentLinkResponse>>(Options(
+        _setStreamType<BaseResponse<dynamic>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -415,7 +415,7 @@ class _EducationDataSource implements EducationDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseResponse<PaymentLinkResponse>.fromJson(_result.data!);
+    final value = BaseResponse<dynamic>.fromJson(_result.data!);
     return value;
   }
 

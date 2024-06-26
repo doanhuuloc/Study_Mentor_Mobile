@@ -177,9 +177,13 @@ class DropdownSheetRouteData extends GoRouteData {
         TypedGoRoute<ProfileLoginRouteData>(
             path: ProfileLoginRouteData.routeName,
             routes: [
-              TypedGoRoute<RegisterRouteData>(
-                  path: RegisterRouteData.routeName),
+              TypedGoRoute<ProfileRegisterRouteData>(
+                  path: ProfileRegisterRouteData.routeName),
+              TypedGoRoute<ResetPasswordRouteData>(
+                  path: ResetPasswordRouteData.routeName),
             ]),
+        TypedGoRoute<ChangePasswordRouteData>(
+            path: ChangePasswordRouteData.routeName),
         TypedGoRoute<EditProfileRouteData>(
           path: EditProfileRouteData.routeName,
         ),

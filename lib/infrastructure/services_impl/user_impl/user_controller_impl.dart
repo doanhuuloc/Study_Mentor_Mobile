@@ -32,4 +32,18 @@ class UserControllerImpl with UserController, DataSourceErrorHandler {
     return handleApiResult(
         future: () => userDataSource.updateProfile(updateProfileRequest));
   }
+
+    @override
+  Future<Result<Failure, SuccessResponse>> changePassword(
+      ChangePasswordRequest request) {
+    return handleApiResult(
+        future: () => userDataSource.changePassword(request));
+  }
+
+  @override
+  Future<Result<Failure, SuccessResponse>> resetPassword(
+      ResetPasswordRequest request) {
+        print("object");
+    return handleApiResult(future: () => userDataSource.resetPassword(request));
+  }
 }

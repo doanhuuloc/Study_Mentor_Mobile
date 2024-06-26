@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/application/services/ai/dto/enum.dart';
 import 'package:study_mentor_mobile/presentation/router/app_nav_key/app_nav_key.dart';
-import 'package:study_mentor_mobile/presentation/ui/report_question_screen/report_question_screen.dart';
+import 'package:study_mentor_mobile/presentation/ui/question_screen/report_question_screen/report_question_screen.dart';
 
 import '../../../../../application/services/education/education.dart';
 import '../../../../../application/services/user/user.dart';
 import '../../../../ui/chat_ai_screen/chat_ai_screen.dart';
 import '../../../../ui/chat_intrustor_screen/chat_intrustor_screen.dart';
-import '../../../../ui/create_question_screen/create_question_screen.dart';
-import '../../../../ui/find_intrustor_screen/find_intrustor_screen.dart';
-import '../../../../ui/finding_intrustor_screen/finding_intrustor_screen.dart';
+import '../../../../ui/question_screen/create_question_screen/create_question_screen.dart';
+import '../../../../ui/question_screen/find_intrustor_screen/find_intrustor_screen.dart';
+import '../../../../ui/question_screen/finding_intrustor_screen/finding_intrustor_screen.dart';
 import '../../../../ui/home_screen/home_screen.dart';
-import '../../../../ui/detailed_question_screen/detailed_question_screen.dart';
-import '../../../../ui/intrustor_info_screen/intrustor_info_screen.dart';
-import '../../../../ui/login_screen/login_screen.dart';
+import '../../../../ui/question_screen/detailed_question_screen/detailed_question_screen.dart';
+import '../../../../ui/question_screen/intrustor_info_screen/intrustor_info_screen.dart';
+import '../../../../ui/auth_screen/login_screen/login_screen.dart';
 
 class HomeBranchData extends StatefulShellBranchData {
   const HomeBranchData();

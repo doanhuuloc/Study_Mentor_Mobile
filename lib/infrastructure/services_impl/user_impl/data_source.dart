@@ -22,4 +22,10 @@ abstract class UserDataSource {
   @PATCH('/api/users/profile/avatar')
   Future<BaseResponse<UserInfoResponse>> updateAvatar(
       @Body() FileRequest fileRequest);
+
+  @PUT('/api/users/password/change-password')
+  Future<SuccessResponse> changePassword(@Body() ChangePasswordRequest request);
+
+  @PUT('/api/users/password/reset-password')
+  Future<SuccessResponse> resetPassword(@Body() ResetPasswordRequest request);
 }

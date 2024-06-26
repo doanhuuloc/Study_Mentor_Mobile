@@ -35,7 +35,8 @@ mixin EducationController {
 
   Future<Result<Failure, BaseResponse<dynamic>>> reportTutor(
       {required ReportTutorRequest reportTutorRequest});
-      
-      Future<Result<Failure, BaseResponse<dynamic>>> cancelFindSystemQuestion(
-      {required CancelFindSystemQuestionRequest cancelFindSystemQuestionRequest});
+
+  Future<Result<Failure, BaseResponse<dynamic>>> cancelFindSystemQuestion(
+      {required CancelFindSystemQuestionRequest
+          cancelFindSystemQuestionRequest});
 }

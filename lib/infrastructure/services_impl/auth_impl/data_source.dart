@@ -18,13 +18,10 @@ abstract class AuthDataSource {
   Future<BaseResponse<AuthenticatedResponse>> refreshToken(
       @Body() RefreshTokenRequest request);
 
-  @DELETE('/v1/users/logout')
+  @POST('/api/users/logout')
   Future<SuccessResponse> logout(@Body() LogoutRequest request);
 
-  @POST('/v1/auth/change-password')
-  Future<SuccessResponse> changePassword(@Body() ChangePasswordRequest request);
-
-  @POST('/v1/auth/change-my-password')
-  Future<SuccessResponse> changeMyPassword(
-      @Body() ChangeMyPasswordRequest request);
+  @POST('/api/users/register')
+  Future<BaseResponse<AuthenticatedResponse>> register(
+      @Body() RegisterRequest request);
 }

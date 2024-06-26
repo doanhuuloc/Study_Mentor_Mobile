@@ -233,10 +233,22 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
               routes: [
                 GoRouteData.$route(
                   path: 'register',
-                  parentNavigatorKey: RegisterRouteData.$parentNavigatorKey,
-                  factory: $RegisterRouteDataExtension._fromState,
+                  parentNavigatorKey:
+                      ProfileRegisterRouteData.$parentNavigatorKey,
+                  factory: $ProfileRegisterRouteDataExtension._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'resetPassword',
+                  parentNavigatorKey:
+                      ResetPasswordRouteData.$parentNavigatorKey,
+                  factory: $ResetPasswordRouteDataExtension._fromState,
                 ),
               ],
+            ),
+            GoRouteData.$route(
+              path: 'changePassword',
+              parentNavigatorKey: ChangePasswordRouteData.$parentNavigatorKey,
+              factory: $ChangePasswordRouteDataExtension._fromState,
             ),
             GoRouteData.$route(
               path: 'editprofile',
@@ -548,12 +560,53 @@ extension $ProfileLoginRouteDataExtension on ProfileLoginRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $RegisterRouteDataExtension on RegisterRouteData {
-  static RegisterRouteData _fromState(GoRouterState state) =>
-      const RegisterRouteData();
+extension $ProfileRegisterRouteDataExtension on ProfileRegisterRouteData {
+  static ProfileRegisterRouteData _fromState(GoRouterState state) =>
+      ProfileRegisterRouteData(
+        redirectUrl: state.uri.queryParameters['redirect-url'],
+      );
 
   String get location => GoRouteData.$location(
         '/profile/login/register',
+        queryParams: {
+          if (redirectUrl != null) 'redirect-url': redirectUrl,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ResetPasswordRouteDataExtension on ResetPasswordRouteData {
+  static ResetPasswordRouteData _fromState(GoRouterState state) =>
+      const ResetPasswordRouteData();
+
+  String get location => GoRouteData.$location(
+        '/profile/login/resetPassword',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ChangePasswordRouteDataExtension on ChangePasswordRouteData {
+  static ChangePasswordRouteData _fromState(GoRouterState state) =>
+      const ChangePasswordRouteData();
+
+  String get location => GoRouteData.$location(
+        '/profile/changePassword',
       );
 
   void go(BuildContext context) => context.go(location);
