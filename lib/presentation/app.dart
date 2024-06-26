@@ -48,8 +48,8 @@ class SuccessManiaApp extends StatelessWidget {
           StatusBarHeightProvider(),
           AssetsLoaderHandler(),
           // OneSignalHandler(),
-          PushNotificationHandler(),
           AppRoutingConfig(),
+          PushNotificationHandler(),
         ],
         child: Builder(
           builder: (context) {

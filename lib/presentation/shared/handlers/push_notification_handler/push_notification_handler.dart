@@ -56,6 +56,7 @@ class _AuthBasedRoutingHandlerState
 
     await FirebaseMessaging.instance.setAutoInitEnabled(true);
     final token = await FirebaseMessaging.instance.getToken();
+    print('token: $token');
     context.read<UserCubit>().setFcmToken(token);
 
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -76,10 +77,16 @@ class _AuthBasedRoutingHandlerState
         // if (details.payload != "") {
         //   handleClickNotification(details.payload!);
         // }
-        logging.i("go");
-        const DetailedQuestionRouteData(
-                questionId: "745e3b7e-bc9d-4e05-a041-13b952896b9f")
-            .go(context);
+        final resolvedNavigatorContext = maybeResolve(
+          context,
+          navigatorKey: widget.navigatorKey,
+          rootNavigator: true,
+        );
+        if (resolvedNavigatorContext == null ||
+            !resolvedNavigatorContext.mounted) {
+          return;
+        }
+        const ProfileRouteData().go(resolvedNavigatorContext);
       },
     );
 
@@ -103,7 +110,6 @@ class _AuthBasedRoutingHandlerState
     );
 
     // on message from firebase
-
     FirebaseMessaging.onMessage.listen((event) async {
       if (event.notification != null) {
         logging.i({
@@ -121,8 +127,20 @@ class _AuthBasedRoutingHandlerState
         payload: event.data["questionId"] ?? "",
       );
     });
+
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       if (event.notification != null) {
+        final resolvedNavigatorContext = maybeResolve(
+          context,
+          navigatorKey: widget.navigatorKey,
+          rootNavigator: true,
+        );
+        if (resolvedNavigatorContext == null ||
+            !resolvedNavigatorContext.mounted) {
+          return;
+        }
+        const ProfileRouteData().go(resolvedNavigatorContext);
+
         logging.i({
           "onMessageOnpenedApp",
           event.notification!.title,
