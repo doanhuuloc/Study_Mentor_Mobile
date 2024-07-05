@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:study_mentor_mobile/application/services/file/file.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 
 import '../../../../shared/theme/theme.dart';
@@ -37,7 +38,7 @@ class QuestionInfoBox extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "Thông tin câu hỏi",
+                    S.of(context).questionInfomation,
                     style: Styles.s16().withWeight(FontWeight.w600),
                   ),
                 ),
@@ -57,7 +58,7 @@ class QuestionInfoBox extends StatelessWidget {
                 data: question),
           if ((fileResponse ?? []).isNotEmpty)
             Text(
-              "Tệp đính kèm",
+              S.of(context).attachments,
               style: Styles.s15().withWeight(FontWeight.w600),
             ),
           if (loading)

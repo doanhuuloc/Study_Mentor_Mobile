@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../application/services/ai/dto/enum.dart';
-import '../../../../application/services/education/education.dart';
 import '../../../../application/services/user/user.dart';
 import '../../../shared/base_infinite_loading/example.dart';
 import '../../../shared/widgets/dialogs/dialogs.dart';
 import '../../../shared/widgets/drop_down_bar/drop_down_bar.dart';
 import '../../../shared/widgets/drop_down_bar/widgets/drop_down_sheet.dart';
+import '../../../shared/widgets/file_picker_sheet/file_picker_sheet.dart';
 import '../../../shared/widgets/image_picker_sheet/image_picker_sheet.dart';
 import '../../../ui/main_screen/main_screen.dart';
+import '../../../ui/question_screen/report_question_screen/blocs/report_question_state.dart';
 import '../../../ui/splash_screen/splash_screen.dart';
 import '../../app_nav_key/app_nav_key.dart';
 import '../routes/routes.dart';
@@ -102,6 +103,24 @@ class ImagePickerRouteData extends GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return ImagePickerSheet.buildPage(
+      context,
+      key: state.pageKey,
+    );
+  }
+}
+
+@TypedGoRoute<FilePickerRouteData>(
+  path: FilePickerRouteData.routeName,
+)
+class FilePickerRouteData extends GoRouteData {
+  const FilePickerRouteData();
+
+  static const routeName = '/file-picker';
+  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return FilePickerSheet.buildPage(
       context,
       key: state.pageKey,
     );

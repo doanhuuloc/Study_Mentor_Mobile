@@ -15,6 +15,7 @@ import '../../../../ui/home_screen/home_screen.dart';
 import '../../../../ui/question_screen/detailed_question_screen/detailed_question_screen.dart';
 import '../../../../ui/question_screen/intrustor_info_screen/intrustor_info_screen.dart';
 import '../../../../ui/auth_screen/login_screen/login_screen.dart';
+import '../../../../ui/question_screen/report_question_screen/blocs/report_question_state.dart';
 
 class HomeBranchData extends StatefulShellBranchData {
   const HomeBranchData();
@@ -202,12 +203,12 @@ class ReportQuestionRouteData extends GoRouteData {
   static const routeName = 'reportQuestion';
   static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
 
-  final GetQuestionInfoResponse $extra;
+  final ReportQuestionProps $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return ReportQuestionScreen(
-      questionInfo: $extra,
+      reportQuestion: $extra,
     );
   }
 }

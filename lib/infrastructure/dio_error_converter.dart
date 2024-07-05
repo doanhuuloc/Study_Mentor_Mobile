@@ -29,8 +29,8 @@ class DioErrorConverter {
     if (responseData is Map<String, dynamic>) {
       Map<String, dynamic> data = {};
       data = responseData;
-      if (data.containsKey('code')) {
-        code = data['code']?.toString();
+      if (data.containsKey('errorCode')) {
+        code = data['errorCode']?.toString();
       }
       if (data.containsKey('message')) {
         message = data['message']?.toString();

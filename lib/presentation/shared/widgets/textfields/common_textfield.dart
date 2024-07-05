@@ -65,7 +65,7 @@ class CommonTextField extends StatefulWidget {
       textEditingController: textEditingController,
       focusNode: focusNode,
       onChanged: onChanged,
-      errorText: errorText,
+      errorText: errorText = "",
       useClearIcon: useClearIcon,
       borderColor: borderColor,
       errorBorderColor: errorBorderColor,
@@ -218,7 +218,8 @@ class _CommonTextFieldState extends State<CommonTextField> {
       focusNode: _focusNode,
       obscureText: widget.obscure,
       decoration: InputDecoration(
-        errorText: widget.errorText,
+        errorMaxLines: 3,
+        errorText: widget.errorText == "" ? null : widget.errorText,
         filled: !widget.enable,
         fillColor: AppColors.gray.shade300,
         suffixIconConstraints: BoxConstraints(

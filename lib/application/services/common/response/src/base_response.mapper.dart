@@ -13,6 +13,7 @@ class BaseResponseMapper extends ClassMapperBase<BaseResponse> {
   static BaseResponseMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = BaseResponseMapper._());
+      PaginationResponseMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -32,19 +33,25 @@ class BaseResponseMapper extends ClassMapperBase<BaseResponse> {
   static dynamic _arg$data<T>(f) => f<T>();
   static const Field<BaseResponse, dynamic> _f$data =
       Field('data', _$data, arg: _arg$data);
+  static PaginationResponse? _$paginationInfo(BaseResponse v) =>
+      v.paginationInfo;
+  static const Field<BaseResponse, PaginationResponse> _f$paginationInfo =
+      Field('paginationInfo', _$paginationInfo, opt: true);
 
   @override
   final MappableFields<BaseResponse> fields = const {
     #success: _f$success,
     #message: _f$message,
     #data: _f$data,
+    #paginationInfo: _f$paginationInfo,
   };
 
   static BaseResponse<T> _instantiate<T>(DecodingData data) {
     return BaseResponse(
         success: data.dec(_f$success),
         message: data.dec(_f$message),
-        data: data.dec(_f$data));
+        data: data.dec(_f$data),
+        paginationInfo: data.dec(_f$paginationInfo));
   }
 
   @override
@@ -100,7 +107,13 @@ extension BaseResponseValueCopy<$R, $Out, T>
 
 abstract class BaseResponseCopyWith<$R, $In extends BaseResponse<T>, $Out, T>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({bool? success, String? message, T? data});
+  PaginationResponseCopyWith<$R, PaginationResponse, PaginationResponse>?
+      get paginationInfo;
+  $R call(
+      {bool? success,
+      String? message,
+      T? data,
+      PaginationResponse? paginationInfo});
   BaseResponseCopyWith<$R2, $In, $Out2, T> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -114,17 +127,27 @@ class _BaseResponseCopyWithImpl<$R, $Out, T>
   late final ClassMapperBase<BaseResponse> $mapper =
       BaseResponseMapper.ensureInitialized();
   @override
-  $R call({Object? success = $none, Object? message = $none, T? data}) =>
+  PaginationResponseCopyWith<$R, PaginationResponse, PaginationResponse>?
+      get paginationInfo => $value.paginationInfo?.copyWith
+          .$chain((v) => call(paginationInfo: v));
+  @override
+  $R call(
+          {Object? success = $none,
+          Object? message = $none,
+          T? data,
+          Object? paginationInfo = $none}) =>
       $apply(FieldCopyWithData({
         if (success != $none) #success: success,
         if (message != $none) #message: message,
-        if (data != null) #data: data
+        if (data != null) #data: data,
+        if (paginationInfo != $none) #paginationInfo: paginationInfo
       }));
   @override
   BaseResponse<T> $make(CopyWithData data) => BaseResponse(
       success: data.get(#success, or: $value.success),
       message: data.get(#message, or: $value.message),
-      data: data.get(#data, or: $value.data));
+      data: data.get(#data, or: $value.data),
+      paginationInfo: data.get(#paginationInfo, or: $value.paginationInfo));
 
   @override
   BaseResponseCopyWith<$R2, BaseResponse<T>, $Out2, T> $chain<$R2, $Out2>(

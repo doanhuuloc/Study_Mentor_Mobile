@@ -31,7 +31,7 @@ class ResetPasswordFormSection extends StatelessWidget {
                     await context.read<ResetPasswordCubit>().resetPassword();
                   }
                 : null,
-            title: "Reset",
+            title: S.of(context).reset,
           );
         }),
         const SizedBox(height: 8),

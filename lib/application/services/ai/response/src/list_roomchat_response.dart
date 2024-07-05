@@ -6,9 +6,9 @@ part 'list_roomchat_response.mapper.dart';
 class ListRoomChatResponse with ListRoomChatResponseMappable {
   const ListRoomChatResponse({
     this.roomId,
-    this.Title,
-    this.SenderId,
-    this.RecipientId,
+    this.title,
+    this.senderId,
+    this.recipientId,
     this.createdAt,
   });
 
@@ -16,8 +16,8 @@ class ListRoomChatResponse with ListRoomChatResponseMappable {
       ListRoomChatResponseMapper.fromJson(json);
 
   final String? roomId;
-  final String? Title;
-  final String? SenderId;
-  final String? RecipientId;
+  final String? title;
+  final String? senderId;
+  final String? recipientId;
   final DateTime? createdAt;
 }

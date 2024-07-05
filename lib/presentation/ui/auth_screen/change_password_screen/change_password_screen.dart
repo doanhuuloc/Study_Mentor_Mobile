@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/application/services/user/user.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import '../../../shared/handlers/loading_handler/loading_manager.dart';
-import '../../../shared/transitions/transitions.dart';
 import '../../../shared/widgets/app_bar/common_app_bar.dart';
 import 'bloc/change_password_cubit.dart';
 import 'bloc/change_password_state.dart';
@@ -17,23 +16,6 @@ class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({
     super.key,
   });
-
-  static Page<void> buildPage(BuildContext context, GoRouterState state,
-      {String? redirectUrl}) {
-    return CustomTransitionPage(
-      key: state.pageKey,
-      child: const ChangePasswordScreen(),
-      transitionsBuilder: (BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation, Widget child) {
-        return CustomTransitionBuilder.slideFromBottomTransition(
-          context,
-          animation,
-          secondaryAnimation,
-          child,
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +50,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     height: constraints.maxHeight * 0.25,
                     child: Text(
-                      "Change your account",
+                      S.of(context).changePassword,
                       style: Styles.s24().withWeight(FontWeight.bold),
                     ),
                   ),

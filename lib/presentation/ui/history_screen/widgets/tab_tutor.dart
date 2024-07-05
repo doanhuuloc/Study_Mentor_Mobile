@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/filters/selectable_chips.dart';
@@ -20,9 +21,7 @@ class TabTutor extends StatefulWidget {
 class _TabTutorState extends State<TabTutor> {
   @override
   void initState() {
-    context
-        .read<HistoryCubit>()
-        .getListQuestion(context.read<HistoryCubit>().state.currentTabTutor);
+    context.read<HistoryCubit>().refreshhData(HistoryFilter.question);
     super.initState();
   }
 
@@ -37,39 +36,34 @@ class _TabTutorState extends State<TabTutor> {
             SelectableChips<QuestionStatus>(
               padding: const EdgeInsets.only(left: 8, right: 8),
               selected: <QuestionStatus>{}..add(state.currentTabTutor),
-              data: const [
-                // ChipData(
-                //   value: QuestionStatus.PENDING,
-                //   label: "Pending",
-                // ),
+              data: [
                 ChipData(
                   value: QuestionStatus.NEW,
-                  label: 'Mới',
+                  label: S.of(context).neW,
                 ),
                 ChipData(
                   value: QuestionStatus.ACCEPTED,
-                  label: 'Đã Chấp nhận',
+                  label: S.of(context).accepted,
                 ),
-                // ChipData(
-                //   value: QuestionStatus.REJECTED,
-                //   label: 'Rejected',
-                // ),
                 ChipData(
                   value: QuestionStatus.ANSWERED,
-                  label: 'Đã trả lời',
+                  label: S.of(context).answered,
                 ),
                 ChipData(
                   value: QuestionStatus.DONE,
-                  label: 'Hoàn thành',
+                  label: S.of(context).done,
                 ),
                 ChipData(
                   value: QuestionStatus.EXPIRED,
-                  label: 'Hết hạn',
+                  label: S.of(context).expired,
                 ),
               ],
               onSelect: (value) {
                 context.read<HistoryCubit>().setTabTutor(value);
-                context.read<HistoryCubit>().getListQuestion(value);
+                context.read<HistoryCubit>().refreshhData(
+                      HistoryFilter.question,
+                      questionStatus: value,
+                    );
               },
             ),
             const SizedBox(height: 10),
@@ -90,7 +84,11 @@ class _TabTutorState extends State<TabTutor> {
                     );
                   }
                   return RefreshIndicator(
-                    onRefresh: () async {},
+                    onRefresh: () async {
+                      context
+                          .read<HistoryCubit>()
+                          .refreshhData(HistoryFilter.question);
+                    },
                     child: state.listQuestion.isNotEmpty
                         ? ListView.separated(
                             itemCount: state.listQuestion.length,
@@ -98,13 +96,12 @@ class _TabTutorState extends State<TabTutor> {
                                 const Divider(),
                             itemBuilder: (context, index) {
                               return MessageBox(
-                                avatar:
-                                    AssetImage(Assets.images.logo.logo.path),
+                                avatar: AssetImage(Assets.images.logoPng.path),
                                 title: state.listQuestion[index].title ??
-                                    "Câu hỏi",
+                                    S.of(context).question,
                                 content:
                                     state.listQuestion[index].tutor?.fullName ??
-                                        "Đang tìm người hướng dẫn",
+                                        S.of(context).findingIntructor,
                                 time: state.listQuestion[index].createdAt,
                                 voidCallback: () {
                                   if (state.listQuestion[index].questionId !=
@@ -132,11 +129,10 @@ class _TabTutorState extends State<TabTutor> {
                                         width: 150,
                                         color: Colors.amber),
                                     const SizedBox(height: 20),
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 20),
-                                      child: Text(
-                                          "Bạn không có câu hỏi nào tại trạng thái hiện tại"),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: Text(S.of(context).emptyQuestion),
                                     ),
                                   ],
                                 ),

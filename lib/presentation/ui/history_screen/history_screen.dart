@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/presentation/gen/app_colors.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 import 'package:study_mentor_mobile/presentation/shared/transitions/transitions.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/app_bar/common_app_bar.dart';
 import 'package:study_mentor_mobile/presentation/ui/history_screen/blocs/history_cubit.dart';
 import 'package:study_mentor_mobile/presentation/ui/history_screen/widgets/tab_ai_pay.dart';
+import 'package:study_mentor_mobile/presentation/ui/history_screen/widgets/tab_report.dart';
 import 'package:study_mentor_mobile/presentation/ui/history_screen/widgets/tab_tutor.dart';
 
 import '../../../application/services/ai/ai.dart';
@@ -42,11 +44,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: CommonAppBar(
           title: Text(
-            "Lịch sử",
+            S.of(context).history,
             style: Styles.s20(),
           ),
           centerTitle: true,
@@ -63,7 +65,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 failureHandlerManager: context.read<FailureHandlerManager>());
           },
           child: Builder(builder: (context) {
-            return const Column(
+            return Column(
               children: [
                 TabBar(
                   isScrollable: true,
@@ -71,22 +73,28 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   dividerHeight: 0,
                   tabs: [
                     Tab(
-                      child: Text("AI thường"),
+                      child: Text(S.of(context).aIFree),
                     ),
                     Tab(
-                      child: Text("AI hệ thống"),
+                      child: Text(S.of(context).aISystem),
                     ),
                     Tab(
-                      child: Text("Người hướng dẫn"),
+                      child: Text(S.of(context).intructor),
+                    ),
+                    Tab(
+                      child: Text(S.of(context).report),
                     ),
                   ],
                 ),
-                Expanded(
-                  child: TabBarView(children: [
-                    TabAI(),
-                    TabAIPay(),
-                    TabTutor(),
-                  ]),
+                const Expanded(
+                  child: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        TabAI(),
+                        TabAIPay(),
+                        TabTutor(),
+                        TabReport(),
+                      ]),
                 ),
               ],
             );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
+import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/textfields/common_textfield.dart';
 
 import '../../../../gen/assets.gen.dart';
@@ -30,9 +32,10 @@ class _FormRattingState extends State<FormRatting> {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                const Text(
-                  "Đánh giá",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                Text(
+                  S.of(context).reivew,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 Image.asset(
                   Assets.images.icons.chatgpt.path,
@@ -84,14 +87,8 @@ class _FormRattingState extends State<FormRatting> {
                       color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Text(
-                      "Send",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
+                    child: Text(S.of(context).send,
+                        style: Styles.s18().withWeight(FontWeight.w600)),
                   ),
                 ),
                 const SizedBox(height: 10)

@@ -25,7 +25,7 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     required this.questionId,
   }) : super(const DetailedQuestionState()) {
     emit(state.copyWith(questionId: questionId));
-    _fetchData();
+    fetchData();
   }
 
   final String userId;
@@ -82,7 +82,10 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
         (state.questionInfo?.answers == null ||
             (state.questionInfo?.answers ?? []).isEmpty)) {
       socketCubit.getAnswer((GetAnswer answer) {
-        emit(state.copyWith(answer: answer.data?.answer));
+        emit(state.copyWith(
+            answer: answer.data?.answer,
+            questionInfo:
+                state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED)));
       });
     }
   }
@@ -152,7 +155,8 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
 
   Future<String> payment() async {
     final futureRes = educationController.payment(
-        paymentLinkRequest: PaymentLinkRequest(questionId: questionId));
+        paymentLinkRequest:
+            PaymentLinkRequest(questionId: questionId, type: 0));
 
     final res = await loadingManager.startLoading(future: futureRes);
 
@@ -169,7 +173,7 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     return "";
   }
 
-  Future<void> _fetchData() async {
+  Future<void> fetchData() async {
     await getQuestion();
     getAnswer();
     await createGGMeet();

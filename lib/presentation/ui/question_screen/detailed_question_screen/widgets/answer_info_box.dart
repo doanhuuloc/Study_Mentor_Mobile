@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:study_mentor_mobile/application/services/education/education.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 
@@ -40,8 +41,8 @@ class AnswerInfoBox extends StatelessWidget {
                       ),
                       child: Text(
                         state.questionInfo?.questionType == QuestionType.GGMEET
-                            ? "Link Google Meet"
-                            : "Thông tin câu trả lời",
+                            ? S.of(context).ggmeetLink
+                            : S.of(context).answeredInfomation,
                         style: Styles.s16().withWeight(FontWeight.w600),
                       ),
                     ),
@@ -62,7 +63,7 @@ class AnswerInfoBox extends StatelessWidget {
                         )),
                         const SizedBox(height: 20),
                         Text(
-                          "Người hướng dẫn đang trả lời câu hỏi",
+                          S.of(context).intructorAnsweringQuestion,
                           style: Styles.s16(),
                         )
                       ],
@@ -84,7 +85,7 @@ class AnswerInfoBox extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Tệp đính kèm",
+                            S.of(context).attachments,
                             style: Styles.s15().withWeight(FontWeight.w600),
                           ),
                           ...?state.answer?.fileAttachmentAnswers
@@ -103,7 +104,7 @@ class AnswerInfoBox extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      "Vui lòng tham gia link google meet bên dưới để cùng với người hướng dẫn trả lời câu hỏi của bạn",
+                      S.of(context).joinGGMeet,
                       style: Styles.s16(),
                     ),
                     const SizedBox(height: 10),

@@ -6,6 +6,7 @@ import 'package:study_mentor_mobile/presentation/router/router_config/router_con
 import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 
 import '../../../bases/auth_cubit/auth_cubit.dart';
+import '../../../gen/locale/app_localizations.dart';
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import '../../../shared/handlers/loading_handler/loading_manager.dart';
 import '../../../shared/transitions/transitions.dart';
@@ -80,7 +81,7 @@ class RegisterScreen extends StatelessWidget {
                     height: constraints.maxHeight * logoFraction,
                     alignment: Alignment.center,
                     child: Text(
-                      "Register your account",
+                      S.of(context).registerYourAccount,
                       style: Styles.s24().withWeight(FontWeight.bold),
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
 import 'package:study_mentor_mobile/presentation/shared/handlers/loading_handler/loading_manager.dart';
@@ -51,15 +52,13 @@ class _IntrustorInfoScreenState extends State<IntrustorInfoScreen> {
                             questionId: widget.questionId ?? "")
                         .go(context);
                   } else {
-                    const AlertRouteData(
-                            content:
-                                "Người hướng dẫn từ chối trả lời câu hỏi của bạn")
+                    AlertRouteData(content: S.of(context).rejectAnswered)
                         .push(context);
                   }
                 },
                 child: Scaffold(
                   appBar: CommonAppBar(
-                    title: const Text("Người hướng dẫn"),
+                    title: Text(S.of(context).intructor),
                     color: AppColors.blue.shade50,
                   ),
                   backgroundColor: AppColors.blue.shade50,
@@ -102,12 +101,13 @@ class _IntrustorInfoScreenState extends State<IntrustorInfoScreen> {
                                         itemBuilder: (context, index) =>
                                             const Icon(Icons.star,
                                                 color: Colors.orange),
-                                        rating: 5,
+                                        rating:
+                                            widget.intrustor.averageRate ?? 0,
                                         itemSize: 30,
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
-                                        widget.intrustor.fullName ?? "Long Vu",
+                                        widget.intrustor.fullName ?? "",
                                         style: Styles.s20()
                                             .withWeight(FontWeight.w600),
                                       )
@@ -124,7 +124,7 @@ class _IntrustorInfoScreenState extends State<IntrustorInfoScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Thông tin cá nhân",
+                                        S.of(context).personalInfomation,
                                         style: Styles.s18()
                                             .withWeight(FontWeight.w600),
                                       ),
@@ -132,24 +132,25 @@ class _IntrustorInfoScreenState extends State<IntrustorInfoScreen> {
                                         gap: 10,
                                         items: [
                                           LineInfo(
-                                              title: "Email",
+                                              title: S.of(context).email,
                                               content:
                                                   widget.intrustor.email ?? ""),
                                           LineInfo(
-                                              title: "Số điện thoại",
+                                              title: S.of(context).phone,
                                               content:
                                                   widget.intrustor.phone ?? ""),
                                           LineInfo(
-                                              title: "Ngày sinh",
-                                              content: widget
-                                                  .intrustor.dateOfBirth
+                                              title: S.of(context).dateOfbirth,
+                                              content: (widget.intrustor
+                                                          .dateOfBirth ??
+                                                      "")
                                                   .toString()),
                                           LineInfo(
-                                              title: "Giới tính",
+                                              title: S.of(context).gender,
                                               content:
                                                   widget.intrustor.gender == 0
-                                                      ? "nam"
-                                                      : "nữ"),
+                                                      ? S.of(context).male
+                                                      : S.of(context).female),
                                         ],
                                       ),
                                     ],
@@ -184,7 +185,9 @@ class _IntrustorInfoScreenState extends State<IntrustorInfoScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(20),
                             child: PrimaryButton.square(
-                              title: state.waittingTutor ? "" : "Chập nhận",
+                              title: state.waittingTutor
+                                  ? ""
+                                  : S.of(context).accept,
                               textStyle:
                                   Styles.s18().withWeight(FontWeight.w600),
                               onPressed: () {

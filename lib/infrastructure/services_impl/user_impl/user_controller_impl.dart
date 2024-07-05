@@ -33,7 +33,7 @@ class UserControllerImpl with UserController, DataSourceErrorHandler {
         future: () => userDataSource.updateProfile(updateProfileRequest));
   }
 
-    @override
+  @override
   Future<Result<Failure, SuccessResponse>> changePassword(
       ChangePasswordRequest request) {
     return handleApiResult(
@@ -43,7 +43,6 @@ class UserControllerImpl with UserController, DataSourceErrorHandler {
   @override
   Future<Result<Failure, SuccessResponse>> resetPassword(
       ResetPasswordRequest request) {
-        print("object");
     return handleApiResult(future: () => userDataSource.resetPassword(request));
   }
 }

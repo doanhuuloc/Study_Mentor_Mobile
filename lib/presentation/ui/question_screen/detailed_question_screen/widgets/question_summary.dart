@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 import 'package:study_mentor_mobile/presentation/utilities/formatCurency.dart';
 
@@ -35,14 +36,14 @@ class QuestionSummary extends StatelessWidget {
             child: GapItems(
               gap: 10,
               items: [
-                Text(
-                  "Thông tin buổi trao đổi",
-                  style: Styles.s16().withWeight(FontWeight.w600),
-                ),
+                // Text(
+                //   "Thông tin buổi trao đổi",
+                //   style: Styles.s16().withWeight(FontWeight.w600),
+                // ),
                 Row(
                   children: [
                     Text(
-                      "Môn học: ",
+                      S.of(context).subjectQuestion,
                       style: Styles.s15().withWeight(FontWeight.w500),
                     ),
                     Expanded(
@@ -55,12 +56,12 @@ class QuestionSummary extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "Giá: ",
+                      S.of(context).price,
                       style: Styles.s15().withWeight(FontWeight.w500),
                     ),
                     Expanded(
                         child: Text(
-                      formatCurrency(double.parse(price)),
+                      formatCurrency(double.parse(price), context),
                       style: Styles.s15().withColor(Colors.redAccent),
                     )),
                   ],

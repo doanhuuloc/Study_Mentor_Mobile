@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 import '../../../../application/services/education/education.dart';
 import '../../../bases/socket_cubit/socket_cubit.dart';
@@ -36,9 +38,7 @@ class _FindingIntrustorScreenState extends State<FindingIntrustorScreen> {
           return BlocListener<FindingIntrustorCubit, FindingIntrustorState>(
             listener: (context, state) {
               if (state.tutor != null) {
-                DetailedQuestionRouteData(
-                        questionId: widget.questionId, $extra: state.tutor)
-                    .pushReplacement(context);
+                context.pop(true);
               }
             },
             child: Scaffold(
@@ -53,7 +53,7 @@ class _FindingIntrustorScreenState extends State<FindingIntrustorScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        "Hệ thống đang tìm kiếm người hướng dẫn phù hợp cho bạn",
+                        S.of(context).systemFindSuitableIntuctor,
                         style: Styles.s18().withWeight(FontWeight.w500),
                         textAlign: TextAlign.center,
                       ),
@@ -68,7 +68,7 @@ class _FindingIntrustorScreenState extends State<FindingIntrustorScreen> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      "Vui lòng một lát nhé",
+                      S.of(context).pleaseWait,
                       style: Styles.s15().withWeight(FontWeight.w300),
                       textAlign: TextAlign.center,
                     ),
@@ -90,7 +90,7 @@ class _FindingIntrustorScreenState extends State<FindingIntrustorScreen> {
                           border: Border.all(color: Colors.blue),
                           borderRadius: BorderRadius.circular(8),
                           child: Text(
-                            "Hủy tìm kiếm",
+                            S.of(context).cancelFind,
                             style: Styles.s16()
                                 .withColor(Colors.blue)
                                 .withWeight(FontWeight.w600),
@@ -106,7 +106,7 @@ class _FindingIntrustorScreenState extends State<FindingIntrustorScreen> {
                           border: Border.all(color: Colors.blue),
                           borderRadius: BorderRadius.circular(8),
                           child: Text(
-                            "Về trang chủ",
+                            S.of(context).goHomePage,
                             style: Styles.s16()
                                 .withColor(Colors.blue)
                                 .withWeight(FontWeight.w600),

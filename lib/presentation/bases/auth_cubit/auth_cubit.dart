@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:study_mentor_mobile/utilities/logging/logging.dart';
 // import 'package:onesignal_flutter/onesignal_flutter.dart';
 
+import '../../../application/failures/dio_failure/dio_failure.dart';
 import '../../../application/services/app/token_service/refresh_token_manager.dart';
 import '../../../application/services/app/token_service/token_service.dart';
 import '../../../application/services/auth/auth.dart';
@@ -70,6 +72,7 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
       ),
     );
     if (loginResponse.isLeft) {
+      logging.i((loginResponse.left as BadRequestFailure).code);
       return loginResponse.left;
     }
     await tokenService.setToken(loginResponse.right.data.accessToken,
@@ -121,25 +124,27 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
     }
   }
 
-  // Future<Failure?> loginWithGoogle({
-  //   required String idToken,
-  //   String? redirectUrl,
-  // }) async {
-  //   final loginWithGoogleResponse = await authController.loginWithGoogle(
-  //     LoginWithGoogleRequest(
-  //       idToken: idToken,
-  //     ),
-  //   );
-  //   if (loginWithGoogleResponse.isLeft) {
-  //     return loginWithGoogleResponse.left;
-  //   }
-  //   await tokenService.setToken(
-  //     loginWithGoogleResponse.right.tokenInfo ?? const JwtResponse(),
-  //   );
-  //   _loggedInSuccess(
-  //       redirectUrl: redirectUrl, userId: loginWithGoogleResponse.right.userId);
-  //   return null;
-  // }
+  Future<Failure?> loginWithGoogle({
+    required String idToken,
+    String? redirectUrl,
+  }) async {
+    // final loginWithGoogleResponse = await authController.loginWithGoogle(
+    //   LoginWithGoogleRequest(
+    //     idToken: idToken,
+    //   ),
+    // );
+    // if (loginWithGoogleResponse.isLeft) {
+    //   return loginWithGoogleResponse.left;
+    // }
+    // await tokenService.setToken(
+    //   // loginWithGoogleResponse.right.accessToken ?? const JwtResponse(),
+    //   loginWithGoogleResponse.right.accessToken,
+    //   loginWithGoogleResponse.right.refreshToken,
+    // );
+
+    // _loggedInSuccess(redirectUrl: redirectUrl);
+    return null;
+  }
 
   Future<void> logout() async {
     final refreshToken = await refreshTokenManager.loadRefreshToken();

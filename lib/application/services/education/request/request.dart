@@ -7,3 +7,4 @@ export 'src/create_ggmeet_request.dart';
 export 'src/payment_link_request.dart';
 export 'src/report_tutor_request.dart';
 export 'src/canel_find_system_question_request.dart';
+export 'src/get_report_question_request.dart';

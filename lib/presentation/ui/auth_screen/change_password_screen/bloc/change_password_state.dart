@@ -1,5 +1,3 @@
-import 'package:equatable/equatable.dart';
-
 import '../../../../bases/base_form_input/base_form_input.dart';
 
 enum LoginFieldError {
@@ -20,15 +18,19 @@ class PasswordField extends BaseFormInput<String, LoginFieldError> {
   }
 }
 
-class ChangePasswordState extends Equatable {
+class ChangePasswordState {
   const ChangePasswordState({
     this.oldPasswordField = const PasswordField.pure(),
+    this.errTextOldPassField = "",
     this.newPasswordField = const PasswordField.pure(),
+    this.errTextNewPassField = "",
     this.changePasswordFlowCompleted = false,
   });
 
   final PasswordField oldPasswordField;
+  final String errTextOldPassField;
   final PasswordField newPasswordField;
+  final String errTextNewPassField;
   final bool changePasswordFlowCompleted;
 
   bool get canSubmit {
@@ -39,24 +41,30 @@ class ChangePasswordState extends Equatable {
 
   ChangePasswordState copyWith({
     PasswordField? oldPasswordField,
+    String? errTextOldPassField,
     PasswordField? newPasswordField,
+    String? errTextNewPassField,
     bool? changePasswordFlowCompleted,
   }) {
     return ChangePasswordState(
       oldPasswordField: oldPasswordField ?? this.oldPasswordField,
+      errTextOldPassField: errTextOldPassField ?? this.errTextOldPassField,
       newPasswordField: newPasswordField ?? this.newPasswordField,
+      errTextNewPassField: errTextNewPassField ?? this.errTextNewPassField,
       changePasswordFlowCompleted:
           changePasswordFlowCompleted ?? this.changePasswordFlowCompleted,
     );
   }
 
-  @override
-  List<Object?> get props => [
-        newPasswordField.value,
-        newPasswordField.error,
-        oldPasswordField.value,
-        oldPasswordField.error,
-        canSubmit,
-        changePasswordFlowCompleted,
-      ];
+  // @override
+  // List<Object?> get props => [
+  //       newPasswordField.value,
+  //       newPasswordField.error,
+  //       oldPasswordField.value,
+  //       oldPasswordField.error,
+  //       canSubmit,
+  //       changePasswordFlowCompleted,
+  //       errTextOldPassField,
+  //       errTextNewPassField,
+  //     ];
 }

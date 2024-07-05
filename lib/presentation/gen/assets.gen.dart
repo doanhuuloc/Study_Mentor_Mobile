@@ -83,6 +83,9 @@ class $AssetsImagesGen {
 
   $AssetsImagesLogoGen get logo => const $AssetsImagesLogoGen();
 
+  /// File path: assets/images/logo.png
+  AssetGenImage get logoPng => const AssetGenImage('assets/images/logo.png');
+
   /// File path: assets/images/teacher.png
   AssetGenImage get teacher => const AssetGenImage('assets/images/teacher.png');
 
@@ -91,7 +94,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [ai, aipre, intrustor, ggmeet, loader, teacher, user];
+      [ai, aipre, intrustor, ggmeet, loader, logoPng, teacher, user];
 }
 
 class $AssetsSvgsGen {

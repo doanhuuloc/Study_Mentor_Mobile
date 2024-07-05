@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_mentor_mobile/presentation/bases/locale_cubit/locale_cubit.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/drop_down_bar/drop_down_bar.dart';
 
 import '../../../../bases/auth_cubit/auth_cubit.dart';
@@ -23,9 +25,38 @@ class ActivitiesSection extends StatefulWidget {
 }
 
 class _ActivitiesSectionState extends State<ActivitiesSection> {
-  String brightnessMode = "Sáng";
-  String notifi = "Bật";
-  String language = "Tiếng Việt";
+  int theme = 0;
+  int notifi = 0;
+
+  String getNotifiName() {
+    if (notifi == 0) {
+      return S.of(context).turnOn;
+    }
+    if (notifi == 1) {
+      return S.of(context).turnOff;
+    }
+    return S.of(context).turnOn;
+  }
+
+  String getThemeName() {
+    if (theme == 0) {
+      return S.of(context).light;
+    }
+    if (theme == 1) {
+      return S.of(context).dark;
+    }
+    return S.of(context).light;
+  }
+
+  String getLocaleName(Locale locale) {
+    if (locale.languageCode == "vi") {
+      return S.of(context).vietnamese;
+    }
+    if (locale.languageCode == "en") {
+      return S.of(context).english;
+    }
+    return S.of(context).vietnamese;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +67,12 @@ class _ActivitiesSectionState extends State<ActivitiesSection> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
             child: Text(
-              "Tài khoản",
+              S.of(context).account,
               style: ActivitiesSection.styleTitle,
             ),
           ),
           _ItemActivity(
-            title: "Thay đổi thông tin cá nhân",
+            title: S.of(context).editProfile,
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
@@ -53,7 +84,7 @@ class _ActivitiesSectionState extends State<ActivitiesSection> {
             },
           ),
           _ItemActivity(
-            title: "Thay đổi mật khẩu",
+            title: S.of(context).changePassword,
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
@@ -73,75 +104,73 @@ class _ActivitiesSectionState extends State<ActivitiesSection> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
             child: Text(
-              "Cài đặt",
+              S.of(context).settings,
               style: ActivitiesSection.styleTitle,
             ),
           ),
           _ItemActivity(
-            title: "Ngôn ngữ",
-            content: language,
+            title: S.of(context).languages,
+            content: getLocaleName(context.read<LocaleCubit>().state),
+            onTap: () async {
+              final Locale selected = await DropdownSheetRouteData(
+                      $extra: S.supportedLocales
+                          .map(
+                            (locale) => DropDownBarData<Locale>(
+                                value: locale, title: getLocaleName(locale)),
+                          )
+                          .toList())
+                  .push(context);
+
+              if (!context.mounted) {
+                return;
+              }
+
+              context.read<LocaleCubit>().changeLocale(selected);
+              setState(() {});
+            },
+          ),
+          _ItemActivity(
+            title: S.of(context).notification,
+            content: getNotifiName(),
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
                 return;
               }
               if (isLoggedIn) {
-                final selected = await const DropdownSheetRouteData($extra: [
-                  DropDownBarData(value: 0, title: "Tiếng Việt"),
-                  DropDownBarData(value: 1, title: "English"),
+                final selected = await DropdownSheetRouteData($extra: [
+                  DropDownBarData(value: 0, title: S.of(context).turnOn),
+                  DropDownBarData(value: 1, title: S.of(context).turnOff),
                 ]).push(context);
 
-                if (selected == 0) {
-                  language = "Tiếng Việt";
-                } else {
-                  language = "English";
+                if (!context.mounted) {
+                  return;
                 }
+                notifi = selected;
+
                 setState(() {});
               }
             },
           ),
           _ItemActivity(
-            title: "Thông báo",
-            content: notifi,
+            title: S.of(context).theme,
+            content: getThemeName(),
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);
               if (!context.mounted) {
                 return;
               }
               if (isLoggedIn) {
-                final selected = await const DropdownSheetRouteData($extra: [
-                  DropDownBarData(value: 0, title: "Bật"),
-                  DropDownBarData(value: 1, title: "Tắt"),
+                final selected = await DropdownSheetRouteData($extra: [
+                  DropDownBarData(value: 0, title: S.of(context).light),
+                  DropDownBarData(value: 1, title: S.of(context).dark),
                 ]).push(context);
 
-                if (selected == 0) {
-                  notifi = "Bật";
-                } else {
-                  notifi = "Tắt";
+                if (!context.mounted) {
+                  return;
                 }
-                setState(() {});
-              }
-            },
-          ),
-          _ItemActivity(
-            title: "Chế độ sáng",
-            content: brightnessMode,
-            onTap: () async {
-              final isLoggedIn = await requestLoginAction(context);
-              if (!context.mounted) {
-                return;
-              }
-              if (isLoggedIn) {
-                final selected = await const DropdownSheetRouteData($extra: [
-                  DropDownBarData(value: 0, title: "Sáng"),
-                  DropDownBarData(value: 1, title: "Tối"),
-                ]).push(context);
 
-                if (selected == 0) {
-                  brightnessMode = "Sáng";
-                } else {
-                  brightnessMode = "Tối";
-                }
+                theme = selected;
                 setState(() {});
               }
             },
@@ -154,7 +183,7 @@ class _ActivitiesSectionState extends State<ActivitiesSection> {
         GapItems(
           items: [
             _ItemActivity(
-              title: "Đăng xuất",
+              title: S.of(context).logout,
               textColor: AppColors.red,
               onTap: () async {
                 final isLoggedIn = await requestLoginAction(context);

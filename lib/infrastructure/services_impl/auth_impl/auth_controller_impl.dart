@@ -41,4 +41,11 @@ class AuthControllerImpl with AuthController, DataSourceErrorHandler {
       RegisterRequest request) {
     return handleApiResult(future: () => authDataSource.register(request));
   }
+
+  @override
+  Future<Result<Failure, AuthenticatedResponse>> loginWithGoogle(
+      LoginWithGoogleRequest request) {
+    // TODO: implement loginWithGoogle
+    throw UnimplementedError();
+  }
 }

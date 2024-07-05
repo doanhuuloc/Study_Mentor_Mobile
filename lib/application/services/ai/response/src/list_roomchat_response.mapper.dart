@@ -23,15 +23,15 @@ class ListRoomChatResponseMapper extends ClassMapperBase<ListRoomChatResponse> {
   static String? _$roomId(ListRoomChatResponse v) => v.roomId;
   static const Field<ListRoomChatResponse, String> _f$roomId =
       Field('roomId', _$roomId, opt: true);
-  static String? _$Title(ListRoomChatResponse v) => v.Title;
-  static const Field<ListRoomChatResponse, String> _f$Title =
-      Field('Title', _$Title, opt: true);
-  static String? _$SenderId(ListRoomChatResponse v) => v.SenderId;
-  static const Field<ListRoomChatResponse, String> _f$SenderId =
-      Field('SenderId', _$SenderId, opt: true);
-  static String? _$RecipientId(ListRoomChatResponse v) => v.RecipientId;
-  static const Field<ListRoomChatResponse, String> _f$RecipientId =
-      Field('RecipientId', _$RecipientId, opt: true);
+  static String? _$title(ListRoomChatResponse v) => v.title;
+  static const Field<ListRoomChatResponse, String> _f$title =
+      Field('title', _$title, opt: true);
+  static String? _$senderId(ListRoomChatResponse v) => v.senderId;
+  static const Field<ListRoomChatResponse, String> _f$senderId =
+      Field('senderId', _$senderId, opt: true);
+  static String? _$recipientId(ListRoomChatResponse v) => v.recipientId;
+  static const Field<ListRoomChatResponse, String> _f$recipientId =
+      Field('recipientId', _$recipientId, opt: true);
   static DateTime? _$createdAt(ListRoomChatResponse v) => v.createdAt;
   static const Field<ListRoomChatResponse, DateTime> _f$createdAt =
       Field('createdAt', _$createdAt, opt: true);
@@ -39,18 +39,18 @@ class ListRoomChatResponseMapper extends ClassMapperBase<ListRoomChatResponse> {
   @override
   final MappableFields<ListRoomChatResponse> fields = const {
     #roomId: _f$roomId,
-    #Title: _f$Title,
-    #SenderId: _f$SenderId,
-    #RecipientId: _f$RecipientId,
+    #title: _f$title,
+    #senderId: _f$senderId,
+    #recipientId: _f$recipientId,
     #createdAt: _f$createdAt,
   };
 
   static ListRoomChatResponse _instantiate(DecodingData data) {
     return ListRoomChatResponse(
         roomId: data.dec(_f$roomId),
-        Title: data.dec(_f$Title),
-        SenderId: data.dec(_f$SenderId),
-        RecipientId: data.dec(_f$RecipientId),
+        title: data.dec(_f$title),
+        senderId: data.dec(_f$senderId),
+        recipientId: data.dec(_f$recipientId),
         createdAt: data.dec(_f$createdAt));
   }
 
@@ -113,9 +113,9 @@ abstract class ListRoomChatResponseCopyWith<
     $Out> implements ClassCopyWith<$R, $In, $Out> {
   $R call(
       {String? roomId,
-      String? Title,
-      String? SenderId,
-      String? RecipientId,
+      String? title,
+      String? senderId,
+      String? recipientId,
       DateTime? createdAt});
   ListRoomChatResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
@@ -132,23 +132,23 @@ class _ListRoomChatResponseCopyWithImpl<$R, $Out>
   @override
   $R call(
           {Object? roomId = $none,
-          Object? Title = $none,
-          Object? SenderId = $none,
-          Object? RecipientId = $none,
+          Object? title = $none,
+          Object? senderId = $none,
+          Object? recipientId = $none,
           Object? createdAt = $none}) =>
       $apply(FieldCopyWithData({
         if (roomId != $none) #roomId: roomId,
-        if (Title != $none) #Title: Title,
-        if (SenderId != $none) #SenderId: SenderId,
-        if (RecipientId != $none) #RecipientId: RecipientId,
+        if (title != $none) #title: title,
+        if (senderId != $none) #senderId: senderId,
+        if (recipientId != $none) #recipientId: recipientId,
         if (createdAt != $none) #createdAt: createdAt
       }));
   @override
   ListRoomChatResponse $make(CopyWithData data) => ListRoomChatResponse(
       roomId: data.get(#roomId, or: $value.roomId),
-      Title: data.get(#Title, or: $value.Title),
-      SenderId: data.get(#SenderId, or: $value.SenderId),
-      RecipientId: data.get(#RecipientId, or: $value.RecipientId),
+      title: data.get(#title, or: $value.title),
+      senderId: data.get(#senderId, or: $value.senderId),
+      recipientId: data.get(#recipientId, or: $value.recipientId),
       createdAt: data.get(#createdAt, or: $value.createdAt));
 
   @override

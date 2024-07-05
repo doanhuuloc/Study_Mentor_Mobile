@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 
 import '../../../../gen/app_colors.dart';
 import '../../../../gen/assets.gen.dart';
@@ -24,7 +25,7 @@ class SocialLoginSection extends StatelessWidget {
             divider,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.5),
-              child: Text("Social account register",
+              child: Text(S.of(context).socialAccountRegister,
                   style: Styles.s13()
                       .withColor(AppColors.text.bodyText)
                       .withLetterSpacing(-2.5 / 100)),

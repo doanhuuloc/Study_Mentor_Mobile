@@ -23,8 +23,8 @@ class DioErrorConverterSweetTracker extends DioErrorConverter {
     if (responseData is Map<String, dynamic>) {
       Map<String, dynamic> data = {};
       data = responseData;
-      if (data.containsKey('code')) {
-        code = data['code']?.toString();
+      if (data.containsKey('errorCode')) {
+        code = data['errorCode']?.toString();
       }
       if (data.containsKey('msg')) {
         message = data['msg']?.toString();

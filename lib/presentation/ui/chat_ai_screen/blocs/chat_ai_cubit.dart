@@ -1,10 +1,16 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../application/services/ai/ai.dart';
+import '../../../../application/services/ai/dto/enum.dart';
+import '../../../../application/services/file/file.dart';
 import '../../../../application/services/socket/dto/dto.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
+import '../../../bases/file_cubit/file_cubit.dart';
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'chat_ai_state.dart';
 
@@ -12,8 +18,10 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
   ChatAICubit({
     required this.aiController,
     required this.failureHandlerManager,
+    required this.fileCubit,
     required this.userId,
     required this.idChatAI,
+    required this.typeAI,
     required this.controller,
     this.roomId,
   }) : super(ChatAIState(roomId: roomId, listChat: [])) {
@@ -24,9 +32,11 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
 
   final AIController aiController;
   final FailureHandlerManager failureHandlerManager;
+  final FileCubit fileCubit;
   final String userId;
   final String idChatAI;
   final String? roomId;
+  final TypeAI? typeAI;
   final ScrollController controller;
 
   Future<void> getListChat({required String roomId}) async {
@@ -45,18 +55,40 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
   Future<void> sendMessageWithAI() async {
     final String message = state.messageField;
     onChangedMessage("");
+    List<FileRequest>? files;
+    if (typeAI == TypeAI.pay) {
+      if (state.listFilePicker.length + state.listIMGPicker.length > 0) {
+        files = await fileCubit.uploadListFile([
+          ...state.listIMGPicker
+              .map((e) => FileData(file: File(e.path), fileName: e.name)),
+          ...state.listFilePicker.map((e) => FileData(
+              file: File(e.files.single.path ?? ""),
+              fileName: e.files.single.name))
+        ]);
+        if (state.listFilePicker.isNotEmpty) {
+          state.listFilePicker.clear();
+        }
+        if (state.listIMGPicker.isNotEmpty) {
+          state.listIMGPicker.clear();
+        }
+      }
+    }
+
     addChat(ChatAIResponse(
       createAt: DateTime.now(),
       content: message,
       senderId: userId,
+      files: files,
     ));
 
     final msgres = await aiController.chatAI(
         chatAIRequest: SendMessage(
-            content: message,
-            senderId: userId,
-            recipientId: idChatAI,
-            roomId: state.roomId));
+      content: message,
+      senderId: userId,
+      recipientId: idChatAI,
+      roomId: state.roomId,
+      files: files,
+    ));
 
     if (msgres.isLeft) {
       failureHandlerManager.handle(msgres.left);
@@ -91,5 +123,27 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
     newListChat.add(chatAIresponse);
     emit(state.copyWith(listChat: newListChat));
     controller.jumpTo(controller.position.maxScrollExtent);
+  }
+
+  void addImgPicker(List<XFile> imagePicker) {
+    emit(state
+        .copyWith(listIMGPicker: [...state.listIMGPicker, ...imagePicker]));
+  }
+
+  void addFilePicker(FilePickerResult filePickerResult) {
+    emit(state
+        .copyWith(listFilePicker: [...state.listFilePicker, filePickerResult]));
+  }
+
+  void removeImgPicker(XFile imagePicker) {
+    emit(state.copyWith(
+        listIMGPicker:
+            state.listIMGPicker.where((e) => e != imagePicker).toList()));
+  }
+
+  void removeFilePicker(FilePickerResult filePickerResult) {
+    emit(state.copyWith(
+        listFilePicker:
+            state.listFilePicker.where((e) => e != filePickerResult).toList()));
   }
 }

@@ -47,18 +47,18 @@ class LoginCubit extends SafeCubit<LoginState> {
     emit(state.copyWith(loginFlowCompleted: true));
   }
 
-  // void onLoginWithGoogle(String idToken) async {
-  //   final loginWithGoogleFuture = authCubit.loginWithGoogle(
-  //     idToken: idToken,
-  //     redirectUrl: redirectUrl,
-  //   );
+  void onLoginWithGoogle(String idToken) async {
+    final loginWithGoogleFuture = authCubit.loginWithGoogle(
+      idToken: idToken,
+      redirectUrl: redirectUrl,
+    );
 
-  //   final loadingLoginWithGoogleFailure =
-  //       await loadingManager.startLoading(future: loginWithGoogleFuture);
-  //   if (loadingLoginWithGoogleFailure != null) {
-  //     failureHandlerManager.handle(loadingLoginWithGoogleFailure);
-  //     return;
-  //   }
-  //   emit(state.copyWith(loginFlowCompleted: true));
-  // }
+    final loadingLoginWithGoogleFailure =
+        await loadingManager.startLoading(future: loginWithGoogleFuture);
+    if (loadingLoginWithGoogleFailure != null) {
+      failureHandlerManager.handle(loadingLoginWithGoogleFailure);
+      return;
+    }
+    emit(state.copyWith(loginFlowCompleted: true));
+  }
 }

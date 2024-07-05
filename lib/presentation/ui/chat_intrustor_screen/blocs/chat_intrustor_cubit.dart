@@ -100,8 +100,9 @@ class ChatIntrustorCubit extends SafeCubit<ChatIntrustorState> {
     emit(state.copyWith(listChat: [...state.listChat, message]));
   }
 
-  void addImgPicker(XFile imagePicker) {
-    emit(state.copyWith(listIMGPicker: [...state.listIMGPicker, imagePicker]));
+  void addImgPicker(List<XFile> imagePicker) {
+    emit(state
+        .copyWith(listIMGPicker: [...state.listIMGPicker, ...imagePicker]));
   }
 
   void addFilePicker(FilePickerResult filePickerResult) {

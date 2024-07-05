@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/application/services/user/response/src/user_info_response.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
 import 'package:study_mentor_mobile/presentation/ui/question_screen/find_intrustor_screen/widgets/intrustor_item.dart';
 
@@ -49,18 +51,23 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
               final navigate =
                   await FindingIntrustorRouteData(questionId: widget.questionId)
                       .push(context);
+
               if (navigate == null || navigate == false) {
-                if (mounted) {
-                  context
-                      .read<FindIntrustorCubit>()
-                      .setFindingWithSystem(false);
+                if (!context.mounted) {
+                  return;
                 }
+                context.read<FindIntrustorCubit>().setFindingWithSystem(false);
+              } else if (navigate == true) {
+                if (!context.mounted) {
+                  return;
+                }
+                context.pop(true);
               }
             }
           },
           child: Scaffold(
             appBar: CommonAppBar(
-              title: const Text("Tìm người hướng dẫn"),
+              title: Text(S.of(context).findIntructor),
               color: AppColors.blue.shade50,
             ),
             body: Padding(
@@ -74,7 +81,7 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                     children: [
                       Expanded(
                         child: Text(
-                          "Hệ thống tự động tìm kiếm người hướng dẫn",
+                          S.of(context).systemFindSuitableIntuctor,
                           style: Styles.s16().withWeight(FontWeight.w600),
                         ),
                       ),
@@ -86,13 +93,13 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                           onPressed: () {
                             context.read<FindIntrustorCubit>().findIntrustor();
                           },
-                          title: "Tìm",
+                          title: S.of(context).find,
                         ),
                       ),
                     ],
                   ),
                   Text(
-                    "Người hướng dẫn được gợi ý",
+                    S.of(context).suggestedInstructor,
                     style: Styles.s16().withWeight(FontWeight.w600),
                   ),
                   Expanded(

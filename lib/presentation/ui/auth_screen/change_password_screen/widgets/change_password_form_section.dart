@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import '../../../../shared/widgets/buttons/primary_button.dart';
 import '../../../../shared/widgets/textfields/common_textfield.dart';
 
@@ -14,18 +15,28 @@ class ChangePasswordFormSection extends StatelessWidget {
     return Column(
       children: [
         CommonTextField(
-          hintText: "Old password",
+          hintText: S.of(context).oldPassword,
           obscure: true,
           onChanged: (value) {
             context.read<ChangePasswordCubit>().onOldPasswordChanged(value);
           },
+          errorText:
+              context.read<ChangePasswordCubit>().state.errTextOldPassField,
         ),
         const SizedBox(height: 12),
-        CommonTextField(
-          hintText: "New password",
-          obscure: true,
-          onChanged: (value) {
-            context.read<ChangePasswordCubit>().onNewPasswordChanged(value);
+        BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
+          buildWhen: (previous, current) =>
+              previous.errTextNewPassField != current.errTextNewPassField,
+          builder: (context, state) {
+            return CommonTextField(
+              hintText: S.of(context).newPasssword,
+              obscure: true,
+              onChanged: (value) {
+                context.read<ChangePasswordCubit>().onNewPasswordChanged(value);
+              },
+              errorText:
+                  context.read<ChangePasswordCubit>().state.errTextNewPassField,
+            );
           },
         ),
         const SizedBox(height: 32),
@@ -36,10 +47,10 @@ class ChangePasswordFormSection extends StatelessWidget {
           return PrimaryButton.round(
             onPressed: state.canSubmit
                 ? () {
-                    context.read<ChangePasswordCubit>().changePassword();
+                    context.read<ChangePasswordCubit>().changePassword(context);
                   }
                 : null,
-            title: "Change",
+            title: S.of(context).change,
           );
         }),
         const SizedBox(height: 8),

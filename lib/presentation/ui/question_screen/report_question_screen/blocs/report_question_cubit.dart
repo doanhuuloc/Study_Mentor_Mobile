@@ -17,15 +17,31 @@ class ReportQuestionCubit extends SafeCubit<ReportQuestionState> {
     required this.loadingManager,
     required this.educationController,
     required this.userId,
-    required this.questionInfo,
-  }) : super(const ReportQuestionState(listFilePicker: []));
+    required this.reportQuestion,
+  }) : super(const ReportQuestionState(listFilePicker: [])) {
+    if (reportQuestion.id != null) {
+      getReportQuestion();
+    }
+  }
 
   final FileCubit fileCubit;
   final FailureHandlerManager failureHandlerManager;
   final LoadingManager loadingManager;
   final EducationController educationController;
   final String userId;
-  final GetQuestionInfoResponse questionInfo;
+  final ReportQuestionProps reportQuestion;
+
+  Future<void> getReportQuestion() async {
+    emit(state.copyWith(loading: true));
+
+    final report = await educationController.getReportQuestion(
+        getReportQuestionRequest:
+            GetReportQuestionRequest(reportId: reportQuestion.id ?? ""));
+
+    if (report.isRight) {
+      emit(state.copyWith(loading: false));
+    }
+  }
 
   void onChangeContent(String value) {
     emit(state.copyWith(content: value));
@@ -47,7 +63,7 @@ class ReportQuestionCubit extends SafeCubit<ReportQuestionState> {
     emit(state.copyWith(listFilePicker: newListFile));
   }
 
-  Future<bool> reportTutor() async {
+  Future<void> reportTutor() async {
     List<FileRequest>? files;
     if (state.listFilePicker != []) {
       files = await fileCubit.uploadListFile([
@@ -59,8 +75,8 @@ class ReportQuestionCubit extends SafeCubit<ReportQuestionState> {
 
     final futureRes = educationController.reportTutor(
       reportTutorRequest: ReportTutorRequest(
-        questionId: questionInfo.questionId ?? "",
-        tutorId: questionInfo.tutor?.id ?? "",
+        questionId: reportQuestion.questionId,
+        tutorId: reportQuestion.tutorId,
         studentId: userId,
         content: state.content,
         attachFiles: files,
@@ -74,8 +90,7 @@ class ReportQuestionCubit extends SafeCubit<ReportQuestionState> {
     }
 
     if (res.isRight) {
-      return true;
+      emit(state.copyWith(reportFLowCompleted: true));
     }
-    return false;
   }
 }

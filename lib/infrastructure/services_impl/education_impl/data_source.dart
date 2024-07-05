@@ -63,11 +63,19 @@ abstract class EducationDataSource {
       @Body() PaymentLinkRequest paymentLinkRequest);
 
   @POST('/api/users/student/report-student')
-  Future<BaseResponse<PaymentLinkResponse>> reportTutor(
+  Future<BaseResponse<dynamic>> reportTutor(
       @Body() ReportTutorRequest reportTutorRequest);
 
   @POST('/api/questions/{questionId}/cancel-find-tutor/system')
   Future<BaseResponse<dynamic>> cancelFindSystemQuestion({
     @Path('questionId') required String questionId,
+  });
+
+  @GET('/api/users/student/report-student')
+  Future<BaseResponse<List<ReportQuestionReponse>>> getListReport();
+
+  @POST('/api/users/student/report-student/{reportId}')
+  Future<BaseResponse<ReportQuestionReponse>> getReportQuestion({
+    @Path('reportId') required String reportId,
   });
 }

@@ -21,3 +21,6 @@ enum QuestionStatus {
 
 @MappableEnum(mode: ValuesMode.indexed)
 enum QuestionType { GGMEET, FILE }
+
+@MappableEnum(mode: ValuesMode.indexed)
+enum ExpirationDateType { DAY, WEEK, MONTH, YEAR }

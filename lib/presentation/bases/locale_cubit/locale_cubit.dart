@@ -10,7 +10,7 @@ class LocaleCubit extends SafeCubit<Locale> {
 
   final LocaleService localeService;
 
-  static const defaultLocale = Locale('en');
+  static const defaultLocale = Locale('vi');
 
   void bootstrapCompleted(Locale? locale) {
     emit(locale ?? defaultLocale);

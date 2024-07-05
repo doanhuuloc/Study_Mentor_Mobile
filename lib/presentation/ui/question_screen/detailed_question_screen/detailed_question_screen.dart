@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
+import 'package:study_mentor_mobile/presentation/ui/question_screen/report_question_screen/blocs/report_question_state.dart';
 
 import '../../../../application/services/education/education.dart';
 import '../../../../application/services/user/user.dart';
@@ -57,11 +59,11 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
             builder: (context, state) {
           return Scaffold(
             appBar: CommonAppBar(
-              title: const Text("Chi tiết câu hỏi"),
+              title: Text(S.of(context).detailedQuestion),
               color: AppColors.blue.shade50,
               actions: [
-                if (state.questionInfo?.status != QuestionStatus.NEW &&
-                    state.questionInfo?.status != QuestionStatus.PENDING &&
+                if ((state.questionInfo?.status == QuestionStatus.ANSWERED ||
+                        state.questionInfo?.status == QuestionStatus.DONE) &&
                     !state.loading)
                   AppIconButton(
                     icon: SvgPicture.asset(
@@ -71,10 +73,14 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                       color: AppColors.black,
                     ),
                     onTap: () {
-                      ReportQuestionRouteData(
-                              $extra: state.questionInfo ??
-                                  const GetQuestionInfoResponse())
-                          .push(context);
+                      if (state.questionInfo?.tutor?.id != null) {
+                        ReportQuestionRouteData(
+                            $extra: ReportQuestionProps(
+                          id: null,
+                          questionId: widget.questionId,
+                          tutorId: state.questionInfo?.tutor?.id ?? "",
+                        )).push(context);
+                      }
                     },
                   )
               ],
@@ -159,7 +165,8 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                                     QuestionStatus.NEW &&
                                 state.questionInfo?.isPaid != true)
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 50),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 50),
                                 child: Container(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -180,92 +187,119 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                                 state.questionInfo?.status !=
                                     QuestionStatus.PENDING)
                               const AnswerInfoBox(),
+                            ActivityButton(
+                              questionId: widget.questionId,
+                            )
                           ],
                         ),
                       ),
                     ),
                   ),
                 ),
-                if (state.questionInfo?.status == QuestionStatus.NEW)
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10, bottom: 20, right: 50, left: 50),
-                    child: CommonButton(
-                      padding: const EdgeInsets.all(10),
-                      child: const Text(
-                          // state.questionInfo?.isPaid == true
-                          // ?
-                          "Tìm người hướng dẫn"
-                          // : "Thanh toán ${formatCurrency(double.parse(state.questionInfo?.price ?? "0"))}"
-                          ),
-                      onTap: () async {
-                        if (state.questionInfo?.subject?.id != null) {
-                          // if (state.questionInfo?.isPaid == true) {
-                          FindIntrustorRouteData(
-                                  $extra: FindIntrustorExtraData(
-                                    questionId: widget.questionId,
-                                    subjectId:
-                                        state.questionInfo?.subject?.id ?? "",
-                                  ),
-                                  questionId: widget.questionId)
-                              .push(context);
-                          // } else {
-                          //   final checkoutUrl = await context
-                          //       .read<DetailedQuestionCubit>()
-                          //       .payment();
-                          //   if (checkoutUrl != "") {
-                          //     await appLaunchUrl(checkoutUrl, context);
-                          //   }
-                          // }
-                        }
-                      },
-                    ),
-                  ),
-                if (state.questionInfo?.status == QuestionStatus.ANSWERED)
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10, bottom: 20, right: 50, left: 50),
-                    child: CommonButton(
-                      padding: const EdgeInsets.all(10),
-                      child: const Text("Hoàn thành"),
-                      onTap: () async {
-                        final completed = await context
-                            .read<DetailedQuestionCubit>()
-                            .completedQuestion();
-                        if (completed) {
-                          if (await showDialog<dynamic>(
-                            context: context,
-                            builder: (ctx) {
-                              return FormRatting(
-                                rate: context
-                                    .read<DetailedQuestionCubit>()
-                                    .rateQuestion,
-                                name: state.questionInfo?.tutor?.fullName ?? "",
-                              );
-                            },
-                          )) {
-                            const HomeRouteData().go(context);
-                          }
-                        }
-                      },
-                    ),
-                  ),
-                if (state.questionInfo?.status == QuestionStatus.DONE ||
-                    state.questionInfo?.status == QuestionStatus.ACCEPTED)
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10, bottom: 20, right: 50, left: 50),
-                    child: CommonButton(
-                      padding: const EdgeInsets.all(10),
-                      child: const Text("Về trang chủ"),
-                      onTap: () {
-                        const HomeRouteData().go(context);
-                      },
-                    ),
-                  ),
               ],
             ),
           );
         }));
+  }
+}
+
+class ActivityButton extends StatelessWidget {
+  const ActivityButton({super.key, required this.questionId});
+  final String questionId;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DetailedQuestionCubit, DetailedQuestionState>(
+      buildWhen: (previous, current) =>
+          previous.questionInfo?.status != current.questionInfo?.status,
+      builder: (context, state) {
+        return Column(
+          children: [
+            if (state.questionInfo?.status == QuestionStatus.NEW)
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 10, bottom: 20, right: 50, left: 50),
+                child: CommonButton(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                      // state.questionInfo?.isPaid == true
+                      // ?
+                      S.of(context).findIntructor
+                      // : "Thanh toán ${formatCurrency(double.parse(state.questionInfo?.price ?? "0"))}"
+                      ),
+                  onTap: () async {
+                    if (state.questionInfo?.subject?.id != null) {
+                      // if (state.questionInfo?.isPaid == true) {
+                      if (await FindIntrustorRouteData(
+                              $extra: FindIntrustorExtraData(
+                                questionId: questionId,
+                                subjectId:
+                                    state.questionInfo?.subject?.id ?? "",
+                              ),
+                              questionId: questionId)
+                          .push(context)) {
+                        if (!context.mounted) {
+                          return;
+                        }
+                        context.read<DetailedQuestionCubit>().fetchData();
+                      }
+                      // } else {
+                      //   final checkoutUrl = await context
+                      //       .read<DetailedQuestionCubit>()
+                      //       .payment();
+                      //   if (checkoutUrl != "") {
+                      //     await appLaunchUrl(checkoutUrl, context);
+                      //   }
+                      // }
+                    }
+                  },
+                ),
+              ),
+            if (state.questionInfo?.status == QuestionStatus.ANSWERED)
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 10, bottom: 20, right: 50, left: 50),
+                child: CommonButton(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(S.of(context).done),
+                  onTap: () async {
+                    final completed = await context
+                        .read<DetailedQuestionCubit>()
+                        .completedQuestion();
+                    if (completed) {
+                      if (await showDialog<dynamic>(
+                        context: context,
+                        builder: (ctx) {
+                          return FormRatting(
+                            rate: context
+                                .read<DetailedQuestionCubit>()
+                                .rateQuestion,
+                            name: state.questionInfo?.tutor?.fullName ?? "",
+                          );
+                        },
+                      )) {
+                        const HomeRouteData().go(context);
+                      }
+                    }
+                  },
+                ),
+              ),
+            if (state.questionInfo?.status == QuestionStatus.DONE ||
+                state.questionInfo?.status == QuestionStatus.ACCEPTED)
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 10, bottom: 20, right: 50, left: 50),
+                child: CommonButton(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(S.of(context).goHomePage),
+                  onTap: () {
+                    const HomeRouteData().go(context);
+                  },
+                ),
+              ),
+          ],
+        );
+      },
+    );
   }
 }

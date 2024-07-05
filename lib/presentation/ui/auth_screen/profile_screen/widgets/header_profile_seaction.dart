@@ -76,7 +76,7 @@ class HeaderProfileSection extends StatelessWidget {
                       : ProfileInfoSection(
                           imageUrl: userState.detail?.avatar?.fileKey != null
                               ? 'https://storage.googleapis.com/study-mentor/${userState.detail?.avatar?.fileKey}'
-                              : '',
+                              : null,
                           name: userState.detail?.fullName ?? '',
                           description: userState.detail?.email ?? '',
                         ),

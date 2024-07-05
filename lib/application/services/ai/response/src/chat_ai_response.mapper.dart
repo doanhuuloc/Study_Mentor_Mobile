@@ -36,8 +36,8 @@ class ChatAIResponseMapper extends ClassMapperBase<ChatAIResponse> {
   static String? _$content(ChatAIResponse v) => v.content;
   static const Field<ChatAIResponse, String> _f$content =
       Field('content', _$content, opt: true);
-  static FileRequest? _$files(ChatAIResponse v) => v.files;
-  static const Field<ChatAIResponse, FileRequest> _f$files =
+  static List<FileRequest>? _$files(ChatAIResponse v) => v.files;
+  static const Field<ChatAIResponse, List<FileRequest>> _f$files =
       Field('files', _$files, opt: true);
 
   @override
@@ -113,14 +113,15 @@ extension ChatAIResponseValueCopy<$R, $Out>
 
 abstract class ChatAIResponseCopyWith<$R, $In extends ChatAIResponse, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  FileRequestCopyWith<$R, FileRequest, FileRequest>? get files;
+  ListCopyWith<$R, FileRequest,
+      FileRequestCopyWith<$R, FileRequest, FileRequest>>? get files;
   $R call(
       {String? recipientId,
       DateTime? createAt,
       String? questionId,
       String? senderId,
       String? content,
-      FileRequest? files});
+      List<FileRequest>? files});
   ChatAIResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -134,8 +135,12 @@ class _ChatAIResponseCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ChatAIResponse> $mapper =
       ChatAIResponseMapper.ensureInitialized();
   @override
-  FileRequestCopyWith<$R, FileRequest, FileRequest>? get files =>
-      $value.files?.copyWith.$chain((v) => call(files: v));
+  ListCopyWith<$R, FileRequest,
+          FileRequestCopyWith<$R, FileRequest, FileRequest>>?
+      get files => $value.files != null
+          ? ListCopyWith($value.files!, (v, t) => v.copyWith.$chain(t),
+              (v) => call(files: v))
+          : null;
   @override
   $R call(
           {Object? recipientId = $none,

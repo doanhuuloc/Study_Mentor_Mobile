@@ -117,3 +117,57 @@ extension QuestionTypeMapperExtension on QuestionType {
     return MapperContainer.globals.toValue<QuestionType>(this);
   }
 }
+
+class ExpirationDateTypeMapper extends EnumMapper<ExpirationDateType> {
+  ExpirationDateTypeMapper._();
+
+  static ExpirationDateTypeMapper? _instance;
+  static ExpirationDateTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = ExpirationDateTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static ExpirationDateType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  ExpirationDateType decode(dynamic value) {
+    switch (value) {
+      case 0:
+        return ExpirationDateType.DAY;
+      case 1:
+        return ExpirationDateType.WEEK;
+      case 2:
+        return ExpirationDateType.MONTH;
+      case 3:
+        return ExpirationDateType.YEAR;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(ExpirationDateType self) {
+    switch (self) {
+      case ExpirationDateType.DAY:
+        return 0;
+      case ExpirationDateType.WEEK:
+        return 1;
+      case ExpirationDateType.MONTH:
+        return 2;
+      case ExpirationDateType.YEAR:
+        return 3;
+    }
+  }
+}
+
+extension ExpirationDateTypeMapperExtension on ExpirationDateType {
+  dynamic toValue() {
+    ExpirationDateTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<ExpirationDateType>(this);
+  }
+}

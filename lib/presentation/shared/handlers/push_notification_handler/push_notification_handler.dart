@@ -86,7 +86,10 @@ class _AuthBasedRoutingHandlerState
             !resolvedNavigatorContext.mounted) {
           return;
         }
-        const ProfileRouteData().go(resolvedNavigatorContext);
+        if (details.payload != null && details.payload != "") {
+          DetailedQuestionRouteData(questionId: details.payload!)
+              .go(resolvedNavigatorContext);
+        }
       },
     );
 
@@ -135,11 +138,17 @@ class _AuthBasedRoutingHandlerState
           navigatorKey: widget.navigatorKey,
           rootNavigator: true,
         );
+
         if (resolvedNavigatorContext == null ||
             !resolvedNavigatorContext.mounted) {
           return;
         }
-        const ProfileRouteData().go(resolvedNavigatorContext);
+
+        if (event.data["questionId"] != null &&
+            event.data["questionId"] != "") {
+          DetailedQuestionRouteData(questionId: event.data["questionId"])
+              .go(resolvedNavigatorContext);
+        }
 
         logging.i({
           "onMessageOnpenedApp",

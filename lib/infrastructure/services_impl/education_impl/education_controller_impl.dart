@@ -118,4 +118,19 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
         future: () => educationDataSource.cancelFindSystemQuestion(
             questionId: cancelFindSystemQuestionRequest.questionId));
   }
+
+  @override
+  Future<Result<Failure, BaseResponse<List<ReportQuestionReponse>>>>
+      getListReport() {
+    return handleApiResult(future: () => educationDataSource.getListReport());
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<ReportQuestionReponse>>>
+      getReportQuestion(
+          {required GetReportQuestionRequest getReportQuestionRequest}) {
+    return handleApiResult(
+        future: () => educationDataSource.getReportQuestion(
+            reportId: getReportQuestionRequest.reportId));
+  }
 }

@@ -13,7 +13,7 @@ mixin UserController {
   Future<Result<Failure, BaseResponse<UserInfoResponse>>> updateProfile(
       {required UpdateProfileRequest updateProfileRequest});
 
-        Future<Result<Failure, SuccessResponse>> changePassword(
+  Future<Result<Failure, SuccessResponse>> changePassword(
       ChangePasswordRequest request);
   Future<Result<Failure, SuccessResponse>> resetPassword(
       ResetPasswordRequest request);

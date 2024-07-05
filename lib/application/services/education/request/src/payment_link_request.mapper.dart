@@ -13,6 +13,7 @@ class PaymentLinkRequestMapper extends ClassMapperBase<PaymentLinkRequest> {
   static PaymentLinkRequestMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PaymentLinkRequestMapper._());
+      ExpirationDateTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -23,14 +24,26 @@ class PaymentLinkRequestMapper extends ClassMapperBase<PaymentLinkRequest> {
   static String? _$questionId(PaymentLinkRequest v) => v.questionId;
   static const Field<PaymentLinkRequest, String> _f$questionId =
       Field('questionId', _$questionId, opt: true);
+  static int _$type(PaymentLinkRequest v) => v.type;
+  static const Field<PaymentLinkRequest, int> _f$type = Field('type', _$type);
+  static ExpirationDateType? _$expirationDateType(PaymentLinkRequest v) =>
+      v.expirationDateType;
+  static const Field<PaymentLinkRequest, ExpirationDateType>
+      _f$expirationDateType =
+      Field('expirationDateType', _$expirationDateType, opt: true);
 
   @override
   final MappableFields<PaymentLinkRequest> fields = const {
     #questionId: _f$questionId,
+    #type: _f$type,
+    #expirationDateType: _f$expirationDateType,
   };
 
   static PaymentLinkRequest _instantiate(DecodingData data) {
-    return PaymentLinkRequest(questionId: data.dec(_f$questionId));
+    return PaymentLinkRequest(
+        questionId: data.dec(_f$questionId),
+        type: data.dec(_f$type),
+        expirationDateType: data.dec(_f$expirationDateType));
   }
 
   @override
@@ -88,7 +101,8 @@ extension PaymentLinkRequestValueCopy<$R, $Out>
 
 abstract class PaymentLinkRequestCopyWith<$R, $In extends PaymentLinkRequest,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? questionId});
+  $R call(
+      {String? questionId, int? type, ExpirationDateType? expirationDateType});
   PaymentLinkRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -102,11 +116,21 @@ class _PaymentLinkRequestCopyWithImpl<$R, $Out>
   late final ClassMapperBase<PaymentLinkRequest> $mapper =
       PaymentLinkRequestMapper.ensureInitialized();
   @override
-  $R call({Object? questionId = $none}) => $apply(
-      FieldCopyWithData({if (questionId != $none) #questionId: questionId}));
+  $R call(
+          {Object? questionId = $none,
+          int? type,
+          Object? expirationDateType = $none}) =>
+      $apply(FieldCopyWithData({
+        if (questionId != $none) #questionId: questionId,
+        if (type != null) #type: type,
+        if (expirationDateType != $none) #expirationDateType: expirationDateType
+      }));
   @override
   PaymentLinkRequest $make(CopyWithData data) => PaymentLinkRequest(
-      questionId: data.get(#questionId, or: $value.questionId));
+      questionId: data.get(#questionId, or: $value.questionId),
+      type: data.get(#type, or: $value.type),
+      expirationDateType:
+          data.get(#expirationDateType, or: $value.expirationDateType));
 
   @override
   PaymentLinkRequestCopyWith<$R2, PaymentLinkRequest, $Out2> $chain<$R2, $Out2>(

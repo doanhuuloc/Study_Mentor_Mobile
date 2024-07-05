@@ -16,7 +16,7 @@ class RegisterFormSection extends StatelessWidget {
     return Column(
       children: [
         CommonTextField(
-          hintText: "Full name",
+          hintText: S.of(context).fullname,
           onChanged: (value) {
             context.read<RegisterCubit>().onFullNameChanged(value);
           },
@@ -42,10 +42,12 @@ class RegisterFormSection extends StatelessWidget {
                 previous.genderField != current.genderField,
             builder: (context, state) {
               return DropDownBar(
-                hintText: "Gender",
+                hintText: S.of(context).gender,
                 data: [0, 1]
                     .map((e) => DropDownBarData<int>(
-                        value: e, title: e == 0 ? "male" : "female"))
+                        value: e,
+                        title:
+                            e == 0 ? S.of(context).male : S.of(context).female))
                     .toList(),
                 value: state.genderField,
                 onChanged: (value) =>
@@ -62,7 +64,7 @@ class RegisterFormSection extends StatelessWidget {
                     context.read<RegisterCubit>().onRegisterWithUserInfo();
                   }
                 : null,
-            title: "Register",
+            title: S.of(context).register,
           );
         }),
         const SizedBox(height: 8),

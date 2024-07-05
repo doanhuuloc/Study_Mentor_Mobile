@@ -136,7 +136,10 @@ class CreateQuestionCubit extends SafeCubit<CreateQuestionState> {
   Future<String> payment() async {
     final futureRes = educationController.payment(
         paymentLinkRequest: PaymentLinkRequest(
-            questionId: state.createQuestionResponse?.questionId ?? ""));
+      questionId: state.createQuestionResponse?.questionId ?? "",
+      type: 0,
+      expirationDateType: ExpirationDateType.DAY,
+    ));
 
     final res = await loadingManager.startLoading(future: futureRes);
 

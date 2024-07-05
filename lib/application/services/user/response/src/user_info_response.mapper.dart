@@ -51,6 +51,9 @@ class UserInfoResponseMapper extends ClassMapperBase<UserInfoResponse> {
   static int? _$status(UserInfoResponse v) => v.status;
   static const Field<UserInfoResponse, int> _f$status =
       Field('status', _$status, opt: true);
+  static bool? _$isMembership(UserInfoResponse v) => v.isMembership;
+  static const Field<UserInfoResponse, bool> _f$isMembership =
+      Field('isMembership', _$isMembership, opt: true);
 
   @override
   final MappableFields<UserInfoResponse> fields = const {
@@ -64,6 +67,7 @@ class UserInfoResponseMapper extends ClassMapperBase<UserInfoResponse> {
     #avatar: _f$avatar,
     #gender: _f$gender,
     #status: _f$status,
+    #isMembership: _f$isMembership,
   };
 
   static UserInfoResponse _instantiate(DecodingData data) {
@@ -77,7 +81,8 @@ class UserInfoResponseMapper extends ClassMapperBase<UserInfoResponse> {
         averageRate: data.dec(_f$averageRate),
         avatar: data.dec(_f$avatar),
         gender: data.dec(_f$gender),
-        status: data.dec(_f$status));
+        status: data.dec(_f$status),
+        isMembership: data.dec(_f$isMembership));
   }
 
   @override
@@ -145,7 +150,8 @@ abstract class UserInfoResponseCopyWith<$R, $In extends UserInfoResponse, $Out>
       double? averageRate,
       FileRequest? avatar,
       int? gender,
-      int? status});
+      int? status,
+      bool? isMembership});
   UserInfoResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -172,7 +178,8 @@ class _UserInfoResponseCopyWithImpl<$R, $Out>
           Object? averageRate = $none,
           Object? avatar = $none,
           Object? gender = $none,
-          Object? status = $none}) =>
+          Object? status = $none,
+          Object? isMembership = $none}) =>
       $apply(FieldCopyWithData({
         if (id != $none) #id: id,
         if (fullName != $none) #fullName: fullName,
@@ -183,7 +190,8 @@ class _UserInfoResponseCopyWithImpl<$R, $Out>
         if (averageRate != $none) #averageRate: averageRate,
         if (avatar != $none) #avatar: avatar,
         if (gender != $none) #gender: gender,
-        if (status != $none) #status: status
+        if (status != $none) #status: status,
+        if (isMembership != $none) #isMembership: isMembership
       }));
   @override
   UserInfoResponse $make(CopyWithData data) => UserInfoResponse(
@@ -196,7 +204,8 @@ class _UserInfoResponseCopyWithImpl<$R, $Out>
       averageRate: data.get(#averageRate, or: $value.averageRate),
       avatar: data.get(#avatar, or: $value.avatar),
       gender: data.get(#gender, or: $value.gender),
-      status: data.get(#status, or: $value.status));
+      status: data.get(#status, or: $value.status),
+      isMembership: data.get(#isMembership, or: $value.isMembership));
 
   @override
   UserInfoResponseCopyWith<$R2, UserInfoResponse, $Out2> $chain<$R2, $Out2>(

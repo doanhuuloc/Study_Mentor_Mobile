@@ -1,12 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_mentor_mobile/application/services/ai/dto/enum.dart';
+import 'package:study_mentor_mobile/presentation/bases/user_cubit/user_cubit.dart';
 import 'package:study_mentor_mobile/presentation/gen/assets.gen.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 
 import '../../../gen/app_colors.dart';
+import '../../../gen/locale/app_localizations.dart';
 import '../../../shared/theme/theme.dart';
 import '../../../shared/widgets/buttons/common_button.dart';
+import 'payAISystemDialog.dart';
 
 class HomeMainContent extends StatelessWidget {
   const HomeMainContent({super.key});
@@ -27,8 +31,8 @@ class HomeMainContent extends StatelessWidget {
             children: [
               Expanded(
                 child: _EventItem(
-                  title: 'Tất cả AI',
-                  subTitle: 'Ai miễn phí',
+                  title: S.of(context).fullAI,
+                  subTitle: S.of(context).aIFree,
                   icon: Assets.svgs.homeAiFree.svg(),
                   onTap: () {
                     showDialog(
@@ -40,11 +44,19 @@ class HomeMainContent extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _EventItem(
-                  title: 'AI hệ thống',
-                  subTitle: 'Ai nâng cấp',
+                  title: S.of(context).aISystem,
+                  subTitle: S.of(context).aIUpgrade,
                   icon: Assets.svgs.homeAiFee.svg(),
                   onTap: () {
-                    const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
+                    // const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
+                    if (context.read<UserCubit>().state.detail?.isMembership ==
+                        true) {
+                      const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (context) => const PayAISystemDialog());
+                    }
                   },
                 ),
               ),
@@ -55,8 +67,8 @@ class HomeMainContent extends StatelessWidget {
             children: [
               Expanded(
                 child: _EventItem(
-                  title: 'Hỏi đáp qua File',
-                  subTitle: 'Đội ngũ chuyên gia sẽ giúp bạn',
+                  title: S.of(context).qAviaFile,
+                  subTitle: S.of(context).intructorAnswerQuestion,
                   icon: Assets.svgs.homeMentorIcon.svg(),
                   onTap: () {
                     const CreateQuestionRouteData().push(context);
@@ -66,8 +78,8 @@ class HomeMainContent extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _EventItem(
-                  title: 'Google meet',
-                  subTitle: 'Tìm kiếm người hướng dẫn qua google meet',
+                  title: S.of(context).ggMeet,
+                  subTitle: S.of(context).intructorGGmeet,
                   icon: Assets.svgs.homeGoogleMeet.svg(),
                   onTap: () {
                     const CreateGGMeetRouteData().push(context);
@@ -112,7 +124,7 @@ class _DirectionBanner extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Xin chào các bạn',
+                              S.of(context).helloEveryone,
                               style: Styles.s16()
                                   .withHeight(22 / 16)
                                   .withWeight(FontWeight.w600)
@@ -128,7 +140,7 @@ class _DirectionBanner extends StatelessWidget {
                                   .withColor(AppColors.gray.shade100),
                               padding: const EdgeInsets.symmetric(
                                   vertical: 2, horizontal: 12),
-                              child: const Text('Hãy khám phá'),
+                              child: Text(S.of(context).letDiscover),
                             ),
                           ],
                         ),

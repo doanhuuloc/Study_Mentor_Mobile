@@ -17,6 +17,7 @@ class UserInfoResponse with UserInfoResponseMappable {
     this.avatar,
     this.gender,
     this.status,
+    this.isMembership,
   });
 
   factory UserInfoResponse.fromJson(Map<String, dynamic> json) =>
@@ -32,4 +33,5 @@ class UserInfoResponse with UserInfoResponseMappable {
   final int? status;
   final double? averageRate;
   final FileRequest? avatar;
+  final bool? isMembership;
 }

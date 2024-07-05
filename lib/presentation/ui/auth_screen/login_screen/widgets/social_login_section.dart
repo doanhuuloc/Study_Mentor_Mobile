@@ -1,7 +1,10 @@
 import 'dart:io' show Platform;
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 
 import '../../../../../utilities/logging/logging.dart';
 import '../../../../gen/app_colors.dart';
@@ -28,7 +31,7 @@ class SocialLoginSection extends StatelessWidget {
             divider,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.5),
-              child: Text("Social account login",
+              child: Text(S.of(context).socialAccountLogin,
                   style: Styles.s13()
                       .withColor(AppColors.text.bodyText)
                       .withLetterSpacing(-2.5 / 100)),
@@ -43,29 +46,30 @@ class SocialLoginSection extends StatelessWidget {
             _SocialLogin(
               icon: Assets.svgs.googleIcon.svg(),
               onTap: () async {
-                // try {
-                //   final GoogleSignInAccount? googleUser =
-                //       await GoogleSignIn().signIn();
+                try {
+                  final GoogleSignInAccount? googleUser =
+                      await GoogleSignIn().signIn();
 
-                //   final GoogleSignInAuthentication? googleAuth =
-                //       await googleUser?.authentication;
+                  final GoogleSignInAuthentication? googleAuth =
+                      await googleUser?.authentication;
 
-                //   final credential = GoogleAuthProvider.credential(
-                //     accessToken: googleAuth?.accessToken,
-                //     idToken: googleAuth?.idToken,
-                //   );
-                //   final auth2 = await FirebaseAuth.instance
-                //       .signInWithCredential(credential);
+                  final credential = GoogleAuthProvider.credential(
+                    accessToken: googleAuth?.accessToken,
+                    idToken: googleAuth?.idToken,
+                  );
+                  final auth2 = await FirebaseAuth.instance
+                      .signInWithCredential(credential);
 
-                //   final idToken = await auth2.user?.getIdToken();
+                  final idToken = await auth2.user?.getIdToken();
+                  logging.i(auth2);
 
-                //   if (!context.mounted || idToken == null) {
-                //     return;
-                //   }
-                //   context.read<LoginCubit>().onLoginWithGoogle(idToken);
-                // } catch (err) {
-                //   logging.e(err);
-                // }
+                  if (!context.mounted || idToken == null) {
+                    return;
+                  }
+                  // context.read<LoginCubit>().onLoginWithGoogle(idToken);
+                } catch (err) {
+                  logging.e(err);
+                }
               },
             ),
             if (Platform.isIOS) const SizedBox(width: 16),

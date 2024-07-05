@@ -95,10 +95,6 @@ class _HomeBottomBannerState extends State<_HomeBottomBanner> {
   static final _carouselItems = [
     Assets.images.homeBanner.homeBanner.image(),
     Assets.images.homeBanner1.homeBanner1.image(),
-    // Assets.images.homeBanner1.homeBanner1.image(),
-    // Assets.images.homeBanner.homeBanner.image(),
-    // Assets.images.homeBanner.homeBanner.image(),
-    // Assets.images.homeBanner.homeBanner.image(),
   ];
 
   int _currentPage = 0;

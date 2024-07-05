@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [
       $alertRouteData,
       $confirmRouteData,
       $imagePickerRouteData,
+      $filePickerRouteData,
       $dropdownSheetRouteData,
       $mainShellRouteData,
       $testLoadingRouteData,
@@ -116,6 +117,30 @@ extension $ImagePickerRouteDataExtension on ImagePickerRouteData {
 
   String get location => GoRouteData.$location(
         '/image-picker',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $filePickerRouteData => GoRouteData.$route(
+      path: '/file-picker',
+      parentNavigatorKey: FilePickerRouteData.$parentNavigatorKey,
+      factory: $FilePickerRouteDataExtension._fromState,
+    );
+
+extension $FilePickerRouteDataExtension on FilePickerRouteData {
+  static FilePickerRouteData _fromState(GoRouterState state) =>
+      const FilePickerRouteData();
+
+  String get location => GoRouteData.$location(
+        '/file-picker',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -482,7 +507,7 @@ extension $CreateGGMeetRouteDataExtension on CreateGGMeetRouteData {
 extension $ReportQuestionRouteDataExtension on ReportQuestionRouteData {
   static ReportQuestionRouteData _fromState(GoRouterState state) =>
       ReportQuestionRouteData(
-        $extra: state.extra as GetQuestionInfoResponse,
+        $extra: state.extra as ReportQuestionProps,
       );
 
   String get location => GoRouteData.$location(

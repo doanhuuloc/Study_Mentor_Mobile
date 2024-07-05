@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 
 import '../../../gen/app_colors.dart';
 import '../../../gen/assets.gen.dart';
@@ -35,7 +36,7 @@ class MainBottomNavigationBar extends StatelessWidget {
             children: [
               Expanded(
                 child: _BottomNavBarItem(
-                  title: "Trang chủ",
+                  title: S.of(context).homePage,
                   onTap: () {
                     onSelected?.call(0);
                   },
@@ -46,17 +47,17 @@ class MainBottomNavigationBar extends StatelessWidget {
               Expanded(
                 child: _BottomNavBarItem(
                   selected: selected == 1,
-                  title: "Lịch sử",
+                  title: S.of(context).history,
                   onTap: () {
                     onSelected?.call(1);
                   },
-                  iconPath: Assets.svgs.tabBarCommunity.path,
+                  iconPath: Assets.svgs.history.path,
                 ),
               ),
               Expanded(
                 child: _BottomNavBarItem(
                   selected: selected == 2,
-                  title: "Tài khoản",
+                  title: S.of(context).account,
                   onTap: () {
                     onSelected?.call(2);
                   },
@@ -136,6 +137,8 @@ class _BottomNavBarItemState
                   _iconColorTween?.evaluate(animation) ?? Colors.transparent,
                   BlendMode.srcIn,
                 ),
+                width: 25,
+                height: 24,
               ),
               const SizedBox(height: 8),
               AutoSizeText(

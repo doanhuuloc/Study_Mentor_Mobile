@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_mentor_mobile/presentation/gen/app_colors.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/image_loading.dart';
 import 'package:study_mentor_mobile/presentation/shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/app_bar/common_app_bar.dart';
@@ -58,7 +59,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Builder(builder: (context) {
         return Scaffold(
           appBar: CommonAppBar(
-            title: const Text("Edit Profile"),
+            title: Text(S.of(context).editProfile),
             color: AppColors.blue.shade50,
           ),
           body: Column(children: [
@@ -132,7 +133,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         },
                       ),
                       Text(
-                        "Họ và tên",
+                        S.of(context).fullname,
                         style: Styles.s18().withWeight(FontWeight.w600),
                       ),
                       CommonTextField(
@@ -146,7 +147,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             .onChangeFullName(value),
                       ),
                       Text(
-                        "Email",
+                        S.of(context).email,
                         style: Styles.s18().withWeight(FontWeight.w600),
                       ),
                       CommonTextField(
@@ -157,7 +158,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             .onChangeEmail(value),
                       ),
                       Text(
-                        "Số điện thoại",
+                        S.of(context).phone,
                         style: Styles.s18().withWeight(FontWeight.w600),
                       ),
                       CommonTextField(
@@ -168,7 +169,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             .onChangePhone(value),
                       ),
                       Text(
-                        "Giới tính",
+                        S.of(context).gender,
                         style: Styles.s18().withWeight(FontWeight.w600),
                       ),
                       BlocBuilder<EditProfileCubit, EditProfileState>(
@@ -179,7 +180,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               data: [0, 1]
                                   .map((e) => DropDownBarData<int>(
                                       value: e,
-                                      title: e == 0 ? "male" : "female"))
+                                      title: e == 0
+                                          ? S.of(context).male
+                                          : S.of(context).female))
                                   .toList(),
                               value: context
                                   .read<EditProfileCubit>()
@@ -192,7 +195,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             );
                           }),
                       Text(
-                        "Ngày sinh",
+                        S.of(context).dateOfbirth,
                         style: Styles.s18().withWeight(FontWeight.w600),
                       ),
                       CommonTextField(
@@ -216,7 +219,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               onPress: () async {
                 await context.read<EditProfileCubit>().updateProfile();
               },
-              title: "Lưu",
+              title: S.of(context).save,
             )
           ]),
         );

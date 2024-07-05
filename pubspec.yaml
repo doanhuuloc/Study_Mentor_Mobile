@@ -48,12 +48,13 @@ dependencies:
   shared_preferences: ^2.2.2
   formz: ^0.7.0
   uni_links: ^0.5.1
-  # flutter_quill: ^9.3.0
+  flutter_quill: ^9.3.0
   url_launcher: ^6.2.5
   flutter_keyboard_visibility: ^6.0.0
   device_info_plus: ^9.1.2
   # super_clipboard: ^0.8.5
-  # flutter_quill_extensions: ^9.3.1
+  flutter_quill_extensions: ^9.3.0
+  quill_html_converter: ^9.3.0
   image_cropper: ^5.0.1
   gal: ^2.3.0
   firebase_auth: ^4.16.0

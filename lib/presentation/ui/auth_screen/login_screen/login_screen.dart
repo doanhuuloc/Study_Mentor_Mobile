@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/presentation/bases/user_cubit/user_cubit.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 
 import '../../../bases/auth_cubit/auth_cubit.dart';
 import '../../../gen/assets.gen.dart';
@@ -82,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                     height: constraints.maxHeight * logoFraction,
                     alignment: Alignment.center,
                     child: Text(
-                      "Login your account",
+                      S.of(context).loginYourAccount,
                       style: Styles.s24().withWeight(FontWeight.bold),
                     ),
                   ),

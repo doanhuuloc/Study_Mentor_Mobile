@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/application/services/user/user.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 
 import '../../../shared/handlers/failure_handler/failure_handler_manager.dart';
@@ -67,7 +68,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     height: constraints.maxHeight * 0.25,
                     alignment: Alignment.center,
                     child: Text(
-                      "Reset password",
+                      S.of(context).resetPassword,
                       style: Styles.s24().withWeight(FontWeight.bold),
                     ),
                   ),

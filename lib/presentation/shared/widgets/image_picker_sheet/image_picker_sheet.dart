@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,7 +27,7 @@ class _ImagePickerSheet extends StatelessWidget {
   const _ImagePickerSheet();
 
   void _pickImage(BuildContext context, ImageSource source) async {
-    final File? image = await pickSingleImage(source: source);
+    final XFile? image = await pickSignlemageXFile(source: source);
     if (!context.mounted) {
       return;
     }

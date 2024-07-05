@@ -11,15 +11,15 @@ import '../../bases/socket_cubit/socket_cubit.dart';
 import '../../bases/user_cubit/user_cubit.dart';
 import '../../gen/app_colors.dart';
 import '../../gen/assets.gen.dart';
+import '../../router/router_config/routes_gen/routes_gen.dart';
 import '../../shared/handlers/failure_handler/failure_handler_manager.dart';
 import '../../shared/theme/theme.dart';
 import '../../shared/widgets/app_bar/common_app_bar.dart';
 import '../../shared/widgets/app_icon_button.dart';
+import '../../shared/widgets/chat_item.dart';
 import '../../shared/widgets/textfields/common_textfield.dart';
 import 'blocs/chat_intrustor_cubit.dart';
 import 'blocs/chat_intrustor_state.dart';
-import 'widgets/chatItem.dart';
-import 'widgets/chooseFileBottomSheet.dart';
 
 class ChatIntrustorScreen extends StatefulWidget {
   const ChatIntrustorScreen(
@@ -185,12 +185,20 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                                 AppIconButton(
                                   icon: Assets.svgs.uploadIcon.svg(),
                                   onTap: () async {
-                                    // ignore: unused_local_variable
-                                    final file = await showModalBottomSheet(
-                                        context: context,
-                                        builder: (context) =>
-                                            const ChooseFileBottomSheet());
+                                    final file =
+                                        await const FilePickerRouteData()
+                                            .push(context);
+                                    if (!context.mounted) {
+                                      return;
+                                    }
+
                                     if (file.runtimeType == XFile) {
+                                      context
+                                          .read<ChatIntrustorCubit>()
+                                          .addImgPicker([file]);
+                                    }
+
+                                    if (file.runtimeType == List<XFile>) {
                                       context
                                           .read<ChatIntrustorCubit>()
                                           .addImgPicker(file);
