@@ -363,7 +363,7 @@ class _EducationDataSource implements EducationDataSource {
   }
 
   @override
-  Future<BaseResponse<dynamic>> reportTutor(
+  Future<BaseResponse<ReportQuestionResponse>> reportTutor(
       ReportTutorRequest reportTutorRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -371,7 +371,7 @@ class _EducationDataSource implements EducationDataSource {
     final _data = <String, dynamic>{};
     _data.addAll(reportTutorRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<dynamic>>(Options(
+        _setStreamType<BaseResponse<ReportQuestionResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -387,7 +387,7 @@ class _EducationDataSource implements EducationDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseResponse<dynamic>.fromJson(_result.data!);
+    final value = BaseResponse<ReportQuestionResponse>.fromJson(_result.data!);
     return value;
   }
 
@@ -420,13 +420,13 @@ class _EducationDataSource implements EducationDataSource {
   }
 
   @override
-  Future<BaseResponse<List<ReportQuestionReponse>>> getListReport() async {
+  Future<BaseResponse<List<ReportQuestionResponse>>> getListReport() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<List<ReportQuestionReponse>>>(Options(
+        _setStreamType<BaseResponse<List<ReportQuestionResponse>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -443,20 +443,20 @@ class _EducationDataSource implements EducationDataSource {
               baseUrl,
             ))));
     final value =
-        BaseResponse<List<ReportQuestionReponse>>.fromJson(_result.data!);
+        BaseResponse<List<ReportQuestionResponse>>.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<BaseResponse<ReportQuestionReponse>> getReportQuestion(
+  Future<BaseResponse<ReportQuestionResponse>> getReportQuestion(
       {required String reportId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<ReportQuestionReponse>>(Options(
-      method: 'POST',
+        _setStreamType<BaseResponse<ReportQuestionResponse>>(Options(
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
@@ -471,7 +471,7 @@ class _EducationDataSource implements EducationDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseResponse<ReportQuestionReponse>.fromJson(_result.data!);
+    final value = BaseResponse<ReportQuestionResponse>.fromJson(_result.data!);
     return value;
   }
 

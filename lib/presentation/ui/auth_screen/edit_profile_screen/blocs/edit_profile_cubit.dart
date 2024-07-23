@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
+import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 
 import '../../../../../application/services/file/file.dart';
 import '../../../../../application/services/user/user.dart';
@@ -44,11 +47,10 @@ class EditProfileCubit extends SafeCubit<EditProfileState> {
   }
 
   void onChangeDateOfBirth(String value) {
-    emit(state.copyWith(
-        user: state.user?.copyWith(dateOfBirth: int.parse(value))));
+    emit(state.copyWith(user: state.user?.copyWith(dateOfBirth: value)));
   }
 
-  Future<void> updateProfile() async {
+  Future<void> updateProfile(BuildContext context) async {
     final res = await userController.updateProfile(
         updateProfileRequest: UpdateProfileRequest(
       fullName: state.user?.fullName,
@@ -63,6 +65,10 @@ class EditProfileCubit extends SafeCubit<EditProfileState> {
     }
 
     if (res.isRight) {
+      if (!context.mounted) {
+        return;
+      }
+      AlertRouteData(content: S.of(context).editProfileSuccess).push(context);
       await userCubit.fetchUserData();
     }
   }

@@ -174,6 +174,7 @@ class TutorMapper extends ClassMapperBase<Tutor> {
   static TutorMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = TutorMapper._());
+      FileRequestMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -188,8 +189,8 @@ class TutorMapper extends ClassMapperBase<Tutor> {
       Field('fullName', _$fullName, opt: true);
   static int? _$age(Tutor v) => v.age;
   static const Field<Tutor, int> _f$age = Field('age', _$age, opt: true);
-  static String? _$avatar(Tutor v) => v.avatar;
-  static const Field<Tutor, String> _f$avatar =
+  static FileRequest? _$avatar(Tutor v) => v.avatar;
+  static const Field<Tutor, FileRequest> _f$avatar =
       Field('avatar', _$avatar, opt: true);
   static int? _$averageRate(Tutor v) => v.averageRate;
   static const Field<Tutor, int> _f$averageRate =
@@ -259,11 +260,12 @@ extension TutorValueCopy<$R, $Out> on ObjectCopyWith<$R, Tutor, $Out> {
 
 abstract class TutorCopyWith<$R, $In extends Tutor, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  FileRequestCopyWith<$R, FileRequest, FileRequest>? get avatar;
   $R call(
       {String? id,
       String? fullName,
       int? age,
-      String? avatar,
+      FileRequest? avatar,
       int? averageRate});
   TutorCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -274,6 +276,9 @@ class _TutorCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Tutor, $Out>
 
   @override
   late final ClassMapperBase<Tutor> $mapper = TutorMapper.ensureInitialized();
+  @override
+  FileRequestCopyWith<$R, FileRequest, FileRequest>? get avatar =>
+      $value.avatar?.copyWith.$chain((v) => call(avatar: v));
   @override
   $R call(
           {Object? id = $none,

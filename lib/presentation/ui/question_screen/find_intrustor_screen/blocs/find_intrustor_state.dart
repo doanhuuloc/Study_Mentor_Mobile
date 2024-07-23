@@ -7,6 +7,8 @@ class FindIntrustorState {
     this.totalPages = 1,
     this.tutor,
     this.findingWithSystem = false,
+    this.waittingTutorAccepted = false,
+    this.isAccepted = false,
   });
 
   final bool isLoading;
@@ -14,6 +16,8 @@ class FindIntrustorState {
   final int totalPages;
   final List<Tutor>? tutor;
   final bool findingWithSystem;
+  final bool waittingTutorAccepted;
+  final bool isAccepted;
 
   copyWith({
     bool? isLoading,
@@ -21,6 +25,8 @@ class FindIntrustorState {
     int? totalPages,
     List<Tutor>? tutor,
     bool? findingWithSystem,
+    bool? waittingTutorAccepted,
+    bool? isAccepted,
   }) {
     return FindIntrustorState(
       isLoading: isLoading ?? this.isLoading,
@@ -28,6 +34,9 @@ class FindIntrustorState {
       totalPages: totalPages ?? this.totalPages,
       tutor: [...this.tutor ?? [], ...tutor ?? []],
       findingWithSystem: findingWithSystem ?? this.findingWithSystem,
+      waittingTutorAccepted:
+          waittingTutorAccepted ?? this.waittingTutorAccepted,
+      isAccepted: isAccepted ?? this.isAccepted,
     );
   }
 }

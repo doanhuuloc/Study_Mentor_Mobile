@@ -17,7 +17,7 @@ class HistoryState {
   final List<ListRoomChatResponse> listChatAI;
   final List<ListRoomChatResponse> listChatPay;
   final List<GetQuestionInfoResponse> listQuestion;
-  final List<ReportQuestionReponse> listReport;
+  final List<ReportQuestionResponse> listReport;
   final QuestionStatus currentTabTutor;
   final int page;
   final int totalPage;
@@ -27,7 +27,7 @@ class HistoryState {
     List<ListRoomChatResponse>? listChatAI,
     List<ListRoomChatResponse>? listChatPay,
     List<GetQuestionInfoResponse>? listQuestion,
-    List<ReportQuestionReponse>? listReport,
+    List<ReportQuestionResponse>? listReport,
     QuestionStatus? currentTabTutor,
     int? page,
     int? totalPage,

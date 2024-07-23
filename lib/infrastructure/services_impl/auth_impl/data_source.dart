@@ -24,4 +24,8 @@ abstract class AuthDataSource {
   @POST('/api/users/register')
   Future<BaseResponse<AuthenticatedResponse>> register(
       @Body() RegisterRequest request);
+
+  @POST("/api/auth/google")
+  Future<BaseResponse<AuthenticatedResponse>> loginWithGoogle(
+      @Body() LoginWithGoogleRequest loginWithGoogleRequest);
 }

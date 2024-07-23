@@ -124,8 +124,22 @@
   "askForStar": "Ask for the instructor's star number",
   "star": "star",
   "timeFindIntructor": "Time to find an instructor",
-  "minute": "minute",
-  "hour": "hour",
+  "minute": "{minute} minute",
+  "@minute": {
+    "placeholders": {
+      "minute": {
+        "type": "String"
+      }
+    }
+  },
+  "hour": "{hour} hour",
+  "@hour": {
+    "placeholders": {
+      "hour": {
+        "type": "String"
+      }
+    }
+  },
   "timeAnswerQuestion": "Time to answer questions",
   "voucher": "Voucher",
   "emptyVoucher": "You don't have any voucher",
@@ -133,7 +147,14 @@
   "totalPayment": "Total payment",
   "voucherDiscount": "Voucher discount",
   "total": "Total",
-  "pay": "Pay",
+  "pay": "Pay {money}",
+  "@pay": {
+    "placeholders": {
+      "money": {
+        "type": "String"
+      }
+    }
+  },
   "detailedQuestion": "Detailed question",
   "findIntructor": "Find intructor",
   "goHomePage": "Go home page",
@@ -194,6 +215,63 @@
   "weekly": "Weekly (7 day)",
   "monthly": " Monthly (30 day)",
   "yearly": "Yearly (365 day)",
-  "membershipPayAI":"AI system membership",
-  "reportSuccess":"Your report is sent successfuly"
+  "membershipPayAI": "AI system membership",
+  "reportSuccess": "Your report is sent successfuly",
+  "confirm": "Confirm",
+  "selectTutorSuccess": "Selected Intructor successfully",
+  "intructorSelectQuestion": "Intructor {intructor} you chose that accepted question with title is {question} with price {price}",
+  "@intructorSelectQuestion": {
+    "placeholders": {
+      "intructor": {
+        "type": "String",
+        "example": "name"
+      },
+      "question": {
+        "type": "String",
+        "example": "name"
+      },
+      "price": {
+        "type": "String",
+        "example": "20.000đ"
+      }
+    }
+  },
+  "editProfileSuccess": "Edit profile successfully",
+  "wattingIntructorAccepted": "You are watting for intructor to accept your question",
+  "chooseIntructorToAnswer": "Do you want to choose {name} to answer your question",
+  "@chooseIntructorToAnswer": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "yes": "Yes",
+  "no": "No",
+  "chooseIntructor": "Choose intructor",
+  "rejectToAnswer": "{name} reject to answer your question",
+  "@rejectToAnswer": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "wattingAccepted": "Please wait for {name} to accept",
+  "@wattingAccepted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "numStart": "{star} star",
+  "@numStart": {
+    "placeholders": {
+      "star": {
+        "type": "String"
+      }
+    }
+  },
+  "loadScreen": "If you play successfully, please load screen"
 }

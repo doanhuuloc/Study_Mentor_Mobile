@@ -185,6 +185,9 @@ class DropdownSheetRouteData extends GoRouteData {
         TypedGoRoute<ReportQuestionRouteData>(
           path: ReportQuestionRouteData.routeName,
         ),
+        TypedGoRoute<NotificationRouteData>(
+          path: NotificationRouteData.routeName,
+        )
       ],
     ),
     TypedGoRoute<HistoryRouteData>(

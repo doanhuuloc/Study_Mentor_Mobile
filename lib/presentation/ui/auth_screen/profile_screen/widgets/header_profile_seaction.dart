@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../application/services/app/app_config/app_config.dart';
 import '../../../../../utilities/api_status/api_status.dart';
 import '../../../../bases/auth_cubit/auth_cubit.dart';
 import '../../../../bases/user_cubit/user_cubit.dart';
@@ -75,7 +76,7 @@ class HeaderProfileSection extends StatelessWidget {
                         )
                       : ProfileInfoSection(
                           imageUrl: userState.detail?.avatar?.fileKey != null
-                              ? 'https://storage.googleapis.com/study-mentor/${userState.detail?.avatar?.fileKey}'
+                              ? '${context.read<AppConfig>().imagePath}/${userState.detail?.avatar?.fileKey}'
                               : null,
                           name: userState.detail?.fullName ?? '',
                           description: userState.detail?.email ?? '',

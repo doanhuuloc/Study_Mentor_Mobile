@@ -13,7 +13,8 @@ class CommonTextField extends StatefulWidget {
     this.focusNode,
     this.onChanged,
     this.errorText,
-    this.useClearIcon = true,
+    this.useClearIcon = false,
+    this.usePasswordIcon = false,
     this.borderColor,
     this.errorBorderColor,
     this.focusedBorderColor,
@@ -45,7 +46,8 @@ class CommonTextField extends StatefulWidget {
     FocusNode? focusNode,
     void Function(String value)? onChanged,
     String? errorText,
-    bool useClearIcon = true,
+    bool useClearIcon = false,
+    bool usePasswordIcon = false,
     Color? borderColor,
     Color? errorBorderColor,
     Color? focusedBorderColor,
@@ -67,6 +69,7 @@ class CommonTextField extends StatefulWidget {
       onChanged: onChanged,
       errorText: errorText = "",
       useClearIcon: useClearIcon,
+      usePasswordIcon: usePasswordIcon,
       borderColor: borderColor,
       errorBorderColor: errorBorderColor,
       focusedBorderColor: focusedBorderColor,
@@ -95,6 +98,7 @@ class CommonTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final String? errorText;
   final bool useClearIcon;
+  final bool usePasswordIcon;
   final Color? errorBorderColor;
   final Color? focusedBorderColor;
   final Color? borderColor;
@@ -127,6 +131,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
   late final bool _createdTextController;
   late final bool _createdFocusNode;
   String _oldValue = '';
+  late bool _obscure;
 
   @override
   void initState() {
@@ -142,6 +147,13 @@ class _CommonTextFieldState extends State<CommonTextField> {
       _textEditingController.text = widget.initialValue ?? '';
     }
     _oldValue = _textEditingController.text;
+
+    if (widget.usePasswordIcon) {
+      _obscure = true;
+    } else {
+      _obscure = widget.obscure;
+    }
+
     _textEditingController.addListener(_onTextChanged);
 
     if (widget.focusNode != null) {
@@ -192,6 +204,67 @@ class _CommonTextFieldState extends State<CommonTextField> {
     return false;
   }
 
+  bool get _shouldShowPasswordIcon {
+    if (widget.usePasswordIcon && _textEditingController.text.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  Widget _suffixIcon() {
+    if (_shouldShowClearIcon) {
+      return Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            customBorder: const CircleBorder(),
+            onTap: () {
+              _textEditingController.text = '';
+            },
+            child: Container(
+              width: suffixButtonSize,
+              height: suffixButtonSize,
+              alignment: Alignment.center,
+              child: Assets.svgs.inputClearIcon.svg(),
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (_shouldShowPasswordIcon) {
+      return Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            customBorder: const CircleBorder(),
+            onTap: () {
+              setState(() {
+                _obscure = !_obscure;
+              });
+            },
+            child: Container(
+              width: suffixButtonSize,
+              height: suffixButtonSize,
+              alignment: Alignment.center,
+              child: _obscure
+                  ? const Icon(Icons.visibility)
+                  : const Icon(Icons.visibility_off),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return widget.suffix ??
+        Container(
+          margin: const EdgeInsets.only(right: suffixButtonSize),
+          child: const SizedBox.shrink(),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -216,7 +289,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
       controller: _textEditingController,
       maxLength: widget.maxLength,
       focusNode: _focusNode,
-      obscureText: widget.obscure,
+      obscureText: _obscure,
       decoration: InputDecoration(
         errorMaxLines: 3,
         errorText: widget.errorText == "" ? null : widget.errorText,
@@ -225,39 +298,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         suffixIconConstraints: BoxConstraints(
             maxWidth: suffixButtonSize + widget.contentPadding.right,
             maxHeight: suffixButtonSize),
-        suffixIcon: Container(
-          margin: EdgeInsets.only(right: widget.contentPadding.right),
-          child: AnimatedSwitcher(
-            transitionBuilder: (child, animation) {
-              return ScaleTransition(
-                scale: animation,
-                child: child,
-              );
-            },
-            duration: widget.animationDuration,
-            child: _shouldShowClearIcon
-                ? Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      customBorder: const CircleBorder(),
-                      onTap: () {
-                        _textEditingController.text = '';
-                      },
-                      child: Container(
-                        width: suffixButtonSize,
-                        height: suffixButtonSize,
-                        alignment: Alignment.center,
-                        child: Assets.svgs.inputClearIcon.svg(),
-                      ),
-                    ),
-                  )
-                : widget.suffix ??
-                    Container(
-                      margin: const EdgeInsets.only(right: suffixButtonSize),
-                      child: const SizedBox.shrink(),
-                    ),
-          ),
-        ),
+        suffixIcon: _suffixIcon(),
         hintText: widget.hintText,
         hintStyle: widget.hintTextStyle ??
             Styles.s15()

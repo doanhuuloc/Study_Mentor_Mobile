@@ -43,19 +43,19 @@ class PaymentInfo extends StatelessWidget {
               items: [
                 Text(
                   S.of(context).paymentInfomation,
-                  style: Styles.s18().withWeight(FontWeight.w600),
+                  style: Styles.s16().withWeight(FontWeight.w600),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       S.of(context).totalPayment,
-                      style: Styles.s16().withWeight(FontWeight.w300),
+                      style: Styles.s15().withWeight(FontWeight.w300),
                     ),
                     Text(
                       formatCurrency(
                           state.calculatePriceReponse?.price ?? 0, context),
-                      style: Styles.s16().withWeight(FontWeight.w300),
+                      style: Styles.s15().withWeight(FontWeight.w300),
                     ),
                   ],
                 ),
@@ -65,11 +65,11 @@ class PaymentInfo extends StatelessWidget {
                     children: [
                       Text(
                         S.of(context).voucherDiscount,
-                        style: Styles.s16().withWeight(FontWeight.w300),
+                        style: Styles.s15().withWeight(FontWeight.w300),
                       ),
                       Text(
                         "- ${formatCurrency(priceVoucher, context)}",
-                        style: Styles.s16().withWeight(FontWeight.w300),
+                        style: Styles.s15().withWeight(FontWeight.w300),
                       ),
                     ],
                   ),
@@ -78,13 +78,13 @@ class PaymentInfo extends StatelessWidget {
                   children: [
                     Text(
                       S.of(context).total,
-                      style: Styles.s16().withWeight(FontWeight.w500),
+                      style: Styles.s15().withWeight(FontWeight.w500),
                     ),
                     Text(
                       formatCurrency(
                           state.calculatePriceReponse?.promoPrice ?? 0,
                           context),
-                      style: Styles.s16()
+                      style: Styles.s15()
                           .withWeight(FontWeight.w500)
                           .withColor(Colors.red),
                     ),

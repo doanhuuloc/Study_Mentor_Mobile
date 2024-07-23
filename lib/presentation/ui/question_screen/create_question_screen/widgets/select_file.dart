@@ -6,9 +6,9 @@ import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 
 import '../../../../gen/locale/app_localizations.dart';
 import '../../../../shared/theme/theme.dart';
+import '../../../../shared/widgets/fileBox.dart';
 import '../blocs/create_question_cubit.dart';
 import '../blocs/create_question_state.dart';
-import 'fileBox.dart';
 
 class SelectFile extends StatelessWidget {
   const SelectFile({super.key});
@@ -20,7 +20,7 @@ class SelectFile extends StatelessWidget {
       items: [
         Text(
           S.of(context).fileQuestion,
-          style: Styles.s18().withWeight(FontWeight.w600),
+          style: Styles.s16().withWeight(FontWeight.w600),
         ),
         BlocBuilder<CreateQuestionCubit, CreateQuestionState>(
           buildWhen: (previous, current) =>
@@ -33,11 +33,13 @@ class SelectFile extends StatelessWidget {
                     .listFilePicker
                     .map(
                       (e) => FileBox(
-                        file: e,
-                        delete: () => context
-                            .read<CreateQuestionCubit>()
-                            .removeFilePicker(e),
-                      ),
+                          name: e.files.single.name,
+                          icon: IconButton(
+                            icon: const Icon(Icons.cancel_outlined),
+                            onPressed: () => context
+                                .read<CreateQuestionCubit>()
+                                .removeFilePicker(e),
+                          )),
                     )
                     .toList());
           },

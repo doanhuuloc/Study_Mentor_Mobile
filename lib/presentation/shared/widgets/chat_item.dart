@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:study_mentor_mobile/presentation/gen/app_colors.dart';
 import 'package:study_mentor_mobile/presentation/shared/theme/src/app_style.dart';
 
 import '../../../../application/services/file/file.dart';
+import '../../../application/services/app/app_config/app_config.dart';
 
 class ChatItem extends StatelessWidget {
   const ChatItem({
@@ -38,7 +40,7 @@ class ChatItem extends StatelessWidget {
                     color: Colors.black,
                     image: DecorationImage(
                         image: NetworkImage(
-                            "https://storage.googleapis.com/study-mentor/${files?[index].fileKey ?? ""}"),
+                            "${context.read<AppConfig>().imagePath}/${files?[index].fileKey ?? ""}"),
                         fit: BoxFit.cover)),
                 width: 100,
               ),

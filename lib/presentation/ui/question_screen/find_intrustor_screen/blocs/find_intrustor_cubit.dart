@@ -1,7 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
+import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
 import 'package:study_mentor_mobile/utilities/logging/logging.dart';
 
 import '../../../../../application/services/education/education.dart';
 import '../../../../../application/services/socket/dto/dto.dart';
+import '../../../../../application/services/socket/dto/src/picked-tutor-accepted-question.dart';
 import '../../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../../bases/socket_cubit/socket_cubit.dart';
 import '../../../../shared/handlers/failure_handler/failure_handler_manager.dart';
@@ -68,4 +72,56 @@ class FindIntrustorCubit extends SafeCubit<FindIntrustorState> {
       userId: userId,
     ));
   }
+
+  Future<void> selectTutor(BuildContext context, Tutor tutor) async {
+    final res = await ConfirmRouteData(
+      content: S.of(context).chooseIntructorToAnswer(tutor.fullName ?? ""),
+      acceptTitle: S.of(context).yes,
+      rejectTitle: S.of(context).no,
+      title: S.of(context).chooseIntructor,
+    ).push(context);
+
+    if (res == true) {
+      socketCubit.pickedTutorAcceptedQuestion(
+          (PickedTutorAcceptedQuestion pickedTutorAcceptedQuestion) {
+        emit(state.copyWith(
+          isAccepted: pickedTutorAcceptedQuestion.data?.isAccepted == 1,
+          waittingTutorAccepted: false,
+        ));
+
+        if (pickedTutorAcceptedQuestion.data?.isAccepted == 0) {
+          if (!context.mounted) {
+            return;
+          }
+
+          AlertRouteData(
+                  content: S.of(context).rejectToAnswer(tutor.fullName ?? ""))
+              .push(context);
+        }
+      });
+
+      final response = await educationController.pickIntrustor(
+          pickIntrustorRequest: PickIntrustorRequest(
+        tutorId: tutor.id ?? "",
+        questionId: questionId,
+      ));
+
+      if (response.isLeft) {
+        failureHandlerManager.handle(response.left);
+      }
+
+      if (response.isRight) {
+        emit(state.copyWith(waittingTutorAccepted: true));
+      }
+
+      if (!context.mounted) {
+        return;
+      }
+      await AlertRouteData(
+              content: S.of(context).wattingAccepted(tutor.fullName ?? ""))
+          .push(context);
+    }
+  }
+
+  Future<void> pickIntrustor(PickIntrustorRequest pickIntrustorRequest) async {}
 }

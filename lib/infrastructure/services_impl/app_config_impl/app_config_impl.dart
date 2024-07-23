@@ -31,6 +31,7 @@ class AppConfigLoaderImpl with AppConfigLoader {
         chatPay: dotenv.env['ID_CHAT_PAY'] ?? '',
         chatGemini: dotenv.env['ID_CHAT_GEMINI'] ?? '',
         chatGpt: dotenv.env['ID_CHAT_CHATGPT'] ?? '',
+        imagePath: dotenv.env['IMAGE_PATH'] ?? '',
       );
       return Right(appVariable);
     } catch (error) {

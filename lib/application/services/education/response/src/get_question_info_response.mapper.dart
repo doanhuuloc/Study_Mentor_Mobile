@@ -80,6 +80,9 @@ class GetQuestionInfoResponseMapper
   static bool? _$isAnswered(GetQuestionInfoResponse v) => v.isAnswered;
   static const Field<GetQuestionInfoResponse, bool> _f$isAnswered =
       Field('isAnswered', _$isAnswered, opt: true);
+  static String? _$reportId(GetQuestionInfoResponse v) => v.reportId;
+  static const Field<GetQuestionInfoResponse, String> _f$reportId =
+      Field('reportId', _$reportId, opt: true);
   static QuestionType? _$questionType(GetQuestionInfoResponse v) =>
       v.questionType;
   static const Field<GetQuestionInfoResponse, QuestionType> _f$questionType =
@@ -110,6 +113,7 @@ class GetQuestionInfoResponseMapper
     #answers: _f$answers,
     #isAccepted: _f$isAccepted,
     #isAnswered: _f$isAnswered,
+    #reportId: _f$reportId,
     #questionType: _f$questionType,
     #meetingURL: _f$meetingURL,
     #timeMetting: _f$timeMetting,
@@ -134,6 +138,7 @@ class GetQuestionInfoResponseMapper
         answers: data.dec(_f$answers),
         isAccepted: data.dec(_f$isAccepted),
         isAnswered: data.dec(_f$isAnswered),
+        reportId: data.dec(_f$reportId),
         questionType: data.dec(_f$questionType),
         meetingURL: data.dec(_f$meetingURL),
         timeMetting: data.dec(_f$timeMetting));
@@ -220,6 +225,7 @@ abstract class GetQuestionInfoResponseCopyWith<
       List<Answer>? answers,
       bool? isAccepted,
       bool? isAnswered,
+      String? reportId,
       QuestionType? questionType,
       String? meetingURL,
       int? timeMetting});
@@ -277,6 +283,7 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
           Object? answers = $none,
           Object? isAccepted = $none,
           Object? isAnswered = $none,
+          Object? reportId = $none,
           Object? questionType = $none,
           Object? meetingURL = $none,
           Object? timeMetting = $none}) =>
@@ -298,6 +305,7 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
         if (answers != $none) #answers: answers,
         if (isAccepted != $none) #isAccepted: isAccepted,
         if (isAnswered != $none) #isAnswered: isAnswered,
+        if (reportId != $none) #reportId: reportId,
         if (questionType != $none) #questionType: questionType,
         if (meetingURL != $none) #meetingURL: meetingURL,
         if (timeMetting != $none) #timeMetting: timeMetting
@@ -321,6 +329,7 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
       answers: data.get(#answers, or: $value.answers),
       isAccepted: data.get(#isAccepted, or: $value.isAccepted),
       isAnswered: data.get(#isAnswered, or: $value.isAnswered),
+      reportId: data.get(#reportId, or: $value.reportId),
       questionType: data.get(#questionType, or: $value.questionType),
       meetingURL: data.get(#meetingURL, or: $value.meetingURL),
       timeMetting: data.get(#timeMetting, or: $value.timeMetting));

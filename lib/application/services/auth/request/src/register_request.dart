@@ -10,6 +10,7 @@ class RegisterRequest with RegisterRequestMappable {
     required this.fullName,
     required this.gender,
     required this.type,
+    required this.dateOfBirth,
   });
 
   final String email;
@@ -17,4 +18,5 @@ class RegisterRequest with RegisterRequestMappable {
   final String fullName;
   final int gender;
   final int type;
+  final DateTime dateOfBirth;
 }

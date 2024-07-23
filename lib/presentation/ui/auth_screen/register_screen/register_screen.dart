@@ -61,10 +61,10 @@ class RegisterScreen extends StatelessWidget {
       },
       child: BlocListener<RegisterCubit, RegisterState>(
         listenWhen: (prev, curr) {
-          return prev.loginFlowCompleted != curr.loginFlowCompleted;
+          return prev.registerFlowCompleted != curr.registerFlowCompleted;
         },
         listener: (BuildContext context, RegisterState state) {
-          if (state.loginFlowCompleted && context.mounted) {
+          if (state.registerFlowCompleted && context.mounted) {
             const ProfileRouteData().go(context);
           }
         },

@@ -8,7 +8,7 @@ String formatDate(DateTime dateTime) {
 }
 
 String diffDate(DateTime dateTime, BuildContext context) {
-  final DateTime localTime = DateTime.parse('${dateTime}Z').toLocal();
+  final DateTime localTime = DateTime.parse('$dateTime').toLocal();
   final DateTime currentTime = DateTime.now();
   final Duration difference = currentTime.difference(localTime);
 

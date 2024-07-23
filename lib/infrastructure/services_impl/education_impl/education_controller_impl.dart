@@ -104,7 +104,7 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
   }
 
   @override
-  Future<Result<Failure, BaseResponse>> reportTutor(
+  Future<Result<Failure, BaseResponse<ReportQuestionResponse>>> reportTutor(
       {required ReportTutorRequest reportTutorRequest}) {
     return handleApiResult(
         future: () => educationDataSource.reportTutor(reportTutorRequest));
@@ -120,13 +120,13 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
   }
 
   @override
-  Future<Result<Failure, BaseResponse<List<ReportQuestionReponse>>>>
+  Future<Result<Failure, BaseResponse<List<ReportQuestionResponse>>>>
       getListReport() {
     return handleApiResult(future: () => educationDataSource.getListReport());
   }
 
   @override
-  Future<Result<Failure, BaseResponse<ReportQuestionReponse>>>
+  Future<Result<Failure, BaseResponse<ReportQuestionResponse>>>
       getReportQuestion(
           {required GetReportQuestionRequest getReportQuestionRequest}) {
     return handleApiResult(

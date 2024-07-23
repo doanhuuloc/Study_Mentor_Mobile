@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:study_mentor_mobile/application/services/file/request/request.dart';
 
 part 'on_get_tutor.mapper.dart';
 
@@ -40,6 +41,6 @@ class Tutor with TutorMappable {
   final String? id;
   final String? fullName;
   final int? age;
-  final String? avatar;
+  final FileRequest? avatar;
   final int? averageRate;
 }

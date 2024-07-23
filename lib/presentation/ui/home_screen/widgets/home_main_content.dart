@@ -48,15 +48,14 @@ class HomeMainContent extends StatelessWidget {
                   subTitle: S.of(context).aIUpgrade,
                   icon: Assets.svgs.homeAiFee.svg(),
                   onTap: () {
-                    // const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
-                    if (context.read<UserCubit>().state.detail?.isMembership ==
-                        true) {
+                    // if (context.read<UserCubit>().state.detail?.isMembership ==
+                    //     true) {
                       const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) => const PayAISystemDialog());
-                    }
+                    // } else {
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (context) => const PayAISystemDialog());
+                    // }
                   },
                 ),
               ),
@@ -88,6 +87,74 @@ class HomeMainContent extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 20),
+          // Text.rich(
+          //   textAlign: TextAlign.center,
+          //   TextSpan(
+          //     children: [
+          //       TextSpan(
+          //         text: S.of(context).process,
+          //         style: Styles.s18()
+          //             .withWeight(FontWeight.w600)
+          //             .withColor(Colors.blue),
+          //       ),
+          //       TextSpan(
+          //         text: S.of(context).stepByStepCreateQuestion,
+          //         style: Styles.s18().withWeight(FontWeight.w600),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // Text(
+          //   "Mỗi câu hỏi dù đơn giản hay phức tạp, người hướng dẫn của Study Mentor đều đặt hết tâm huyết, đảm bảo cung cấp câu trả lời chính xác cho học viên",
+          //   style: Styles.s15()
+          //       .withWeight(FontWeight.w400)
+          //       .withColor(AppColors.text.bodyText),
+          //   textAlign: TextAlign.center,
+          // ),
+          // const SizedBox(height: 10),
+          // Container(
+          //   padding: const EdgeInsets.all(15),
+          //   decoration: BoxDecoration(color: AppColors.blue.shade50),
+          //   child: Text.rich(
+          //     TextSpan(
+          //       children: [
+          //         TextSpan(
+          //           text: "1  ",
+          //           style: Styles.s16()
+          //               .withWeight(FontWeight.w600)
+          //               .withColor(Colors.blue),
+          //         ),
+          //         TextSpan(
+          //           text: S.of(context).step1,
+          //           style: Styles.s16(),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
+
+          // Container(
+          //   padding: const EdgeInsets.all(15),
+          //   decoration: BoxDecoration(color: AppColors.blue.shade50),
+          //   child: Text.rich(
+          //     TextSpan(
+          //       children: [
+          //         TextSpan(
+          //           text: "2  ",
+          //           style: Styles.s16()
+          //               .withWeight(FontWeight.w600)
+          //               .withColor(Colors.blue),
+          //         ),
+          //         TextSpan(
+          //           text: S.of(context).step2,
+          //           style: Styles.s16(),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

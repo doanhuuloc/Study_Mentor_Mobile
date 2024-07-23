@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:study_mentor_mobile/presentation/gen/assets.gen.dart';
 import 'package:study_mentor_mobile/presentation/shared/theme/theme.dart';
-import 'package:study_mentor_mobile/presentation/shared/widgets/app_icon_button.dart';
 
 class FileBox extends StatelessWidget {
-  const FileBox({super.key, required this.name, required this.download});
+  const FileBox({
+    super.key,
+    required this.name,
+    required this.icon,
+  });
 
   final String name;
-  final VoidCallback download;
+  final Widget icon;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
       ),
@@ -42,14 +44,7 @@ class FileBox extends StatelessWidget {
               ],
             ),
           ),
-          AppIconButton(
-            icon: Assets.svgs.uploadFile.svg(
-              color: Colors.black,
-              height: 25,
-              width: 15,
-            ),
-            onTap: download,
-          )
+          icon,
         ],
       ),
     );

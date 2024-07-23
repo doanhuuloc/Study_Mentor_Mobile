@@ -1,3 +1,4 @@
+import 'package:study_mentor_mobile/application/services/auth/auth.dart';
 import 'package:study_mentor_mobile/presentation/bases/user_cubit/user_cubit.dart';
 
 import '../../../../bases/auth_cubit/auth_cubit.dart';
@@ -47,9 +48,9 @@ class LoginCubit extends SafeCubit<LoginState> {
     emit(state.copyWith(loginFlowCompleted: true));
   }
 
-  void onLoginWithGoogle(String idToken) async {
+  void onLoginWithGoogle(LoginWithGoogleRequest loginWithGoogleRequest) async {
     final loginWithGoogleFuture = authCubit.loginWithGoogle(
-      idToken: idToken,
+      loginWithGoogleRequest: loginWithGoogleRequest,
       redirectUrl: redirectUrl,
     );
 

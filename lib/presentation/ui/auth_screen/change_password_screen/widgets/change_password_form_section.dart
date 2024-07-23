@@ -15,8 +15,8 @@ class ChangePasswordFormSection extends StatelessWidget {
     return Column(
       children: [
         CommonTextField(
+          usePasswordIcon: true,
           hintText: S.of(context).oldPassword,
-          obscure: true,
           onChanged: (value) {
             context.read<ChangePasswordCubit>().onOldPasswordChanged(value);
           },
@@ -30,7 +30,7 @@ class ChangePasswordFormSection extends StatelessWidget {
           builder: (context, state) {
             return CommonTextField(
               hintText: S.of(context).newPasssword,
-              obscure: true,
+              usePasswordIcon: true,
               onChanged: (value) {
                 context.read<ChangePasswordCubit>().onNewPasswordChanged(value);
               },

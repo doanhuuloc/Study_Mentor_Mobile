@@ -15,6 +15,10 @@ mixin UserController {
 
   Future<Result<Failure, SuccessResponse>> changePassword(
       ChangePasswordRequest request);
+
   Future<Result<Failure, SuccessResponse>> resetPassword(
       ResetPasswordRequest request);
+
+  Future<Result<Failure, BaseResponse<List<MyNotificationResponse>>>>
+      getAllNotifications();
 }

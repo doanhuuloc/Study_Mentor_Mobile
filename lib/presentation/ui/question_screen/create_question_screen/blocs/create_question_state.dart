@@ -6,7 +6,6 @@ class CreateQuestionState {
   const CreateQuestionState({
     this.loading = false,
     this.titleField = "",
-    this.contentQuestionField = "",
     this.findingTimeField,
     this.numberOfStar,
     this.level,
@@ -24,7 +23,6 @@ class CreateQuestionState {
 
   final bool loading;
   final String titleField;
-  final String contentQuestionField;
   final int? findingTimeField;
   final int? numberOfStar;
   final LevelResponse? level;
@@ -43,14 +41,12 @@ class CreateQuestionState {
     return subject != null &&
         numberOfStar != null &&
         findingTimeField != null &&
-        contentQuestionField != "" &&
         (questionType == QuestionType.GGMEET ? timeMeeting != null : true);
   }
 
   CreateQuestionState copyWith({
     bool? loading,
     String? titleField,
-    String? contentQuestionField,
     int? findingTimeField,
     int? numberOfStar,
     LevelResponse? level,
@@ -68,7 +64,6 @@ class CreateQuestionState {
     return CreateQuestionState(
       loading: loading ?? this.loading,
       titleField: titleField ?? this.titleField,
-      contentQuestionField: contentQuestionField ?? this.contentQuestionField,
       findingTimeField: findingTimeField ?? this.findingTimeField,
       numberOfStar: numberOfStar ?? this.numberOfStar,
       level: level ?? this.level,

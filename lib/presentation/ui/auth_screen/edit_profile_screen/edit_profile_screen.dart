@@ -8,6 +8,7 @@ import 'package:study_mentor_mobile/presentation/shared/widgets/app_bar/common_a
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/textfields/common_textfield.dart';
 
+import '../../../../application/services/app/app_config/app_config.dart';
 import '../../../../application/services/user/user.dart';
 import '../../../bases/file_cubit/file_cubit.dart';
 import '../../../bases/user_cubit/user_cubit.dart';
@@ -100,7 +101,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     child: state.user?.avatar?.fileKey != null
                                         ? ClipOval(
                                             child: Image.network(
-                                              'https://storage.googleapis.com/study-mentor/${state.user!.avatar!.fileKey!}',
+                                              '${context.read<AppConfig>().imagePath}/${state.user!.avatar!.fileKey!}',
                                               loadingBuilder:
                                                   helperImage.loadingBuilder,
                                               errorBuilder:
@@ -217,7 +218,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             BottomButton(
               onPress: () async {
-                await context.read<EditProfileCubit>().updateProfile();
+                await context.read<EditProfileCubit>().updateProfile(context);
               },
               title: S.of(context).save,
             )

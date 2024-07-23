@@ -40,17 +40,17 @@ mixin EducationController {
   Future<Result<Failure, BaseResponse<PaymentLinkResponse>>> payment(
       {required PaymentLinkRequest paymentLinkRequest});
 
-  Future<Result<Failure, BaseResponse<dynamic>>> reportTutor(
+  Future<Result<Failure, BaseResponse<ReportQuestionResponse>>> reportTutor(
       {required ReportTutorRequest reportTutorRequest});
 
   Future<Result<Failure, BaseResponse<dynamic>>> cancelFindSystemQuestion(
       {required CancelFindSystemQuestionRequest
           cancelFindSystemQuestionRequest});
 
-  Future<Result<Failure, BaseResponse<List<ReportQuestionReponse>>>>
+  Future<Result<Failure, BaseResponse<List<ReportQuestionResponse>>>>
       getListReport();
 
-  Future<Result<Failure, BaseResponse<ReportQuestionReponse>>>
+  Future<Result<Failure, BaseResponse<ReportQuestionResponse>>>
       getReportQuestion(
           {required GetReportQuestionRequest getReportQuestionRequest});
 }

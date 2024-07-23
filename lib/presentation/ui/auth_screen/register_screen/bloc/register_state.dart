@@ -25,20 +25,23 @@ class RegisterState {
     this.passwordField = const PasswordField.pure(),
     this.fullNameField = "",
     this.genderField,
-    this.loginFlowCompleted = false,
+    this.registerFlowCompleted = false,
+    this.dateOfBirth,
   });
 
   final EmailField emailField;
   final PasswordField passwordField;
   final String fullNameField;
   final int? genderField;
-  final bool loginFlowCompleted;
+  final bool registerFlowCompleted;
+  final DateTime? dateOfBirth;
 
   bool get canSubmit {
     return emailField.isValid &&
         passwordField.isValid &&
         genderField != null &&
-        fullNameField != "";
+        fullNameField != "" &&
+        dateOfBirth != null;
   }
 
   RegisterState copyWith({
@@ -47,13 +50,16 @@ class RegisterState {
     String? fullNameField,
     int? genderField,
     bool? registerFlowCompleted,
+    DateTime? dateOfBirth,
   }) {
     return RegisterState(
       emailField: emailField ?? this.emailField,
       passwordField: passwordField ?? this.passwordField,
       fullNameField: fullNameField ?? this.fullNameField,
       genderField: genderField ?? this.genderField,
-      loginFlowCompleted: registerFlowCompleted ?? loginFlowCompleted,
+      registerFlowCompleted:
+          registerFlowCompleted ?? this.registerFlowCompleted,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
     );
   }
 }

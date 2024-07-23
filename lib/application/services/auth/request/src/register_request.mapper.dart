@@ -34,6 +34,9 @@ class RegisterRequestMapper extends ClassMapperBase<RegisterRequest> {
       Field('gender', _$gender);
   static int _$type(RegisterRequest v) => v.type;
   static const Field<RegisterRequest, int> _f$type = Field('type', _$type);
+  static DateTime _$dateOfBirth(RegisterRequest v) => v.dateOfBirth;
+  static const Field<RegisterRequest, DateTime> _f$dateOfBirth =
+      Field('dateOfBirth', _$dateOfBirth);
 
   @override
   final MappableFields<RegisterRequest> fields = const {
@@ -42,6 +45,7 @@ class RegisterRequestMapper extends ClassMapperBase<RegisterRequest> {
     #fullName: _f$fullName,
     #gender: _f$gender,
     #type: _f$type,
+    #dateOfBirth: _f$dateOfBirth,
   };
 
   static RegisterRequest _instantiate(DecodingData data) {
@@ -50,7 +54,8 @@ class RegisterRequestMapper extends ClassMapperBase<RegisterRequest> {
         password: data.dec(_f$password),
         fullName: data.dec(_f$fullName),
         gender: data.dec(_f$gender),
-        type: data.dec(_f$type));
+        type: data.dec(_f$type),
+        dateOfBirth: data.dec(_f$dateOfBirth));
   }
 
   @override
@@ -111,7 +116,8 @@ abstract class RegisterRequestCopyWith<$R, $In extends RegisterRequest, $Out>
       String? password,
       String? fullName,
       int? gender,
-      int? type});
+      int? type,
+      DateTime? dateOfBirth});
   RegisterRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -130,13 +136,15 @@ class _RegisterRequestCopyWithImpl<$R, $Out>
           String? password,
           String? fullName,
           int? gender,
-          int? type}) =>
+          int? type,
+          DateTime? dateOfBirth}) =>
       $apply(FieldCopyWithData({
         if (email != null) #email: email,
         if (password != null) #password: password,
         if (fullName != null) #fullName: fullName,
         if (gender != null) #gender: gender,
-        if (type != null) #type: type
+        if (type != null) #type: type,
+        if (dateOfBirth != null) #dateOfBirth: dateOfBirth
       }));
   @override
   RegisterRequest $make(CopyWithData data) => RegisterRequest(
@@ -144,7 +152,8 @@ class _RegisterRequestCopyWithImpl<$R, $Out>
       password: data.get(#password, or: $value.password),
       fullName: data.get(#fullName, or: $value.fullName),
       gender: data.get(#gender, or: $value.gender),
-      type: data.get(#type, or: $value.type));
+      type: data.get(#type, or: $value.type),
+      dateOfBirth: data.get(#dateOfBirth, or: $value.dateOfBirth));
 
   @override
   RegisterRequestCopyWith<$R2, RegisterRequest, $Out2> $chain<$R2, $Out2>(

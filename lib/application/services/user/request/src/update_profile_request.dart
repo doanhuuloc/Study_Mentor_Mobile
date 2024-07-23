@@ -23,6 +23,6 @@ class UpdateProfileRequest with UpdateProfileRequestMappable {
   final String? fullName;
   final String? email;
   final String? phone;
-  final int? dateOfBirth;
+  final String? dateOfBirth;
   final int? gender;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../gen/app_colors.dart';
 import '../../../../gen/locale/app_localizations.dart';
 import '../../../../shared/theme/src/app_style.dart';
@@ -25,11 +26,17 @@ class LoginFormSection extends StatelessWidget {
         const SizedBox(height: 12),
         CommonTextField(
           hintText: S.of(context).password,
-          obscure: true,
+          usePasswordIcon: true,
           onChanged: (value) {
             context.read<LoginCubit>().onPasswordChanged(value);
           },
         ),
+        // CommonTextField(
+        //   hintText: S.of(context).password,
+        //   onChanged: (value) {
+        //     context.read<LoginCubit>().onPasswordChanged(value);
+        //   },
+        // ),
         const SizedBox(height: 32),
         BlocBuilder<LoginCubit, LoginState>(buildWhen: (prev, curr) {
           return prev.canSubmit != curr.canSubmit;

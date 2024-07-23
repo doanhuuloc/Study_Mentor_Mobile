@@ -25,7 +25,7 @@ class SelectVoucher extends StatelessWidget {
           items: [
             Text(
               S.of(context).voucher,
-              style: Styles.s18().withWeight(FontWeight.w600),
+              style: Styles.s16().withWeight(FontWeight.w600),
             ),
             DropDownBar(
               hintText: (state.vouchers?.length ?? 0) <= 0

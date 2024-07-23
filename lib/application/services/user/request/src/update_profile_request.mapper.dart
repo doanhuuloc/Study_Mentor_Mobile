@@ -75,8 +75,8 @@ class UpdateProfileRequestMapper extends ClassMapperBase<UpdateProfileRequest> {
   static String? _$phone(UpdateProfileRequest v) => v.phone;
   static const Field<UpdateProfileRequest, String> _f$phone =
       Field('phone', _$phone, opt: true);
-  static int? _$dateOfBirth(UpdateProfileRequest v) => v.dateOfBirth;
-  static const Field<UpdateProfileRequest, int> _f$dateOfBirth =
+  static String? _$dateOfBirth(UpdateProfileRequest v) => v.dateOfBirth;
+  static const Field<UpdateProfileRequest, String> _f$dateOfBirth =
       Field('dateOfBirth', _$dateOfBirth, opt: true);
   static int? _$gender(UpdateProfileRequest v) => v.gender;
   static const Field<UpdateProfileRequest, int> _f$gender =
@@ -161,7 +161,7 @@ abstract class UpdateProfileRequestCopyWith<
       {String? fullName,
       String? email,
       String? phone,
-      int? dateOfBirth,
+      String? dateOfBirth,
       int? gender});
   UpdateProfileRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);

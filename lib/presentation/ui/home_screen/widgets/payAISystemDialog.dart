@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_mentor_mobile/presentation/shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'package:study_mentor_mobile/presentation/shared/handlers/loading_handler/loading_manager.dart';
 import 'package:study_mentor_mobile/presentation/utilities/formatCurency.dart';
+import 'package:study_mentor_mobile/presentation/bases/user_cubit/user_cubit.dart';
 import 'package:study_mentor_mobile/utilities/launch_url.dart';
 
 import '../../../../application/services/education/education.dart';
@@ -27,6 +28,7 @@ class _PayAISystemDialogState extends State<PayAISystemDialog> {
   }
 
   Future<void> pay() async {
+    context.read<UserCubit>().setMemberShip();
     final futureRes = context.read<EducationController>().payment(
         paymentLinkRequest:
             PaymentLinkRequest(type: 1, expirationDateType: type));

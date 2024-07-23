@@ -27,6 +27,7 @@ class GetQuestionInfoResponse with GetQuestionInfoResponseMappable {
     this.answers,
     this.isAccepted,
     this.isAnswered,
+    this.reportId,
     this.questionType,
     this.meetingURL,
     this.timeMetting,
@@ -51,6 +52,7 @@ class GetQuestionInfoResponse with GetQuestionInfoResponseMappable {
   final List<Answer>? answers;
   final bool? isAccepted;
   final bool? isAnswered;
+  final String? reportId;
   final QuestionType? questionType;
   final int? timeMetting;
   final String? meetingURL;

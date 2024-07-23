@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:study_mentor_mobile/application/services/user/response/src/user_info_response.dart';
 import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
 import 'package:study_mentor_mobile/presentation/ui/question_screen/find_intrustor_screen/widgets/intrustor_item.dart';
@@ -64,6 +63,13 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                 context.pop(true);
               }
             }
+
+            if (state.isAccepted == true) {
+              if (!context.mounted) {
+                return;
+              }
+              context.pop(true);
+            }
           },
           child: Scaffold(
             appBar: CommonAppBar(
@@ -91,7 +97,21 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                         width: 75,
                         child: PrimaryButton.round(
                           onPressed: () {
-                            context.read<FindIntrustorCubit>().findIntrustor();
+                            if (context
+                                    .read<FindIntrustorCubit>()
+                                    .state
+                                    .waittingTutorAccepted ==
+                                true) {
+                              AlertRouteData(
+                                      content: S
+                                          .of(context)
+                                          .wattingIntructorAccepted)
+                                  .push(context);
+                            } else {
+                              context
+                                  .read<FindIntrustorCubit>()
+                                  .findIntrustor();
+                            }
                           },
                           title: S.of(context).find,
                         ),
@@ -141,20 +161,32 @@ class _FindIntrustorScreenState extends State<FindIntrustorScreen> {
                                         (e) => IntrustorItem(
                                           name: e.fullName ?? "",
                                           numberOfStar: e.averageRate ?? 0,
-                                          avatar: e.avatar ?? "",
+                                          avatar: e.avatar?.fileKey ?? "",
                                           voidCallback: () {
-                                            IntrustorInfoRouteData(
-                                                    $extra:
-                                                        IntrustorInfoExtraData(
-                                                            intrustor:
-                                                                UserInfoResponse(
-                                                              id: e.id,
-                                                              fullName:
-                                                                  e.fullName,
-                                                            ),
-                                                            questionId: widget
-                                                                .questionId))
-                                                .push(context);
+                                            if (state.waittingTutorAccepted ==
+                                                true) {
+                                              AlertRouteData(
+                                                      content: S
+                                                          .of(context)
+                                                          .wattingIntructorAccepted)
+                                                  .push(context);
+                                            } else {
+                                              context
+                                                  .read<FindIntrustorCubit>()
+                                                  .selectTutor(context, e);
+                                            }
+                                            // IntrustorInfoRouteData(
+                                            //         $extra:
+                                            //             IntrustorInfoExtraData(
+                                            //                 intrustor:
+                                            //                     UserInfoResponse(
+                                            //                   id: e.id,
+                                            //                   fullName:
+                                            //                       e.fullName,
+                                            //                 ),
+                                            //                 questionId: widget
+                                            //                     .questionId))
+                                            //     .push(context);
                                           },
                                         ),
                                       ),

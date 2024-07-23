@@ -241,6 +241,11 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
               parentNavigatorKey: ReportQuestionRouteData.$parentNavigatorKey,
               factory: $ReportQuestionRouteDataExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'notification',
+              parentNavigatorKey: NotificationRouteData.$parentNavigatorKey,
+              factory: $NotificationRouteDataExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -524,6 +529,24 @@ extension $ReportQuestionRouteDataExtension on ReportQuestionRouteData {
 
   void replace(BuildContext context) =>
       context.replace(location, extra: $extra);
+}
+
+extension $NotificationRouteDataExtension on NotificationRouteData {
+  static NotificationRouteData _fromState(GoRouterState state) =>
+      const NotificationRouteData();
+
+  String get location => GoRouteData.$location(
+        '/home/notification',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 extension $HistoryRouteDataExtension on HistoryRouteData {

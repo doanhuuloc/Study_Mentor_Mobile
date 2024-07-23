@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:study_mentor_mobile/application/services/file/file.dart';
 import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
-
+import 'package:study_mentor_mobile/presentation/utilities/download_file.dart';
+import '../../../../../application/services/app/app_config/app_config.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../shared/theme/theme.dart';
-import 'fileBox.dart';
+import '../../../../shared/widgets/app_icon_button.dart';
+import '../../../../shared/widgets/fileBox.dart';
 
 class QuestionInfoBox extends StatelessWidget {
   const QuestionInfoBox({
@@ -52,10 +56,24 @@ class QuestionInfoBox extends StatelessWidget {
               decoration: const BoxDecoration(color: Colors.black),
             )
           else
-            MarkdownBody(
-                styleSheet: MarkdownStyleSheet.fromTheme(
-                    ThemeData(textTheme: TextTheme(bodyMedium: Styles.s15()))),
-                data: question),
+            SizedBox(
+              child: QuillEditor.basic(
+                configurations: QuillEditorConfigurations(
+                  readOnly: true,
+                  showCursor: false,
+                  enableInteractiveSelection: false,
+                  controller: QuillController(
+                    document: Document.fromHtml(question),
+                    selection: const TextSelection.collapsed(offset: 0),
+                  ),
+                ),
+              ),
+            ),
+
+          // MarkdownBody(
+          //     styleSheet: MarkdownStyleSheet.fromTheme(
+          //         ThemeData(textTheme: TextTheme(bodyMedium: Styles.s15()))),
+          //     data: question),
           if ((fileResponse ?? []).isNotEmpty)
             Text(
               S.of(context).attachments,
@@ -72,7 +90,21 @@ class QuestionInfoBox extends StatelessWidget {
               children: (fileResponse ?? []).map((file) {
                 return FileBox(
                   name: file.fileName ?? "",
-                  download: () {},
+                  icon: AppIconButton(
+                    icon: Assets.svgs.uploadFile.svg(
+                      color: Colors.black,
+                      height: 25,
+                      width: 15,
+                    ),
+                    onTap: () async {
+                      if (file.fileKey != null && file.fileName != null) {
+                        await openFile(
+                            url:
+                                "${context.read<AppConfig>().imagePath}/${file.fileKey}",
+                            fileName: "${file.fileName}");
+                      }
+                    },
+                  ),
                 );
               }).toList(),
             ),

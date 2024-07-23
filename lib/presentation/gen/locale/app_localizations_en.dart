@@ -316,10 +316,14 @@ class SEn extends S {
   String get timeFindIntructor => 'Time to find an instructor';
 
   @override
-  String get minute => 'minute';
+  String minute(String minute) {
+    return '$minute minute';
+  }
 
   @override
-  String get hour => 'hour';
+  String hour(String hour) {
+    return '$hour hour';
+  }
 
   @override
   String get timeAnswerQuestion => 'Time to answer questions';
@@ -343,7 +347,9 @@ class SEn extends S {
   String get total => 'Total';
 
   @override
-  String get pay => 'Pay';
+  String pay(String money) {
+    return 'Pay $money';
+  }
 
   @override
   String get detailedQuestion => 'Detailed question';
@@ -530,4 +536,53 @@ class SEn extends S {
 
   @override
   String get reportSuccess => 'Your report is sent successfuly';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get selectTutorSuccess => 'Selected Intructor successfully';
+
+  @override
+  String intructorSelectQuestion(String intructor, String question, String price) {
+    return 'Intructor $intructor you chose that accepted question with title is $question with price $price';
+  }
+
+  @override
+  String get editProfileSuccess => 'Edit profile successfully';
+
+  @override
+  String get wattingIntructorAccepted => 'You are watting for intructor to accept your question';
+
+  @override
+  String chooseIntructorToAnswer(String name) {
+    return 'Do you want to choose $name to answer your question';
+  }
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get chooseIntructor => 'Choose intructor';
+
+  @override
+  String rejectToAnswer(String name) {
+    return '$name reject to answer your question';
+  }
+
+  @override
+  String wattingAccepted(String name) {
+    return 'Please wait for $name to accept';
+  }
+
+  @override
+  String numStart(String star) {
+    return '$star star';
+  }
+
+  @override
+  String get loadScreen => 'If you play successfully, please load screen';
 }

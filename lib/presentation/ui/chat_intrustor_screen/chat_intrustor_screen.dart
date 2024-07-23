@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../application/services/app/app_config/app_config.dart';
 import '../../../application/services/user/response/response.dart';
 import '../../bases/file_cubit/file_cubit.dart';
 import '../../bases/socket_cubit/socket_cubit.dart';
@@ -63,7 +64,7 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
-                            "https://storage.googleapis.com/study-mentor/${widget.intrustor.avatar?.fileKey ?? ""}",
+                            "${context.read<AppConfig>().imagePath}/${widget.intrustor.avatar?.fileKey ?? ""}",
                           ),
                           fit: BoxFit.cover,
                         ),
@@ -106,7 +107,7 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                       )),
                       Container(
                         decoration:
-                            BoxDecoration(color: AppColors.blue.shade50),
+                            BoxDecoration(color: AppColors.blue.shade200),
                         padding: const EdgeInsets.all(10),
                         child: Column(
                           children: [

@@ -36,10 +36,6 @@ class QuestionSummary extends StatelessWidget {
             child: GapItems(
               gap: 10,
               items: [
-                // Text(
-                //   "Thông tin buổi trao đổi",
-                //   style: Styles.s16().withWeight(FontWeight.w600),
-                // ),
                 Row(
                   children: [
                     Text(

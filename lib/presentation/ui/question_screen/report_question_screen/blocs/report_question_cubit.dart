@@ -39,7 +39,8 @@ class ReportQuestionCubit extends SafeCubit<ReportQuestionState> {
             GetReportQuestionRequest(reportId: reportQuestion.id ?? ""));
 
     if (report.isRight) {
-      emit(state.copyWith(loading: false));
+      emit(state.copyWith(
+          loading: false, reportQuestionResponse: report.right.data));
     }
   }
 
@@ -90,7 +91,8 @@ class ReportQuestionCubit extends SafeCubit<ReportQuestionState> {
     }
 
     if (res.isRight) {
-      emit(state.copyWith(reportFLowCompleted: true));
+      emit(state.copyWith(
+          reportQuestionResponse: res.right.data, reportFLowCompleted: true));
     }
   }
 }

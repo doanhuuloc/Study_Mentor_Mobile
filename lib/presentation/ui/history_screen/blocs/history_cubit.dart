@@ -79,7 +79,6 @@ class HistoryCubit extends SafeCubit<HistoryState> {
     final listQuestion =
         await educationController.getListQuestion(status: questionStatus.name);
     if (listQuestion.isLeft) {
-      failureHandlerManager.handle(listQuestion.left);
       emit(state.copyWith(loading: false));
     }
 

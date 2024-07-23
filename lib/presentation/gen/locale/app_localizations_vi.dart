@@ -32,19 +32,19 @@ class SVi extends S {
 
   @override
   String hoursAgo(String time) {
-    return '$time hours ago';
+    return '$time giờ trước';
   }
 
   @override
   String minutesAgo(String time) {
-    return '$time minutes ago';
+    return '$time phút trước';
   }
 
   @override
-  String get justNow => 'Just now';
+  String get justNow => 'Bây giờ';
 
   @override
-  String get pleaseLoginToViewRegisteredInformation => 'Please login to view registered information. Would you like to log in?';
+  String get pleaseLoginToViewRegisteredInformation => 'Vui lòng đăng nhập để tiếp tục sử dụng tính năng của ứng dụng. Bạn có muốn đăng nhập không?';
 
   @override
   String get ok => 'OK';
@@ -56,40 +56,40 @@ class SVi extends S {
   String get emptyList => 'Rỗng';
 
   @override
-  String get connectionFailure => 'can not connect to server. Please try again later';
+  String get connectionFailure => 'Không thể kết nối với máy chủ. Vui lòng thử lại sau';
 
   @override
-  String get timeoutFailure => 'request timeout';
+  String get timeoutFailure => 'Đã quá thời gian yêu cầu dữ liệu';
 
   @override
-  String get otherDioFailure => 'some thing went wrong';
+  String get otherDioFailure => 'Có gì đó sai sót';
 
   @override
-  String get convertDataFailure => 'convert data failure';
+  String get convertDataFailure => 'Chuyển đổi dữ liệu thất bại';
 
   @override
-  String get genericFailure => 'generic failure';
+  String get genericFailure => 'Lỗi';
 
   @override
-  String get persistentFailure => 'persistent failure';
+  String get persistentFailure => 'Lỗi';
 
   @override
   String get notificationAlert => 'Thông báo';
 
   @override
-  String get passwordInvalid => 'Combination of alphanumeric and special characters, minimum 8 characters';
+  String get passwordInvalid => 'Bao gồm chữ in hoa, ký tự đặc biệt và ít nhất 8 ký tự.';
 
   @override
-  String get confirmPasswordNotMatch => 'Passwords do not match';
+  String get confirmPasswordNotMatch => 'Mật khẩu không khớp';
 
   @override
-  String get phoneInvalid => 'Invalid phone number format.';
+  String get phoneInvalid => 'Số điện thoại không hợp lệ';
 
   @override
   String get otpInvalid => '6-digit number allowed';
 
   @override
-  String get phoneNumberNotExisted => 'This phone number does not exist in the application.';
+  String get phoneNumberNotExisted => 'Số điện thoại không tồn tại';
 
   @override
   String get takePicture => 'Chụp ảnh';
@@ -98,7 +98,7 @@ class SVi extends S {
   String get pickFromGallery => 'Chọn từ thư viện';
 
   @override
-  String get someThingWentWrong => 'Something went wrong.';
+  String get someThingWentWrong => 'Có gì đó không đúng';
 
   @override
   String get deletePhoto => 'Xóa ảnh';
@@ -107,7 +107,7 @@ class SVi extends S {
   String get compose => 'Compose';
 
   @override
-  String get empty => 'This field cannot be empty.';
+  String get empty => 'Ô này không được để trống';
 
   @override
   String get usernameInvalid => 'Combination of alphanumeric, minimum 6 characters';
@@ -316,10 +316,14 @@ class SVi extends S {
   String get timeFindIntructor => 'Thời gian tìm người hướng dẫn';
 
   @override
-  String get minute => 'minute';
+  String minute(String minute) {
+    return '$minute phút';
+  }
 
   @override
-  String get hour => 'hour';
+  String hour(String hour) {
+    return '$hour giờ';
+  }
 
   @override
   String get timeAnswerQuestion => 'Thời gian giải đáp câu hỏi';
@@ -343,7 +347,9 @@ class SVi extends S {
   String get total => 'Tổng tiền';
 
   @override
-  String get pay => 'Thanh toán';
+  String pay(String money) {
+    return 'Thanh toán $money';
+  }
 
   @override
   String get detailedQuestion => 'Chi tiết câu hỏi';
@@ -412,13 +418,13 @@ class SVi extends S {
   String get personalInfomation => 'Thông tin cá nhân';
 
   @override
-  String get reportIntructor => 'Report intructor';
+  String get reportIntructor => 'Báo cáo người hướng dẫn';
 
   @override
-  String get reportContent => 'Report content';
+  String get reportContent => 'Nội dung báo cáo';
 
   @override
-  String get reportFile => 'Report file';
+  String get reportFile => 'File báo cáo';
 
   @override
   String get accept => 'Chập nhận';
@@ -530,4 +536,53 @@ class SVi extends S {
 
   @override
   String get reportSuccess => 'Báo cáo của bạn được gữi thành công';
+
+  @override
+  String get confirm => 'Xác nhận';
+
+  @override
+  String get selectTutorSuccess => 'Chọn người hướng dẫn thành công';
+
+  @override
+  String intructorSelectQuestion(String intructor, String question, String price) {
+    return 'Người hướng dẫn $intructor bạn chọn đã chấp nhận câu hỏi với tiêu đề $question với giá $price';
+  }
+
+  @override
+  String get editProfileSuccess => 'Thay đổi thông tin cá nhân thành công';
+
+  @override
+  String get wattingIntructorAccepted => 'Bạn đang đợi người hướng dẫn chấp nhận trả lời câu hỏi của bạn';
+
+  @override
+  String chooseIntructorToAnswer(String name) {
+    return 'Bạn có muốn chọn $name trả lời câu hỏi của bạn';
+  }
+
+  @override
+  String get yes => 'Có';
+
+  @override
+  String get no => 'Không';
+
+  @override
+  String get chooseIntructor => 'Chọn người hướng dẫn';
+
+  @override
+  String rejectToAnswer(String name) {
+    return '$name đã từ chối trả lời câu hỏi của bạn';
+  }
+
+  @override
+  String wattingAccepted(String name) {
+    return 'Vui lòng đợi $name chấp nhận';
+  }
+
+  @override
+  String numStart(String star) {
+    return '$star sao';
+  }
+
+  @override
+  String get loadScreen => 'Nếu bạn đã thanh toán vui lòng tải lại màn hình';
 }

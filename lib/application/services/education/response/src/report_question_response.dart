@@ -4,8 +4,8 @@ import '../../../file/file.dart';
 part 'report_question_response.mapper.dart';
 
 @MappableClass()
-class ReportQuestionReponse with ReportQuestionReponseMappable {
-  const ReportQuestionReponse({
+class ReportQuestionResponse with ReportQuestionResponseMappable {
+  const ReportQuestionResponse({
     this.id,
     this.questionName,
     this.studentId,
@@ -17,8 +17,8 @@ class ReportQuestionReponse with ReportQuestionReponseMappable {
     this.studentName,
   });
 
-  factory ReportQuestionReponse.fromJson(Map<String, dynamic> json) =>
-      ReportQuestionReponseMapper.fromJson(json);
+  factory ReportQuestionResponse.fromJson(Map<String, dynamic> json) =>
+      ReportQuestionResponseMapper.fromJson(json);
 
   final String? id;
   final String? questionName;

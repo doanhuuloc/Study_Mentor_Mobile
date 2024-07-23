@@ -135,22 +135,28 @@ class _IntrustorInfoScreenState extends State<IntrustorInfoScreen> {
                                               title: S.of(context).email,
                                               content:
                                                   widget.intrustor.email ?? ""),
-                                          LineInfo(
-                                              title: S.of(context).phone,
-                                              content:
-                                                  widget.intrustor.phone ?? ""),
-                                          LineInfo(
-                                              title: S.of(context).dateOfbirth,
-                                              content: (widget.intrustor
-                                                          .dateOfBirth ??
-                                                      "")
-                                                  .toString()),
-                                          LineInfo(
-                                              title: S.of(context).gender,
-                                              content:
-                                                  widget.intrustor.gender == 0
-                                                      ? S.of(context).male
-                                                      : S.of(context).female),
+                                          if (widget.intrustor.phone != null ||
+                                              widget.intrustor.phone != "")
+                                            LineInfo(
+                                                title: S.of(context).phone,
+                                                content:
+                                                    widget.intrustor.phone ??
+                                                        ""),
+                                          if (widget.intrustor.dateOfBirth !=
+                                              null)
+                                            LineInfo(
+                                                title:
+                                                    S.of(context).dateOfbirth,
+                                                content: widget.intrustor
+                                                        .dateOfBirth ??
+                                                    ""),
+                                          if (widget.intrustor.gender != null)
+                                            LineInfo(
+                                                title: S.of(context).gender,
+                                                content:
+                                                    widget.intrustor.gender == 0
+                                                        ? S.of(context).male
+                                                        : S.of(context).female),
                                         ],
                                       ),
                                     ],

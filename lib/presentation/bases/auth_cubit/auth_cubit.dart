@@ -125,24 +125,20 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
   }
 
   Future<Failure?> loginWithGoogle({
-    required String idToken,
+    required LoginWithGoogleRequest loginWithGoogleRequest,
     String? redirectUrl,
   }) async {
-    // final loginWithGoogleResponse = await authController.loginWithGoogle(
-    //   LoginWithGoogleRequest(
-    //     idToken: idToken,
-    //   ),
-    // );
-    // if (loginWithGoogleResponse.isLeft) {
-    //   return loginWithGoogleResponse.left;
-    // }
-    // await tokenService.setToken(
-    //   // loginWithGoogleResponse.right.accessToken ?? const JwtResponse(),
-    //   loginWithGoogleResponse.right.accessToken,
-    //   loginWithGoogleResponse.right.refreshToken,
-    // );
+    final loginWithGoogleResponse =
+        await authController.loginWithGoogle(loginWithGoogleRequest);
+    if (loginWithGoogleResponse.isLeft) {
+      return loginWithGoogleResponse.left;
+    }
+    await tokenService.setToken(
+      loginWithGoogleResponse.right.data.accessToken,
+      loginWithGoogleResponse.right.data.refreshToken,
+    );
 
-    // _loggedInSuccess(redirectUrl: redirectUrl);
+    _loggedInSuccess(redirectUrl: redirectUrl);
     return null;
   }
 

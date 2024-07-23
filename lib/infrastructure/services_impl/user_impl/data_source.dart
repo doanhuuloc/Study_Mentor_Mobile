@@ -28,4 +28,7 @@ abstract class UserDataSource {
 
   @PUT('/api/users/password/reset-password')
   Future<SuccessResponse> resetPassword(@Body() ResetPasswordRequest request);
+
+  @GET('/api/notifications')
+  Future<BaseResponse<List<MyNotificationResponse>>> getAllNotifications();
 }

@@ -6,6 +6,7 @@ import 'package:study_mentor_mobile/presentation/router/router_config/router_con
 
 import '../../../gen/app_colors.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../utilities/request_login.dart';
 import '../../theme/theme.dart';
 import '../app_icon_button.dart';
 // import '../quick_access_Icon_button/quick_access_icon_button.dart';
@@ -70,26 +71,18 @@ class _MainAppBarState extends AnimatedWidgetBaseState<MainAppBar> {
               margin: const EdgeInsets.only(right: 10),
               child: AppIconButton(
                 onTap: () async {
-                  // final isLoggedIn = await requestLoginAction(context);
-                  // if (!context.mounted) {
-                  //   return;
-                  // }
-                  // if (isLoggedIn) {
-                  //   // const NotificationRouteData().push(context);
-                  // }
+                  final isLoggedIn = await requestLoginAction(context);
+                  if (!context.mounted) {
+                    return;
+                  }
+                  if (isLoggedIn) {
+                    const NotificationRouteData().push(context);
+                  }
                 },
                 icon: Assets.svgs.appBarBellIcon.svg(
                   color: AppColors.blue.shade600,
                 ),
               ),
-              //  QuickAccessIconButton(
-              //   onTap: () {
-              //     navigateToNotification(context);
-              //   },
-              //   showBadge: true,
-              //   badgeBackground: _color?.evaluate(animation),
-              //   icon: Assets.svgs.notificationIcon.svg(),
-              // ),
             ),
           ],
           elevation: 0,

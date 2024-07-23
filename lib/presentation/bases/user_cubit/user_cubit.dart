@@ -57,6 +57,10 @@ class UserCubit extends SafeCubit<UserState> {
     emit(state.copyWith(fcmToken: fcmToken));
   }
 
+  void setMemberShip() {
+    emit(state.copyWith(detail: state.detail?.copyWith(isMembership: true)));
+  }
+
   @override
   Future<void> close() async {
     await _sessionSubscription?.cancel();

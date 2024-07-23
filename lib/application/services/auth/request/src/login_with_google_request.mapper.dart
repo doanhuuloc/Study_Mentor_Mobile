@@ -21,23 +21,28 @@ class LoginWithGoogleRequestMapper
   @override
   final String id = 'LoginWithGoogleRequest';
 
-  static String? _$accessToken(LoginWithGoogleRequest v) => v.accessToken;
-  static const Field<LoginWithGoogleRequest, String> _f$accessToken =
-      Field('accessToken', _$accessToken, opt: true);
-  static String? _$refreshToken(LoginWithGoogleRequest v) => v.refreshToken;
-  static const Field<LoginWithGoogleRequest, String> _f$refreshToken =
-      Field('refreshToken', _$refreshToken, opt: true);
+  static String? _$email(LoginWithGoogleRequest v) => v.email;
+  static const Field<LoginWithGoogleRequest, String> _f$email =
+      Field('email', _$email, opt: true);
+  static String? _$fullName(LoginWithGoogleRequest v) => v.fullName;
+  static const Field<LoginWithGoogleRequest, String> _f$fullName =
+      Field('fullName', _$fullName, opt: true);
+  static String? _$fcmToken(LoginWithGoogleRequest v) => v.fcmToken;
+  static const Field<LoginWithGoogleRequest, String> _f$fcmToken =
+      Field('fcmToken', _$fcmToken, opt: true);
 
   @override
   final MappableFields<LoginWithGoogleRequest> fields = const {
-    #accessToken: _f$accessToken,
-    #refreshToken: _f$refreshToken,
+    #email: _f$email,
+    #fullName: _f$fullName,
+    #fcmToken: _f$fcmToken,
   };
 
   static LoginWithGoogleRequest _instantiate(DecodingData data) {
     return LoginWithGoogleRequest(
-        accessToken: data.dec(_f$accessToken),
-        refreshToken: data.dec(_f$refreshToken));
+        email: data.dec(_f$email),
+        fullName: data.dec(_f$fullName),
+        fcmToken: data.dec(_f$fcmToken));
   }
 
   @override
@@ -97,7 +102,7 @@ abstract class LoginWithGoogleRequestCopyWith<
     $R,
     $In extends LoginWithGoogleRequest,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? accessToken, String? refreshToken});
+  $R call({String? email, String? fullName, String? fcmToken});
   LoginWithGoogleRequestCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -112,15 +117,20 @@ class _LoginWithGoogleRequestCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LoginWithGoogleRequest> $mapper =
       LoginWithGoogleRequestMapper.ensureInitialized();
   @override
-  $R call({Object? accessToken = $none, Object? refreshToken = $none}) =>
+  $R call(
+          {Object? email = $none,
+          Object? fullName = $none,
+          Object? fcmToken = $none}) =>
       $apply(FieldCopyWithData({
-        if (accessToken != $none) #accessToken: accessToken,
-        if (refreshToken != $none) #refreshToken: refreshToken
+        if (email != $none) #email: email,
+        if (fullName != $none) #fullName: fullName,
+        if (fcmToken != $none) #fcmToken: fcmToken
       }));
   @override
   LoginWithGoogleRequest $make(CopyWithData data) => LoginWithGoogleRequest(
-      accessToken: data.get(#accessToken, or: $value.accessToken),
-      refreshToken: data.get(#refreshToken, or: $value.refreshToken));
+      email: data.get(#email, or: $value.email),
+      fullName: data.get(#fullName, or: $value.fullName),
+      fcmToken: data.get(#fcmToken, or: $value.fcmToken));
 
   @override
   LoginWithGoogleRequestCopyWith<$R2, LoginWithGoogleRequest, $Out2>

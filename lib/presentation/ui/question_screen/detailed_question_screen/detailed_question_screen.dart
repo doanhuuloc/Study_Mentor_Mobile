@@ -6,6 +6,7 @@ import 'package:study_mentor_mobile/presentation/ui/question_screen/report_quest
 
 import '../../../../application/services/education/education.dart';
 import '../../../../application/services/user/user.dart';
+import '../../../../utilities/launch_url.dart';
 import '../../../bases/file_cubit/file_cubit.dart';
 import '../../../bases/socket_cubit/socket_cubit.dart';
 import '../../../bases/user_cubit/user_cubit.dart';
@@ -21,6 +22,7 @@ import '../../../shared/widgets/app_bar/common_app_bar.dart';
 import '../../../shared/widgets/app_icon_button.dart';
 import '../../../shared/widgets/buttons/common_button.dart';
 import '../../../shared/widgets/gap_items.dart';
+import '../../../utilities/formatCurency.dart';
 import 'blocs/detailed_question_cubit.dart';
 import 'blocs/detailed_question_state.dart';
 import 'widgets/answer_info_box.dart';
@@ -72,14 +74,22 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                       width: 30,
                       color: AppColors.black,
                     ),
-                    onTap: () {
+                    onTap: () async {
                       if (state.questionInfo?.tutor?.id != null) {
-                        ReportQuestionRouteData(
+                        final reportId = await ReportQuestionRouteData(
                             $extra: ReportQuestionProps(
-                          id: null,
+                          id: state.questionInfo?.reportId,
                           questionId: widget.questionId,
                           tutorId: state.questionInfo?.tutor?.id ?? "",
                         )).push(context);
+                        if (reportId != null) {
+                          if (!context.mounted) {
+                            return;
+                          }
+                          context
+                              .read<DetailedQuestionCubit>()
+                              .changeReportId(reportId);
+                        }
                       }
                     },
                   )
@@ -170,7 +180,7 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                                 child: Container(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "Nếu bạn đã thanh toán vui lòng tải lại màn hình",
+                                    S.of(context).loadScreen,
                                     textAlign: TextAlign.center,
                                     style: Styles.s16()
                                         .withWeight(FontWeight.w600),
@@ -221,36 +231,35 @@ class ActivityButton extends StatelessWidget {
                     top: 10, bottom: 20, right: 50, left: 50),
                 child: CommonButton(
                   padding: const EdgeInsets.all(10),
-                  child: Text(
-                      // state.questionInfo?.isPaid == true
-                      // ?
-                      S.of(context).findIntructor
-                      // : "Thanh toán ${formatCurrency(double.parse(state.questionInfo?.price ?? "0"))}"
-                      ),
+                  child: Text(state.questionInfo?.isPaid == true
+                      ? S.of(context).findIntructor
+                      : S.of(context).pay(formatCurrency(
+                          double.parse(state.questionInfo?.price ?? "0"),
+                          context))),
                   onTap: () async {
                     if (state.questionInfo?.subject?.id != null) {
-                      // if (state.questionInfo?.isPaid == true) {
-                      if (await FindIntrustorRouteData(
-                              $extra: FindIntrustorExtraData(
-                                questionId: questionId,
-                                subjectId:
-                                    state.questionInfo?.subject?.id ?? "",
-                              ),
-                              questionId: questionId)
-                          .push(context)) {
-                        if (!context.mounted) {
-                          return;
+                      if (state.questionInfo?.isPaid == true) {
+                        if (await FindIntrustorRouteData(
+                                $extra: FindIntrustorExtraData(
+                                  questionId: questionId,
+                                  subjectId:
+                                      state.questionInfo?.subject?.id ?? "",
+                                ),
+                                questionId: questionId)
+                            .push(context)) {
+                          if (!context.mounted) {
+                            return;
+                          }
+                          context.read<DetailedQuestionCubit>().fetchData();
                         }
-                        context.read<DetailedQuestionCubit>().fetchData();
+                      } else {
+                        final checkoutUrl = await context
+                            .read<DetailedQuestionCubit>()
+                            .payment();
+                        if (checkoutUrl != "") {
+                          await appLaunchUrl(checkoutUrl, context);
+                        }
                       }
-                      // } else {
-                      //   final checkoutUrl = await context
-                      //       .read<DetailedQuestionCubit>()
-                      //       .payment();
-                      //   if (checkoutUrl != "") {
-                      //     await appLaunchUrl(checkoutUrl, context);
-                      //   }
-                      // }
                     }
                   },
                 ),

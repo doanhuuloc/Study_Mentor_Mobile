@@ -28,7 +28,7 @@ class SelectEducationStructure extends StatelessWidget {
               items: [
                 Text(
                   S.of(context).questionLevel,
-                  style: Styles.s18().withWeight(FontWeight.w600),
+                  style: Styles.s16().withWeight(FontWeight.w600),
                 ),
                 DropDownBar(
                   enabled: true,
@@ -60,7 +60,7 @@ class SelectEducationStructure extends StatelessWidget {
               items: [
                 Text(
                   S.of(context).grade,
-                  style: Styles.s18().withWeight(FontWeight.w600),
+                  style: Styles.s16().withWeight(FontWeight.w600),
                 ),
                 DropDownBar(
                   enabled:
@@ -95,7 +95,7 @@ class SelectEducationStructure extends StatelessWidget {
               items: [
                 Text(
                   S.of(context).subject,
-                  style: Styles.s18().withWeight(FontWeight.w600),
+                  style: Styles.s16().withWeight(FontWeight.w600),
                 ),
                 DropDownBar(
                   enabled:

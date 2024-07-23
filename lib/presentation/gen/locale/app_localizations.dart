@@ -702,14 +702,14 @@ abstract class S {
   /// No description provided for @minute.
   ///
   /// In en, this message translates to:
-  /// **'minute'**
-  String get minute;
+  /// **'{minute} minute'**
+  String minute(String minute);
 
   /// No description provided for @hour.
   ///
   /// In en, this message translates to:
-  /// **'hour'**
-  String get hour;
+  /// **'{hour} hour'**
+  String hour(String hour);
 
   /// No description provided for @timeAnswerQuestion.
   ///
@@ -756,8 +756,8 @@ abstract class S {
   /// No description provided for @pay.
   ///
   /// In en, this message translates to:
-  /// **'Pay'**
-  String get pay;
+  /// **'Pay {money}'**
+  String pay(String money);
 
   /// No description provided for @detailedQuestion.
   ///
@@ -1130,6 +1130,84 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Your report is sent successfuly'**
   String get reportSuccess;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @selectTutorSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected Intructor successfully'**
+  String get selectTutorSuccess;
+
+  /// No description provided for @intructorSelectQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Intructor {intructor} you chose that accepted question with title is {question} with price {price}'**
+  String intructorSelectQuestion(String intructor, String question, String price);
+
+  /// No description provided for @editProfileSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile successfully'**
+  String get editProfileSuccess;
+
+  /// No description provided for @wattingIntructorAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'You are watting for intructor to accept your question'**
+  String get wattingIntructorAccepted;
+
+  /// No description provided for @chooseIntructorToAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to choose {name} to answer your question'**
+  String chooseIntructorToAnswer(String name);
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @chooseIntructor.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose intructor'**
+  String get chooseIntructor;
+
+  /// No description provided for @rejectToAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} reject to answer your question'**
+  String rejectToAnswer(String name);
+
+  /// No description provided for @wattingAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait for {name} to accept'**
+  String wattingAccepted(String name);
+
+  /// No description provided for @numStart.
+  ///
+  /// In en, this message translates to:
+  /// **'{star} star'**
+  String numStart(String star);
+
+  /// No description provided for @loadScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'If you play successfully, please load screen'**
+  String get loadScreen;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

@@ -1,12 +1,8 @@
-import 'dart:io';
-
-import 'package:image_picker/image_picker.dart';
 import 'package:study_mentor_mobile/application/services/user/user.dart';
 import 'package:study_mentor_mobile/presentation/bases/file_cubit/file_cubit.dart';
 import 'package:study_mentor_mobile/presentation/shared/handlers/loading_handler/loading_manager.dart';
 
 import '../../../../../application/services/education/education.dart';
-import '../../../../../application/services/file/file.dart';
 import '../../../../../application/services/socket/dto/src/get_answer.dart';
 import '../../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../../bases/socket_cubit/socket_cubit.dart';
@@ -36,6 +32,11 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
   final EducationController educationController;
   final SocketCubit socketCubit;
   final String questionId;
+
+  void changeReportId(String value) {
+    emit(state.copyWith(
+        questionInfo: state.questionInfo?.copyWith(reportId: value)));
+  }
 
   Future<void> getQuestion() async {
     emit(state.copyWith(loading: true));
@@ -70,9 +71,13 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
         failureHandlerManager.handle(meetUrl.left);
       }
       if (meetUrl.isRight) {
-        // emit(state.copyWith(meetingUrl: meetUrl.right.data.meetingUrl));
-        emit(
-            state.copyWith(meetingUrl: "https://meet.google.com/xvc-fcxq-ohw"));
+        emit(state.copyWith(
+            meetingUrl: meetUrl.right.data.meetingUrl ??
+                "https://meet.google.com/xvc-fcxq-ohw",
+            questionInfo:
+                state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED)));
+        // emit(
+        //     state.copyWith(meetingUrl: "https://meet.google.com/xvc-fcxq-ohw"));
       }
     }
   }
@@ -123,40 +128,13 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     return false;
   }
 
-  Future<bool> reportTutor(String content, List<XFile>? file) async {
-    List<FileRequest>? files;
-    if (file != null && file != []) {
-      files = await fileCubit.uploadListFile([
-        ...file.map((e) => FileData(file: File(e.path), fileName: e.name)),
-      ]);
-    }
-
-    final futureRes = educationController.reportTutor(
-      reportTutorRequest: ReportTutorRequest(
-        questionId: questionId,
-        tutorId: state.questionInfo?.tutor?.id ?? "",
-        studentId: userId,
-        content: "best",
-        attachFiles: files,
-      ),
-    );
-
-    final res = await loadingManager.startLoading(future: futureRes);
-
-    if (res.isLeft) {
-      failureHandlerManager.handle(res.left);
-    }
-
-    if (res.isRight) {
-      return true;
-    }
-    return false;
-  }
-
   Future<String> payment() async {
     final futureRes = educationController.payment(
-        paymentLinkRequest:
-            PaymentLinkRequest(questionId: questionId, type: 0));
+        paymentLinkRequest: PaymentLinkRequest(
+      questionId: questionId,
+      type: 0,
+      expirationDateType: ExpirationDateType.DAY,
+    ));
 
     final res = await loadingManager.startLoading(future: futureRes);
 

@@ -36,18 +36,23 @@ class RegisterCubit extends SafeCubit<RegisterState> {
   }
 
   void onGenderChanged(int value) {
-    print("object");
     emit(state.copyWith(genderField: value));
+  }
+
+  void onChangeDateOfBirth(DateTime value) {
+    emit(state.copyWith(dateOfBirth: value));
   }
 
   void onRegisterWithUserInfo() async {
     final registerFuture = authCubit.registerWithUserInfo(
       request: RegisterRequest(
-          email: state.emailField.value,
-          password: state.passwordField.value,
-          fullName: state.fullNameField,
-          gender: state.genderField ?? 0,
-          type: 0),
+        email: state.emailField.value,
+        password: state.passwordField.value,
+        fullName: state.fullNameField,
+        gender: state.genderField ?? 0,
+        type: 0,
+        dateOfBirth: state.dateOfBirth ?? DateTime.now(),
+      ),
       redirectUrl: redirectUrl,
       fcmToken: userCubit.state.fcmToken,
     );
@@ -61,18 +66,18 @@ class RegisterCubit extends SafeCubit<RegisterState> {
     emit(state.copyWith(registerFlowCompleted: true));
   }
 
-  // void onLoginWithGoogle(String idToken) async {
-  //   final loginWithGoogleFuture = authCubit.loginWithGoogle(
-  //     idToken: idToken,
-  //     redirectUrl: redirectUrl,
-  //   );
+  void onLoginWithGoogle(LoginWithGoogleRequest loginWithGoogleRequest) async {
+    final loginWithGoogleFuture = authCubit.loginWithGoogle(
+      loginWithGoogleRequest: loginWithGoogleRequest,
+      redirectUrl: redirectUrl,
+    );
 
-  //   final loadingLoginWithGoogleFailure =
-  //       await loadingManager.startLoading(future: loginWithGoogleFuture);
-  //   if (loadingLoginWithGoogleFailure != null) {
-  //     failureHandlerManager.handle(loadingLoginWithGoogleFailure);
-  //     return;
-  //   }
-  //   emit(state.copyWith(loginFlowCompleted: true));
-  // }
+    final loadingLoginWithGoogleFailure =
+        await loadingManager.startLoading(future: loginWithGoogleFuture);
+    if (loadingLoginWithGoogleFailure != null) {
+      failureHandlerManager.handle(loadingLoginWithGoogleFailure);
+      return;
+    }
+    emit(state.copyWith(registerFlowCompleted: true));
+  }
 }

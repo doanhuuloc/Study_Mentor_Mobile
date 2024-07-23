@@ -11,6 +11,7 @@ class AppConfig {
     required this.chatPay,
     required this.chatGemini,
     required this.chatGpt,
+    required this.imagePath,
   });
 
   final String version;
@@ -21,6 +22,7 @@ class AppConfig {
   final String chatPay;
   final String chatGemini;
   final String chatGpt;
+  final String imagePath;
 }
 
 mixin AppConfigLoader {

@@ -45,4 +45,10 @@ class UserControllerImpl with UserController, DataSourceErrorHandler {
       ResetPasswordRequest request) {
     return handleApiResult(future: () => userDataSource.resetPassword(request));
   }
+
+  @override
+  Future<Result<Failure, BaseResponse<List<MyNotificationResponse>>>>
+      getAllNotifications() {
+    return handleApiResult(future: () => userDataSource.getAllNotifications());
+  }
 }

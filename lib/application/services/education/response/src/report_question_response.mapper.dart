@@ -6,53 +6,53 @@
 
 part of 'report_question_response.dart';
 
-class ReportQuestionReponseMapper
-    extends ClassMapperBase<ReportQuestionReponse> {
-  ReportQuestionReponseMapper._();
+class ReportQuestionResponseMapper
+    extends ClassMapperBase<ReportQuestionResponse> {
+  ReportQuestionResponseMapper._();
 
-  static ReportQuestionReponseMapper? _instance;
-  static ReportQuestionReponseMapper ensureInitialized() {
+  static ReportQuestionResponseMapper? _instance;
+  static ReportQuestionResponseMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = ReportQuestionReponseMapper._());
+      MapperContainer.globals.use(_instance = ReportQuestionResponseMapper._());
       FileResponseMapper.ensureInitialized();
     }
     return _instance!;
   }
 
   @override
-  final String id = 'ReportQuestionReponse';
+  final String id = 'ReportQuestionResponse';
 
-  static String? _$id(ReportQuestionReponse v) => v.id;
-  static const Field<ReportQuestionReponse, String> _f$id =
+  static String? _$id(ReportQuestionResponse v) => v.id;
+  static const Field<ReportQuestionResponse, String> _f$id =
       Field('id', _$id, opt: true);
-  static String? _$questionName(ReportQuestionReponse v) => v.questionName;
-  static const Field<ReportQuestionReponse, String> _f$questionName =
+  static String? _$questionName(ReportQuestionResponse v) => v.questionName;
+  static const Field<ReportQuestionResponse, String> _f$questionName =
       Field('questionName', _$questionName, opt: true);
-  static String? _$studentId(ReportQuestionReponse v) => v.studentId;
-  static const Field<ReportQuestionReponse, String> _f$studentId =
+  static String? _$studentId(ReportQuestionResponse v) => v.studentId;
+  static const Field<ReportQuestionResponse, String> _f$studentId =
       Field('studentId', _$studentId, opt: true);
-  static String? _$content(ReportQuestionReponse v) => v.content;
-  static const Field<ReportQuestionReponse, String> _f$content =
+  static String? _$content(ReportQuestionResponse v) => v.content;
+  static const Field<ReportQuestionResponse, String> _f$content =
       Field('content', _$content, opt: true);
-  static List<FileResponse>? _$attachFiles(ReportQuestionReponse v) =>
+  static List<FileResponse>? _$attachFiles(ReportQuestionResponse v) =>
       v.attachFiles;
-  static const Field<ReportQuestionReponse, List<FileResponse>> _f$attachFiles =
-      Field('attachFiles', _$attachFiles, opt: true);
-  static DateTime? _$createdAt(ReportQuestionReponse v) => v.createdAt;
-  static const Field<ReportQuestionReponse, DateTime> _f$createdAt =
+  static const Field<ReportQuestionResponse, List<FileResponse>>
+      _f$attachFiles = Field('attachFiles', _$attachFiles, opt: true);
+  static DateTime? _$createdAt(ReportQuestionResponse v) => v.createdAt;
+  static const Field<ReportQuestionResponse, DateTime> _f$createdAt =
       Field('createdAt', _$createdAt, opt: true);
-  static String? _$questionId(ReportQuestionReponse v) => v.questionId;
-  static const Field<ReportQuestionReponse, String> _f$questionId =
+  static String? _$questionId(ReportQuestionResponse v) => v.questionId;
+  static const Field<ReportQuestionResponse, String> _f$questionId =
       Field('questionId', _$questionId, opt: true);
-  static String? _$questionTitle(ReportQuestionReponse v) => v.questionTitle;
-  static const Field<ReportQuestionReponse, String> _f$questionTitle =
+  static String? _$questionTitle(ReportQuestionResponse v) => v.questionTitle;
+  static const Field<ReportQuestionResponse, String> _f$questionTitle =
       Field('questionTitle', _$questionTitle, opt: true);
-  static String? _$studentName(ReportQuestionReponse v) => v.studentName;
-  static const Field<ReportQuestionReponse, String> _f$studentName =
+  static String? _$studentName(ReportQuestionResponse v) => v.studentName;
+  static const Field<ReportQuestionResponse, String> _f$studentName =
       Field('studentName', _$studentName, opt: true);
 
   @override
-  final MappableFields<ReportQuestionReponse> fields = const {
+  final MappableFields<ReportQuestionResponse> fields = const {
     #id: _f$id,
     #questionName: _f$questionName,
     #studentId: _f$studentId,
@@ -64,8 +64,8 @@ class ReportQuestionReponseMapper
     #studentName: _f$studentName,
   };
 
-  static ReportQuestionReponse _instantiate(DecodingData data) {
-    return ReportQuestionReponse(
+  static ReportQuestionResponse _instantiate(DecodingData data) {
+    return ReportQuestionResponse(
         id: data.dec(_f$id),
         questionName: data.dec(_f$questionName),
         studentId: data.dec(_f$studentId),
@@ -80,59 +80,59 @@ class ReportQuestionReponseMapper
   @override
   final Function instantiate = _instantiate;
 
-  static ReportQuestionReponse fromJson(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<ReportQuestionReponse>(map);
+  static ReportQuestionResponse fromJson(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<ReportQuestionResponse>(map);
   }
 
-  static ReportQuestionReponse fromJsonString(String json) {
-    return ensureInitialized().decodeJson<ReportQuestionReponse>(json);
+  static ReportQuestionResponse fromJsonString(String json) {
+    return ensureInitialized().decodeJson<ReportQuestionResponse>(json);
   }
 }
 
-mixin ReportQuestionReponseMappable {
+mixin ReportQuestionResponseMappable {
   String toJsonString() {
-    return ReportQuestionReponseMapper.ensureInitialized()
-        .encodeJson<ReportQuestionReponse>(this as ReportQuestionReponse);
+    return ReportQuestionResponseMapper.ensureInitialized()
+        .encodeJson<ReportQuestionResponse>(this as ReportQuestionResponse);
   }
 
   Map<String, dynamic> toJson() {
-    return ReportQuestionReponseMapper.ensureInitialized()
-        .encodeMap<ReportQuestionReponse>(this as ReportQuestionReponse);
+    return ReportQuestionResponseMapper.ensureInitialized()
+        .encodeMap<ReportQuestionResponse>(this as ReportQuestionResponse);
   }
 
-  ReportQuestionReponseCopyWith<ReportQuestionReponse, ReportQuestionReponse,
-          ReportQuestionReponse>
-      get copyWith => _ReportQuestionReponseCopyWithImpl(
-          this as ReportQuestionReponse, $identity, $identity);
+  ReportQuestionResponseCopyWith<ReportQuestionResponse, ReportQuestionResponse,
+          ReportQuestionResponse>
+      get copyWith => _ReportQuestionResponseCopyWithImpl(
+          this as ReportQuestionResponse, $identity, $identity);
   @override
   String toString() {
-    return ReportQuestionReponseMapper.ensureInitialized()
-        .stringifyValue(this as ReportQuestionReponse);
+    return ReportQuestionResponseMapper.ensureInitialized()
+        .stringifyValue(this as ReportQuestionResponse);
   }
 
   @override
   bool operator ==(Object other) {
-    return ReportQuestionReponseMapper.ensureInitialized()
-        .equalsValue(this as ReportQuestionReponse, other);
+    return ReportQuestionResponseMapper.ensureInitialized()
+        .equalsValue(this as ReportQuestionResponse, other);
   }
 
   @override
   int get hashCode {
-    return ReportQuestionReponseMapper.ensureInitialized()
-        .hashValue(this as ReportQuestionReponse);
+    return ReportQuestionResponseMapper.ensureInitialized()
+        .hashValue(this as ReportQuestionResponse);
   }
 }
 
-extension ReportQuestionReponseValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, ReportQuestionReponse, $Out> {
-  ReportQuestionReponseCopyWith<$R, ReportQuestionReponse, $Out>
-      get $asReportQuestionReponse =>
-          $base.as((v, t, t2) => _ReportQuestionReponseCopyWithImpl(v, t, t2));
+extension ReportQuestionResponseValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, ReportQuestionResponse, $Out> {
+  ReportQuestionResponseCopyWith<$R, ReportQuestionResponse, $Out>
+      get $asReportQuestionResponse =>
+          $base.as((v, t, t2) => _ReportQuestionResponseCopyWithImpl(v, t, t2));
 }
 
-abstract class ReportQuestionReponseCopyWith<
+abstract class ReportQuestionResponseCopyWith<
     $R,
-    $In extends ReportQuestionReponse,
+    $In extends ReportQuestionResponse,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, FileResponse,
       FileResponseCopyWith<$R, FileResponse, FileResponse>>? get attachFiles;
@@ -146,18 +146,19 @@ abstract class ReportQuestionReponseCopyWith<
       String? questionId,
       String? questionTitle,
       String? studentName});
-  ReportQuestionReponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+  ReportQuestionResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
 
-class _ReportQuestionReponseCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, ReportQuestionReponse, $Out>
-    implements ReportQuestionReponseCopyWith<$R, ReportQuestionReponse, $Out> {
-  _ReportQuestionReponseCopyWithImpl(super.value, super.then, super.then2);
+class _ReportQuestionResponseCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, ReportQuestionResponse, $Out>
+    implements
+        ReportQuestionResponseCopyWith<$R, ReportQuestionResponse, $Out> {
+  _ReportQuestionResponseCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<ReportQuestionReponse> $mapper =
-      ReportQuestionReponseMapper.ensureInitialized();
+  late final ClassMapperBase<ReportQuestionResponse> $mapper =
+      ReportQuestionResponseMapper.ensureInitialized();
   @override
   ListCopyWith<$R, FileResponse,
           FileResponseCopyWith<$R, FileResponse, FileResponse>>?
@@ -188,7 +189,7 @@ class _ReportQuestionReponseCopyWithImpl<$R, $Out>
         if (studentName != $none) #studentName: studentName
       }));
   @override
-  ReportQuestionReponse $make(CopyWithData data) => ReportQuestionReponse(
+  ReportQuestionResponse $make(CopyWithData data) => ReportQuestionResponse(
       id: data.get(#id, or: $value.id),
       questionName: data.get(#questionName, or: $value.questionName),
       studentId: data.get(#studentId, or: $value.studentId),
@@ -200,7 +201,7 @@ class _ReportQuestionReponseCopyWithImpl<$R, $Out>
       studentName: data.get(#studentName, or: $value.studentName));
 
   @override
-  ReportQuestionReponseCopyWith<$R2, ReportQuestionReponse, $Out2>
+  ReportQuestionResponseCopyWith<$R2, ReportQuestionResponse, $Out2>
       $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-          _ReportQuestionReponseCopyWithImpl($value, $cast, t);
+          _ReportQuestionResponseCopyWithImpl($value, $cast, t);
 }

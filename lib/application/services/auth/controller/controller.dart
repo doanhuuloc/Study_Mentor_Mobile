@@ -11,6 +11,6 @@ mixin AuthController {
   Future<Result<Failure, BaseResponse<AuthenticatedResponse>>> refreshToken(
       RefreshTokenRequest request);
   Future<Result<Failure, SuccessResponse>> logout(LogoutRequest request);
-  Future<Result<Failure, AuthenticatedResponse>> loginWithGoogle(
+  Future<Result<Failure, BaseResponse<AuthenticatedResponse>>> loginWithGoogle(
       LoginWithGoogleRequest request);
 }

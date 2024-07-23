@@ -8,6 +8,7 @@ import '../../../../../application/services/education/education.dart';
 import '../../../../../application/services/user/user.dart';
 import '../../../../ui/chat_ai_screen/chat_ai_screen.dart';
 import '../../../../ui/chat_intrustor_screen/chat_intrustor_screen.dart';
+import '../../../../ui/notification_screen/notification_screen.dart';
 import '../../../../ui/question_screen/create_question_screen/create_question_screen.dart';
 import '../../../../ui/question_screen/find_intrustor_screen/find_intrustor_screen.dart';
 import '../../../../ui/question_screen/finding_intrustor_screen/finding_intrustor_screen.dart';
@@ -210,5 +211,16 @@ class ReportQuestionRouteData extends GoRouteData {
     return ReportQuestionScreen(
       reportQuestion: $extra,
     );
+  }
+}
+
+class NotificationRouteData extends GoRouteData {
+  const NotificationRouteData();
+  static const routeName = 'notification';
+  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const NotificationScreen();
   }
 }

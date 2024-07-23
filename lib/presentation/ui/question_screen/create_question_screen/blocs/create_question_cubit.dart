@@ -32,10 +32,6 @@ class CreateQuestionCubit extends SafeCubit<CreateQuestionState> {
     emit(state.copyWith(titleField: value));
   }
 
-  void onChangeContentQuestion(String value) {
-    emit(state.copyWith(contentQuestionField: value));
-  }
-
   void onChangeFindingTime(int value) {
     emit(state.copyWith(findingTimeField: value));
   }
@@ -102,14 +98,14 @@ class CreateQuestionCubit extends SafeCubit<CreateQuestionState> {
     }
   }
 
-  Future<CreateQuestionResponse> createQuestion() async {
+  Future<CreateQuestionResponse> createQuestion(String contentQuestion) async {
     final futureRes = educationController.createQuestion(
         createQuestionRequest: CreateQuestionRequest(
       title: state.titleField,
       subjectId: state.subject?.id ?? "",
       numberOfStar: state.numberOfStar ?? 0,
       timeFindTutor: state.findingTimeField ?? 0,
-      content: state.contentQuestionField,
+      content: contentQuestion,
       voucherCode: state.selectedVoucher?.code,
       attachFiles: await fileCubit.uploadListFile(state.listFilePicker
           .map((e) => FileData(

@@ -23,12 +23,15 @@ class SelectTimeFinding extends StatelessWidget {
           items: [
             Text(
               S.of(context).timeFindIntructor,
-              style: Styles.s18().withWeight(FontWeight.w600),
+              style: Styles.s16().withWeight(FontWeight.w600),
             ),
             DropDownBar(
               data: [10, 20, 30, 45, 60, 120, 360, 720, 1440]
                   .map((e) => DropDownBarData<int>(
-                      value: e, title: e < 60 ? "$e phút" : "${e ~/ 60} giờ"))
+                      value: e,
+                      title: e < 60
+                          ? S.of(context).minute("$e")
+                          : S.of(context).hour("${e ~/ 60}")))
                   .toList(),
               value: state.findingTimeField,
               onChanged: (value) => context

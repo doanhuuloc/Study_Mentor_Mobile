@@ -36,8 +36,8 @@ class UserInfoResponseMapper extends ClassMapperBase<UserInfoResponse> {
   static String? _$phone(UserInfoResponse v) => v.phone;
   static const Field<UserInfoResponse, String> _f$phone =
       Field('phone', _$phone, opt: true);
-  static int? _$dateOfBirth(UserInfoResponse v) => v.dateOfBirth;
-  static const Field<UserInfoResponse, int> _f$dateOfBirth =
+  static String? _$dateOfBirth(UserInfoResponse v) => v.dateOfBirth;
+  static const Field<UserInfoResponse, String> _f$dateOfBirth =
       Field('dateOfBirth', _$dateOfBirth, opt: true);
   static double? _$averageRate(UserInfoResponse v) => v.averageRate;
   static const Field<UserInfoResponse, double> _f$averageRate =
@@ -146,7 +146,7 @@ abstract class UserInfoResponseCopyWith<$R, $In extends UserInfoResponse, $Out>
       String? email,
       int? role,
       String? phone,
-      int? dateOfBirth,
+      String? dateOfBirth,
       double? averageRate,
       FileRequest? avatar,
       int? gender,

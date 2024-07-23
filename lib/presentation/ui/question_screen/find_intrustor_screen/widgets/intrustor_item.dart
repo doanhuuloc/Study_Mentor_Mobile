@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:study_mentor_mobile/application/services/app/app_config/app_config.dart';
 
 import '../../../../gen/assets.gen.dart';
+import '../../../../shared/base_infinite_loading/image_loading.dart';
 import '../../../../shared/theme/theme.dart';
 
 class IntrustorItem extends StatelessWidget {
@@ -21,6 +24,11 @@ class IntrustorItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("${context.read<AppConfig>().imagePath}/$avatar");
+    const helperImage = ImageLoading(
+      width: 60,
+      height: 60,
+    );
     return InkWell(
       onTap: voidCallback,
       child: Container(
@@ -37,9 +45,23 @@ class IntrustorItem extends StatelessWidget {
                   height: 60,
                   width: 60,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: AssetImage(Assets.images.ai.path))),
+                    shape: BoxShape.circle,
+                    image: avatar == ""
+                        ? DecorationImage(
+                            image: AssetImage(Assets.images.ai.path))
+                        : null,
+                  ),
+                  child: avatar != ""
+                      ? ClipOval(
+                        child: Image.network(
+                            "${context.read<AppConfig>().imagePath}/$avatar",
+                            fit: BoxFit.cover,
+                        
+                            loadingBuilder: helperImage.loadingBuilder,
+                            errorBuilder: helperImage.errorBuilder,
+                          ),
+                      )
+                      : null,
                 ),
                 Expanded(
                   child: Padding(

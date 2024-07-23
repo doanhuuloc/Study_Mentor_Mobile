@@ -23,11 +23,12 @@ class SelectNumberStar extends StatelessWidget {
           items: [
             Text(
               S.of(context).askForStar,
-              style: Styles.s18().withWeight(FontWeight.w600),
+              style: Styles.s16().withWeight(FontWeight.w600),
             ),
             DropDownBar(
-              data: [0, 1, 2, 3, 4, 5]
-                  .map((e) => DropDownBarData<int>(value: e, title: "$e sao"))
+              data: [1, 2, 3, 4, 5]
+                  .map((e) => DropDownBarData<int>(
+                      value: e, title: S.of(context).numStart("$e")))
                   .toList(),
               value: state.numberOfStar,
               onChanged: (value) => context

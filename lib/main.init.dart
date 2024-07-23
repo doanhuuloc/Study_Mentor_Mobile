@@ -89,7 +89,9 @@ import 'application/services/user/request/src/reset_password_request.dart'
     as p55;
 import 'application/services/user/request/src/update_profile_request.dart'
     as p56;
-import 'application/services/user/response/src/user_info_response.dart' as p57;
+import 'application/services/user/response/src/notfication_response.dart'
+    as p57;
+import 'application/services/user/response/src/user_info_response.dart' as p58;
 
 void initializeMappers() {
   p0.ChatAIRequestMapper.ensureInitialized();
@@ -134,7 +136,7 @@ void initializeMappers() {
   p35.SubjectResponseMapper.ensureInitialized();
   p36.VoucherReponseMapper.ensureInitialized();
   p37.PaymentLinkResponseMapper.ensureInitialized();
-  p38.ReportQuestionReponseMapper.ensureInitialized();
+  p38.ReportQuestionResponseMapper.ensureInitialized();
   p39.FileRequestMapper.ensureInitialized();
   p40.SignedUrlRequestMapper.ensureInitialized();
   p41.UploadFileRequestMapper.ensureInitialized();
@@ -158,5 +160,8 @@ void initializeMappers() {
   p55.ResetPasswordRequestMapper.ensureInitialized();
   p56.UpdateProfileRequestMapper.ensureInitialized();
   p56.GenderMapper.ensureInitialized();
-  p57.UserInfoResponseMapper.ensureInitialized();
+  p57.MyNotificationResponseMapper.ensureInitialized();
+  p57.QuestionNotficationMapper.ensureInitialized();
+  p57.UserNotificationMapper.ensureInitialized();
+  p58.UserInfoResponseMapper.ensureInitialized();
 }
