@@ -1,4 +1,5 @@
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:study_mentor_mobile/application/services/socket/dto/src/info_ggmeet.dart';
 import '../dto/dto.dart';
 
 mixin SocketController {
@@ -46,4 +47,9 @@ mixin SocketController {
       {Socket? socket, required Function function});
 
   void getAnswer({Socket? socket, required Function function});
+
+  void sendInfoGGMeet({Socket? socket, required InfoGGMeet infoGGMeet});
+  void receiveInfoGGMeet({Socket? socket, required Function function});
+  void cancelGGMeet({Socket? socket, required InfoGGMeet infoGGMeet});
+  void receiveGGMeet({Socket? socket, required Function function});
 }

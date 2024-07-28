@@ -361,7 +361,7 @@ class SVi extends S {
   String get goHomePage => 'Về trang chủ';
 
   @override
-  String get ggmeetLink => 'Link google meet';
+  String get ggmeetLink => 'Thông tin google meet';
 
   @override
   String get questionInfomation => 'Thông tin câu hỏi';

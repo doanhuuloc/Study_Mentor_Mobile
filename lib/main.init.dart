@@ -76,22 +76,24 @@ import 'application/services/socket/dto/src/create_roomchat.dart' as p44;
 import 'application/services/socket/dto/src/emit_get_tutor.dart' as p45;
 import 'application/services/socket/dto/src/get_accpet_tutor_info.dart' as p46;
 import 'application/services/socket/dto/src/get_answer.dart' as p47;
-import 'application/services/socket/dto/src/notification.dart' as p48;
-import 'application/services/socket/dto/src/on_get_tutor.dart' as p49;
+import 'application/services/socket/dto/src/info_ggmeet.dart' as p48;
+import 'application/services/socket/dto/src/notification.dart' as p49;
+import 'application/services/socket/dto/src/on_get_tutor.dart' as p50;
 import 'application/services/socket/dto/src/picked-tutor-accepted-question.dart'
-    as p50;
-import 'application/services/socket/dto/src/receive_message.dart' as p51;
-import 'application/services/socket/dto/src/send_message.dart' as p52;
-import 'application/services/socket/dto/src/send_notification.dart' as p53;
+    as p51;
+import 'application/services/socket/dto/src/receive_ggmeet.dart' as p52;
+import 'application/services/socket/dto/src/receive_message.dart' as p53;
+import 'application/services/socket/dto/src/send_message.dart' as p54;
+import 'application/services/socket/dto/src/send_notification.dart' as p55;
 import 'application/services/user/request/src/change_password_request.dart'
-    as p54;
-import 'application/services/user/request/src/reset_password_request.dart'
-    as p55;
-import 'application/services/user/request/src/update_profile_request.dart'
     as p56;
-import 'application/services/user/response/src/notfication_response.dart'
+import 'application/services/user/request/src/reset_password_request.dart'
     as p57;
-import 'application/services/user/response/src/user_info_response.dart' as p58;
+import 'application/services/user/request/src/update_profile_request.dart'
+    as p58;
+import 'application/services/user/response/src/notfication_response.dart'
+    as p59;
+import 'application/services/user/response/src/user_info_response.dart' as p60;
 
 void initializeMappers() {
   p0.ChatAIRequestMapper.ensureInitialized();
@@ -148,20 +150,22 @@ void initializeMappers() {
   p47.GetAnswerMapper.ensureInitialized();
   p47.DataGetAnswerMapper.ensureInitialized();
   p47.AnswerMapper.ensureInitialized();
-  p48.NotificationMapper.ensureInitialized();
-  p49.OnGetTutorMapper.ensureInitialized();
-  p49.TutorMapper.ensureInitialized();
-  p50.PickedTutorAcceptedQuestionMapper.ensureInitialized();
-  p50.DataPickedTutorAcceptedQuestionMapper.ensureInitialized();
-  p51.ReceiveMessageMapper.ensureInitialized();
-  p52.SendMessageMapper.ensureInitialized();
-  p53.SendNotificationMapper.ensureInitialized();
-  p54.ChangePasswordRequestMapper.ensureInitialized();
-  p55.ResetPasswordRequestMapper.ensureInitialized();
-  p56.UpdateProfileRequestMapper.ensureInitialized();
-  p56.GenderMapper.ensureInitialized();
-  p57.MyNotificationResponseMapper.ensureInitialized();
-  p57.QuestionNotficationMapper.ensureInitialized();
-  p57.UserNotificationMapper.ensureInitialized();
-  p58.UserInfoResponseMapper.ensureInitialized();
+  p48.InfoGGMeetMapper.ensureInitialized();
+  p49.NotificationMapper.ensureInitialized();
+  p50.OnGetTutorMapper.ensureInitialized();
+  p50.TutorMapper.ensureInitialized();
+  p51.PickedTutorAcceptedQuestionMapper.ensureInitialized();
+  p51.DataPickedTutorAcceptedQuestionMapper.ensureInitialized();
+  p52.ReceiveGGMeetMapper.ensureInitialized();
+  p53.ReceiveMessageMapper.ensureInitialized();
+  p54.SendMessageMapper.ensureInitialized();
+  p55.SendNotificationMapper.ensureInitialized();
+  p56.ChangePasswordRequestMapper.ensureInitialized();
+  p57.ResetPasswordRequestMapper.ensureInitialized();
+  p58.UpdateProfileRequestMapper.ensureInitialized();
+  p58.GenderMapper.ensureInitialized();
+  p59.MyNotificationResponseMapper.ensureInitialized();
+  p59.QuestionNotficationMapper.ensureInitialized();
+  p59.UserNotificationMapper.ensureInitialized();
+  p60.UserInfoResponseMapper.ensureInitialized();
 }

@@ -26,7 +26,7 @@ class SelectTimeMetting extends StatelessWidget {
               style: Styles.s16().withWeight(FontWeight.w600),
             ),
             DropDownBar(
-              data: [10, 20, 30, 45, 60, 120, 360, 720, 1440]
+              data: [10, 15, 20, 30, 45, 60, 120]
                   .map((e) => DropDownBarData<int>(
                       value: e,
                       title: e < 60

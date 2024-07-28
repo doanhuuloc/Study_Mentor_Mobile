@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:study_mentor_mobile/application/services/education/education.dart';
 import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
 import 'package:study_mentor_mobile/presentation/shared/base_infinite_loading/app_shimmer.dart';
@@ -26,7 +27,7 @@ class AnswerInfoBox extends StatelessWidget {
     return BlocBuilder<DetailedQuestionCubit, DetailedQuestionState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: GapItems(
             gap: 15,
             items: [
@@ -127,7 +128,66 @@ class AnswerInfoBox extends StatelessWidget {
                   ],
                 ),
               if (state.questionInfo?.questionType == QuestionType.GGMEET &&
-                  state.meetingUrl != "")
+                  state.meetingUrl == null)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 10),
+                    Text(
+                      "Thời gian bạn muốn tham gia google meet",
+                      style: Styles.s16(),
+                    ),
+                    const SizedBox(height: 10),
+                    InkWell(
+                      onTap: () async {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101),
+                        ).then((selectedDate) {
+                          if (selectedDate != null) {
+                            showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.now(),
+                              initialEntryMode: TimePickerEntryMode.dialOnly,
+                            ).then((selectedTime) {
+                              if (selectedTime != null) {
+                                DateTime selectedDateTime = DateTime(
+                                  selectedDate.year,
+                                  selectedDate.month,
+                                  selectedDate.day,
+                                  selectedTime.hour,
+                                  selectedTime.minute,
+                                );
+                                context
+                                    .read<DetailedQuestionCubit>()
+                                    .onChangeMeetingStartTime(selectedDateTime);
+                              }
+                            });
+                          }
+                        });
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 10),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade300)),
+                        child: Text(
+                          state.meetingStartTime == null
+                              ? "Chọn thời gian"
+                              : DateFormat("dd-MM-yyyy HH-mm")
+                                  .format(state.meetingStartTime!),
+                          style: Styles.s15().withLetterSpacing(-2.5 / 100),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              if (state.questionInfo?.questionType == QuestionType.GGMEET &&
+                  state.meetingUrl != null &&
+                  state.meetingStartTime != null)
                 Column(
                   children: [
                     const SizedBox(height: 10),

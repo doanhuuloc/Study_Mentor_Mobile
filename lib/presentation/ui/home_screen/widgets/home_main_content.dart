@@ -48,14 +48,16 @@ class HomeMainContent extends StatelessWidget {
                   subTitle: S.of(context).aIUpgrade,
                   icon: Assets.svgs.homeAiFee.svg(),
                   onTap: () {
-                    // if (context.read<UserCubit>().state.detail?.isMembership ==
-                    //     true) {
+                    if (context.read<UserCubit>().state.detail?.isMembership ==
+                        true) {
                       const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
-                    // } else {
-                      // showDialog(
-                      //     context: context,
-                      //     builder: (context) => const PayAISystemDialog());
-                    // }
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (context) => const PayAISystemDialog());
+                    }
+                    context.read<UserCubit>().setMemberShip();
+
                   },
                 ),
               ),

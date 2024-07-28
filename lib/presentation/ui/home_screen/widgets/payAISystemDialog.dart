@@ -28,7 +28,7 @@ class _PayAISystemDialogState extends State<PayAISystemDialog> {
   }
 
   Future<void> pay() async {
-    context.read<UserCubit>().setMemberShip();
+    // context.read<UserCubit>().setMemberShip();
     final futureRes = context.read<EducationController>().payment(
         paymentLinkRequest:
             PaymentLinkRequest(type: 1, expirationDateType: type));

@@ -3,6 +3,7 @@ import 'package:study_mentor_mobile/presentation/bases/file_cubit/file_cubit.dar
 import 'package:study_mentor_mobile/presentation/shared/handlers/loading_handler/loading_manager.dart';
 
 import '../../../../../application/services/education/education.dart';
+import '../../../../../application/services/socket/dto/dto.dart';
 import '../../../../../application/services/socket/dto/src/get_answer.dart';
 import '../../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
 import '../../../../bases/socket_cubit/socket_cubit.dart';
@@ -22,6 +23,8 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
   }) : super(const DetailedQuestionState()) {
     emit(state.copyWith(questionId: questionId));
     fetchData();
+    receiveInfoGGMeet();
+    receiveGGMeet();
   }
 
   final String userId;
@@ -59,26 +62,19 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
   }
 
   Future<void> createGGMeet() async {
-    if (state.questionInfo?.questionType == QuestionType.GGMEET &&
-        (state.questionInfo?.meetingURL == null ||
-            state.questionInfo?.meetingURL == "")) {
-      final meetUrl = await educationController.createGGMeet(
-          createGGMeetRequest: CreateGGMeetRequest(
-              questionId: questionId,
-              tutorId: state.questionInfo?.tutor?.id ?? ""));
+    final meetUrl = await educationController.createGGMeet(
+        createGGMeetRequest: CreateGGMeetRequest(
+            questionId: questionId,
+            tutorId: state.questionInfo?.tutor?.id ?? ""));
 
-      if (meetUrl.isLeft) {
-        failureHandlerManager.handle(meetUrl.left);
-      }
-      if (meetUrl.isRight) {
-        emit(state.copyWith(
-            meetingUrl: meetUrl.right.data.meetingUrl ??
-                "https://meet.google.com/xvc-fcxq-ohw",
-            questionInfo:
-                state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED)));
-        // emit(
-        //     state.copyWith(meetingUrl: "https://meet.google.com/xvc-fcxq-ohw"));
-      }
+    if (meetUrl.isLeft) {
+      failureHandlerManager.handle(meetUrl.left);
+    }
+    if (meetUrl.isRight) {
+      emit(state.copyWith(
+        meetingUrl: meetUrl.right.data.meetingUrl ??
+            "https://meet.google.com/xvc-fcxq-ohw",
+      ));
     }
   }
 
@@ -88,9 +84,9 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
             (state.questionInfo?.answers ?? []).isEmpty)) {
       socketCubit.getAnswer((GetAnswer answer) {
         emit(state.copyWith(
-            answer: answer.data?.answer,
-            questionInfo:
-                state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED)));
+          answer: answer.data?.answer,
+          questionInfo: state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED)
+        ));
       });
     }
   }
@@ -113,9 +109,10 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     final res = await educationController.rateQuestion(
         questionId: questionId,
         rateQuestionRequest: RateQuestionRequest(
-            tutorId: state.questionInfo?.tutor?.id ?? "",
-            comment: comment,
-            numberOfStar: star));
+          tutorId: state.questionInfo?.tutor?.id ?? "",
+          comment: comment,
+          numberOfStar: star,
+        ));
 
     // final res = await loadingManager.startLoading(future: futureRes);
     if (res.isLeft) {
@@ -151,9 +148,56 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     return "";
   }
 
+  void onChangeMeetingStartTime(DateTime value) {
+    emit(state.copyWith(meetingStartTime: value));
+  }
+
+  void onChangeShowModalAcceptGGMeet(bool value) {
+    emit(state.copyWith(showModalAcceptGGMeet: value));
+  }
+
+  void sendInfoGGMeet() {
+    final InfoGGMeet infoGGMeet = InfoGGMeet(
+      studentId: userId,
+      tutorId: state.questionInfo?.tutor?.id ?? "",
+      questionId: questionId,
+      meeting_start_time: state.meetingStartTime,
+      isStudent: true,
+    );
+    socketCubit.sendInfoGGMeet(infoGGMeet);
+  }
+
+  void receiveInfoGGMeet() {
+    socketCubit.receiveInfoGGMeet((InfoGGMeet infoGGMeet) {
+      emit(state.copyWith(
+          meetingStartTime: infoGGMeet.meeting_start_time,
+          showModalAcceptGGMeet: state.showModalAcceptGGMeet ? false : true));
+    });
+  }
+
+  void receiveGGMeet() {
+    socketCubit.receiveGGMeet((ReceiveGGMeet infoGGMeet) {
+      emit(state.copyWith(
+        meetingUrl:
+            infoGGMeet.meetingUrl ?? "https://meet.google.com/xvc-fcxq-ohw",
+        meetingStartTime: infoGGMeet.meeting_start_time,
+      ));
+    });
+  }
+
+  void cancelGGMeet() {
+    final InfoGGMeet infoGGMeet = InfoGGMeet(
+      studentId: userId,
+      tutorId: state.questionInfo?.tutor?.id ?? "",
+      questionId: questionId,
+      isStudent: true,
+    );
+    socketCubit.sendInfoGGMeet(infoGGMeet);
+  }
+
   Future<void> fetchData() async {
     await getQuestion();
     getAnswer();
-    await createGGMeet();
+
   }
 }

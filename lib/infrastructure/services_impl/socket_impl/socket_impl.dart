@@ -90,8 +90,8 @@ class SocketControllerImpl with SocketController {
   void onGetTutorAvailable({Socket? socket, required Function function}) {
     logging.i("on get tutor available");
     socket?.on(SocketEvent.ON_GET_TUTORS_AVAILABLE.event, (data) {
+      logging.i(data);
       final OnGetTutor onGetTutor = OnGetTutor.fromJson(data);
-      logging.i(onGetTutor);
       function(onGetTutor);
     });
   }
@@ -133,6 +133,38 @@ class SocketControllerImpl with SocketController {
       logging.i(data);
       final GetAnswer answer = GetAnswer.fromJson(data);
       function(answer);
+    });
+  }
+
+  @override
+  void cancelGGMeet({Socket? socket, required InfoGGMeet infoGGMeet}) {
+    logging.i("cancel gg meet");
+    socket?.emit(SocketEvent.CANCEL_GGMEET.event, infoGGMeet);
+  }
+
+  @override
+  void receiveInfoGGMeet({Socket? socket, required Function function}) {
+    logging.i("on receive info ggmeet");
+    socket?.on(SocketEvent.RECEIVE_INFO_GOOGLE_MEET.event, (data) {
+      logging.i(data);
+      final InfoGGMeet infoGGMeet = InfoGGMeet.fromJson(data);
+      function(infoGGMeet);
+    });
+  }
+
+  @override
+  void sendInfoGGMeet({Socket? socket, required InfoGGMeet infoGGMeet}) {
+    logging.i("send info gg meet");
+    socket?.emit(SocketEvent.SEND_INFO_GOOGLE_MEET.event, infoGGMeet);
+  }
+
+  @override
+  void receiveGGMeet({Socket? socket, required Function function}) {
+    logging.i("on receive ggmeet");
+    socket?.on(SocketEvent.RECEIVE_GGMEET.event, (data) {
+      logging.i(data);
+      final ReceiveGGMeet ggmeet = ReceiveGGMeet.fromJson(data);
+      function(ggmeet);
     });
   }
 }

@@ -10,6 +10,8 @@ class DetailedQuestionState {
     this.meetingUrl,
     this.questionId,
     this.questionInfo,
+    this.meetingStartTime,
+    this.showModalAcceptGGMeet = false,
   });
 
   final bool loading;
@@ -18,6 +20,8 @@ class DetailedQuestionState {
   final GetQuestionInfoResponse? questionInfo;
   final Answer? answer;
   final String? meetingUrl;
+  final DateTime? meetingStartTime;
+  final bool showModalAcceptGGMeet;
 
   copyWith({
     bool? loading,
@@ -26,6 +30,8 @@ class DetailedQuestionState {
     GetQuestionInfoResponse? questionInfo,
     Answer? answer,
     String? meetingUrl,
+    DateTime? meetingStartTime,
+    bool? showModalAcceptGGMeet,
   }) {
     return DetailedQuestionState(
       loading: loading ?? this.loading,
@@ -34,6 +40,9 @@ class DetailedQuestionState {
       questionInfo: questionInfo ?? this.questionInfo,
       answer: answer ?? this.answer,
       meetingUrl: meetingUrl ?? this.meetingUrl,
+      meetingStartTime: meetingStartTime ?? this.meetingStartTime,
+      showModalAcceptGGMeet:
+          showModalAcceptGGMeet ?? this.showModalAcceptGGMeet,
     );
   }
 }

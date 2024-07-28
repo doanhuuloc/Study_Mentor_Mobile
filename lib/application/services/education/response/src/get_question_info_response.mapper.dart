@@ -93,6 +93,17 @@ class GetQuestionInfoResponseMapper
   static int? _$timeMetting(GetQuestionInfoResponse v) => v.timeMetting;
   static const Field<GetQuestionInfoResponse, int> _f$timeMetting =
       Field('timeMetting', _$timeMetting, opt: true);
+  static DateTime? _$meeting_start_time(GetQuestionInfoResponse v) =>
+      v.meeting_start_time;
+  static const Field<GetQuestionInfoResponse, DateTime> _f$meeting_start_time =
+      Field('meeting_start_time', _$meeting_start_time, opt: true);
+  static DateTime? _$meeting_end_time(GetQuestionInfoResponse v) =>
+      v.meeting_end_time;
+  static const Field<GetQuestionInfoResponse, DateTime> _f$meeting_end_time =
+      Field('meeting_end_time', _$meeting_end_time, opt: true);
+  static bool? _$isStudentPaid(GetQuestionInfoResponse v) => v.isStudentPaid;
+  static const Field<GetQuestionInfoResponse, bool> _f$isStudentPaid =
+      Field('isStudentPaid', _$isStudentPaid, opt: true);
 
   @override
   final MappableFields<GetQuestionInfoResponse> fields = const {
@@ -117,6 +128,9 @@ class GetQuestionInfoResponseMapper
     #questionType: _f$questionType,
     #meetingURL: _f$meetingURL,
     #timeMetting: _f$timeMetting,
+    #meeting_start_time: _f$meeting_start_time,
+    #meeting_end_time: _f$meeting_end_time,
+    #isStudentPaid: _f$isStudentPaid,
   };
 
   static GetQuestionInfoResponse _instantiate(DecodingData data) {
@@ -141,7 +155,10 @@ class GetQuestionInfoResponseMapper
         reportId: data.dec(_f$reportId),
         questionType: data.dec(_f$questionType),
         meetingURL: data.dec(_f$meetingURL),
-        timeMetting: data.dec(_f$timeMetting));
+        timeMetting: data.dec(_f$timeMetting),
+        meeting_start_time: data.dec(_f$meeting_start_time),
+        meeting_end_time: data.dec(_f$meeting_end_time),
+        isStudentPaid: data.dec(_f$isStudentPaid));
   }
 
   @override
@@ -228,7 +245,10 @@ abstract class GetQuestionInfoResponseCopyWith<
       String? reportId,
       QuestionType? questionType,
       String? meetingURL,
-      int? timeMetting});
+      int? timeMetting,
+      DateTime? meeting_start_time,
+      DateTime? meeting_end_time,
+      bool? isStudentPaid});
   GetQuestionInfoResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -286,7 +306,10 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
           Object? reportId = $none,
           Object? questionType = $none,
           Object? meetingURL = $none,
-          Object? timeMetting = $none}) =>
+          Object? timeMetting = $none,
+          Object? meeting_start_time = $none,
+          Object? meeting_end_time = $none,
+          Object? isStudentPaid = $none}) =>
       $apply(FieldCopyWithData({
         if (questionId != $none) #questionId: questionId,
         if (title != $none) #title: title,
@@ -308,7 +331,11 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
         if (reportId != $none) #reportId: reportId,
         if (questionType != $none) #questionType: questionType,
         if (meetingURL != $none) #meetingURL: meetingURL,
-        if (timeMetting != $none) #timeMetting: timeMetting
+        if (timeMetting != $none) #timeMetting: timeMetting,
+        if (meeting_start_time != $none)
+          #meeting_start_time: meeting_start_time,
+        if (meeting_end_time != $none) #meeting_end_time: meeting_end_time,
+        if (isStudentPaid != $none) #isStudentPaid: isStudentPaid
       }));
   @override
   GetQuestionInfoResponse $make(CopyWithData data) => GetQuestionInfoResponse(
@@ -332,7 +359,12 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
       reportId: data.get(#reportId, or: $value.reportId),
       questionType: data.get(#questionType, or: $value.questionType),
       meetingURL: data.get(#meetingURL, or: $value.meetingURL),
-      timeMetting: data.get(#timeMetting, or: $value.timeMetting));
+      timeMetting: data.get(#timeMetting, or: $value.timeMetting),
+      meeting_start_time:
+          data.get(#meeting_start_time, or: $value.meeting_start_time),
+      meeting_end_time:
+          data.get(#meeting_end_time, or: $value.meeting_end_time),
+      isStudentPaid: data.get(#isStudentPaid, or: $value.isStudentPaid));
 
   @override
   GetQuestionInfoResponseCopyWith<$R2, GetQuestionInfoResponse, $Out2>

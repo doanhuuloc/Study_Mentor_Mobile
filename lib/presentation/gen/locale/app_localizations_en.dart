@@ -361,7 +361,7 @@ class SEn extends S {
   String get goHomePage => 'Go home page';
 
   @override
-  String get ggmeetLink => 'Link google meet';
+  String get ggmeetLink => 'Google meet infomation';
 
   @override
   String get questionInfomation => 'Question infomation';

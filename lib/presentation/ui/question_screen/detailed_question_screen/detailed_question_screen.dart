@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
+import 'package:study_mentor_mobile/presentation/ui/question_screen/detailed_question_screen/widgets/tutor_send_info_ggmeet.dart';
 import 'package:study_mentor_mobile/presentation/ui/question_screen/report_question_screen/blocs/report_question_state.dart';
 
 import '../../../../application/services/education/education.dart';
@@ -59,154 +60,187 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
             questionId: widget.questionId),
         child: BlocBuilder<DetailedQuestionCubit, DetailedQuestionState>(
             builder: (context, state) {
-          return Scaffold(
-            appBar: CommonAppBar(
-              title: Text(S.of(context).detailedQuestion),
-              color: AppColors.blue.shade50,
-              actions: [
-                if ((state.questionInfo?.status == QuestionStatus.ANSWERED ||
-                        state.questionInfo?.status == QuestionStatus.DONE) &&
-                    !state.loading)
-                  AppIconButton(
-                    icon: SvgPicture.asset(
-                      Assets.svgs.report.path,
-                      height: 30,
-                      width: 30,
-                      color: AppColors.black,
-                    ),
-                    onTap: () async {
-                      if (state.questionInfo?.tutor?.id != null) {
-                        final reportId = await ReportQuestionRouteData(
-                            $extra: ReportQuestionProps(
-                          id: state.questionInfo?.reportId,
-                          questionId: widget.questionId,
-                          tutorId: state.questionInfo?.tutor?.id ?? "",
-                        )).push(context);
-                        if (reportId != null) {
-                          if (!context.mounted) {
-                            return;
-                          }
-                          context
-                              .read<DetailedQuestionCubit>()
-                              .changeReportId(reportId);
-                        }
-                      }
+          return BlocListener<DetailedQuestionCubit, DetailedQuestionState>(
+            listener: (context, state) async {
+              if (state.showModalAcceptGGMeet) {
+                await showDialog(
+                  context: context,
+                  builder: (ctx) => TutorSendInfoGGMeet(
+                    timeMeetingStart: state.meetingStartTime ?? DateTime.now(),
+                    reject: () {
+                      context.read<DetailedQuestionCubit>().cancelGGMeet();
+                      FindIntrustorRouteData(
+                        $extra: FindIntrustorExtraData(
+                            questionId: state.questionId ?? "",
+                            subjectId: state.questionInfo?.subject?.id ?? ""),
+                        questionId: state.questionId ?? "",
+                      ).go(context);
                     },
-                  )
-              ],
-            ),
-            floatingActionButton: state.questionInfo?.status ==
-                        QuestionStatus.NEW ||
-                    state.questionInfo?.status == QuestionStatus.PENDING ||
-                    state.loading
-                ? null
-                : Padding(
-                    padding: const EdgeInsets.only(bottom: 20, right: 10),
-                    child: Material(
-                      color: Colors.transparent,
-                      type: MaterialType.transparency,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(1000),
-                        child: Ink(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: AppColors.blue.shade50,
-                              shape: BoxShape.circle),
-                          child: Assets.svgs.chat.svg(
-                            color: Colors.blue,
-                            height: 30,
-                            width: 30,
+                    accept: () {
+                      context.read<DetailedQuestionCubit>().createGGMeet();
+                      Navigator.pop(context);
+                    },
+                  ),
+                );
+                if (!context.mounted) {
+                  return;
+                }
+
+                context
+                    .read<DetailedQuestionCubit>()
+                    .onChangeShowModalAcceptGGMeet(false);
+              }
+            },
+            child: Scaffold(
+              appBar: CommonAppBar(
+                title: Text(S.of(context).detailedQuestion),
+                color: AppColors.blue.shade50,
+                actions: [
+                  if ((state.questionInfo?.status == QuestionStatus.ANSWERED ||
+                          state.questionInfo?.status == QuestionStatus.DONE) &&
+                      !state.loading)
+                    AppIconButton(
+                      icon: SvgPicture.asset(
+                        Assets.svgs.report.path,
+                        height: 30,
+                        width: 30,
+                        color: AppColors.black,
+                      ),
+                      onTap: () async {
+                        if (state.questionInfo?.tutor?.id != null) {
+                          final reportId = await ReportQuestionRouteData(
+                              $extra: ReportQuestionProps(
+                            id: state.questionInfo?.reportId,
+                            questionId: widget.questionId,
+                            tutorId: state.questionInfo?.tutor?.id ?? "",
+                          )).push(context);
+                          if (reportId != null) {
+                            if (!context.mounted) {
+                              return;
+                            }
+                            context
+                                .read<DetailedQuestionCubit>()
+                                .changeReportId(reportId);
+                          }
+                        }
+                      },
+                    )
+                ],
+              ),
+              floatingActionButton: state.questionInfo?.status ==
+                          QuestionStatus.NEW ||
+                      state.questionInfo?.status == QuestionStatus.PENDING ||
+                      state.loading
+                  ? null
+                  : Padding(
+                      padding: const EdgeInsets.only(bottom: 20, right: 10),
+                      child: Material(
+                        color: Colors.transparent,
+                        type: MaterialType.transparency,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(1000),
+                          child: Ink(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: AppColors.blue.shade50,
+                                shape: BoxShape.circle),
+                            child: Assets.svgs.chat.svg(
+                              color: Colors.blue,
+                              height: 30,
+                              width: 30,
+                            ),
                           ),
+                          onTap: () {
+                            ChatIntrustorRouteData(
+                                    $extra: ChatIntrustorExtraData(
+                                        roomId:
+                                            "b9a66b1d-fdc6-4a86-966f-4016f2e5e927",
+                                        intrustor: state.questionInfo?.tutor ??
+                                            const UserInfoResponse()))
+                                .push(context);
+                          },
                         ),
-                        onTap: () {
-                          ChatIntrustorRouteData(
-                                  $extra: ChatIntrustorExtraData(
-                                      roomId:
-                                          "b9a66b1d-fdc6-4a86-966f-4016f2e5e927",
-                                      intrustor: state.questionInfo?.tutor ??
-                                          const UserInfoResponse()))
-                              .push(context);
-                        },
                       ),
                     ),
-                  ),
-            body: Column(
-              children: [
-                Expanded(
-                  child: RefreshIndicator(
-                    color: Colors.amber,
-                    onRefresh: () async {
-                      context.read<DetailedQuestionCubit>().getQuestion();
-                    },
-                    child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: AppShimmer(
-                        enabled: state.loading,
-                        child: GapItems(
-                          gap: 15,
-                          items: [
-                            if (state.questionInfo?.status !=
-                                    QuestionStatus.NEW &&
-                                state.questionInfo?.status !=
-                                    QuestionStatus.PENDING)
-                              IntrustorItem(
+              body: Column(
+                children: [
+                  Expanded(
+                    child: RefreshIndicator(
+                      color: Colors.amber,
+                      onRefresh: () async {
+                        context.read<DetailedQuestionCubit>().getQuestion();
+                      },
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: AppShimmer(
+                          enabled: state.loading,
+                          child: GapItems(
+                            gap: 15,
+                            items: [
+                              if (state.questionInfo?.status !=
+                                      QuestionStatus.NEW &&
+                                  state.questionInfo?.status !=
+                                      QuestionStatus.PENDING)
+                                IntrustorItem(
+                                  loading: state.loading,
+                                  name:
+                                      state.questionInfo?.tutor?.fullName ?? "",
+                                  numberOfStar: 5,
+                                  voidCallback: () {
+                                    IntrustorInfoRouteData(
+                                            $extra: IntrustorInfoExtraData(
+                                                intrustor: state
+                                                        .questionInfo?.tutor ??
+                                                    const UserInfoResponse()))
+                                        .push(context);
+                                  },
+                                )
+                              else
+                                const SizedBox(),
+                              QuestionSummary(
                                 loading: state.loading,
-                                name: state.questionInfo?.tutor?.fullName ?? "",
-                                numberOfStar: 5,
-                                voidCallback: () {
-                                  IntrustorInfoRouteData(
-                                          $extra: IntrustorInfoExtraData(
-                                              intrustor:
-                                                  state.questionInfo?.tutor ??
-                                                      const UserInfoResponse()))
-                                      .push(context);
-                                },
-                              )
-                            else
-                              const SizedBox(),
-                            QuestionSummary(
-                              loading: state.loading,
-                              subjectName:
-                                  state.questionInfo?.subject?.name ?? "",
-                              price: state.questionInfo?.price ?? "",
-                            ),
-                            if (!state.loading &&
-                                state.questionInfo?.status ==
-                                    QuestionStatus.NEW &&
-                                state.questionInfo?.isPaid != true)
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 50),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    S.of(context).loadScreen,
-                                    textAlign: TextAlign.center,
-                                    style: Styles.s16()
-                                        .withWeight(FontWeight.w600),
+                                subjectName:
+                                    state.questionInfo?.subject?.name ?? "",
+                                price: state.questionInfo?.price ?? "",
+                              ),
+                              if (!state.loading &&
+                                  state.questionInfo?.status ==
+                                      QuestionStatus.NEW &&
+                                  state.questionInfo?.isStudentPaid != true)
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 50),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      S.of(context).loadScreen,
+                                      textAlign: TextAlign.center,
+                                      style: Styles.s16()
+                                          .withWeight(FontWeight.w600),
+                                    ),
                                   ),
                                 ),
+                              QuestionInfoBox(
+                                loading: state.loading,
+                                question: state.questionInfo?.content ?? "",
+                                fileResponse: state.questionInfo?.fileQuestions,
                               ),
-                            QuestionInfoBox(
-                              loading: state.loading,
-                              question: state.questionInfo?.content ?? "",
-                              fileResponse: state.questionInfo?.fileQuestions,
-                            ),
-                            if (state.questionInfo?.status !=
-                                    QuestionStatus.NEW &&
-                                state.questionInfo?.status !=
-                                    QuestionStatus.PENDING)
-                              const AnswerInfoBox(),
-                            ActivityButton(
-                              questionId: widget.questionId,
-                            )
-                          ],
+                              if (state.questionInfo?.status !=
+                                      QuestionStatus.NEW &&
+                                  state.questionInfo?.status !=
+                                      QuestionStatus.PENDING)
+                                const AnswerInfoBox(),
+                              ActivityButton(
+                                questionId: widget.questionId,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         }));
@@ -231,14 +265,14 @@ class ActivityButton extends StatelessWidget {
                     top: 10, bottom: 20, right: 50, left: 50),
                 child: CommonButton(
                   padding: const EdgeInsets.all(10),
-                  child: Text(state.questionInfo?.isPaid == true
+                  child: Text(state.questionInfo?.isStudentPaid == true
                       ? S.of(context).findIntructor
                       : S.of(context).pay(formatCurrency(
                           double.parse(state.questionInfo?.price ?? "0"),
                           context))),
                   onTap: () async {
                     if (state.questionInfo?.subject?.id != null) {
-                      if (state.questionInfo?.isPaid == true) {
+                      if (state.questionInfo?.isStudentPaid == true) {
                         if (await FindIntrustorRouteData(
                                 $extra: FindIntrustorExtraData(
                                   questionId: questionId,
@@ -293,17 +327,21 @@ class ActivityButton extends StatelessWidget {
                   },
                 ),
               ),
-            if (state.questionInfo?.status == QuestionStatus.DONE ||
+            if (state.questionInfo?.questionType == QuestionType.GGMEET &&
+                state.meetingUrl == null &&
                 state.questionInfo?.status == QuestionStatus.ACCEPTED)
               Padding(
                 padding: const EdgeInsets.only(
                     top: 10, bottom: 20, right: 50, left: 50),
                 child: CommonButton(
                   padding: const EdgeInsets.all(10),
-                  child: Text(S.of(context).goHomePage),
+                  backgroundColor: state.meetingStartTime != null
+                      ? AppColors.text.caption
+                      : null,
                   onTap: () {
-                    const HomeRouteData().go(context);
+                    context.read<DetailedQuestionCubit>().sendInfoGGMeet();
                   },
+                  child: const Text("Gữi lời mời"),
                 ),
               ),
           ],

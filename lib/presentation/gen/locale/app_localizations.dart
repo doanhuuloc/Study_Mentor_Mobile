@@ -780,7 +780,7 @@ abstract class S {
   /// No description provided for @ggmeetLink.
   ///
   /// In en, this message translates to:
-  /// **'Link google meet'**
+  /// **'Google meet infomation'**
   String get ggmeetLink;
 
   /// No description provided for @questionInfomation.

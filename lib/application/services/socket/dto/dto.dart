@@ -6,3 +6,5 @@ export 'src/receive_message.dart';
 export 'src/send_message.dart';
 export 'src/send_notification.dart';
 export 'src/socket_event.dart';
+export 'src/info_ggmeet.dart';
+export 'src/receive_ggmeet.dart';

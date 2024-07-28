@@ -31,6 +31,9 @@ class GetQuestionInfoResponse with GetQuestionInfoResponseMappable {
     this.questionType,
     this.meetingURL,
     this.timeMetting,
+    this.meeting_start_time,
+    this.meeting_end_time,
+    this.isStudentPaid,
   });
   factory GetQuestionInfoResponse.fromJson(Map<String, dynamic> json) =>
       GetQuestionInfoResponseMapper.fromJson(json);
@@ -56,4 +59,7 @@ class GetQuestionInfoResponse with GetQuestionInfoResponseMappable {
   final QuestionType? questionType;
   final int? timeMetting;
   final String? meetingURL;
+  final DateTime? meeting_start_time;
+  final DateTime? meeting_end_time;
+  final bool? isStudentPaid;
 }

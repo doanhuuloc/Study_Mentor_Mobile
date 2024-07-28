@@ -16,7 +16,11 @@ enum SocketEvent {
   PICKED_TUTOR_ACCEPTED_QUESTION('picked-tutor-accepted-question'),
   GET_ANSWER('answer'),
   CREATE_GGMEET('create-ggmeet'),
-  GET_LINK_GGMEET('receive-ggmeet');
+  GET_LINK_GGMEET('receive-ggmeet'),
+  SEND_INFO_GOOGLE_MEET('send-info-google-meet'),
+  RECEIVE_INFO_GOOGLE_MEET('receive-info-google-meet'),
+  CANCEL_GGMEET('cancel-google-meet'),
+  RECEIVE_GGMEET("receive-ggmeet");
 
   final String event;
 

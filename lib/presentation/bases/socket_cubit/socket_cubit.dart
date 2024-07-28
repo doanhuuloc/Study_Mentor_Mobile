@@ -73,4 +73,22 @@ class SocketCubit extends SafeCubit<SocketState> {
   void getAnswer(Function function) {
     socketController.getAnswer(socket: state.socket, function: function);
   }
+
+  void cancelGGMeet(InfoGGMeet infoGGMeet) {
+    socketController.cancelGGMeet(socket: state.socket, infoGGMeet: infoGGMeet);
+  }
+
+  void receiveInfoGGMeet(Function function) {
+    socketController.receiveInfoGGMeet(
+        socket: state.socket, function: function);
+  }
+
+  void sendInfoGGMeet(InfoGGMeet infoGGMeet) {
+    socketController.sendInfoGGMeet(
+        socket: state.socket, infoGGMeet: infoGGMeet);
+  }
+
+  void receiveGGMeet(Function function) {
+    socketController.receiveGGMeet(socket: state.socket, function: function);
+  }
 }

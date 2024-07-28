@@ -88,7 +88,9 @@ class _FormRattingState extends State<FormRatting> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(S.of(context).send,
-                        style: Styles.s18().withWeight(FontWeight.w600)),
+                        style: Styles.s18()
+                            .withWeight(FontWeight.w600)
+                            .withColor(Colors.white)),
                   ),
                 ),
                 const SizedBox(height: 10)
