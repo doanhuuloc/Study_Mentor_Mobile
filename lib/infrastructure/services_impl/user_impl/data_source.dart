@@ -31,4 +31,11 @@ abstract class UserDataSource {
 
   @GET('/api/notifications')
   Future<BaseResponse<List<MyNotificationResponse>>> getAllNotifications();
+
+  @GET('/api/users/bank')
+  Future<BaseResponse<GetBankInfoResponse>> getBankInfo();
+
+  @PUT('/api/users/bank')
+  Future<BaseResponse<dynamic>> updateBankInfo(
+      @Body() UpdateBankInfoRequest updateBankInfoRequest);
 }

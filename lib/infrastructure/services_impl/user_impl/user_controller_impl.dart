@@ -51,4 +51,16 @@ class UserControllerImpl with UserController, DataSourceErrorHandler {
       getAllNotifications() {
     return handleApiResult(future: () => userDataSource.getAllNotifications());
   }
+
+  @override
+  Future<Result<Failure, BaseResponse<GetBankInfoResponse>>> getBankInfo() {
+    return handleApiResult(future: () => userDataSource.getBankInfo());
+  }
+
+  @override
+  Future<Result<Failure, dynamic>> updateBankInfo(
+      UpdateBankInfoRequest updateBankInfoRequest) {
+    return handleApiResult(
+        future: () => userDataSource.updateBankInfo(updateBankInfoRequest));
+  }
 }

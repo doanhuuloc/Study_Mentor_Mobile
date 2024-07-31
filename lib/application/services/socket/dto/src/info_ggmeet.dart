@@ -11,8 +11,8 @@ class InfoGGMeet with InfoGGMeetMappable {
     this.meeting_start_time,
     this.isStudent,
   });
-  
-   factory InfoGGMeet.fromJson(Map<String, dynamic> json) =>
+
+  factory InfoGGMeet.fromJson(Map<String, dynamic> json) =>
       InfoGGMeetMapper.fromJson(json);
 
   final String? studentId;

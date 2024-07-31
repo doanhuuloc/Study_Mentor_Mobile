@@ -16,6 +16,7 @@ import '../application/services/file/file.dart';
 import '../application/services/socket/controller/controller.dart';
 import '../application/services/user/controller/controller.dart';
 
+import '../application/services/vietqr/controller/controller.dart';
 import '../infrastructure/interceptors/auth_interceptor/auth_interceptor.dart';
 import '../infrastructure/interceptors/auth_interceptor/token_based_auth_interceptor.dart';
 import '../infrastructure/interceptors/logger_interceptor/logger_interceptor.dart';
@@ -38,6 +39,8 @@ import '../infrastructure/services_impl/token_service_impl/refresh_token_manager
 import '../infrastructure/services_impl/user_impl/data_source.dart';
 import '../infrastructure/services_impl/user_impl/user_controller_impl.dart';
 
+import '../infrastructure/services_impl/vietqr/data_source.dart';
+import '../infrastructure/services_impl/vietqr/vietqr_controller_impl.dart';
 import 'base/di_service.dart';
 
 class AppDIData {
@@ -53,6 +56,7 @@ class AppDIData {
     required this.educationController,
     required this.socketController,
     required this.localeService,
+    required this.vietqrController,
   });
 
   final AppConfig config;
@@ -66,6 +70,7 @@ class AppDIData {
   final EducationController educationController;
   final SocketController socketController;
   final LocaleService localeService;
+  final VietqrController vietqrController;
 }
 
 class AppDIService implements DIService<AppDIData> {
@@ -112,6 +117,13 @@ class AppDIService implements DIService<AppDIData> {
       receiveTimeout: const Duration(minutes: 5),
     );
 
+    // dio vietqr options
+    final optionsVietqr = BaseOptions(
+      baseUrl: appConfig.vietqrAPIUrl,
+      connectTimeout: const Duration(minutes: 5),
+      receiveTimeout: const Duration(minutes: 5),
+    );
+
     final loggerInterceptor = LoggerInterceptor();
 
     final tokenServiceDio = Dio(options);
@@ -144,6 +156,12 @@ class AppDIService implements DIService<AppDIData> {
     final dioAI = Dio(optionsAI);
     dioAI.interceptors.addAll([
       authInterceptor,
+      loggerInterceptor,
+    ]);
+
+    // dio for vietqr
+    final dioVietqr = Dio(optionsVietqr);
+    dioVietqr.interceptors.addAll([
       loggerInterceptor,
     ]);
 
@@ -184,6 +202,11 @@ class AppDIService implements DIService<AppDIData> {
     final LocaleService localeService =
         LocaleServiceImpl(sharedPreferences: sharedPrefs);
 
+    // vietqr
+    final VietqrDataSource vietqrDataSource = VietqrDataSource(dioVietqr);
+    final VietqrController vietqrController =
+        VietqrControllerImpl(vietqrDataSource: vietqrDataSource);
+
     // result
     return AppDIData(
       localeService: localeService,
@@ -197,6 +220,7 @@ class AppDIService implements DIService<AppDIData> {
       educationController: educationController,
       socketController: socketController,
       appUsernameService: appUsernameService,
+      vietqrController: vietqrController,
     );
   }
 }

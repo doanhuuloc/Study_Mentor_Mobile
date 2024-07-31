@@ -1,5 +1,4 @@
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:study_mentor_mobile/application/services/socket/dto/src/info_ggmeet.dart';
 import '../dto/dto.dart';
 
 mixin SocketController {

@@ -1,7 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-import '../../../file/file.dart';
-
 part 'receive_ggmeet.mapper.dart';
 
 @MappableClass()

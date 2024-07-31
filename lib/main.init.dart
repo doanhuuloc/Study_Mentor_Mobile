@@ -89,11 +89,21 @@ import 'application/services/user/request/src/change_password_request.dart'
     as p56;
 import 'application/services/user/request/src/reset_password_request.dart'
     as p57;
-import 'application/services/user/request/src/update_profile_request.dart'
+import 'application/services/user/request/src/update_bank_info_request.dart'
     as p58;
-import 'application/services/user/response/src/notfication_response.dart'
+import 'application/services/user/request/src/update_profile_request.dart'
     as p59;
-import 'application/services/user/response/src/user_info_response.dart' as p60;
+import 'application/services/user/response/src/get_bank_info_response.dart'
+    as p60;
+import 'application/services/user/response/src/notfication_response.dart'
+    as p61;
+import 'application/services/user/response/src/user_info_response.dart' as p62;
+import 'application/services/vietqr/request/src/check_account_bank_request.dart'
+    as p63;
+import 'application/services/vietqr/response/src/check_account_bank_response.dart'
+    as p64;
+import 'application/services/vietqr/response/src/get_list_banks_response.dart'
+    as p65;
 
 void initializeMappers() {
   p0.ChatAIRequestMapper.ensureInitialized();
@@ -162,10 +172,16 @@ void initializeMappers() {
   p55.SendNotificationMapper.ensureInitialized();
   p56.ChangePasswordRequestMapper.ensureInitialized();
   p57.ResetPasswordRequestMapper.ensureInitialized();
-  p58.UpdateProfileRequestMapper.ensureInitialized();
-  p58.GenderMapper.ensureInitialized();
-  p59.MyNotificationResponseMapper.ensureInitialized();
-  p59.QuestionNotficationMapper.ensureInitialized();
-  p59.UserNotificationMapper.ensureInitialized();
-  p60.UserInfoResponseMapper.ensureInitialized();
+  p58.UpdateBankInfoRequestMapper.ensureInitialized();
+  p59.UpdateProfileRequestMapper.ensureInitialized();
+  p59.GenderMapper.ensureInitialized();
+  p60.GetBankInfoResponseMapper.ensureInitialized();
+  p61.MyNotificationResponseMapper.ensureInitialized();
+  p61.QuestionNotficationMapper.ensureInitialized();
+  p61.UserNotificationMapper.ensureInitialized();
+  p62.UserInfoResponseMapper.ensureInitialized();
+  p63.CheckAccountBankRequestMapper.ensureInitialized();
+  p64.CheckAccountBankResponseMapper.ensureInitialized();
+  p64.AccountNameMapper.ensureInitialized();
+  p65.BankMapper.ensureInitialized();
 }

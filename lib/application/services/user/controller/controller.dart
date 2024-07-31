@@ -21,4 +21,9 @@ mixin UserController {
 
   Future<Result<Failure, BaseResponse<List<MyNotificationResponse>>>>
       getAllNotifications();
+
+  Future<Result<Failure, BaseResponse<GetBankInfoResponse>>> getBankInfo();
+
+  Future<Result<Failure, dynamic>> updateBankInfo(
+      UpdateBankInfoRequest updateBankInfoRequest);
 }

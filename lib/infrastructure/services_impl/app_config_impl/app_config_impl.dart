@@ -27,6 +27,7 @@ class AppConfigLoaderImpl with AppConfigLoader {
         baseUrl: dotenv.env['BASE_URL'] ?? '',
         baseUrlAI: dotenv.env['BASE_URL_AI'] ?? '',
         socketUrl: dotenv.env['SOCKET_URL'] ?? '',
+        vietqrAPIUrl: dotenv.env['VIETQR_API_URL'] ?? '',
         appLink: dotenv.env['APP_LINK'] ?? '',
         chatPay: dotenv.env['ID_CHAT_PAY'] ?? '',
         chatGemini: dotenv.env['ID_CHAT_GEMINI'] ?? '',

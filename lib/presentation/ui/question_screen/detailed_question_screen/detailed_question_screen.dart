@@ -328,7 +328,6 @@ class ActivityButton extends StatelessWidget {
                 ),
               ),
             if (state.questionInfo?.questionType == QuestionType.GGMEET &&
-                state.meetingUrl == null &&
                 state.questionInfo?.status == QuestionStatus.ACCEPTED)
               Padding(
                 padding: const EdgeInsets.only(

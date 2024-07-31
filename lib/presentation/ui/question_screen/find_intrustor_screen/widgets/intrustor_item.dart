@@ -53,14 +53,13 @@ class IntrustorItem extends StatelessWidget {
                   ),
                   child: avatar != ""
                       ? ClipOval(
-                        child: Image.network(
+                          child: Image.network(
                             "${context.read<AppConfig>().imagePath}/$avatar",
                             fit: BoxFit.cover,
-                        
                             loadingBuilder: helperImage.loadingBuilder,
                             errorBuilder: helperImage.errorBuilder,
                           ),
-                      )
+                        )
                       : null,
                 ),
                 Expanded(

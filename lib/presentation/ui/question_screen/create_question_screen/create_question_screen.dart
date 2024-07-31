@@ -12,6 +12,7 @@ import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/textfields/common_textfield.dart';
 import 'package:study_mentor_mobile/presentation/ui/question_screen/create_question_screen/widgets/payment_info.dart';
 import 'package:study_mentor_mobile/presentation/ui/question_screen/create_question_screen/widgets/select_file.dart';
+import 'package:study_mentor_mobile/presentation/ui/question_screen/create_question_screen/widgets/select_meeting_method.dart';
 import 'package:study_mentor_mobile/presentation/ui/question_screen/create_question_screen/widgets/select_time_metting.dart';
 import 'package:study_mentor_mobile/presentation/ui/question_screen/create_question_screen/widgets/select_voucher.dart';
 import 'package:study_mentor_mobile/utilities/launch_url.dart';
@@ -119,6 +120,8 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                           const SelectEducationStructure(),
                           const SelectNumberStar(),
                           const SelectTimeFinding(),
+                          if (widget.questionType == QuestionType.GGMEET)
+                            const SelectMeetingMethod(),
                           if (widget.questionType == QuestionType.GGMEET)
                             const SelectTimeMetting(),
                           const SelectVoucher(),

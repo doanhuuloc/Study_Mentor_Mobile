@@ -26,33 +26,10 @@ class AnswerInfoBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DetailedQuestionCubit, DetailedQuestionState>(
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: GapItems(
+        Widget fileAnswer() {
+          return GapItems(
             gap: 15,
             items: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        state.questionInfo?.questionType == QuestionType.GGMEET
-                            ? S.of(context).ggmeetLink
-                            : S.of(context).answeredInfomation,
-                        style: Styles.s16().withWeight(FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               if (state.questionInfo?.questionType == QuestionType.FILE &&
                   state.answer == null)
                 Container(
@@ -127,8 +104,16 @@ class AnswerInfoBox extends StatelessWidget {
                       )
                   ],
                 ),
+            ],
+          );
+        }
+
+        Widget ggmeetAnswer() {
+          return GapItems(
+            gap: 15,
+            items: [
               if (state.questionInfo?.questionType == QuestionType.GGMEET &&
-                  state.meetingUrl == null)
+                  state.questionInfo?.status == QuestionStatus.ACCEPTED)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -186,8 +171,7 @@ class AnswerInfoBox extends StatelessWidget {
                   ],
                 ),
               if (state.questionInfo?.questionType == QuestionType.GGMEET &&
-                  state.meetingUrl != null &&
-                  state.meetingStartTime != null)
+                  state.questionInfo?.status == QuestionStatus.ANSWERED)
                 Column(
                   children: [
                     const SizedBox(height: 10),
@@ -212,6 +196,39 @@ class AnswerInfoBox extends StatelessWidget {
                     ),
                   ],
                 )
+            ],
+          );
+        }
+
+        return Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          child: GapItems(
+            gap: 15,
+            items: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        state.questionInfo?.questionType == QuestionType.GGMEET
+                            ? S.of(context).ggmeetLink
+                            : S.of(context).answeredInfomation,
+                        style: Styles.s16().withWeight(FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              fileAnswer(),
+              ggmeetAnswer(),
             ],
           ),
         );

@@ -274,7 +274,7 @@ class SVi extends S {
   String get ggMeet => 'Google meet';
 
   @override
-  String get intructorGGmeet => 'Người hướng dẫn sẽ trả lời câu hỏi trực tiếp thông google meet';
+  String get intructorGGmeet => 'Người hướng dẫn sẽ trả lời câu hỏi trực tiếp thông qua cuộc gọi trực tuyến';
 
   @override
   String get helloEveryone => 'Xin chào mọi người';

@@ -84,6 +84,18 @@ class _ActivitiesSectionState extends State<ActivitiesSection> {
             },
           ),
           _ItemActivity(
+            title: "Tài khoản ngân hàng",
+            onTap: () async {
+              final isLoggedIn = await requestLoginAction(context);
+              if (!context.mounted) {
+                return;
+              }
+              if (isLoggedIn) {
+                const BankAccountRouteData().push(context);
+              }
+            },
+          ),
+          _ItemActivity(
             title: S.of(context).changePassword,
             onTap: () async {
               final isLoggedIn = await requestLoginAction(context);

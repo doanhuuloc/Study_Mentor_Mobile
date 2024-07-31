@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/presentation/router/app_nav_key/app_nav_key.dart';
 import 'package:study_mentor_mobile/presentation/ui/auth_screen/edit_profile_screen/edit_profile_screen.dart';
 
+import '../../../../ui/auth_screen/bank_account_screen/bank_account_screen.dart';
 import '../../../../ui/auth_screen/change_password_screen/change_password_screen.dart';
 import '../../../../ui/auth_screen/login_screen/login_screen.dart';
 import '../../../../ui/auth_screen/profile_screen/profile_screen.dart';
@@ -95,4 +96,14 @@ class EditProfileRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const EditProfileScreen();
+}
+
+class BankAccountRouteData extends GoRouteData {
+  const BankAccountRouteData();
+
+  static const routeName = 'bankAccount';
+  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppNavKey.root;
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const BankAccountScreen();
 }

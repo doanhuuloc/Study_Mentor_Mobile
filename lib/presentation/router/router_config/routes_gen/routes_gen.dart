@@ -209,6 +209,9 @@ class DropdownSheetRouteData extends GoRouteData {
         TypedGoRoute<EditProfileRouteData>(
           path: EditProfileRouteData.routeName,
         ),
+        TypedGoRoute<BankAccountRouteData>(
+          path: BankAccountRouteData.routeName,
+        ),
       ],
     ),
   ],

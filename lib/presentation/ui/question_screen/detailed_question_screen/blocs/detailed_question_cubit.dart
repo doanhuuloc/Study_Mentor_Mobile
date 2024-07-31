@@ -52,7 +52,7 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     if (response.isRight) {
       emit(state.copyWith(
         loading: false,
-        questionInfo: response.right.data,
+        questionInfo: response.right.data.copyWith(isStudentPaid: true),
         answer: (response.right.data.answers ?? []).isEmpty
             ? null
             : response.right.data.answers?[0],
@@ -84,9 +84,9 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
             (state.questionInfo?.answers ?? []).isEmpty)) {
       socketCubit.getAnswer((GetAnswer answer) {
         emit(state.copyWith(
-          answer: answer.data?.answer,
-          questionInfo: state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED)
-        ));
+            answer: answer.data?.answer,
+            questionInfo:
+                state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED)));
       });
     }
   }
@@ -198,6 +198,5 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
   Future<void> fetchData() async {
     await getQuestion();
     getAnswer();
-
   }
 }

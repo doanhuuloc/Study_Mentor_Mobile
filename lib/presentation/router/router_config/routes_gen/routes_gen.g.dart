@@ -285,6 +285,11 @@ RouteBase get $mainShellRouteData => ShellRouteData.$route(
               parentNavigatorKey: EditProfileRouteData.$parentNavigatorKey,
               factory: $EditProfileRouteDataExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'bankAccount',
+              parentNavigatorKey: BankAccountRouteData.$parentNavigatorKey,
+              factory: $BankAccountRouteDataExtension._fromState,
+            ),
           ],
         ),
       ],
@@ -673,6 +678,24 @@ extension $EditProfileRouteDataExtension on EditProfileRouteData {
 
   String get location => GoRouteData.$location(
         '/profile/editprofile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $BankAccountRouteDataExtension on BankAccountRouteData {
+  static BankAccountRouteData _fromState(GoRouterState state) =>
+      const BankAccountRouteData();
+
+  String get location => GoRouteData.$location(
+        '/profile/bankAccount',
       );
 
   void go(BuildContext context) => context.go(location);

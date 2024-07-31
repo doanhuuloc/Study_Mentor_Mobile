@@ -6,6 +6,7 @@ class AppConfig {
     required this.baseUrl,
     required this.baseUrlAI,
     required this.socketUrl,
+    required this.vietqrAPIUrl,
     required this.version,
     required this.appLink,
     required this.chatPay,
@@ -18,6 +19,7 @@ class AppConfig {
   final String baseUrl;
   final String baseUrlAI;
   final String socketUrl;
+  final String vietqrAPIUrl;
   final String appLink;
   final String chatPay;
   final String chatGemini;
