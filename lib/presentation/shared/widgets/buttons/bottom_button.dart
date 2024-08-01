@@ -53,7 +53,6 @@ class BottomButton extends StatelessWidget {
             : PrimaryButton.square(
                 onPressed: onPress,
                 title: title,
-                textStyle: textStyle,
               ),
       ),
     );

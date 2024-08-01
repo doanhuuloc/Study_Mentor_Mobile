@@ -60,6 +60,15 @@ class _ChatAIScreenState extends State<ChatAIScreen> {
         break;
     }
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+  }
+
+  void _scrollToBottom() {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 1000),
+      curve: Curves.easeOut,
+    );
   }
 
   @override
@@ -118,32 +127,40 @@ class _ChatAIScreenState extends State<ChatAIScreen> {
                   )
                 ],
               ),
-              body: BlocConsumer<ChatAICubit, ChatAIState>(
+              body: BlocListener<ChatAICubit, ChatAIState>(
                 listener: (context, state) {
-                  scrollController
-                      .jumpTo(scrollController.position.maxScrollExtent);
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => _scrollToBottom());
                 },
-                builder: (context, state) {
+                child: BlocBuilder<ChatAICubit, ChatAIState>(
+                    builder: (context, state) {
                   return Column(
                     children: [
                       Expanded(
-                          child: ListView(
-                        controller: scrollController,
-                        padding: const EdgeInsets.all(10),
-                        children:
-                            context.read<ChatAICubit>().state.listChat.map((e) {
-                          return ChatItem(
-                            content: e.content ?? "",
-                            dateTime: e.createAt ?? DateTime.now(),
-                            isOpposite: e.senderId !=
-                                context.read<UserCubit>().state.detail?.id,
-                            files: e.files,
-                          );
-                        }).toList(),
-                      )),
+                          child: state.listChat.isEmpty
+                              ? const Center(
+                                  child: Text("Vui lòng nhắn tin để bắt đầu"),
+                                )
+                              : ListView(
+                                  controller: scrollController,
+                                  padding: const EdgeInsets.all(10),
+                                  children: state.listChat.map((e) {
+                                    return ChatItem(
+                                      content: e.content ?? "",
+                                      dateTime: e.createAt ?? DateTime.now(),
+                                      isOpposite: e.senderId !=
+                                          context
+                                              .read<UserCubit>()
+                                              .state
+                                              .detail
+                                              ?.id,
+                                      files: e.files,
+                                    );
+                                  }).toList(),
+                                )),
                       Container(
                         decoration:
-                            BoxDecoration(color: AppColors.blue.shade200),
+                            BoxDecoration(color: AppColors.blue.shade50),
                         padding: const EdgeInsets.all(10),
                         child: Column(
                           children: [
@@ -260,9 +277,7 @@ class _ChatAIScreenState extends State<ChatAIScreen> {
                                           .onChangedMessage(value);
                                     },
                                     borderColor: Colors.black,
-                                  
                                     textInputAction: TextInputAction.newline,
-                                    
                                     minLines: 1,
                                     maxLines: null,
                                   ),
@@ -293,7 +308,7 @@ class _ChatAIScreenState extends State<ChatAIScreen> {
                       )
                     ],
                   );
-                },
+                }),
               ));
         },
       ),

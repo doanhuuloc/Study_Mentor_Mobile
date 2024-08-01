@@ -262,7 +262,7 @@ class ActivityButton extends StatelessWidget {
             if (state.questionInfo?.status == QuestionStatus.NEW)
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 10, bottom: 20, right: 50, left: 50),
+                    top: 10, bottom: 20, right: 18, left: 18),
                 child: CommonButton(
                   padding: const EdgeInsets.all(10),
                   child: Text(state.questionInfo?.isStudentPaid == true
@@ -302,7 +302,7 @@ class ActivityButton extends StatelessWidget {
             if (state.questionInfo?.status == QuestionStatus.ANSWERED)
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 10, bottom: 20, right: 50, left: 50),
+                    top: 10, bottom: 20, right: 18, left: 18),
                 child: CommonButton(
                   padding: const EdgeInsets.all(10),
                   child: Text(S.of(context).done),
@@ -332,7 +332,7 @@ class ActivityButton extends StatelessWidget {
                 state.questionInfo?.status == QuestionStatus.ACCEPTED)
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 10, bottom: 20, right: 50, left: 50),
+                    top: 10, bottom: 20, right: 18, left: 18),
                 child: CommonButton(
                   padding: const EdgeInsets.all(10),
                   backgroundColor: state.meetingStartTime != null

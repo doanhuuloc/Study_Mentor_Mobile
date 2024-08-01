@@ -73,8 +73,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                 child: GestureDetector(
                   onTap: () => editContentFocusNode.unfocus(),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.only(left: 18, right: 18),
                     child: SingleChildScrollView(
                       child: GapItems(
                         gap: 10,
@@ -125,16 +124,28 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                           if (widget.questionType == QuestionType.GGMEET)
                             const SelectTimeMetting(),
                           const SelectVoucher(),
-                          const PaymentInfo(),
-                          _PayButton(
-                            contentQuestionController:
-                                contentQuestionController,
+                          const SizedBox(
+                            height: 20,
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
+              ),
+              Container(
+                height: 4,
+                color: AppColors.gray.shade100,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18),
+                child: PaymentInfo(),
+              ),
+              _PayButton(
+                contentQuestionController: contentQuestionController,
               ),
               if (isfocusEditContent)
                 SingleChildScrollView(
@@ -187,7 +198,7 @@ class _PayButton extends StatelessWidget {
           prev.calculatePriceReponse != curr.calculatePriceReponse;
     }, builder: (context, state) {
       return BottomButton(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        // padding: const EdgeInsets.symmetric(vertical: 20),
         title: S.of(context).pay(state.canSubmit
             ? formatCurrency(
                 state.calculatePriceReponse?.promoPrice ?? 0, context)
