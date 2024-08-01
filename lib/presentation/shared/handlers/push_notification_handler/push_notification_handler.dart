@@ -36,9 +36,7 @@ class _AuthBasedRoutingHandlerState
   }
 
   Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
-    print('Handling a background message ${message.messageId}');
-  }
+      RemoteMessage message) async {}
 
   void handleClickNotification(String questionId) {
     DetailedQuestionRouteData(questionId: questionId).go(context);
@@ -56,7 +54,6 @@ class _AuthBasedRoutingHandlerState
 
     await FirebaseMessaging.instance.setAutoInitEnabled(true);
     final token = await FirebaseMessaging.instance.getToken();
-    print('token: $token');
     context.read<UserCubit>().setFcmToken(token);
 
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =

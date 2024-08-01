@@ -110,7 +110,6 @@ class AuthCubit extends SafeCubit<AuthStatusState> {
           .refreshTokens(shouldTriggerExpired: false)
           .timeout(timeOut);
       if (refreshTokenSuccess.success) {
-        print('succeeeeeeee $redirectUrl');
         _loggedInSuccess(
           redirectUrl: redirectUrl,
         );

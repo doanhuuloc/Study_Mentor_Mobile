@@ -24,7 +24,6 @@ class IntrustorItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("${context.read<AppConfig>().imagePath}/$avatar");
     const helperImage = ImageLoading(
       width: 60,
       height: 60,

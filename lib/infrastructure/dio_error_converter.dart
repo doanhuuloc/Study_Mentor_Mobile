@@ -53,7 +53,6 @@ class DioErrorConverter {
   }
 
   DioFailure convert() {
-    print('error.requestOptions.uri.toString(): ${error.type}');
     final apiPath = error.requestOptions.uri.toString();
 
     switch (error.type) {

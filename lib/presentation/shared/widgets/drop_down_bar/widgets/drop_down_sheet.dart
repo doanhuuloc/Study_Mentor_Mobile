@@ -33,21 +33,23 @@ class _DropdownSheet<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: items
-          .map(
-            (e) => AppListTile(
-              title: Text(
-                e.title,
-                style: e.textStyle,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: items
+            .map(
+              (e) => AppListTile(
+                title: Text(
+                  e.title,
+                  style: e.textStyle,
+                ),
+                onTap: () {
+                  context.pop(e.value);
+                },
               ),
-              onTap: () {
-                context.pop(e.value);
-              },
-            ),
-          )
-          .toList(),
+            )
+            .toList(),
+      ),
     );
   }
 }

@@ -25,6 +25,14 @@ class BankAccountCubit extends SafeCubit<BankAccountState> {
   final UserController userController;
   final VietqrController vietqrController;
 
+  void onChangeSelectedBank(Bank value) {
+    emit(state.copyWith(selectedBank: value));
+  }
+
+  void onChangeAccountNumber(String value) {
+    emit(state.copyWith(accountNumberBank: value));
+  }
+
   Future<void> getListBank() async {
     emit(state.copyWith(loading: true));
     final response = await vietqrController.getListBank();
@@ -47,7 +55,12 @@ class BankAccountCubit extends SafeCubit<BankAccountState> {
         orElse: () => const Bank(),
       );
 
-      emit(state.copyWith(selectedBank: myBankInfo, loading: false));
+      emit(state.copyWith(
+        selectedBank: myBankInfo,
+        loading: false,
+        accountNumberBank: response.right.data.numberOfBanking,
+        accountNameBank: response.right.data.nameUserOfBanking,
+      ));
     }
   }
 
@@ -74,7 +87,7 @@ class BankAccountCubit extends SafeCubit<BankAccountState> {
 
   Future<void> updateBankInfo(BuildContext context) async {
     final futureResponse = userController.updateBankInfo(UpdateBankInfoRequest(
-      idOfBanking: state.selectedBank?.id,
+      idOfBanking: state.selectedBank?.bin,
       nameOfBanking: state.selectedBank?.name,
       numberOfBanking: state.accountNumberBank,
       nameUserOfBanking: state.accountNameBank,

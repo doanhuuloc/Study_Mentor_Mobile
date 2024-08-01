@@ -216,7 +216,7 @@
   "monthly": " Gói tháng (30 ngày)",
   "yearly": "Gói năm (365 ngày)",
   "membershipPayAI": "Gói sử dụng AI hệ thống",
-  "reportSuccess": "Báo cáo của bạn được gữi thành công",
+  "reportSuccess": "Báo cáo của bạn được gửi thành công",
   "confirm": "Xác nhận",
   "selectTutorSuccess": "Chọn người hướng dẫn thành công",
   "intructorSelectQuestion": "Người hướng dẫn {intructor} bạn chọn đã chấp nhận câu hỏi với tiêu đề {question} với giá {price}",

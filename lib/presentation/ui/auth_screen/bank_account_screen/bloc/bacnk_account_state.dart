@@ -15,7 +15,10 @@ class BankAccountState {
   final String? accountNameBank;
 
   bool get canSubmit {
-    return true;
+    return selectedBank != null ||
+        selectedBank != const Bank() ||
+        accountNumberBank != "" ||
+        accountNumberBank != null;
   }
 
   BankAccountState copyWith({

@@ -535,7 +535,7 @@ class SVi extends S {
   String get membershipPayAI => 'Gói sử dụng AI hệ thống';
 
   @override
-  String get reportSuccess => 'Báo cáo của bạn được gữi thành công';
+  String get reportSuccess => 'Báo cáo của bạn được gửi thành công';
 
   @override
   String get confirm => 'Xác nhận';

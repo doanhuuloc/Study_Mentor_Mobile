@@ -259,7 +259,10 @@ class _ChatAIScreenState extends State<ChatAIScreen> {
                                           .read<ChatAICubit>()
                                           .onChangedMessage(value);
                                     },
+                                    borderColor: Colors.black,
+                                  
                                     textInputAction: TextInputAction.newline,
+                                    
                                     minLines: 1,
                                     maxLines: null,
                                   ),

@@ -52,7 +52,7 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     if (response.isRight) {
       emit(state.copyWith(
         loading: false,
-        questionInfo: response.right.data.copyWith(isStudentPaid: true),
+        questionInfo: response.right.data,
         answer: (response.right.data.answers ?? []).isEmpty
             ? null
             : response.right.data.answers?[0],
@@ -74,6 +74,8 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
       emit(state.copyWith(
         meetingUrl: meetUrl.right.data.meetingUrl ??
             "https://meet.google.com/xvc-fcxq-ohw",
+        questionInfo:
+            state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED),
       ));
     }
   }
@@ -178,10 +180,11 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
   void receiveGGMeet() {
     socketCubit.receiveGGMeet((ReceiveGGMeet infoGGMeet) {
       emit(state.copyWith(
-        meetingUrl:
-            infoGGMeet.meetingUrl ?? "https://meet.google.com/xvc-fcxq-ohw",
-        meetingStartTime: infoGGMeet.meeting_start_time,
-      ));
+          meetingUrl:
+              infoGGMeet.meetingUrl ?? "https://meet.google.com/xvc-fcxq-ohw",
+          meetingStartTime: infoGGMeet.meeting_start_time,
+          questionInfo:
+              state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED)));
     });
   }
 

@@ -117,9 +117,9 @@ class FindIntrustorCubit extends SafeCubit<FindIntrustorState> {
       if (!context.mounted) {
         return;
       }
-      await AlertRouteData(
-              content: S.of(context).wattingAccepted(tutor.fullName ?? ""))
-          .push(context);
+      // await AlertRouteData(
+      //         content: S.of(context).wattingAccepted(tutor.fullName ?? ""))
+      //     .push(context);
     }
   }
 

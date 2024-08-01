@@ -73,7 +73,6 @@ class BootstrapCubit extends SafeCubit<BootstrapState> {
       initialUrl: initialLink,
       username: oldUsername,
     ));
-    print('loi, initialLink: $initialLink');
     authCubit.loginByRefreshToken(redirectUrl: initialLink ?? '/home');
   }
 }

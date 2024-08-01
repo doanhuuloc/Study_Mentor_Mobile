@@ -274,13 +274,14 @@ class ActivityButton extends StatelessWidget {
                     if (state.questionInfo?.subject?.id != null) {
                       if (state.questionInfo?.isStudentPaid == true) {
                         if (await FindIntrustorRouteData(
-                                $extra: FindIntrustorExtraData(
-                                  questionId: questionId,
-                                  subjectId:
-                                      state.questionInfo?.subject?.id ?? "",
-                                ),
-                                questionId: questionId)
-                            .push(context)) {
+                                    $extra: FindIntrustorExtraData(
+                                      questionId: questionId,
+                                      subjectId:
+                                          state.questionInfo?.subject?.id ?? "",
+                                    ),
+                                    questionId: questionId)
+                                .push(context) ??
+                            false) {
                           if (!context.mounted) {
                             return;
                           }

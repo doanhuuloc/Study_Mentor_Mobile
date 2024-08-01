@@ -119,10 +119,13 @@ class AppDIService implements DIService<AppDIData> {
 
     // dio vietqr options
     final optionsVietqr = BaseOptions(
-      baseUrl: appConfig.vietqrAPIUrl,
-      connectTimeout: const Duration(minutes: 5),
-      receiveTimeout: const Duration(minutes: 5),
-    );
+        baseUrl: appConfig.vietqrAPIUrl,
+        connectTimeout: const Duration(minutes: 5),
+        receiveTimeout: const Duration(minutes: 5),
+        headers: {
+          "x-client-id": "09cdb6a7-e088-4dbd-8bb0-d645389cdae3",
+          "x-api-key": "93d46183-97c7-417a-8da7-23692310b980",
+        });
 
     final loggerInterceptor = LoggerInterceptor();
 

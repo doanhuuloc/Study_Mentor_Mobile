@@ -174,6 +174,10 @@ class AnswerInfoBox extends StatelessWidget {
                   state.questionInfo?.status == QuestionStatus.ANSWERED)
                 Column(
                   children: [
+                    Text(
+                      "Thời gian tham gia: ${DateFormat("hh 'giờ' mm 'phút' 'vào' dd/MM/yyyy").format( state.meetingStartTime??DateTime.now())}",
+                      style: Styles.s16(),
+                    ),
                     const SizedBox(height: 10),
                     Text(
                       S.of(context).joinGGMeet,

@@ -73,9 +73,9 @@ class SocketControllerImpl with SocketController {
     logging.i("on receive message");
 
     socket?.on(SocketEvent.RECEIVE_MESSAGE.event, (data) {
+      logging.i(data);
       final ReceiveMessage receiveMessage = ReceiveMessage.fromJson(data);
 
-      logging.i(receiveMessage);
       function(receiveMessage);
     });
   }

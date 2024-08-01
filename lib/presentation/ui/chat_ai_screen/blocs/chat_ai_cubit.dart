@@ -53,6 +53,7 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
   }
 
   Future<void> sendMessageWithAI() async {
+    emit(state.copyWith(loading: true));
     final String message = state.messageField;
     onChangedMessage("");
     List<FileRequest>? files;
@@ -73,7 +74,6 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
         }
       }
     }
-
     addChat(ChatAIResponse(
       createAt: DateTime.now(),
       content: message,
@@ -81,22 +81,26 @@ class ChatAICubit extends SafeCubit<ChatAIState> {
       files: files,
     ));
 
-    final msgres = await aiController.chatAI(
-        chatAIRequest: SendMessage(
+    aiController
+        .chatAI(
+            chatAIRequest: SendMessage(
       content: message,
       senderId: userId,
       recipientId: idChatAI,
       roomId: state.roomId,
       files: files,
-    ));
+    ))
+        .then((msgres) {
+      if (msgres.isLeft) {
+        failureHandlerManager.handle(msgres.left);
+        emit(state.copyWith(loading: false));
+      }
 
-    if (msgres.isLeft) {
-      failureHandlerManager.handle(msgres.left);
-    }
-
-    if (msgres.isRight) {
-      addChat(msgres.right);
-    }
+      if (msgres.isRight) {
+        addChat(msgres.right);
+        emit(state.copyWith(loading: false));
+      }
+    });
   }
 
   Future<void> createRoomChat() async {
