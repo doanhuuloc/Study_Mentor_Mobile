@@ -91,7 +91,7 @@ class QuestionInfoBox extends StatelessWidget {
                 return FileBox(
                   name: file.fileName ?? "",
                   icon: AppIconButton(
-                    icon: Assets.svgs.uploadFile.svg(
+                    icon: Assets.svgs.download.svg(
                       color: Colors.black,
                       height: 25,
                       width: 15,

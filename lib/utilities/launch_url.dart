@@ -9,6 +9,7 @@ Future<void> appLaunchUrl(String url, BuildContext context) async {
 
   final checked = await launchUrl(launch, mode: LaunchMode.externalApplication);
 
+
   if (!checked) {
     if (context.mounted) {
       final AppSnackBar snackBar =

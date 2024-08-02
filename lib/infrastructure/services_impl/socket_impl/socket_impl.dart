@@ -167,4 +167,14 @@ class SocketControllerImpl with SocketController {
       function(ggmeet);
     });
   }
+
+  @override
+  void payment({Socket? socket, required Function function}) {
+    logging.i("on payment");
+    socket?.on(SocketEvent.PAYMENT.event, (data) {
+      logging.i(data);
+      final Payment payment = Payment.fromJson(data);
+      function(payment);
+    });
+  }
 }

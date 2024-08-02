@@ -8,3 +8,4 @@ export 'src/send_notification.dart';
 export 'src/socket_event.dart';
 export 'src/info_ggmeet.dart';
 export 'src/receive_ggmeet.dart';
+export 'src/payment.dart';

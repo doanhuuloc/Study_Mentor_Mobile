@@ -382,7 +382,7 @@ class SVi extends S {
   String get reivew => 'Đánh giá';
 
   @override
-  String get send => 'Gữi';
+  String get send => 'Gửi';
 
   @override
   String get subjectQuestion => 'Môn học: ';

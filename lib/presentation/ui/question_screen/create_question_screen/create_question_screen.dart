@@ -97,16 +97,19 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 border:
-                                    Border.all(color: AppColors.gray.shade300),
+                                    Border.all(color:isfocusEditContent?AppColors.blue.shade500: AppColors.gray.shade300),
                                 borderRadius: BorderRadius.circular(
                                   4,
                                 )),
                             child: QuillEditor.basic(
                               focusNode: editContentFocusNode,
                               configurations: QuillEditorConfigurations(
+                                
                                 controller: contentQuestionController,
                                 readOnly: false,
+                                
                                 sharedConfigurations: QuillSharedConfigurations(
+                                  
                                   locale: Locale(context
                                       .read<LocaleCubit>()
                                       .state

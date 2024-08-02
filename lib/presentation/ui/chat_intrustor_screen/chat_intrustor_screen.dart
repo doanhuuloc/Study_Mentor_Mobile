@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../application/services/app/app_config/app_config.dart';
+import '../../../application/services/education/education.dart';
 import '../../../application/services/user/response/response.dart';
 import '../../bases/file_cubit/file_cubit.dart';
 import '../../bases/socket_cubit/socket_cubit.dart';
@@ -44,10 +45,12 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
           failureHandlerManager: context.read<FailureHandlerManager>(),
           socketCubit: context.read<SocketCubit>(),
           fileCubit: context.read<FileCubit>(),
+          educationController: context.read<EducationController>(),
           userId: context.read<UserCubit>().state.detail?.id ?? "",
           intrustor: widget.intrustor,
           roomId: widget.roomId,
           controller: scrollController,
+
         );
       },
       child: Builder(
@@ -63,9 +66,11 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: NetworkImage(
-                            "${context.read<AppConfig>().imagePath}/${widget.intrustor.avatar?.fileKey ?? ""}",
-                          ),
+                          image: (widget.intrustor.avatar?.fileKey ?? "") == ""
+                              ? AssetImage(Assets.images.ai.path)
+                              : NetworkImage(
+                                  "${context.read<AppConfig>().imagePath}/${widget.intrustor.avatar?.fileKey ?? ""}",
+                                ) as ImageProvider,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -223,6 +228,8 @@ class _ChatIntrustorScreenState extends State<ChatIntrustorScreen> {
                                     textInputAction: TextInputAction.newline,
                                     minLines: 1,
                                     maxLines: null,
+                                    fillColor: Colors.white,
+                                    borderColor: Colors.black,
                                   ),
                                 ),
                                 Padding(

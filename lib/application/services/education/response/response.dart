@@ -7,3 +7,4 @@ export 'src/calculate_price_response.dart';
 export 'src/create_ggmeet_response.dart';
 export 'src/payment_link_response.dart';
 export 'src/report_question_response.dart';
+export 'src/create_question_roomchat_response.dart';

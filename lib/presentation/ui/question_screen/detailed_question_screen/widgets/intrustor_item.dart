@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../../../../application/services/app/app_config/app_config.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/theme/theme.dart';
 
@@ -11,11 +13,13 @@ class IntrustorItem extends StatelessWidget {
     this.name,
     this.numberOfStar,
     this.voidCallback,
+    required this.image,
   });
   final bool loading;
   final String? name;
   final int? numberOfStar;
   final VoidCallback? voidCallback;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,11 @@ class IntrustorItem extends StatelessWidget {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              image: AssetImage(Assets.images.ai.path))),
+                              image: image == ""
+                                  ? AssetImage(Assets.images.ai.path)
+                                  : NetworkImage(
+                                          "${context.read<AppConfig>().imagePath}/$image")
+                                      as ImageProvider)),
                     ),
                   Expanded(
                     child: Padding(

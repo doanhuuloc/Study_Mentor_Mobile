@@ -82,7 +82,7 @@ class AnswerInfoBox extends StatelessWidget {
                                 (e) => FileBox(
                                   name: e.fileName ?? "",
                                   icon: AppIconButton(
-                                    icon: Assets.svgs.uploadFile.svg(
+                                    icon: Assets.svgs.download.svg(
                                       color: Colors.black,
                                       height: 25,
                                       width: 15,
@@ -175,7 +175,7 @@ class AnswerInfoBox extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Thời gian tham gia: ${DateFormat("hh 'giờ' mm 'phút' 'vào' dd/MM/yyyy").format( state.meetingStartTime??DateTime.now())}",
+                      "Thời gian tham gia: ${DateFormat("hh 'giờ' mm 'phút' 'vào' dd/MM/yyyy").format(state.meetingStartTime ?? DateTime.now())}",
                       style: Styles.s16(),
                     ),
                     const SizedBox(height: 10),
@@ -199,7 +199,20 @@ class AnswerInfoBox extends StatelessWidget {
                       ],
                     ),
                   ],
-                )
+                ),
+              if (state.questionInfo?.questionType == QuestionType.GGMEET &&
+                  state.questionInfo?.status == QuestionStatus.DONE)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                     "Bạn đã hoàn thành câu hỏi này",
+                      textAlign: TextAlign.center,
+                      style: Styles.s16().withWeight(FontWeight.w600),
+                    ),
+                  ),
+                ),
             ],
           );
         }

@@ -200,6 +200,9 @@ class $AssetsSvgsGen {
   SvgGenImage get dotsHorizontalIcon =>
       const SvgGenImage('assets/svgs/dots-horizontal-icon.svg');
 
+  /// File path: assets/svgs/download.svg
+  SvgGenImage get download => const SvgGenImage('assets/svgs/download.svg');
+
   /// File path: assets/svgs/drawer-menu.svg
   SvgGenImage get drawerMenu =>
       const SvgGenImage('assets/svgs/drawer-menu.svg');
@@ -461,6 +464,7 @@ class $AssetsSvgsGen {
         deliveryCompleted,
         dotsHorizontalIcon24,
         dotsHorizontalIcon,
+        download,
         drawerMenu,
         emptyData,
         eyeIcon16,

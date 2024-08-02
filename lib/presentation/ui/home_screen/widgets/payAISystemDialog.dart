@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:study_mentor_mobile/presentation/shared/handlers/failure_handler/failure_handler_manager.dart';
 import 'package:study_mentor_mobile/presentation/shared/handlers/loading_handler/loading_manager.dart';
 import 'package:study_mentor_mobile/presentation/utilities/formatCurency.dart';
 import 'package:study_mentor_mobile/utilities/launch_url.dart';
+import 'package:study_mentor_mobile/utilities/logging/logging.dart';
 
 import '../../../../application/services/education/education.dart';
+import '../../../../application/services/socket/dto/dto.dart';
+import '../../../bases/socket_cubit/socket_cubit.dart';
+import '../../../bases/user_cubit/user_cubit.dart';
 import '../../../gen/app_colors.dart';
 import '../../../shared/theme/theme.dart';
 import '../../../shared/widgets/buttons/common_button.dart';
 
 class PayAISystemDialog extends StatefulWidget {
-  const PayAISystemDialog({super.key});
+  const PayAISystemDialog({super.key, required this.paymentSucces});
+  final Function paymentSucces;
 
   @override
   State<PayAISystemDialog> createState() => _PayAISystemDialogState();
@@ -27,7 +33,6 @@ class _PayAISystemDialogState extends State<PayAISystemDialog> {
   }
 
   Future<void> pay() async {
-    // context.read<UserCubit>().setMemberShip();
     final futureRes = context.read<EducationController>().payment(
         paymentLinkRequest:
             PaymentLinkRequest(type: 1, expirationDateType: type));
@@ -44,7 +49,18 @@ class _PayAISystemDialogState extends State<PayAISystemDialog> {
 
     if (res.isRight) {
       try {
-        appLaunchUrl(res.right.data.checkoutUrl!, context);
+        context.read<SocketCubit>().payment((Payment payment) {
+          logging.i(payment);
+          if (payment.data?.type == 1) {
+          logging.i(payment);
+
+            widget.paymentSucces();
+          }
+        });
+        context.pop();
+        Navigator.of(context).pop();
+
+        await appLaunchUrl(res.right.data.checkoutUrl!, context);
       } catch (e) {}
     }
   }

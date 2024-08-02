@@ -104,6 +104,9 @@ class GetQuestionInfoResponseMapper
   static bool? _$isStudentPaid(GetQuestionInfoResponse v) => v.isStudentPaid;
   static const Field<GetQuestionInfoResponse, bool> _f$isStudentPaid =
       Field('isStudentPaid', _$isStudentPaid, opt: true);
+  static String? _$roomId(GetQuestionInfoResponse v) => v.roomId;
+  static const Field<GetQuestionInfoResponse, String> _f$roomId =
+      Field('roomId', _$roomId, opt: true);
 
   @override
   final MappableFields<GetQuestionInfoResponse> fields = const {
@@ -131,6 +134,7 @@ class GetQuestionInfoResponseMapper
     #meeting_start_time: _f$meeting_start_time,
     #meeting_end_time: _f$meeting_end_time,
     #isStudentPaid: _f$isStudentPaid,
+    #roomId: _f$roomId,
   };
 
   static GetQuestionInfoResponse _instantiate(DecodingData data) {
@@ -158,7 +162,8 @@ class GetQuestionInfoResponseMapper
         timeMetting: data.dec(_f$timeMetting),
         meeting_start_time: data.dec(_f$meeting_start_time),
         meeting_end_time: data.dec(_f$meeting_end_time),
-        isStudentPaid: data.dec(_f$isStudentPaid));
+        isStudentPaid: data.dec(_f$isStudentPaid),
+        roomId: data.dec(_f$roomId));
   }
 
   @override
@@ -248,7 +253,8 @@ abstract class GetQuestionInfoResponseCopyWith<
       int? timeMetting,
       DateTime? meeting_start_time,
       DateTime? meeting_end_time,
-      bool? isStudentPaid});
+      bool? isStudentPaid,
+      String? roomId});
   GetQuestionInfoResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -309,7 +315,8 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
           Object? timeMetting = $none,
           Object? meeting_start_time = $none,
           Object? meeting_end_time = $none,
-          Object? isStudentPaid = $none}) =>
+          Object? isStudentPaid = $none,
+          Object? roomId = $none}) =>
       $apply(FieldCopyWithData({
         if (questionId != $none) #questionId: questionId,
         if (title != $none) #title: title,
@@ -335,7 +342,8 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
         if (meeting_start_time != $none)
           #meeting_start_time: meeting_start_time,
         if (meeting_end_time != $none) #meeting_end_time: meeting_end_time,
-        if (isStudentPaid != $none) #isStudentPaid: isStudentPaid
+        if (isStudentPaid != $none) #isStudentPaid: isStudentPaid,
+        if (roomId != $none) #roomId: roomId
       }));
   @override
   GetQuestionInfoResponse $make(CopyWithData data) => GetQuestionInfoResponse(
@@ -364,7 +372,8 @@ class _GetQuestionInfoResponseCopyWithImpl<$R, $Out>
           data.get(#meeting_start_time, or: $value.meeting_start_time),
       meeting_end_time:
           data.get(#meeting_end_time, or: $value.meeting_end_time),
-      isStudentPaid: data.get(#isStudentPaid, or: $value.isStudentPaid));
+      isStudentPaid: data.get(#isStudentPaid, or: $value.isStudentPaid),
+      roomId: data.get(#roomId, or: $value.roomId));
 
   @override
   GetQuestionInfoResponseCopyWith<$R2, GetQuestionInfoResponse, $Out2>

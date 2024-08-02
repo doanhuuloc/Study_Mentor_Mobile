@@ -5,6 +5,7 @@ import 'package:study_mentor_mobile/application/services/ai/dto/enum.dart';
 import 'package:study_mentor_mobile/presentation/bases/user_cubit/user_cubit.dart';
 import 'package:study_mentor_mobile/presentation/gen/assets.gen.dart';
 import 'package:study_mentor_mobile/presentation/router/router_config/router_config.dart';
+import 'package:study_mentor_mobile/utilities/logging/logging.dart';
 
 import '../../../gen/app_colors.dart';
 import '../../../gen/locale/app_localizations.dart';
@@ -54,9 +55,13 @@ class HomeMainContent extends StatelessWidget {
                     } else {
                       showDialog(
                           context: context,
-                          builder: (context) => const PayAISystemDialog());
+                          builder: (ctx) => PayAISystemDialog(
+                                paymentSucces: () {
+                                  logging.i("message");
+                                  context.read<UserCubit>().setMemberShip();
+                                },
+                              ));
                     }
-                    context.read<UserCubit>().setMemberShip();
                   },
                 ),
               ),

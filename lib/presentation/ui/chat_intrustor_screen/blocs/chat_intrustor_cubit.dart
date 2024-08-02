@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:study_mentor_mobile/application/services/file/file.dart';
 
+import '../../../../application/services/education/education.dart';
 import '../../../../application/services/socket/dto/dto.dart';
 import '../../../../application/services/user/response/response.dart';
 import '../../../bases/bloc_utils/safe_cubit/safe_cubit.dart';
@@ -23,12 +24,17 @@ class ChatIntrustorCubit extends SafeCubit<ChatIntrustorState> {
     required this.intrustor,
     required this.controller,
     required this.roomId,
+    required this.educationController,
   }) : super(ChatIntrustorState(roomId: roomId, listChat: [])) {
-    // getListChat(roomId: roomId);
+    if (roomId != "") {
+      getListChat(roomId: roomId);
+      emit(state.copyWith(roomId: roomId));
+    }
     receiveMessage();
   }
 
   final FailureHandlerManager failureHandlerManager;
+  final EducationController educationController;
   final SocketCubit socketCubit;
   final FileCubit fileCubit;
   final String userId;
@@ -37,15 +43,15 @@ class ChatIntrustorCubit extends SafeCubit<ChatIntrustorState> {
   final ScrollController controller;
 
   Future<void> getListChat({required String roomId}) async {
-    // final listChat =
-    //     await aiController.getDetailedMessageRoomChat(roomId: roomId);
-    // if (listChat.isLeft) {
-    //   failureHandlerManager.handle(listChat.left);
-    // }
+    final listChat =
+        await educationController.getDetailedRoomChat(roomId: roomId);
+    if (listChat.isLeft) {
+      failureHandlerManager.handle(listChat.left);
+    }
 
-    // if (listChat.isRight) {
-    //   emit(state.copyWith(listChat: listChat.right));
-    // }
+    if (listChat.isRight) {
+      emit(state.copyWith(listChat: listChat.right.listMessage));
+    }
   }
 
   Future<void> sendMessage() async {

@@ -41,7 +41,7 @@ class TutorSendInfoGGMeet extends StatelessWidget {
                       .withWeight(FontWeight.w600),
                 ),
                 Text(
-                  "Bạn có thể đề xuất thời gian tham gia google khác tắt thông báo và gữi 1 lời mời tham gia google meet khác",
+                  "Bạn có thể đề xuất thời gian tham gia google khác tắt thông báo và Gửi 1 lời mời tham gia google meet khác",
                   style: Styles.s14().withColor(AppColors.text.bodyText),
                 ),
                 Row(

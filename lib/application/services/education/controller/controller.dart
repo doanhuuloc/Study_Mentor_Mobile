@@ -1,3 +1,5 @@
+import 'package:study_mentor_mobile/application/services/education/response/src/get_detailed_roomchat_response.dart';
+
 import '../../../../utilities/failure/failure.dart';
 import '../../../../utilities/result/result.dart';
 import '../../common/common.dart';
@@ -53,4 +55,12 @@ mixin EducationController {
   Future<Result<Failure, BaseResponse<ReportQuestionResponse>>>
       getReportQuestion(
           {required GetReportQuestionRequest getReportQuestionRequest});
+
+  Future<Result<Failure, BaseResponse<CreateQuestionRoomChatResponse>>>
+      createRoomChat(
+          {required CreateQuestionRoomChatRequest
+              createQuestionRoomChatRequest});
+
+  Future<Result<Failure, GetDetailedRoomChatReponse>> getDetailedRoomChat(
+      {required String roomId});
 }

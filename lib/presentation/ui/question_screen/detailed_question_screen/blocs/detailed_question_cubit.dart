@@ -25,6 +25,7 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     fetchData();
     receiveInfoGGMeet();
     receiveGGMeet();
+    paymentSucces();
   }
 
   final String userId;
@@ -39,6 +40,11 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
   void changeReportId(String value) {
     emit(state.copyWith(
         questionInfo: state.questionInfo?.copyWith(reportId: value)));
+  }
+
+  void isPaid() {
+    emit(state.copyWith(
+        questionInfo: state.questionInfo?.copyWith(isStudentPaid: true)));
   }
 
   Future<void> getQuestion() async {
@@ -196,6 +202,44 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
       isStudent: true,
     );
     socketCubit.sendInfoGGMeet(infoGGMeet);
+  }
+
+  void paymentSucces() {
+    socketCubit.payment((Payment payment) {
+      if (payment.data?.type == 0) {
+        // getQuestion();
+        emit(state.copyWith(
+            questionInfo: state.questionInfo?.copyWith(isStudentPaid: true)));
+      }
+    });
+  }
+
+  Future<String> createRoomChat() async {
+    if (state.questionInfo?.roomId != null &&
+        state.questionInfo?.roomId != "") {
+      return state.questionInfo?.roomId ?? "";
+    }
+
+    final response = await educationController.createRoomChat(
+        createQuestionRoomChatRequest: CreateQuestionRoomChatRequest(
+      userId: userId,
+      tutorId: state.questionInfo?.tutor?.id ?? "",
+      questionId: questionId,
+    ));
+
+    if (response.isLeft) {
+      failureHandlerManager.handle(response.left);
+      return "";
+    }
+
+    if (response.isRight) {
+      emit(state.copyWith(
+          questionInfo: state.questionInfo
+              ?.copyWith(roomId: response.right.data.roomId)));
+      return response.right.data.roomId ?? "";
+    }
+
+    return "";
   }
 
   Future<void> fetchData() async {

@@ -37,6 +37,7 @@ class CommonTextField extends StatefulWidget {
     this.inputFormatters,
     this.suffix,
     this.minLines,
+    this.fillColor,
   });
 
   factory CommonTextField.slim({
@@ -117,6 +118,7 @@ class CommonTextField extends StatefulWidget {
   final int? maxLength;
   final List<TextInputFormatter>? inputFormatters;
   final Widget? suffix;
+  final Color? fillColor;
 
   @override
   State<CommonTextField> createState() => _CommonTextFieldState();
@@ -293,8 +295,8 @@ class _CommonTextFieldState extends State<CommonTextField> {
       decoration: InputDecoration(
         errorMaxLines: 3,
         errorText: widget.errorText == "" ? null : widget.errorText,
-        filled: !widget.enable,
-        fillColor: AppColors.gray.shade300,
+        filled: widget.fillColor != null ? true : !widget.enable,
+        fillColor: widget.fillColor ?? AppColors.gray.shade300,
         suffixIconConstraints: BoxConstraints(
             maxWidth: suffixButtonSize + widget.contentPadding.right,
             maxHeight: suffixButtonSize),

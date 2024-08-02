@@ -20,6 +20,7 @@ enum SocketEvent {
   SEND_INFO_GOOGLE_MEET('send-info-google-meet'),
   RECEIVE_INFO_GOOGLE_MEET('receive-info-google-meet'),
   CANCEL_GGMEET('cancel-google-meet'),
+  PAYMENT('payment'),
   RECEIVE_GGMEET("receive-ggmeet");
 
   final String event;

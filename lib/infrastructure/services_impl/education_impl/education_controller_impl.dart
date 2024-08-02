@@ -1,3 +1,5 @@
+import 'package:study_mentor_mobile/application/services/education/response/src/get_detailed_roomchat_response.dart';
+
 import '../../../application/services/common/common.dart';
 import '../../../application/services/education/Education.dart';
 import '../../../utilities/failure/failure.dart';
@@ -132,5 +134,22 @@ class EducationControllerImpl with EducationController, DataSourceErrorHandler {
     return handleApiResult(
         future: () => educationDataSource.getReportQuestion(
             reportId: getReportQuestionRequest.reportId));
+  }
+
+  @override
+  Future<Result<Failure, BaseResponse<CreateQuestionRoomChatResponse>>>
+      createRoomChat(
+          {required CreateQuestionRoomChatRequest
+              createQuestionRoomChatRequest}) {
+    return handleApiResult(
+        future: () =>
+            educationDataSource.createRoomChat(createQuestionRoomChatRequest));
+  }
+
+  @override
+  Future<Result<Failure, GetDetailedRoomChatReponse>> getDetailedRoomChat(
+      {required String roomId}) {
+    return handleApiResult(
+        future: () => educationDataSource.getDetailedRoomChat(roomId: roomId));
   }
 }

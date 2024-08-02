@@ -150,14 +150,23 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                               width: 30,
                             ),
                           ),
-                          onTap: () {
-                            ChatIntrustorRouteData(
-                                    $extra: ChatIntrustorExtraData(
-                                        roomId:
-                                            "b9a66b1d-fdc6-4a86-966f-4016f2e5e927",
-                                        intrustor: state.questionInfo?.tutor ??
-                                            const UserInfoResponse()))
-                                .push(context);
+                          onTap: () async {
+                            final roomId = await context
+                                .read<DetailedQuestionCubit>()
+                                .createRoomChat();
+                            if (roomId != "") {
+                              if (!context.mounted) {
+                                return;
+                              }
+                              print("te");
+                              ChatIntrustorRouteData(
+                                      $extra: ChatIntrustorExtraData(
+                                          roomId: roomId,
+                                          intrustor:
+                                              state.questionInfo?.tutor ??
+                                                  const UserInfoResponse()))
+                                  .push(context);
+                            }
                           },
                         ),
                       ),
@@ -168,7 +177,8 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                     child: RefreshIndicator(
                       color: Colors.amber,
                       onRefresh: () async {
-                        context.read<DetailedQuestionCubit>().getQuestion();
+                        // context.read<DetailedQuestionCubit>().getQuestion();
+                        context.read<DetailedQuestionCubit>().isPaid();
                       },
                       child: SingleChildScrollView(
                         physics: const AlwaysScrollableScrollPhysics(),
@@ -186,6 +196,9 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                                   name:
                                       state.questionInfo?.tutor?.fullName ?? "",
                                   numberOfStar: 5,
+                                  image: state.questionInfo?.tutor?.avatar
+                                          ?.fileKey ??
+                                      "",
                                   voidCallback: () {
                                     IntrustorInfoRouteData(
                                             $extra: IntrustorInfoExtraData(
@@ -203,23 +216,23 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                                     state.questionInfo?.subject?.name ?? "",
                                 price: state.questionInfo?.price ?? "",
                               ),
-                              if (!state.loading &&
-                                  state.questionInfo?.status ==
-                                      QuestionStatus.NEW &&
-                                  state.questionInfo?.isStudentPaid != true)
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 50),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      S.of(context).loadScreen,
-                                      textAlign: TextAlign.center,
-                                      style: Styles.s16()
-                                          .withWeight(FontWeight.w600),
-                                    ),
-                                  ),
-                                ),
+                              // if (!state.loading &&
+                              //     state.questionInfo?.status ==
+                              //         QuestionStatus.NEW &&
+                              //     state.questionInfo?.isStudentPaid != true)
+                              //   Padding(
+                              //     padding: const EdgeInsets.symmetric(
+                              //         horizontal: 50),
+                              //     child: Container(
+                              //       alignment: Alignment.center,
+                              //       child: Text(
+                              //         S.of(context).loadScreen,
+                              //         textAlign: TextAlign.center,
+                              //         style: Styles.s16()
+                              //             .withWeight(FontWeight.w600),
+                              //       ),
+                              //     ),
+                              //   ),
                               QuestionInfoBox(
                                 loading: state.loading,
                                 question: state.questionInfo?.content ?? "",
@@ -255,7 +268,9 @@ class ActivityButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DetailedQuestionCubit, DetailedQuestionState>(
       buildWhen: (previous, current) =>
-          previous.questionInfo?.status != current.questionInfo?.status,
+          previous.questionInfo?.status != current.questionInfo?.status ||
+          previous.questionInfo?.isStudentPaid !=
+              current.questionInfo?.isStudentPaid,
       builder: (context, state) {
         return Column(
           children: [
@@ -341,7 +356,7 @@ class ActivityButton extends StatelessWidget {
                   onTap: () {
                     context.read<DetailedQuestionCubit>().sendInfoGGMeet();
                   },
-                  child: const Text("Gữi lời mời"),
+                  child: const Text("Gửi lời mời"),
                 ),
               ),
           ],

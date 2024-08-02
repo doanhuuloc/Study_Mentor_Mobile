@@ -63,7 +63,7 @@ class _TabReportState extends State<TabReport> {
                                     AssetImage(Assets.images.logo.logo.path),
                                 title: state.listReport[index].questionTitle ??
                                     S.of(context).question,
-                                content: state.listReport[index].questionName ??
+                                content: state.listReport[index].content ??
                                     S.of(context).findingIntructor,
                                 time: state.listReport[index].createdAt,
                                 voidCallback: () {

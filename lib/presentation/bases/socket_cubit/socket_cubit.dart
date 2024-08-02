@@ -91,4 +91,8 @@ class SocketCubit extends SafeCubit<SocketState> {
   void receiveGGMeet(Function function) {
     socketController.receiveGGMeet(socket: state.socket, function: function);
   }
+
+  void payment(Function function) {
+    socketController.payment(function: function, socket: state.socket);
+  }
 }

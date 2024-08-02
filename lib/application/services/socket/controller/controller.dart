@@ -51,4 +51,5 @@ mixin SocketController {
   void receiveInfoGGMeet({Socket? socket, required Function function});
   void cancelGGMeet({Socket? socket, required InfoGGMeet infoGGMeet});
   void receiveGGMeet({Socket? socket, required Function function});
+  void payment({Socket?socket,required Function function});
 }

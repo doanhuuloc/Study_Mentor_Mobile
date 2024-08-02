@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:study_mentor_mobile/application/services/education/response/src/get_detailed_roomchat_response.dart';
 
 import '../../../application/services/common/common.dart';
 import '../../../application/services/education/education.dart';
@@ -77,5 +78,14 @@ abstract class EducationDataSource {
   @GET('/api/users/student/report-student/{reportId}')
   Future<BaseResponse<ReportQuestionResponse>> getReportQuestion({
     @Path('reportId') required String reportId,
+  });
+
+  @POST('/api/users/create/roomChat')
+  Future<BaseResponse<CreateQuestionRoomChatResponse>> createRoomChat(
+      @Body() CreateQuestionRoomChatRequest createQuestionRoomChatRequest);
+
+  @GET('/api/roomchat/MessageRoom/{roomId}')
+  Future<GetDetailedRoomChatReponse> getDetailedRoomChat({
+    @Path('roomId') required String roomId,
   });
 }

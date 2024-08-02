@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -137,30 +138,38 @@ class _ChatAIScreenState extends State<ChatAIScreen> {
                   return Column(
                     children: [
                       Expanded(
-                          child: state.listChat.isEmpty
-                              ? const Center(
-                                  child: Text("Vui lòng nhắn tin để bắt đầu"),
+                          child: ListView(
+                        controller: scrollController,
+                        padding: const EdgeInsets.all(10),
+                        children: state.listChat.isEmpty
+                            ? [
+                                Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.4),
+                                    child: Text("Vui lòng nhắn tin để bắt đầu"),
+                                  ),
                                 )
-                              : ListView(
-                                  controller: scrollController,
-                                  padding: const EdgeInsets.all(10),
-                                  children: state.listChat.map((e) {
-                                    return ChatItem(
-                                      content: e.content ?? "",
-                                      dateTime: e.createAt ?? DateTime.now(),
-                                      isOpposite: e.senderId !=
-                                          context
-                                              .read<UserCubit>()
-                                              .state
-                                              .detail
-                                              ?.id,
-                                      files: e.files,
-                                    );
-                                  }).toList(),
-                                )),
+                              ]
+                            : state.listChat.map((e) {
+                                return ChatItem(
+                                  content: e.content ?? "",
+                                  dateTime: e.createAt ?? DateTime.now(),
+                                  isOpposite: e.senderId !=
+                                      context
+                                          .read<UserCubit>()
+                                          .state
+                                          .detail
+                                          ?.id,
+                                  files: e.files,
+                                );
+                              }).toList(),
+                      )),
                       Container(
                         decoration:
-                            BoxDecoration(color: AppColors.blue.shade50),
+                            BoxDecoration(color: AppColors.blue.shade200),
                         padding: const EdgeInsets.all(10),
                         child: Column(
                           children: [
@@ -280,6 +289,7 @@ class _ChatAIScreenState extends State<ChatAIScreen> {
                                     textInputAction: TextInputAction.newline,
                                     minLines: 1,
                                     maxLines: null,
+                                    fillColor: Colors.white,
                                   ),
                                 ),
                                 Padding(
