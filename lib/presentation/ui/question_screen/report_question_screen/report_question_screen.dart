@@ -153,7 +153,7 @@ class _ReportQuestionScreenState extends State<ReportQuestionScreen> {
                                           onTap: () {
                                             if (e.fileKey != null &&
                                                 e.fileName != null) {
-                                              openFile(
+                                              downloadFile(
                                                   url:
                                                       "${context.read<AppConfig>().imagePath}/${e.fileKey}",
                                                   fileName: "${e.fileName}");

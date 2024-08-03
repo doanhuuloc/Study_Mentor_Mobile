@@ -98,7 +98,7 @@ class QuestionInfoBox extends StatelessWidget {
                     ),
                     onTap: () async {
                       if (file.fileKey != null && file.fileName != null) {
-                        await openFile(
+                        await downloadFile(
                             url:
                                 "${context.read<AppConfig>().imagePath}/${file.fileKey}",
                             fileName: "${file.fileName}");

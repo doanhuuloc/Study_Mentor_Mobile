@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:open_file/open_file.dart';
 import 'package:study_mentor_mobile/presentation/shared/widgets/gap_items.dart';
 
 import '../../../../gen/locale/app_localizations.dart';
@@ -32,14 +33,17 @@ class SelectFile extends StatelessWidget {
                     .state
                     .listFilePicker
                     .map(
-                      (e) => FileBox(
-                          name: e.files.single.name,
-                          icon: IconButton(
-                            icon: const Icon(Icons.cancel_outlined),
-                            onPressed: () => context
-                                .read<CreateQuestionCubit>()
-                                .removeFilePicker(e),
-                          )),
+                      (e) => InkWell(
+                        onTap: () => OpenFile.open(e.files.single.path),
+                        child: FileBox(
+                            name: e.files.single.name,
+                            icon: IconButton(
+                              icon: const Icon(Icons.cancel_outlined),
+                              onPressed: () => context
+                                  .read<CreateQuestionCubit>()
+                                  .removeFilePicker(e),
+                            )),
+                      ),
                     )
                     .toList());
           },

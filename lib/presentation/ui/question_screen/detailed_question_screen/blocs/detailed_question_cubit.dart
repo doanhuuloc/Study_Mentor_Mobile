@@ -78,7 +78,7 @@ class DetailedQuestionCubit extends SafeCubit<DetailedQuestionState> {
     }
     if (meetUrl.isRight) {
       emit(state.copyWith(
-        meetingUrl: meetUrl.right.data.meetingUrl ??
+        meetingUrl: meetUrl.right.data.meetingURL ??
             "https://meet.google.com/xvc-fcxq-ohw",
         questionInfo:
             state.questionInfo?.copyWith(status: QuestionStatus.ANSWERED),

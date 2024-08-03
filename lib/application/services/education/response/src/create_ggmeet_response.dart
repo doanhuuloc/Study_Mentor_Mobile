@@ -5,12 +5,12 @@ part 'create_ggmeet_response.mapper.dart';
 @MappableClass()
 class CreateGGMeetResponse with CreateGGMeetResponseMappable {
   const CreateGGMeetResponse({
-    this.meetingUrl,
+    this.meetingURL,
     // this.createdAt,
   });
 
   factory CreateGGMeetResponse.fromJson(Map<String, dynamic> json) =>
       CreateGGMeetResponseMapper.fromJson(json);
-  final String? meetingUrl;
+  final String? meetingURL;
   // final DateTime? createdAt;
 }

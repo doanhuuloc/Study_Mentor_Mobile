@@ -11,6 +11,7 @@ import '../../../gen/app_colors.dart';
 import '../../../gen/locale/app_localizations.dart';
 import '../../../shared/theme/theme.dart';
 import '../../../shared/widgets/buttons/common_button.dart';
+import '../../../utilities/request_login.dart';
 import 'payAISystemDialog.dart';
 
 class HomeMainContent extends StatelessWidget {
@@ -35,10 +36,16 @@ class HomeMainContent extends StatelessWidget {
                   title: S.of(context).fullAI,
                   subTitle: S.of(context).aIFree,
                   icon: Assets.svgs.homeAiFree.svg(),
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const _SelectAIDialog());
+                  onTap: () async {
+                    final isLoggedIn = await requestLoginAction(context);
+                    if (!context.mounted) {
+                      return;
+                    }
+                    if (isLoggedIn) {
+                      showDialog(
+                          context: context,
+                          builder: (context) => const _SelectAIDialog());
+                    }
                   },
                 ),
               ),
@@ -48,19 +55,32 @@ class HomeMainContent extends StatelessWidget {
                   title: S.of(context).aISystem,
                   subTitle: S.of(context).aIUpgrade,
                   icon: Assets.svgs.homeAiFee.svg(),
-                  onTap: () {
-                    if (context.read<UserCubit>().state.detail?.isMembership ==
-                        true) {
-                      const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) => PayAISystemDialog(
-                                paymentSucces: () {
-                                  logging.i("message");
-                                  context.read<UserCubit>().setMemberShip();
-                                },
-                              ));
+                  onTap: () async {
+                    final isLoggedIn = await requestLoginAction(context);
+                    if (!context.mounted) {
+                      return;
+                    }
+                    if (isLoggedIn) {
+                      if (context
+                              .read<UserCubit>()
+                              .state
+                              .detail
+                              ?.isMembership ==
+                          true) {
+                        const ChatAIRouteData(typeAI: TypeAI.pay).push(context);
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => PayAISystemDialog(
+                                  paymentSucces: () {
+                                    context.read<UserCubit>().setMemberShip();
+                                    const AlertRouteData(
+                                            content:
+                                                "Bạn đã thanh toán thành công")
+                                        .push(context);
+                                  },
+                                ));
+                      }
                     }
                   },
                 ),
@@ -75,8 +95,14 @@ class HomeMainContent extends StatelessWidget {
                   title: S.of(context).qAviaFile,
                   subTitle: S.of(context).intructorAnswerQuestion,
                   icon: Assets.svgs.homeMentorIcon.svg(),
-                  onTap: () {
-                    const CreateQuestionRouteData().push(context);
+                  onTap: () async {
+                    final isLoggedIn = await requestLoginAction(context);
+                    if (!context.mounted) {
+                      return;
+                    }
+                    if (isLoggedIn) {
+                      const CreateQuestionRouteData().push(context);
+                    }
                   },
                 ),
               ),
@@ -86,8 +112,14 @@ class HomeMainContent extends StatelessWidget {
                   title: "Meeting online",
                   subTitle: S.of(context).intructorGGmeet,
                   icon: Assets.svgs.homeGoogleMeet.svg(),
-                  onTap: () {
-                    const CreateGGMeetRouteData().push(context);
+                  onTap: () async {
+                    final isLoggedIn = await requestLoginAction(context);
+                    if (!context.mounted) {
+                      return;
+                    }
+                    if (isLoggedIn) {
+                      const CreateGGMeetRouteData().push(context);
+                    }
                   },
                 ),
               ),

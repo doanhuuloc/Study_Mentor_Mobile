@@ -90,7 +90,7 @@ class AnswerInfoBox extends StatelessWidget {
                                     onTap: () {
                                       if (e.fileKey != null &&
                                           e.fileName != null) {
-                                        openFile(
+                                        downloadFile(
                                             url:
                                                 "${context.read<AppConfig>().imagePath}/${e.fileKey}",
                                             fileName: "${e.fileName}");

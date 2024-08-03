@@ -19,7 +19,7 @@ class ConsoleLogger implements Loggable {
 
   @override
   void i(message, [error, StackTrace? stackTrace]) {
-    return logger.i(message, error: error, stackTrace: stackTrace);
+    // return logger.i(message, error: error, stackTrace: stackTrace);
   }
 
   @override

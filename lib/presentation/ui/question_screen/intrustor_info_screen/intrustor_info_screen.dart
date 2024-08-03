@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:study_mentor_mobile/presentation/gen/locale/app_localizations.dart';
@@ -229,14 +231,18 @@ class LineInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: Styles.s16(),
+        Expanded(
+          child: Text(
+            title,
+            style: Styles.s16(),
+          ),
         ),
-        Text(
-          content,
-          textAlign: TextAlign.right,
-          style: Styles.s16(),
+        Expanded(
+          child: Text(
+            content,
+            textAlign: TextAlign.right,
+            style: Styles.s16(),
+          ),
         ),
       ],
     );

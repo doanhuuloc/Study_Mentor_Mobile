@@ -1,6 +1,6 @@
 import 'package:flutter_downloader/flutter_downloader.dart';
 
-Future<void> openFile({required String url, required String fileName}) async {
+Future<void> downloadFile({required String url, required String fileName}) async {
   String directorys = "/storage/emulated/0/Download/";
 
   await FlutterDownloader.enqueue(

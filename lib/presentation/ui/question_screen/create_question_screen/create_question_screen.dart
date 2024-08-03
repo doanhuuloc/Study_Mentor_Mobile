@@ -79,6 +79,7 @@ class _CreateQuestionScreenState extends State<CreateQuestionScreen> {
                         gap: 10,
                         crossAxisAlignmentRow: CrossAxisAlignment.start,
                         items: [
+                          const SizedBox(height: 5),
                           Text(
                             S.of(context).titleQuestion,
                             style: Styles.s16().withWeight(FontWeight.w600),

@@ -177,8 +177,7 @@ class _DetailedQuestionScreenState extends State<DetailedQuestionScreen> {
                     child: RefreshIndicator(
                       color: Colors.amber,
                       onRefresh: () async {
-                        // context.read<DetailedQuestionCubit>().getQuestion();
-                        context.read<DetailedQuestionCubit>().isPaid();
+                        context.read<DetailedQuestionCubit>().getQuestion();
                       },
                       child: SingleChildScrollView(
                         physics: const AlwaysScrollableScrollPhysics(),
@@ -270,7 +269,8 @@ class ActivityButton extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.questionInfo?.status != current.questionInfo?.status ||
           previous.questionInfo?.isStudentPaid !=
-              current.questionInfo?.isStudentPaid,
+              current.questionInfo?.isStudentPaid ||
+          previous.meetingStartTime != current.meetingStartTime,
       builder: (context, state) {
         return Column(
           children: [
@@ -350,11 +350,13 @@ class ActivityButton extends StatelessWidget {
                     top: 10, bottom: 20, right: 18, left: 18),
                 child: CommonButton(
                   padding: const EdgeInsets.all(10),
-                  backgroundColor: state.meetingStartTime != null
+                  backgroundColor: state.meetingStartTime == null
                       ? AppColors.text.caption
                       : null,
                   onTap: () {
-                    context.read<DetailedQuestionCubit>().sendInfoGGMeet();
+                    if (state.meetingStartTime != null) {
+                      context.read<DetailedQuestionCubit>().sendInfoGGMeet();
+                    }
                   },
                   child: const Text("Gửi lời mời"),
                 ),

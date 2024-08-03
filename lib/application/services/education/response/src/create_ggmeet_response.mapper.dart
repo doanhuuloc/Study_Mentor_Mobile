@@ -20,17 +20,17 @@ class CreateGGMeetResponseMapper extends ClassMapperBase<CreateGGMeetResponse> {
   @override
   final String id = 'CreateGGMeetResponse';
 
-  static String? _$meetingUrl(CreateGGMeetResponse v) => v.meetingUrl;
-  static const Field<CreateGGMeetResponse, String> _f$meetingUrl =
-      Field('meetingUrl', _$meetingUrl, opt: true);
+  static String? _$meetingURL(CreateGGMeetResponse v) => v.meetingURL;
+  static const Field<CreateGGMeetResponse, String> _f$meetingURL =
+      Field('meetingURL', _$meetingURL, opt: true);
 
   @override
   final MappableFields<CreateGGMeetResponse> fields = const {
-    #meetingUrl: _f$meetingUrl,
+    #meetingURL: _f$meetingURL,
   };
 
   static CreateGGMeetResponse _instantiate(DecodingData data) {
-    return CreateGGMeetResponse(meetingUrl: data.dec(_f$meetingUrl));
+    return CreateGGMeetResponse(meetingURL: data.dec(_f$meetingURL));
   }
 
   @override
@@ -90,7 +90,7 @@ abstract class CreateGGMeetResponseCopyWith<
     $R,
     $In extends CreateGGMeetResponse,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? meetingUrl});
+  $R call({String? meetingURL});
   CreateGGMeetResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -104,11 +104,11 @@ class _CreateGGMeetResponseCopyWithImpl<$R, $Out>
   late final ClassMapperBase<CreateGGMeetResponse> $mapper =
       CreateGGMeetResponseMapper.ensureInitialized();
   @override
-  $R call({Object? meetingUrl = $none}) => $apply(
-      FieldCopyWithData({if (meetingUrl != $none) #meetingUrl: meetingUrl}));
+  $R call({Object? meetingURL = $none}) => $apply(
+      FieldCopyWithData({if (meetingURL != $none) #meetingURL: meetingURL}));
   @override
   CreateGGMeetResponse $make(CopyWithData data) => CreateGGMeetResponse(
-      meetingUrl: data.get(#meetingUrl, or: $value.meetingUrl));
+      meetingURL: data.get(#meetingURL, or: $value.meetingURL));
 
   @override
   CreateGGMeetResponseCopyWith<$R2, CreateGGMeetResponse, $Out2>
