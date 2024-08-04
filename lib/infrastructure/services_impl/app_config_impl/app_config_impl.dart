@@ -13,26 +13,26 @@ class AppConfigLoaderImpl with AppConfigLoader {
   @override
   Future<Result<Failure, AppConfig>> loadConfig() async {
     try {
-      String envFileName = '.env';
-      if (kReleaseMode) {
-        envFileName = '.env.release';
-      }
-      await dotenv.load(fileName: envFileName);
-      final packageInfo = await PackageInfo.fromPlatform();
-      final version = packageInfo.version;
-      final resolvedVersion = 'v$version';
+      // String envFileName = '.env';
+      // if (kReleaseMode) {
+      //   envFileName = '.env.release';
+      // }
+      // await dotenv.load(fileName: envFileName);
+      // final packageInfo = await PackageInfo.fromPlatform();
+      // final version = packageInfo.version;
+      // final resolvedVersion = 'v$version';
 
       final appVariable = AppConfig(
-        version: resolvedVersion,
-        baseUrl: dotenv.env['BASE_URL'] ?? '',
-        baseUrlAI: dotenv.env['BASE_URL_AI'] ?? '',
-        socketUrl: dotenv.env['SOCKET_URL'] ?? '',
-        vietqrAPIUrl: dotenv.env['VIETQR_API_URL'] ?? '',
-        appLink: dotenv.env['APP_LINK'] ?? '',
-        chatPay: dotenv.env['ID_CHAT_PAY'] ?? '',
-        chatGemini: dotenv.env['ID_CHAT_GEMINI'] ?? '',
-        chatGpt: dotenv.env['ID_CHAT_CHATGPT'] ?? '',
-        imagePath: dotenv.env['IMAGE_PATH'] ?? '',
+        version: '1.0.0',
+        baseUrl: 'https://api.studymentor.id.vn',
+        baseUrlAI: 'https://ai.studymentor.id.vn',
+        socketUrl: 'https://api.studymentor.id.vn',
+        vietqrAPIUrl: 'https://api.vietqr.io"',
+        appLink: '',
+        chatPay: '4c363f7b-e292-49ac-a653-57f45f011a49',
+        chatGemini: 'cb0fc00b-9f9e-4481-ad5e-4499ef7528e8',
+        chatGpt: '8bbe44dc-9973-4bf3-a56d-2e7364ef5fad',
+        imagePath: 'https://storage.googleapis.com/study-mentor',
       );
       return Right(appVariable);
     } catch (error) {
